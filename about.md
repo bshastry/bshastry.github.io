@@ -1,15 +1,9 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+I have been a PhD student at the Security in Telecommunications (SecT) chair, TU Berlin/Telekom Innovation Labs since late 2013. I will be **graduating in 2017**.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jekyll" %} /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+My research focuses on **static analysis assisted vulnerability discovery**. All of my papers are publicly available through my [**google scholar**](https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ&view_op=list_works&sortby=pubdate) page.
