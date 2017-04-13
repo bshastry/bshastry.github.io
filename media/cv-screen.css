@@ -67,6 +67,7 @@ p {
 	margin-bottom: 0.7em;
 	margin-right: 0;
 	width: 65%;
+	font-size: 110%;
 }
 
 code {
@@ -74,7 +75,7 @@ code {
 	font-size: 110%;
 	/*line-height: 1em;*/
 	font-family: Menlo,monospace,sans-serif;
-	color: #aaa;
+	color: #111;
 }
 
 p code {
@@ -138,8 +139,9 @@ h2 {
 	margin-top: 3em;
 	position: relative;
 	top: 1.4em;
-	text-align: right;
+	text-align: left;
 	width: 20%;
+	margin-left: 10em;
 }
 
 h3 {

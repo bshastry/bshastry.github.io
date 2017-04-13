@@ -6,7 +6,7 @@ title: Curriculum Vitae
 PhD Student, SecT, TU Berlin.
 
 <div id="webaddress">
-<a href="https://www.isti.tu-berlin.de/security_in_telecommunications/menue/people/research_assistants/bhargava_shastry/">SecT page</a>
+<a href="/index.html">Home</a>
 | <i class="fa fa-github"></i> <a href="https://github.com/bshastry">GitHub</a>
 | <i class="fa fa-google"></i> <a href="https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ&view_op=list_works&sortby=pubdate">Google Scholar</a>
 </div>
