@@ -1,0 +1,71 @@
+---
+layout: none
+permalink: .well-known/keybase.txt
+---
+==================================================================
+https://keybase.io/bshastry
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://bshastry.github.io
+  * I am bshastry (https://keybase.io/bshastry) on keybase.
+  * I have a public key with fingerprint 6631 6F57 0E40 03F0 5E74  9985 8BF3 57BD D838 6407
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01017a853361c4ea6d376920e738a2c6315776c694b5e6a0c23947e8da28b74a740a0a",
+            "fingerprint": "66316f570e4003f05e7499858bf357bdd8386407",
+            "host": "keybase.io",
+            "key_id": "8bf357bdd8386407",
+            "kid": "01017a853361c4ea6d376920e738a2c6315776c694b5e6a0c23947e8da28b74a740a0a",
+            "uid": "62f4ac8adb7e19c2f8c318a6f3831f19",
+            "username": "bshastry"
+        },
+        "service": {
+            "hostname": "bshastry.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1492093067,
+    "expire_in": 157680000,
+    "prev": "5dd8d9869c3e2a71d20f14711fe951aa38a625e8b430c41de7c90ae68735ece3",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owGtUkloFEEUnbg7RBQX3KN0hHgYxuqu7qrqAQ9qVDQoKC5xHaqrqzMdk56xu7MZ
+jeQgMQjGDYyJxC1ul4AkAQMRUVBcQIwa0IMEFxR1yIgLRi+xOupFPFqXon699+q9
+Rx0aNzwUzjo7Ir/73orVc7LuvzNChZn9jdWSkTSrpFi1tIMPbbzE5J4f32GbUkwC
+MpAxJRqESGYqp8iEGOkK4BgSqjAEZQ1jxJCuGhpHFDAF6irmxKQKMbBKsQoooFJE
+smyniLsp13Z8IYsEEVkaBlwFAFpA41jVdaIRw4IaNkyTQIJUgAUxkfQChjBnUI9H
+7aSYiUN8yN4/8P/Zd9mQHFIslTJCTQNzWWeKRRiUCUUWJFC2ZD0Aetx1aCkXaMNL
+UM93q6Q9EUlMy23Gg2KDJH8hokW2nygzfqVKuUk/yZIl4j7h+ykvFvD9qlRAqOBG
+/LdU3LAdU7QpGOXc9eykI8VkgWS+HWjLqoipQ4BwROKVKdvlcTtAaBgRIFbwDi8X
+ktp2UZupE6QzyBWKZVMBlqxiWba4rsmUiqaQonFiqBAwVTY5ZjqgHBEMNc44lIJ0
+O52kFNOET1okND27yKF+mculPeH6rFkjQlnh0KiRw4J/FgqPnfDn813pGz24rXTM
+ETRfzeRmD2YKmHl+cOqShr6Cb429nycW1+QsSu87eaC3GG6FTzpy+79Oc2e3hZ2X
+hf3paz/etpYeHNv9KJc0955d39n19niVP6d7b9OYSBf7dGHKo/rLk69nspkz88HC
+wYNSuzRjyftM4lTtso8P9/acngBePeu46fZebZ535nV+TmfN+HvVXz6sepZuswe6
+6tu3N3dPOXesDysDm8BNvQGCgTXFdzN4Q+XFpluXmt+01D1dW3CjJ6913rmakl1L
+v76ORkH/1k93vqzcmE7fyJ90e/fVuumH87IrBtYtfD7xaHruierWyIwFm7/XLq8v
+fNFSqW+pPbM4+ur044aevPKf
+=dphm
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/bshastry
+
+==================================================================
