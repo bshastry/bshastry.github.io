@@ -7,10 +7,13 @@ permalink: /bugs
 ### Open vSwitch
 
 - [CVE-2016-2074][1]
-- [Conntrack][2]
-- [Flow][3]
+- [CVE-2017-9264][2]
+- [CVE-2016-10377][3]
 - [CVE-2017-9214][10]
 - [Pinctrl][11]
+- [CVE-2017-9214][12]
+- [CVE-2017-9263][13]
+- [CVE-2017-9265][14]
 
 ### GNU oSIP2
 
@@ -25,8 +28,8 @@ permalink: /bugs
 - [CVE-2017-6658][9]
 
 [1]: https://mail.openvswitch.org/pipermail/ovs-announce/2016-March/000082.html
-[2]: https://mail.openvswitch.org/pipermail/ovs-dev/2017-March/329323.html
-[3]: https://mail.openvswitch.org/pipermail/ovs-dev/2016-July/319503.html
+[2]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9264
+[3]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10377
 [4]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-7853
 [5]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10324
 [6]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-10325
@@ -35,3 +38,8 @@ permalink: /bugs
 [9]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6658
 [10]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9214
 [11]: https://mail.openvswitch.org/pipermail/ovs-dev/2017-May/332712.html
+[12]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9214
+[13]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9263
+[14]: https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-9265
+
+

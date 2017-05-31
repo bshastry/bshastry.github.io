@@ -80,7 +80,7 @@ WOOT'14, MASCOTS'16
 ## Teaching
 \\
 \\
-Computer Security Seminar, Telecommunications Security
+Software Security, Computer Security Seminar, Telecommunications Security
 
 ## References
 \\
