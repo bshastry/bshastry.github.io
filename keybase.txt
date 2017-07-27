@@ -9,33 +9,33 @@ I hereby claim:
 
   * I am an admin of https://bshastry.github.io
   * I am bshastry (https://keybase.io/bshastry) on keybase.
-  * I have a public key with fingerprint 6631 6F57 0E40 03F0 5E74  9985 8BF3 57BD D838 6407
+  * I have a public key with fingerprint 0C8D 6170 F162 7AEB 358F  6571 03EF 3FA5 CD1D 7232
 
 To do so, I am signing this object:
 
 {
-    "body": {
-        "key": {
-            "eldest_kid": "01017a853361c4ea6d376920e738a2c6315776c694b5e6a0c23947e8da28b74a740a0a",
-            "fingerprint": "66316f570e4003f05e7499858bf357bdd8386407",
-            "host": "keybase.io",
-            "key_id": "8bf357bdd8386407",
-            "kid": "01017a853361c4ea6d376920e738a2c6315776c694b5e6a0c23947e8da28b74a740a0a",
-            "uid": "62f4ac8adb7e19c2f8c318a6f3831f19",
-            "username": "bshastry"
-        },
-        "service": {
-            "hostname": "bshastry.github.io",
-            "protocol": "https:"
-        },
-        "type": "web_service_binding",
-        "version": 1
+  "body": {
+    "key": {
+      "eldest_kid": "0101ec848d8b2625a0681ceb0eadd9f4a9b4901f4b5d5855c04b20739ce1354056af0a",
+      "fingerprint": "0c8d6170f1627aeb358f657103ef3fa5cd1d7232",
+      "host": "keybase.io",
+      "key_id": "03ef3fa5cd1d7232",
+      "kid": "0101ec848d8b2625a0681ceb0eadd9f4a9b4901f4b5d5855c04b20739ce1354056af0a",
+      "uid": "62f4ac8adb7e19c2f8c318a6f3831f19",
+      "username": "bshastry"
     },
-    "ctime": 1492093067,
-    "expire_in": 157680000,
-    "prev": "5dd8d9869c3e2a71d20f14711fe951aa38a625e8b430c41de7c90ae68735ece3",
-    "seqno": 5,
-    "tag": "signature"
+    "service": {
+      "hostname": "bshastry.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1501189543,
+  "expire_in": 157680000,
+  "prev": "164a070451518687bb9b24ae35e14df3d81eca984a93a71a31f7ce2e408f1ce1",
+  "seqno": 9,
+  "tag": "signature"
 }
 
 which yields the signature:
@@ -43,23 +43,23 @@ which yields the signature:
 -----BEGIN PGP MESSAGE-----
 Version: GnuPG v1
 
-owGtUkloFEEUnbg7RBQX3KN0hHgYxuqu7qrqAQ9qVDQoKC5xHaqrqzMdk56xu7MZ
-jeQgMQjGDYyJxC1ul4AkAQMRUVBcQIwa0IMEFxR1yIgLRi+xOupFPFqXon699+q9
-Rx0aNzwUzjo7Ir/73orVc7LuvzNChZn9jdWSkTSrpFi1tIMPbbzE5J4f32GbUkwC
-MpAxJRqESGYqp8iEGOkK4BgSqjAEZQ1jxJCuGhpHFDAF6irmxKQKMbBKsQoooFJE
-smyniLsp13Z8IYsEEVkaBlwFAFpA41jVdaIRw4IaNkyTQIJUgAUxkfQChjBnUI9H
-7aSYiUN8yN4/8P/Zd9mQHFIslTJCTQNzWWeKRRiUCUUWJFC2ZD0Aetx1aCkXaMNL
-UM93q6Q9EUlMy23Gg2KDJH8hokW2nygzfqVKuUk/yZIl4j7h+ykvFvD9qlRAqOBG
-/LdU3LAdU7QpGOXc9eykI8VkgWS+HWjLqoipQ4BwROKVKdvlcTtAaBgRIFbwDi8X
-ktp2UZupE6QzyBWKZVMBlqxiWba4rsmUiqaQonFiqBAwVTY5ZjqgHBEMNc44lIJ0
-O52kFNOET1okND27yKF+mculPeH6rFkjQlnh0KiRw4J/FgqPnfDn813pGz24rXTM
-ETRfzeRmD2YKmHl+cOqShr6Cb429nycW1+QsSu87eaC3GG6FTzpy+79Oc2e3hZ2X
-hf3paz/etpYeHNv9KJc0955d39n19niVP6d7b9OYSBf7dGHKo/rLk69nspkz88HC
-wYNSuzRjyftM4lTtso8P9/acngBePeu46fZebZ535nV+TmfN+HvVXz6sepZuswe6
-6tu3N3dPOXesDysDm8BNvQGCgTXFdzN4Q+XFpluXmt+01D1dW3CjJ6913rmakl1L
-v76ORkH/1k93vqzcmE7fyJ90e/fVuumH87IrBtYtfD7xaHruierWyIwFm7/XLq8v
-fNFSqW+pPbM4+ur044aevPKf
-=dphm
+owGtUm1IFEEYvjv7MKM6fwVdUG7BJVnN7O7szl5FQVhR9qMiorCOmd3Zuy29vXZX
+8xIrCQOp6AP7kESiH0VSgkER9kUSiKaRUpYRSIVG0ncEEUnNZv2pv82fYd55nmee
+52GOTMoK5AR/sIOJRMXgo+C91zSwadeGpkqB2kZGiFUK29mvjZUYzPXi2y1DiAkA
+Ash0LGMDU1EREQEKhjqjgBHD0EyZaFTWADRligyEEdKBTEWgSprOoIRkgBRiAiIU
+CKaVSjAn7Vgpz5fVsaFAFZhQEVXCqISwqSAVAomZkkmQbkBDFSWRE5O26zO4OUpc
+Nt+y+Ywf4qP2/sX/Z99lv+QUkVN0TAyqMqjpool1CWKimBKWoAk1H+gyJ0VKGUdT
+N0lcz8kIVQUCn5ZbOvOL9ZP8hZifsLxkGR1NlXZsz9btEn6f9Ly0G/P5XibtE3Yy
+Gv8tFadWyuBtckY5c1zLTgkxyJG6Z/naEAEIsYZkqUBgFWnLYXHLRyBVwYAv/x1W
+ziXhVkUmQAUygghiBauUalSUCZMQg7JhSgbmFRIN87IkokLCk6o6E5kMsMm7hIKf
+bkfKFmIa90kSXNO1EinilTlMqMqpDU4fEwjmBMaNDfn/LJAzIfzn8z2Njv+xsa7N
+OxrtXufi89WPi98dKozOOxwPzxwauLx0+bX+yPiPZ/Kvt7bUTj784Mqy5+tmDcWy
+r71vOD+p50YmlnvqdVFe8lZ4Su+r4itOz9jBjuG+kYKR0LPPdWebv+1e3zC8+kTX
+mtK17XO+S69sM+9ta1dnUF2goA2RgS0HVjVUh68Gp3+dG+1kxxbl9gaPf7qzY9+K
+7tmhuhlGzf32kRfFVt/D9jy7/vhpd/bdJ82h1sEPbzouDe3/cpCMaWyPlb6M3x7u
+qM5f0vT5WSRSsffCpz1ZJazpq1jc8rxw4YIPs6Y1TS0KZbehk9su9tdEzoFw49vl
+m/X61pUXyhZHO2/CiUqmV/gJ
+=G3gI
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
