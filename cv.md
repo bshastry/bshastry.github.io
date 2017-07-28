@@ -57,6 +57,9 @@ __Intern__, Ittiam Systems Private Limited, Bangalore.
 ## Awards
 \\
 \\
+`2017`
+USENIX Student Grant.
+
 `2009-10`
 Swiss Government Excellence Scholarship.
 
@@ -70,6 +73,7 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 * C++
 * Python
 * Java
+* Bash
 
 ## Professional Activities
 \\
