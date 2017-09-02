@@ -9,6 +9,7 @@ PhD Student, SecT, TU Berlin.
 <a href="/index.html">Home</a>
 | <i class="fa fa-github"></i> <a href="https://github.com/bshastry">GitHub</a>
 | <i class="fa fa-google"></i> <a href="https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ&view_op=list_works&sortby=pubdate">Google Scholar</a>
+| <i class="fa fa-linkedin-square"></i> <a href="https://www.linkedin.com/in/bhargavashastry">Linkedin</a>
 </div>
 
 ## Education
