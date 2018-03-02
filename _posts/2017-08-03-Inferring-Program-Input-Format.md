@@ -188,14 +188,18 @@ user    0m0.012s
 sys     0m0.024s
 ```
 
-Naturally, it's a lot faster because we already know some things about the input format.
+Naturally, it's a lot faster because we already know some things about the input format. Of course, more information may be gathered such as the context in which certain tokens are used, the order in which they are used and so on. You may read how this can be done in the paper linked below.
 
 ## Results
 
-Of course, this works better for applications that parse highly structured inputs such as file format and network parsers.
-Can it find crypto bugs faster? No, because knowledge of input format is irrelavant for bugs not in the parsing code path.
-However, for parsers, this approach has worked out quite well.
-You can read the [full paper][5] (to be published in Springer proceedings of RAID'17) and form your own opinion.
+Statically generated dictionaries may make fuzzing campaigns more effective.
+These dictionaries are particular suitable for fuzzing applications that parse highly structured inputs such as file format and network parsers.
+For example, we found over 15 zero-day vulns in network parsers due to the use of dictionaries alone.
+Having said that, understanding where they won't help might help one decide if using one is desirable. 
+Can it find bugs in the non-parser code path faster? No, because knowledge of input format is irrelavant for bugs not in the parsing code path.
+Will a smart fuzzer not find these bugs by itself? That is unlikely. Good fuzzers usually eventually find the same bugs.
+However, dictionaries can support them by triggering these code paths much faster so that a fuzzer may "focus" on other interesting code paths.
+You can read the [full paper][5] (to be published in the proceedings of RAID'17 by Springer) that this work produced and form your own opinion.
 
 
 [Part 1][1] \| [Part 2][2] \| [Part 3][3]
