@@ -58,7 +58,7 @@ __Intern__, Ittiam Systems Private Limited, Bangalore.
 ## Awards
 \\
 \\
-`2017`
+`2012/2017`
 USENIX Student Grant.
 
 `2009-10`
@@ -80,7 +80,7 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 \\
 \\
 `Reviewer`
-WOOT'14, MASCOTS'16
+WOOT'14, MASCOTS'16, COMNET'17
 
 ## Teaching
 \\
