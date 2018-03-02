@@ -16,7 +16,7 @@ PhD Student, SecT, TU Berlin.
 
 \\
 \\
-`2013-2017 (Expected)`
+`2013-2018 (Expected)`
 __Ph.D__. Electrical Engineering and Computer Science, SecT, TU Berlin.
 
 Tentative title: __Static Analysis Assisted Vulnerability Discovery__
