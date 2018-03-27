@@ -33,7 +33,7 @@ __B.Tech__ Electrical and Electronics Engineering, National Institute of Technol
 `Aug 2012-May 2013`
 __Research Assistant__, Computer Security Lab, Rice University.
 
-*Contributed to automated analysis of Tizen mobile applications.*
+*Described data-flow sources/sinks for full-blown taint analysis of Tizen mobile applications.*
 
 `June 2011-May 2012`
 __Research Employee__, Fraunhofer Secure IT Institute, Darmstadt.
@@ -54,6 +54,27 @@ __Student Assistant__, EPFL+ECAL Lab, Lausanne.
 __Intern__, Ittiam Systems Private Limited, Bangalore.
 
 *Analyzed audio jitter in Ittiam VoIP phones.*
+
+## Talks
+\\
+\\
+`OvS Orbit Interview`
+[Talk about security audit of OvS and fuzzing frameworks][10]
+
+`RAID'17`
+[Static Program Analysis as a Fuzzing Aid][1]
+
+`WOOT'17`
+[Static Exploration of Taint-Style Vulnerabilities Found by Fuzzing][2]
+
+`WOOT'17`
+[Leveraging Flawed Tutorials for Seeding Large-Scale Web Vulnerability Discovery][3]
+
+`DIMVA'16`
+[Towards Vulnerability Discovery Using Staged Program Analysis][4]
+
+`MoST'14`
+[A First Look at Firefox OS Security][5]
 
 ## Awards
 \\
@@ -79,8 +100,15 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 ## Professional Activities
 \\
 \\
+`Proactive Security Audit`
+[snort++][6]
+[tcpdump][7]
+[Open vSwitch][8]
+[GNU libosip2][9]
+
 `Reviewer`
 WOOT'14, MASCOTS'16, COMNET'17
+
 
 ## Teaching
 \\
@@ -91,3 +119,15 @@ Software Security, Computer Security Seminar, Telecommunications Security
 \\
 \\
 Available on request.
+
+
+[1]: media/raid17_slidedeck.pdf
+[2]: https://www.usenix.org/conference/woot17/workshop-program/presentation/shastry
+[3]: https://www.usenix.org/conference/woot17/workshop-program/presentation/unruh
+[4]: media/melange_slides.pdf
+[5]: media/ffos_slides_tub.pdf
+[6]: http://blog.snort.org/2017/05/snort-vulnerabilities-found.html
+[7]: http://www.tcpdump.org/
+[8]: https://mail.openvswitch.org/pipermail/ovs-announce/2016-March/000082.html
+[9]: https://www.securityfocus.com/bid/92921
+[10]: https://ovsorbit.org/#e43
