@@ -1,6 +1,7 @@
 ---
 layout: cv
 title: Curriculum Vitae
+permalink: /cv
 ---
 # Bhargava Shastry
 PhD Student, SecT, TU Berlin.
@@ -121,11 +122,11 @@ Software Security, Computer Security Seminar, Telecommunications Security
 Available on request.
 
 
-[1]: media/raid17_slidedeck.pdf
+[1]: http://users.sec.t-labs.tu-berlin.de/~bshastry/raid17_slidedeck.pdf
 [2]: https://www.usenix.org/conference/woot17/workshop-program/presentation/shastry
 [3]: https://www.usenix.org/conference/woot17/workshop-program/presentation/unruh
-[4]: media/melange_slides.pdf
-[5]: media/ffos_slides_tub.pdf
+[4]: http://users.sec.t-labs.tu-berlin.de/~bshastry/melange_slides.pdf
+[5]: http://users.sec.t-labs.tu-berlin.de/~bshastry/ffos_slides_tub.pdf
 [6]: http://blog.snort.org/2017/05/snort-vulnerabilities-found.html
 [7]: http://www.tcpdump.org/
 [8]: https://mail.openvswitch.org/pipermail/ovs-announce/2016-March/000082.html
