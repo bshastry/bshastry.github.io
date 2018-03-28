@@ -26,7 +26,7 @@ keybase_username: bshastry
 linkedin_username: bhargavashastry
 # Build settings
 markdown: kramdown
-theme: minima
+theme: massively
 gems:
   - jekyll-feed
 exclude:
