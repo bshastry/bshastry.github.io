@@ -14,7 +14,6 @@ PhD Student, SecT, TU Berlin.
 </div>
 
 ## Education
-
 \\
 \\
 `2013-2018 (Expected)`
