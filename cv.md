@@ -1,7 +1,6 @@
 ---
 layout: cv
 title: Curriculum Vitae
-permalink: /cv
 ---
 # Bhargava Shastry
 PhD Student, SecT, TU Berlin.
