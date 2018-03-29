@@ -1,5 +1,5 @@
 ---
-layout: cv
+layout: page
 title: Tools
 permalink: /tools/
 ---
