@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: cv
 title: "Bugs and CVEs"
 permalink: /bugs
 ---
