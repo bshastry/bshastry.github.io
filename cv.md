@@ -92,18 +92,13 @@ Swiss Government Excellence Scholarship.
 Young Engineering Fellow, Indian Institute of Science, Bangalore.
 
 ## Coding Skills
-<br><br>
-
-* C
-* C++
-* Python
-* Java
-* Bash
+<br>
+* C, C++, Python, Java, Bash
 
 ## Professional Activities
 \\
 \\
-`Proactive Security Audit`
+`Security Audits`
 [snort++][6]
 [tcpdump][7]
 [Open vSwitch][8]
