@@ -20,8 +20,12 @@ __Ph.D__. Electrical Engineering and Computer Science, SecT, TU Berlin.
 
 Tentative title: __Static Analysis Assisted Vulnerability Discovery__
 
+*Over the past five years, I have developed an expertise in C/C++ code security audits, and compiler-driven static and dynamic vulnerability analyses. My work has contributed to four peer reviewed scientific publications on the topic which I have conceptualized and led, and several others which I have actively contributed to. Moreover, the tools I have written have helped uncover tens of vulnerabilities in open source networking software such as tcpdump, snort++, and Open vSwitch.*
+
 `2008-2010`
 __M.Sc.__ Computer Science, Ecole Polytechnique Federale de Lausanne.
+
+*At EPFL, I obtained a masters degree in computer science with a specialization in computer engineering. My masters thesis is titled "DPA attacks on certain cryptographic primitives on a common 8-bit microcontroller". This work benefited from my specialisation and kindled my interest in computer security.*
 
 `2003-2007`
 __B.Tech__ Electrical and Electronics Engineering, National Institute of Technology Karnataka.
@@ -32,33 +36,33 @@ __B.Tech__ Electrical and Electronics Engineering, National Institute of Technol
 `Aug 2012-May 2013`
 __Research Assistant__, Computer Security Lab, Rice University.
 
-*Described data-flow sources/sinks for full-blown taint analysis of Tizen mobile applications.*
+*At Rice University, I consulted on a security-program analysis project focused on large scale analysis of Tizen mobile applications. Specifically, I enumerated the ways in which security critical information flows from user input gathering APIs to data processing end points (sinks). My work contributed to the first security analysis of Tizen applications.*
 
 `June 2011-May 2012`
 __Research Employee__, Fraunhofer Secure IT Institute, Darmstadt.
 
-*Ported Mandatory Access Control to Android Linux Kernel.*
+*At Fraunhofer SIT, I ported TOMOYO Mandatory Access Control (MAC) system to Android. I also contributed to the design and development of an Android phone prototype with enhanced security features. The work has been published work in top-tier security conferences.*
 
 `July 2007-July 2008`
 __Software Engineer__, Ittiam Systems Private Limited, Bangalore.
 
-*Contributed to the VoIP phone product line.*
+*At Ittiam, I worked as an software development and testing engineer. I wrote C code for adding new features to the Voice over IP phone, Ittiam's flagship product. Moreover, I was actively involved in fixing bugs, and serving as the point of contact for customers in remote locations.*
 
 `March-July 2009`
 __Student Assistant__, EPFL+ECAL Lab, Lausanne.
 
-*Implemented OpenCV extensions for a media research project.*
+*At the ECAL lab, Implemented OpenCV extensions for a media research project.*
 
 `Summer 2006`
 __Intern__, Ittiam Systems Private Limited, Bangalore.
 
-*Analyzed audio jitter in Ittiam VoIP phones.*
+*As an intern at Ittiam, I designed an experiment to measure and analyze audio jitter in Ittiam VoIP phones so that Ittiam's jitter reduction could be quantitatively and qualitatively evaluated.*
 
 ## Talks
 \\
 \\
 `OvS Orbit Interview`
-[Talk about security audit of OvS and fuzzing frameworks][10]
+[Podcast discussion with Ben Pfaff on my security audit of OvS and fuzzing frameworks][10]
 
 `RAID'17`
 [Static Program Analysis as a Fuzzing Aid][1]
