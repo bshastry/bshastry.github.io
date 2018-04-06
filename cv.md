@@ -82,6 +82,11 @@ __Intern__, Ittiam Systems Private Limited, Bangalore.
 ## Awards
 \\
 \\
+`2018`
+Best paper award for "_Taking Control of SDN-based Cloud Systems via the Data Plane_" at [SOSR'18][11]
+<br>
+Kashyap Thimmaraju, *Bhargava Shastry*, Tobias Fiebig, Felicitas Hetzelt, Jean-Pierre Seifert, Anja Feldmann, Stefan Schmid.
+
 `2012/2017`
 USENIX Student Grant.
 
@@ -129,3 +134,4 @@ Available on request.
 [8]: https://mail.openvswitch.org/pipermail/ovs-announce/2016-March/000082.html
 [9]: https://www.securityfocus.com/bid/92921
 [10]: https://ovsorbit.org/#e43
+[11]: https://conferences.sigcomm.org/sosr/2018/program.html
