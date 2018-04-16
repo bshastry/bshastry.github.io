@@ -6,25 +6,25 @@ permalink: /bugs
 
 ### Open vSwitch
 
-- [CVE-2016-2074][1]
-- [CVE-2017-9264][2]
-- [CVE-2016-10377][3]
-- [CVE-2017-9214][10]
-- [Pinctrl][11]
-- [CVE-2017-9263][12]
-- [CVE-2017-9265][13]
+- [CVE-2016-2074][1] Out-Of-Bounds (OOB) write in MPLS parser permits remote code execution
+- [CVE-2017-9264][2] OOB read in TCP/UDP/IPv6 parsers
+- [CVE-2016-10377][3] OOB read in flow parser
+- [CVE-2017-9214][10] OOB read in Open Flow (OF) parser
+- [Pinctrl][11] 
+- [CVE-2017-9263][12] Denial of service (DoS) due to unhandled case in OF parser
+- [CVE-2017-9265][13] OOB read in OF parser
 
 ### GNU oSIP2
 
-- [CVE-2017-7853][4]
-- [CVE-2016-10324][5]
-- [CVE-2016-10325][6]
-- [CVE-2016-10326][7]
+- [CVE-2017-7853][4] OOB write in SIP parser leads to DoS
+- [CVE-2016-10324][5] OOB write in SIP parser
+- [CVE-2016-10325][6] OOB write in SIP parser leads to DoS
+- [CVE-2016-10326][7] OOB write in SIP parser leads to DoS
 
 ### Snort++
 
-- [CVE-2017-6657][8]
-- [CVE-2017-6658][9]
+- [CVE-2017-6657][8] DoS due to logical error in Ethernet parser
+- [CVE-2017-6658][9] OOB read in packet decoder
 
 ### tcpdump
 
