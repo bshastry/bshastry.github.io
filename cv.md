@@ -85,13 +85,18 @@ __Intern__, Ittiam Systems Private Limited, Bangalore.
 `2018`
 Best paper award for "_Taking Control of SDN-based Cloud Systems via the Data Plane_" at [SOSR'18][11]
 <br>
-Kashyap Thimmaraju, *Bhargava Shastry*, Tobias Fiebig, Felicitas Hetzelt, Jean-Pierre Seifert, Anja Feldmann, Stefan Schmid.
+K. Thimmaraju, *B. Shastry*, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid.
 
 `2012/2017`
 USENIX Student Grant.
 
 `2009-10`
 Swiss Government Excellence Scholarship.
+
+`2007`
+Best paper presentation award for "_Advanced Educational Tools for Modeling, Simulation, Impleme-ntation and Real-Time Testing of Modern Power System Protection Schemes-Particular Reference to Distance Protection_" at the National Systems Conference (India) 2007
+<br>
+U.J. Shenoy, K.R. Satheesh, B.S. Kavyashree, *B.Shastry*
 
 `2006`
 Young Engineering Fellow, Indian Institute of Science, Bangalore.
