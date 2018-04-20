@@ -5,9 +5,9 @@
 layout: home
 ---
 
-I am a security research and Ph.D. candidate at the chair for [Security in Telecommunications][1] (SecT), TU Berlin. I will be graduating in **2018**. My research focuses on compiler assisted vulnerability assessment. I obtained my M.Sc. in computer science from [EPFL][2] and my B.Tech in electrical engineering from [NITK][3]. I have developed software for [Ittiam Systems][4], and conducted research on mobile systems security at the [Fraunhofer SIT][5], and [Rice University computer security lab][6].
+I am a security researcher and Ph.D. candidate at the chair for [Security in Telecommunications][1] (SecT), TU Berlin. I will be graduating in **2018**. My research focuses on **compiler assisted vulnerability assessment**. I obtained an M.Sc. in computer science from [EPFL][2] and a B.Tech in electrical engineering from [NITK][3].
 
-I enjoy arts and running.
+I have developed software for [Ittiam Systems][4], and conducted research on mobile systems security at the [Fraunhofer SIT][5], and [Rice University computer security lab][6].
 
 [1]: http://www.fgsect.de
 [2]: https://www.epfl.ch
