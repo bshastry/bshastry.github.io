@@ -22,5 +22,5 @@ permalink: /pubs
 ### B.Tech
 
 - "MATLAB Based Evaluation Study of Adaptive Technique and Three Sample Fixed Data Window Algorithm with Particular Reference to development of DSP Based Fast Distance Protection", **B. Shastry**, U.J. Shenoy, K. Parthasarathy, H.P. Khincha, International Conference on Power Systems 2007 
-- "Advanced Educational Tools for Modeling, Simulation, Impleme-ntation and Real-Time Testing of Modern Power System Protection Schemes-Particular Reference to Distance Protection", U.J. Shenoy, K.R. Satheesh, B.S. Kavyashree, **B. Shastry**, National Systems Conference 2007 **Best Paper Presentation Award**
+- "Advanced Educational Tools for Modeling, Simulation, Impleme-ntation and Real-Time Testing of Modern Power System Protection Schemes-Particular Reference to Distance Protection", U.J. Shenoy, K.R. Satheesh, B.S. Kavyashree, **B. Shastry**, National Systems Conference (India) 2007 **Best Paper Presentation Award**
 - "Adaptive Filtering Technique and DSP-Based Implementation for High Speed Distance Protection”, U.J. Shenoy, **B. Shastry**, K. Parthasarathy, K.R. Satheesh, B.S. Kavyashree, Fourth International Conference on Power System Protection and Automation 2007
