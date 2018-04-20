@@ -112,6 +112,13 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 `Reviewer`
 WOOT'14, MASCOTS'16, COMNET'17
 
+## Press
+\\
+\\
+`18 April 2017`
+[Code-sharing leads to widespread bug sharing that black-hats can track][12]
+<br>
+Our study on the relationship between vulnerable tutorials and real-world code was covered by The Register.
 
 ## Teaching
 \\
@@ -135,3 +142,4 @@ Available on request.
 [9]: https://www.securityfocus.com/bid/92921
 [10]: https://ovsorbit.org/#e43
 [11]: https://conferences.sigcomm.org/sosr/2018/program.html
+[12]: https://www.theregister.co.uk/2017/04/18/codesharing_leads_to_widespread_bug_sharing
