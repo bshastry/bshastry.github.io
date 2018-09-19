@@ -15,10 +15,10 @@ PhD Student, SecT, TU Berlin.
 ## Education
 \\
 \\
-`2013-2018 (Expected)`
+`2013-2018`
 __Ph.D__. Electrical Engineering and Computer Science, SecT, TU Berlin.
 
-Tentative title: __Static Analysis Assisted Vulnerability Discovery__
+Dissertation title: __Compiler Assisted Vulnerability Discovery__
 
 *Over the past five years, I have developed an expertise in C/C++ code security audits, and compiler-driven static and dynamic vulnerability analyses. My work has contributed to four peer reviewed scientific publications on the topic which I have conceptualized and led, and several others which I have actively contributed to. Moreover, the tools I have written have helped uncover tens of vulnerabilities in open source networking software such as tcpdump, snort++, and Open vSwitch.*
 
@@ -114,6 +114,11 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 [Open vSwitch][8]
 [GNU libosip2][9]
 
+`OSS-Fuzz Integrations`
+[Open vSwitch][13]
+[libcoap][14]
+[xmlsec][15]
+
 `Reviewer`
 WOOT'14, MASCOTS'16, COMNET'17
 
@@ -148,3 +153,6 @@ Available on request.
 [10]: https://ovsorbit.org/#e43
 [11]: https://conferences.sigcomm.org/sosr/2018/program.html
 [12]: https://www.theregister.co.uk/2017/04/18/codesharing_leads_to_widespread_bug_sharing
+[13]: https://github.com/google/oss-fuzz/pull/1553
+[14]: https://github.com/google/oss-fuzz/pull/1496
+[15]: https://github.com/google/oss-fuzz/pull/1600

@@ -1,11 +1,12 @@
 ---
 layout: page
-title: "Publications"
+title: "Publications and Talks"
 permalink: /pubs
 ---
 
 ### Ph.D.
 
+- "Follow the White Rabbit: Simplifying Fuzz Testing Using FuzzExMachina", V. Ulitzsch, D. Maier, **B. Shastry**, Black Hat 2018
 - "Taking Control of SDN-based Cloud Systems via the Data Plane", K. Thimmaraju, **B. Shastry**, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid, Symposium on SDN Research 2018 **Best Paper Award**
 - "The vAMP Attack: Taking Control of Cloud Systems via the Unified Packet Parser", K. Thimmaraju, **B. Shastry**, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid, Cloud Computing Security Workshop 2017
 - "Static Program Analysis as a Fuzzing Aid", **B. Shastry**, M. Leutner, T. Fiebig, K. Thimmaraju, F. Yamaguchi, K. Rieck, S. Schmid, J.P. Seifert, A. Feldmann, International Symposium on Research in Attacks, Intrusions, and Defenses 2017
