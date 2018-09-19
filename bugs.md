@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Bugs and CVEs"
+title: "Vulns"
 permalink: /bugs
 ---
 
