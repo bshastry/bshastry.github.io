@@ -102,7 +102,7 @@ T_norm = ["tweak"]
 T_norm.extend(T)
 ## Create consolidated list
 C = [B_norm, T_norm]
-for rx in a12s(rxs,rev=True,enough=0.71): print(rx)
+for rx in a12s(C,rev=True,enough=0.71): print(rx)
 ```
 
 The `enough` parameter is essentially the effect-size threshold of your choice. For the listing above, I have used the conventional big threshold i.e., `p>0.71`.
