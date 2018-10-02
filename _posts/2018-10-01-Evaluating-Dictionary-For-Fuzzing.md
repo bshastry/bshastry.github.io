@@ -256,7 +256,7 @@ Small effect ranking
  - Rank 2: Dict C
  - Rank 3: Baseline
 
-In other words, Dict A offers small improvements in program coverage over Dict B and Dict C, which in turn offer small improvements in program coverage over the baseline.
+In other words, Dict A offers **at least** small improvements in program coverage over Dict B and Dict C, which in turn offer **at least** small improvements in program coverage over the baseline.
 
 Medium effect ranking
  - Rank 1: Dict A
@@ -286,6 +286,13 @@ I draw the following conclusions from this work:
 Some caveats: (1) Fuzzing window chosen for evaluation was short, (2) results focus on the coverage metric and not e.g., for speed of bug finding.
 However, this methodology offers a scientific basis for drawing conclusions which is pretty cool.
 Needless to say, I added Dict A in my PR to oss-fuzz and now I can say that (in a very limited way) my PR is based on scientific evidence ;-)
+
+### Acknowledgments
+
+Thanks to
+  - The authors of the "Evaluating Fuzz Testing" paper, check the [paper][2] out.
+  - Tim Menzies whose [A12 implementation][6] I used in this work
+  - My wife, Divya, for teaching me basic stats
 
 [1]: https://link.springer.com/chapter/10.1007/978-3-319-66332-6_2
 [2]: https://arxiv.org/pdf/1808.09700.pdf
