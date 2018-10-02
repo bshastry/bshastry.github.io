@@ -33,3 +33,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
 include: [".well-known/"]
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
