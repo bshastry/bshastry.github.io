@@ -161,7 +161,7 @@ Even before I go ahead and implement this estimate inside, say afl-fuzz, I see t
     - For example, at some point $$t=t_{k}$$ the estimate may go below $$\alpha{}$$ only to increase in value thereafter
   - Q3: How to compute $$g_{0}$$?
     - $$g_{0}$$ depends on $$M$$, the total number of feasible program behaviors that we can only estimate
-    - If a 32-bit `exec_cksum` is used to discretize program behavior (as in afl-fuzz), $$M \approx{} 4.3 billion$$
+    - If a 32-bit `exec_cksum` is used to discretize program behavior (as in afl-fuzz), $$M \approx{} 4.3 $$ billion.
 
 At least, I am sceptical that the Good-Turing estimate can be mechanically relied upon to stop fuzzing.
 A lot depends on the answers to the three questions above, and likely more.
@@ -214,7 +214,7 @@ $$
 
 where $$N_{z}$$ is the expected number of additional fuzz required to uncover a new path.
 
-So, what a $$\hat{\theta{}}(0) = 1.16e-11$$ is saying is that you need to run the fuzzer for an additional $$N_{z} \approx{} 86.2 billion$$ executions until you find a new path.
+So, what a $$\hat{\theta{}}(0) = 1.16e-11$$ is saying is that you need to run the fuzzer for an additional $$N_{z} \approx{} 86.2$$ billion executions until you find a new path.
 Assuming an average execution speed of $$1000$$, this translates to keep the fuzzer running for close to 3 years!
 This is grossly inaccurate and of little practical utility.
 Evidently, we need estimates that are tailored for exponential spaces, which I feel Good-Turing is not.
