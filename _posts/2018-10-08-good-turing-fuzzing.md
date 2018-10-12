@@ -202,10 +202,9 @@ Anyway, that's all for now folks.
 I'll post a follow-up when I have some empirical evidence from real-world targets.
 Watch this space!
 
-## Updates
+#### Updates
 
-2018-12-10
-----------
+2018-12-10:
 
 Another way to think of the extremely low estimates for discovering new paths is to say
 
