@@ -202,6 +202,24 @@ Anyway, that's all for now folks.
 I'll post a follow-up when I have some empirical evidence from real-world targets.
 Watch this space!
 
+## Updates
+
+2018-12-10
+----------
+
+Another way to think of the extremely low estimates for discovering new paths is to say
+
+$$
+N_{z} = 1/\hat{\theta{}}(0)
+$$
+
+where $$N_{z}$$ is the expected number of additional fuzz required to uncover a new path.
+
+So, what a $$\hat{\theta{}}(0) = 1.16e-11$$ is saying is that you need to run the fuzzer for an additional $$N_{z} \approx{} 86.2 billion$$ executions until you find a new path.
+Assuming an average execution speed of $$1000$$, this translates to keep the fuzzer running for close to 3 years!
+This is grossly inaccurate and of little practical utility.
+Evidently, we need estimates that are tailored for exponential spaces, which I feel Good-Turing is not.
+
 [1]: https://arxiv.org/pdf/1807.10255.pdf
 [2]: https://en.wikipedia.org/wiki/Good–Turing_frequency_estimation
 [3]: https://www.twitter.com/ibags
