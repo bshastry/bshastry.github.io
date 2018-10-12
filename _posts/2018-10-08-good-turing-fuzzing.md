@@ -215,7 +215,7 @@ $$
 where $$N_{z}$$ is the expected number of additional fuzz required to uncover a new path.
 
 So, what a $$\hat{\theta{}}(0) = 1.16e-11$$ is saying is that you need to run the fuzzer for an additional $$N_{z} \approx{} 86.2$$ billion executions until you find a new path.
-Assuming an average execution speed of $$1000$$, this translates to keep the fuzzer running for close to 3 years!
+Assuming that the average execution speed of fuzzer is $$1000$$ executions per second, this translates to keep the fuzzer running for close to 3 years on a single core!
 This is grossly inaccurate and of little practical utility.
 Evidently, we need estimates that are tailored for exponential spaces, which I feel Good-Turing is not.
 
