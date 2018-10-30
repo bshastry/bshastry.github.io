@@ -96,7 +96,7 @@ $$
 
 where $$f_{k}$$ is the number of times behavior $$p_{k}$$ has been observed.
 
-The relative frequency estimate for $$p_{j}$$ is $$f_{j}/m$$.
+The relative frequency estimate for ~~$$p_{j}$$ is $$f_{j}/m$$~~ $$p_{j}$$ is $$f_{j}/n$$.
 This estimate is inaccurate for small counts.
 For example, if $$f_{j}=0$$, our estimate is essentially saying "you can't expect to see what you have not seen" which can be grossly inaccurate.
 
