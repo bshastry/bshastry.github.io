@@ -96,9 +96,13 @@ $$
 F = {f_{1},f_{2},...,f_{n}}
 $$
 
-where $$f_{k}$$ is the number of times behavior $$p_{k}$$ has been observed.
+where $$f_{k}$$ is the number of times behavior $$p_{k}$$ has been observed. The frequency of unobserved behaviors is zero.
 
-The relative frequency estimate for ~~$$p_{j}$$ is $$f_{j}/m$$~~ $$p_{j}$$ is $$f_{j}/n$$.
+$$
+f_{i} = 0, n+1 \leq i \leq m
+$$
+
+The relative frequency estimate for $$p_{j}$$ is $$f_{j}/n$$.
 This estimate is inaccurate for small counts.
 For example, if $$f_{j}=0$$, our estimate is essentially saying "you can't expect to see what you have not seen" which can be grossly inaccurate.
 
@@ -148,7 +152,7 @@ $$
 $$
 
 That is to say, this probability is greater than $$(1/N)$$ for positive $$g_{1}$$ when $$g_{1} \gt{} g_{0}$$.
-When N=1 (after one program behavior has been observed), this probability is $$(1/(M-1)$$ which can be grossly inaccurate.
+When N=1 (after one program behavior has been observed), this probability is $$1/(M-1)$$ which can be grossly inaccurate.
 But the hope is, as N grows, this estimate converges on more realistic actual probability.
 
 ## Applying Good-Turing Estimate to Fuzzing
@@ -223,7 +227,7 @@ Evidently, we need estimates that are tailored for exponential spaces, which I f
 
 2018-3-11:
 
-Thanks to Marcel B$${\"o}$$hme for the errata :-)
+Thanks to Marcel Böhme for pointing out errors in the first version of the post
 
 [1]: https://arxiv.org/pdf/1807.10255.pdf
 [2]: https://en.wikipedia.org/wiki/Good–Turing_frequency_estimation
