@@ -3,6 +3,8 @@ layout: post
 title: Can Good-Turing Frequency Estimation Tell Us When to Stop Fuzzing?
 ---
 
+<script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 **tl;dr: Depends, but I'm sceptical atm :-)**
 
 In this post, I will try to examine the utility of the [Good-Turing frequency estimation][2] for fuzz testing.
@@ -218,6 +220,10 @@ So, what a $$\hat{\theta{}}(0) = 1.16e-11$$ is saying is that you need to run th
 Assuming that the average execution speed of fuzzer is $$1000$$ executions per second, this translates to keep the fuzzer running for close to 3 years on a single core!
 This is grossly inaccurate and of little practical utility.
 Evidently, we need estimates that are tailored for exponential spaces, which I feel Good-Turing is not.
+
+2018-3-11:
+
+Thanks to Marcel B$${\"o}$$hme for the errata :-)
 
 [1]: https://arxiv.org/pdf/1807.10255.pdf
 [2]: https://en.wikipedia.org/wiki/Good–Turing_frequency_estimation
