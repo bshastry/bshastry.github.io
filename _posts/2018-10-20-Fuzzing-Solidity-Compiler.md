@@ -46,7 +46,7 @@ I will add one more reason that drew me to fuzzing Solidity
 Here, I refer to the following statement sourced from a paper titled "Defining the Ethereum Virtual Machine for Interactive Theorem Provers" by Y. Hirai (**emphasis mine**).
 
 >Although ultimately all Ethereum smart contracts are deployed as EVM bytecode, the bytecode is rarely directly written.
->The most popular programming language Solidity [3] has a rich syntax but **no specification**. **The only definition of Solidity is the Solidity compiler implementation**, which compiles Solidity programs into EVM bytecode.
+>The most popular programming language Solidity has a rich syntax but **no specification**. **The only definition of Solidity is the Solidity compiler implementation**, which compiles Solidity programs into EVM bytecode.
 
 To me, this implies:
   - Bugs in Solidity may impact correctness of Solidity-written smart contracts
