@@ -33,6 +33,9 @@ __B.Tech__ Electrical and Electronics Engineering, National Institute of Technol
 ## Experience
 \\
 \\
+`Jan 2019-Present`
+__Security Engineer__, Ethereum foundation.
+
 `Aug 2012-May 2013`
 __Research Assistant__, Computer Security Lab, Rice University.
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Quick Dive into Trail of Bit's Slither
+title: Quick Dive into Trail of Bits' Slither
 ---
 
 ## Intro
@@ -21,8 +21,6 @@ Treat this as a (shoddy) introduction to Slither, that at the
  time of writing addresses only the author's curiosity. haha.
 
 First things first, Slither itself is written in `python3`, yaay!
-However, it is targeted at applications (smart contracts) written in the 
-Solidity programming language.
 One of the first things slither does is to use the solidity compiler (`solc` 
 binary) to obtain the AST of the program to be analyzed.
 Therefore, before I proceed, let me install the Solidity compiler.
