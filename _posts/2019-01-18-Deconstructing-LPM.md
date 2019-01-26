@@ -20,8 +20,10 @@ Most importantly, what we don't need is the LP fuzzer itself: code that mutates 
 
 This seems complicated at first; it definitely is for someone, like me, who has never written an LP-based fuzzer before.
 I will try to make it simpler.
+
 I think the big idea behind this was that it is harder to ask developers to write custom fuzz mutators than it is to ask them to write a format specification and test harness.
 I've never written a custom fuzz mutator before, so I'm not in a position to present my experience.
+
 That aside, the hope with this project is that this setup (LP-based fuzzing) catches bugs faster and more methodically.
 Methodically because you are fuzzing the specification and not mutating an opaque sequence of bytes.
 Faster, hopefully because fuzzing only what needs to be fuzzed with only those mutations that make sense arrives at bugs faster than fuzzing everything somehow.
@@ -101,22 +103,24 @@ message IHDR {
   required uint32 width = 1;
   required uint32 height = 2;
   enum bit_depth {
-    1 = 1;
-    2 = 2;
-    4 = 3;
-    8 = 4;
-    16 = 5;
-    255 = 6; // BYTE_MAX
+    BD_ONE = 1;
+    BD_TWO = 2;
+    BD_FOUR = 4;
+    BD_EIGHT = 8;
+    BD_SIXTEEN = 16;
+    BD_MAX = 255; // BYTE_MAX
   };
   enum color_type {
-    0 = 1;
-    2 = 2;
-    3 = 3;
-    4 = 4;
-    6 = 5;
-    255 = 6; // BYTE_MAX
+    CT_ZERO = 0;
+    CT_TWO = 2;
+    CT_THREE = 3;
+    CT_FOUR = 4;
+    CT_SIX = 6;
+    CT_MAX = 255; // BYTE_MAX
   };
 ...
+};
+
 ```
 
 Although the `BYTE_MAX` option is not part of the specification, I have intentionally added it so that we make the mutator explore specific corner cases. This is hacky, I admit. Who is to say whether or not `200` is a better corner-case than `255`?
@@ -237,6 +241,13 @@ In this post, we explored
   - what LibprotobufferMutator is and how one can write an LP spec
   - How LP spec can help us write more targeted fuzzers
   - How the whole LP/LPM/libFuzzer setup is wired together
+
+Overall, I feel that LP-based fuzzing holds promise for testing language parsers, compilers, interpreters etc.
+The challenge is to obtain an understanding of the underlying language well enough to be able to (1) write a spec for it and (2) write a proper LP-to-native format converter.
+
+Although I think writing these things is not a big deal, it definitely takes dedicated time and effort.
+This means, unless you draw benefits from such effort you are more likely to just download a corpus from the Internet and start fuzzing.
+It's essentially a cost-benefit trade-off.
 
 In an upcoming post, I plan to compare vanilla (non specification) fuzzer and an LP-based fuzzer  with the hope that such a comparison sheds light on the actual benefits of LP-based fuzzing. That's all folks!
 
