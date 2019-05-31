@@ -16,7 +16,7 @@
 title: Bhargava Shastry
 #email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
-       Yo! I am a security researcher and a PhD student at SecT, TU Berlin.
+       Yo! I am a security engineer at the Ethereum Foundation/indie security researcher.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ibags

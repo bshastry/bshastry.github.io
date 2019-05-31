@@ -4,6 +4,9 @@ title: "Publications and Talks"
 permalink: /pubs
 ---
 
+### Indie
+- "[Vulnerability Search Problem and Methods][2]", B.Shastry, Invited Talk at the Internet Network Architectures group, TU Berlin, 2019
+
 ### Ethereum foundation
 - "[Open Discussion on Solidity Fuzzing][1]", B.Shastry, Ethereum Meetup, Berlin, 2019.
 
@@ -30,3 +33,4 @@ permalink: /pubs
 - "Adaptive Filtering Technique and DSP-Based Implementation for High Speed Distance Protection”, U.J. Shenoy, **B. Shastry**, K. Parthasarathy, K.R. Satheesh, B.S. Kavyashree, Fourth International Conference on Power System Protection and Automation 2007
 
 [1]: media/Eth_Meetup_Slides.pdf
+[2]: media/Vulnerability_Search_Problem_and_Methods.pdf
