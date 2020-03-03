@@ -8,8 +8,10 @@ permalink: /pubs
 - "[Vulnerability Search Problem and Methods][2]", B.Shastry, Invited Talk at the Internet Network Architectures group, TU Berlin, 2019
 
 ### Ethereum foundation
+
 - "[Open Discussion on Solidity Fuzzing][1]", B.Shastry, Ethereum Meetup, Berlin, 2019.
 - "Fuzzing the Solidity Compiler" [Slides][3] [Video][4], B.Shastry, Devcon 5, Osaka, 2019.
+- "Fuzzing the Solidity Compiler" [Slides][5], B.Shastry, EthCC 3, Paris, 2020.
 
 ### Ph.D.
 
@@ -36,4 +38,5 @@ permalink: /pubs
 [1]: media/Eth_Meetup_Slides.pdf
 [2]: media/Vulnerability_Search_Problem_and_Methods.pdf
 [3]: https://bshastry.github.io/media/Fuzzing_Solidity.pdf
-[4]: https://youtu.be/cAU5NbrXst0 
+[4]: https://youtu.be/cAU5NbrXst0
+[5]: https://bshastry.github.io/media/Fuzzing_Solidity_EthCC3.pdf
