@@ -29,7 +29,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)
 }
 ```
 
-when compiled and run like so
+when compiled and run like so (tested on Linux bash console)
 
 ```
 echo -e "                                          
@@ -49,7 +49,7 @@ extern \"C\" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)
 " | clang++ -x c++ - -fsanitize=fuzzer -o fuzz_bfs -lboost_filesystem && time ./fuzz_bfs
 ```
 
-prints the following output on the console (Linux, x86, clang v10)
+prints the following output on the console (Linux, x86, clang v10, boost v1.71)
 
 ```
 INFO: Seed: 3723374228
