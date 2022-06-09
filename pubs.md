@@ -9,6 +9,7 @@ permalink: /pubs
 
 ### Ethereum foundation
 
+- "Can A Fuzzer Match A Human: Solidity Case Study" [Slides][7], B.Shastry
 - "[Open Discussion on Solidity Fuzzing][1]", B.Shastry, Ethereum Meetup, Berlin, 2019.
 - "Fuzzing the Solidity Compiler" [Slides][3] [Video][4], B.Shastry, Devcon 5, Osaka, 2019.
 - "Fuzzing the Solidity Compiler" [Slides][5], B.Shastry, EthCC 3, Paris, 2020.
@@ -42,3 +43,4 @@ permalink: /pubs
 [4]: https://youtu.be/cAU5NbrXst0
 [5]: https://bshastry.github.io/media/Fuzzing_Solidity_EthCC3.pdf
 [6]: https://bshastry.github.io/media/Fuzzing_Solidity_FuzzconEU.pdf
+[7]: https://bshastry.github.io/media/Can_A_Fuzzer_Match_A_Human.pdf
