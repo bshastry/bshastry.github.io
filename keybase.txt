@@ -2,27 +2,27 @@
 permalink: .well-known/keybase.txt
 ---
 ==================================================================
-https://keybase.io/bshastry
+https://keybase.io/shastry
 --------------------------------------------------------------------
 
 I hereby claim:
 
   * I am an admin of https://bshastry.github.io
-  * I am bshastry (https://keybase.io/bshastry) on keybase.
-  * I have a public key with fingerprint 0C8D 6170 F162 7AEB 358F  6571 03EF 3FA5 CD1D 7232
+  * I am shastry (https://keybase.io/shastry) on keybase.
+  * I have a public key with fingerprint 724A D7B9 9CC5 E904 A184  B298 BCC7 B7AF 2A03 C0E7
 
 To do so, I am signing this object:
 
 {
   "body": {
     "key": {
-      "eldest_kid": "0101ec848d8b2625a0681ceb0eadd9f4a9b4901f4b5d5855c04b20739ce1354056af0a",
-      "fingerprint": "0c8d6170f1627aeb358f657103ef3fa5cd1d7232",
+      "eldest_kid": "0120ad38544876f4a1373d27f3a6821c456a573ff6b7ddcfbc556138ee4df34ad95c0a",
+      "fingerprint": "724ad7b99cc5e904a184b298bcc7b7af2a03c0e7",
       "host": "keybase.io",
-      "key_id": "03ef3fa5cd1d7232",
-      "kid": "0101ec848d8b2625a0681ceb0eadd9f4a9b4901f4b5d5855c04b20739ce1354056af0a",
-      "uid": "62f4ac8adb7e19c2f8c318a6f3831f19",
-      "username": "bshastry"
+      "key_id": "bcc7b7af2a03c0e7",
+      "kid": "011696b03975a1a8ac3af204bde202196a66b0db3a1e1906bd100620fcd66f2b1ea20a",
+      "uid": "ddd817c870022fb2d096e499ecde3219",
+      "username": "shastry"
     },
     "service": {
       "hostname": "bshastry.github.io",
@@ -31,41 +31,37 @@ To do so, I am signing this object:
     "type": "web_service_binding",
     "version": 1
   },
-  "ctime": 1501189543,
+  "ctime": 1715085124,
   "expire_in": 157680000,
-  "prev": "164a070451518687bb9b24ae35e14df3d81eca984a93a71a31f7ce2e408f1ce1",
-  "seqno": 9,
+  "prev": "58be2a05d3dd41769f35e84d01f5b3ef0266488bdc0bd9f1ecca903b9658ad81",
+  "seqno": 7,
   "tag": "signature"
 }
 
 which yields the signature:
 
 -----BEGIN PGP MESSAGE-----
-Version: GnuPG v1
 
-owGtUm1IFEEYvjv7MKM6fwVdUG7BJVnN7O7szl5FQVhR9qMiorCOmd3Zuy29vXZX
-8xIrCQOp6AP7kESiH0VSgkER9kUSiKaRUpYRSIVG0ncEEUnNZv2pv82fYd55nmee
-52GOTMoK5AR/sIOJRMXgo+C91zSwadeGpkqB2kZGiFUK29mvjZUYzPXi2y1DiAkA
-Ash0LGMDU1EREQEKhjqjgBHD0EyZaFTWADRligyEEdKBTEWgSprOoIRkgBRiAiIU
-CKaVSjAn7Vgpz5fVsaFAFZhQEVXCqISwqSAVAomZkkmQbkBDFSWRE5O26zO4OUpc
-Nt+y+Ywf4qP2/sX/Z99lv+QUkVN0TAyqMqjpool1CWKimBKWoAk1H+gyJ0VKGUdT
-N0lcz8kIVQUCn5ZbOvOL9ZP8hZifsLxkGR1NlXZsz9btEn6f9Ly0G/P5XibtE3Yy
-Gv8tFadWyuBtckY5c1zLTgkxyJG6Z/naEAEIsYZkqUBgFWnLYXHLRyBVwYAv/x1W
-ziXhVkUmQAUygghiBauUalSUCZMQg7JhSgbmFRIN87IkokLCk6o6E5kMsMm7hIKf
-bkfKFmIa90kSXNO1EinilTlMqMqpDU4fEwjmBMaNDfn/LJAzIfzn8z2Njv+xsa7N
-OxrtXufi89WPi98dKozOOxwPzxwauLx0+bX+yPiPZ/Kvt7bUTj784Mqy5+tmDcWy
-r71vOD+p50YmlnvqdVFe8lZ4Su+r4itOz9jBjuG+kYKR0LPPdWebv+1e3zC8+kTX
-mtK17XO+S69sM+9ta1dnUF2goA2RgS0HVjVUh68Gp3+dG+1kxxbl9gaPf7qzY9+K
-7tmhuhlGzf32kRfFVt/D9jy7/vhpd/bdJ82h1sEPbzouDe3/cpCMaWyPlb6M3x7u
-qM5f0vT5WSRSsffCpz1ZJazpq1jc8rxw4YIPs6Y1TS0KZbehk9su9tdEzoFw49vl
-m/X61pUXyhZHO2/CiUqmV/gJ
-=G3gI
+owFtUjtoVEEU3TWxyIKfQiIYRBzBQpYwnze/LcRGUBsLbURknc+d3UeS9zbvvc2H
+mM4iaJPSwsbCWvyAiBYBEQu1EhSVtEq0EBQEwcJ5a9I5zTD3nnPm3MNd3zPWaE0+
+e/n43omxjS/NV1u2ETpHzqwgm/tl1FlBMzC6YNZDWXVnUo86CBOKjWeKJ4mSIiSG
+MMk8lYEZoShxCReGSxaCsNJ7F6zjXBCmABIfWGK85g4b1EYhzXpQDIo0q6KspLEl
+rdbOcdA4yqrEUq2sc9JKE6jBzGGQkdjPy5oRzVlTwnSax1p8dEf2/oPf8U2EFhYz
+LbkhRhnHIgon1gPFlGhhROx6ywwBorGwnmAsKA7OCxGoJWDoyPdwJOe9V0Q6JTGm
+NFjqsRaQaA3OA4tyNbCEIjNzENFl35RVsYxW2ygWF1IHda71INsAu42Y7qVVf2j/
+DTUo8ip3+Wzs96tqUHZqfrU8qAmLYLvbUl2bZj6GGRkLUJRpnqEOiUhXpbU2kYRj
+xQlN2giWBmkB3bRGcCkUjqf+BxaiJFdXLMTcuGfeJ0QKHRgHlXhMArcMAqZCJEpZ
+77D1OhBwzmjMrBZcmRgHqqebz3LUkdGn6dWDp73MVMMC0GprbTjemGw1Dk8eHS/O
+vX9y+8XW+J3rD27t7N/uXfXyNVoT+3cq+941G28+/7h44+Gfp5sXrl0+39w4PX93
+bmrvqfWvryeufrq5dWyt2fi1+Pb+yUcfy7kDH35/mzh48PlUF2+c/X5o6dLPzXbv
++Nhf
+=sJ0k
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
 appending to this document.
 
-View my publicly-auditable identity here: https://keybase.io/bshastry
+View my publicly-auditable identity here: https://keybase.io/shastry
 
 ==================================================================
 
