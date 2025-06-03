@@ -3,7 +3,7 @@ layout: cv
 title: Curriculum Vitae
 ---
 # Bhargava Shastry
-PhD Student, SecT, TU Berlin.
+Security Engineer, Ethereum Foundation.
 
 <div id="webaddress">
 <a href="/index.html">Home</a>
@@ -61,9 +61,34 @@ __Intern__, Ittiam Systems Private Limited, Bangalore.
 
 *As an intern at Ittiam, I designed an experiment to measure and analyze audio jitter in Ittiam VoIP phones so that Ittiam's jitter reduction could be quantitatively and qualitatively evaluated.*
 
+## Selected Projects
+\\
+\\
+`C Projects`
+[solidity](git@github.com:bshastry/solidity) - 303 commits
+[orthrus](git@gitlab.sec.t-labs.tu-berlin.de:collaboration/Orthrus) - 216 commits
+[oss-fuzz](https://github.com/google/oss-fuzz) - 69 commits
+
+`Go Projects`
+[goevmlab](git@github.com:holiman/goevmlab) - 33 commits
+[eip7702fuzzer_v3](git@github.com:bshastry/EIP7702Fuzzer) - 23 commits
+[poc_active_delegation](git@github.com:bshastry/poc_active_delegation) - 20 commits
+
+`C/C++ Projects`
+[rust-libp2p](git@github.com:bshastry/rust-libp2p-fuzzers) - 9 commits
+
+`C++ Projects`
+[prysm](git@github.com:bshastry/prysm-fuzzers) - 6 commits
+[hash-fuzz](git@github.com:bshastry/hash-fuzz) - 6 commits
+
+`JSON Projects`
+[rust-yamux](git@github.com:sigp/rust-yamux) - 5 commits
+
+
+
 ## Talks
-\\
-\\
+\
+\
 `OvS Orbit Interview`
 [Podcast discussion with Ben Pfaff on my security audit of OvS and fuzzing frameworks][10]
 
@@ -106,7 +131,7 @@ Young Engineering Fellow, Indian Institute of Science, Bangalore.
 
 ## Coding Skills
 <br>
-* C, C++, Python, Java, Bash
+* C, C++, Python, Java, Bash, Solidity, Go, Rust
 
 ## Professional Activities
 \\
