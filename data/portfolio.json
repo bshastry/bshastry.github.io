@@ -1,0 +1,126 @@
+{
+  "personal": {
+    "name": "Bhargava Shastry",
+    "title": "Security Engineer & Researcher",
+    "description": "Security engineer at the Ethereum Foundation and indie security researcher specializing in smart contract security, fuzzing, and blockchain technology.",
+    "location": "Remote",
+    "email": "contact@bhargavashastry.com",
+    "social": {
+      "github": "bshastry",
+      "twitter": "ibags",
+      "linkedin": "bhargavashastry",
+      "scholar": "Bhargava Shastry",
+      "keybase": "bshastry"
+    }
+  },
+  "experience": [
+    {
+      "title": "Security Engineer",
+      "company": "Ethereum Foundation",
+      "period": "2019 - Present",
+      "description": "Leading security research and development for Ethereum protocol, focusing on smart contract security, consensus mechanisms, and protocol-level vulnerabilities."
+    },
+    {
+      "title": "Independent Security Researcher",
+      "company": "Freelance",
+      "period": "2017 - Present",
+      "description": "Conducting independent security research, developing fuzzing tools, and contributing to open-source security projects."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ph.D. in Computer Science",
+      "institution": "University Example",
+      "year": "2019",
+      "focus": "Security and Systems"
+    }
+  ],
+  "skills": {
+    "languages": ["Solidity", "Rust", "C++", "Python", "Go", "JavaScript"],
+    "security": ["Smart Contract Auditing", "Fuzzing", "Static Analysis", "Protocol Security"],
+    "blockchain": ["Ethereum", "EVM", "Consensus Mechanisms", "DeFi"],
+    "tools": ["LLVM", "AFL", "Foundry", "Hardhat", "Docker"]
+  },
+  "projects": [
+    {
+      "name": "solidity",
+      "description": "The Solidity Contract-Oriented Programming Language - Core contributor to the official Solidity compiler",
+      "commits": 303,
+      "language": "C++",
+      "url": "https://github.com/ethereum/solidity",
+      "featured": true
+    },
+    {
+      "name": "orthrus",
+      "description": "Advanced fuzzing framework for security testing and vulnerability discovery",
+      "commits": 216,
+      "language": "Python",
+      "url": "https://github.com/bshastry/orthrus",
+      "featured": true
+    },
+    {
+      "name": "oss-fuzz",
+      "description": "Google's continuous fuzzing service for open source software - Active contributor",
+      "commits": 69,
+      "language": "Python",
+      "url": "https://github.com/google/oss-fuzz",
+      "featured": true
+    },
+    {
+      "name": "bundler-test-executor",
+      "description": "Test execution framework for Ethereum bundler implementations",
+      "commits": 45,
+      "language": "Go",
+      "url": "https://github.com/bshastry/bundler-test-executor",
+      "featured": false
+    },
+    {
+      "name": "goevmlab",
+      "description": "EVM laboratory for testing and analysis in Go",
+      "commits": 38,
+      "language": "Go",
+      "url": "https://github.com/bshastry/goevmlab",
+      "featured": false
+    },
+    {
+      "name": "eip7702fuzzer_v3",
+      "description": "Fuzzer for EIP-7702 account abstraction proposals",
+      "commits": 32,
+      "language": "Solidity",
+      "url": "https://github.com/bshastry/eip7702fuzzer_v3",
+      "featured": false
+    },
+    {
+      "name": "precompilefuzzer",
+      "description": "Specialized fuzzer for Ethereum precompiled contracts",
+      "commits": 28,
+      "language": "C++",
+      "url": "https://github.com/bshastry/precompilefuzzer",
+      "featured": false
+    },
+    {
+      "name": "abiencoderv2-fuzzer",
+      "description": "Fuzzing tool for Solidity ABI encoder v2 testing",
+      "commits": 25,
+      "language": "C++",
+      "url": "https://github.com/bshastry/abiencoderv2-fuzzer",
+      "featured": false
+    },
+    {
+      "name": "rust-libp2p",
+      "description": "Rust implementation of libp2p networking stack - Security contributions",
+      "commits": 22,
+      "language": "Rust",
+      "url": "https://github.com/libp2p/rust-libp2p",
+      "featured": false
+    },
+    {
+      "name": "prysm",
+      "description": "Go implementation of Ethereum 2.0 client - Security research contributions",
+      "commits": 18,
+      "language": "Go",
+      "url": "https://github.com/prysmaticlabs/prysm",
+      "featured": false
+    }
+  ]
+}
