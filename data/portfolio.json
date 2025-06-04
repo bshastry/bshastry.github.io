@@ -4,11 +4,11 @@
     "title": "Security Engineer & Researcher",
     "description": "Security engineer at the Ethereum Foundation and indie security researcher specializing in smart contract security, fuzzing, and blockchain technology.",
     "location": "Remote",
-    "email": "contact@bhargavashastry.com",
+    "email": "bshastry@ethereum.org",
     "social": {
       "github": "bshastry",
       "twitter": "ibags",
-      "linkedin": "bhargavashastry",
+      "linkedin": "bshastry",
       "scholar": "Bhargava Shastry",
       "keybase": "bshastry"
     }
@@ -18,7 +18,7 @@
       "title": "Security Engineer",
       "company": "Ethereum Foundation",
       "period": "2019 - Present",
-      "description": "Leading security research and development for Ethereum protocol, focusing on smart contract security, consensus mechanisms, and protocol-level vulnerabilities."
+      "description": "Conducting security research and development for Ethereum protocol, focusing on smart contract security, consensus mechanisms, and protocol-level vulnerabilities."
     },
     {
       "title": "Independent Security Researcher",
@@ -30,9 +30,9 @@
   "education": [
     {
       "degree": "Ph.D. in Computer Science",
-      "institution": "University Example",
+      "institution": "Technische Universität Berlin",
       "year": "2019",
-      "focus": "Security and Systems"
+      "focus": "Static analysis and fuzzing techniques for open source bug detection"
     }
   ],
   "skills": {
@@ -72,7 +72,7 @@
       "commits": 45,
       "language": "Go",
       "url": "https://github.com/bshastry/bundler-test-executor",
-      "featured": false
+      "featured": true
     },
     {
       "name": "goevmlab",
@@ -88,7 +88,7 @@
       "commits": 32,
       "language": "Solidity",
       "url": "https://github.com/bshastry/eip7702fuzzer_v3",
-      "featured": false
+      "featured": true
     },
     {
       "name": "precompilefuzzer",
@@ -96,7 +96,7 @@
       "commits": 28,
       "language": "C++",
       "url": "https://github.com/bshastry/precompilefuzzer",
-      "featured": false
+      "featured": true
     },
     {
       "name": "abiencoderv2-fuzzer",
@@ -104,7 +104,7 @@
       "commits": 25,
       "language": "C++",
       "url": "https://github.com/bshastry/abiencoderv2-fuzzer",
-      "featured": false
+      "featured": true
     },
     {
       "name": "rust-libp2p",
@@ -112,7 +112,7 @@
       "commits": 22,
       "language": "Rust",
       "url": "https://github.com/libp2p/rust-libp2p",
-      "featured": false
+      "featured": true
     },
     {
       "name": "prysm",
