@@ -51,10 +51,7 @@ export default function Contact() {
                 Let's Connect
               </h3>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                I'm always open to discussing new opportunities, research collaborations,
-                or interesting security challenges. Whether you're looking for a security
-                engineer, want to discuss blockchain security, or have questions about
-                my research, feel free to reach out.
+                I'm passionate about cybersecurity and welcome discussions on research collaborations, emerging security challenges, or my work in blockchain security. Feel free to connect if you'd like to explore these areas or have questions about my research.
               </p>
 
               <div className="space-y-6">
@@ -89,7 +86,7 @@ export default function Contact() {
                 <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
                 <div className="flex space-x-4">
                   <a
-                    href={personal.social.github}
+                    href={`https://github.com/${personal.social.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-gray-900 text-white rounded-lg flex items-center justify-center hover:bg-gray-800 transition-colors"
@@ -97,7 +94,7 @@ export default function Contact() {
                     <Github size={20} />
                   </a>
                   <a
-                    href={personal.social.linkedin}
+                    href={`https://linkedin.com/in/${personal.social.linkedin}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
@@ -105,7 +102,7 @@ export default function Contact() {
                     <Linkedin size={20} />
                   </a>
                   <a
-                    href={personal.social.twitter}
+                    href={`https://twitter.com/${personal.social.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 bg-sky-500 text-white rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors"

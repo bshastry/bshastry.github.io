@@ -96,7 +96,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
               <Twitter size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/bhargavashastry"
+              href="https://linkedin.com/in/bshastry"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-primary-600 transition-colors"
@@ -151,7 +151,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                   <Twitter size={20} />
                 </a>
                 <a
-                  href="https://linkedin.com/in/bhargavashastry"
+                  href="https://linkedin.com/in/bshastry"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-primary-600 transition-colors"

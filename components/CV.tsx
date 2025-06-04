@@ -6,6 +6,46 @@ import portfolioData from '@/data/portfolio.json'
 export default function CV() {
   const { personal, experience, education, skills } = portfolioData
 
+  const handleDownloadPDF = () => {
+    // Create a new window with just the CV content for printing
+    const printWindow = window.open('', '_blank')
+    if (!printWindow) return
+
+    const cvContent = document.getElementById('cv-content')
+    if (!cvContent) return
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>${personal.name} - CV</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+            .header { text-align: center; margin-bottom: 30px; }
+            .section { margin-bottom: 25px; }
+            .section h3 { color: #2563eb; border-bottom: 2px solid #e5e7eb; padding-bottom: 5px; }
+            .job, .edu { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #ddd; }
+            .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+            .skill { background: #f3f4f6; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+            @media print { body { margin: 0; } }
+          </style>
+        </head>
+        <body>
+          ${cvContent.innerHTML}
+        </body>
+      </html>
+    `)
+
+    printWindow.document.close()
+    printWindow.focus()
+
+    // Wait for content to load then trigger print dialog
+    setTimeout(() => {
+      printWindow.print()
+      printWindow.close()
+    }, 250)
+  }
+
   return (
     <section id="cv" className="py-20 bg-white">
       <div className="container-max section-padding">
@@ -18,7 +58,7 @@ export default function CV() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto" id="cv-content">
           {/* Header */}
           <div className="card p-8 mb-8">
             <div className="text-center mb-6">
@@ -41,7 +81,10 @@ export default function CV() {
             </div>
 
             <div className="text-center">
-              <button className="btn-primary inline-flex items-center space-x-2">
+              <button
+                onClick={handleDownloadPDF}
+                className="btn-primary inline-flex items-center space-x-2"
+              >
                 <Download size={16} />
                 <span>Download PDF</span>
               </button>

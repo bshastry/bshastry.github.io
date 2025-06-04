@@ -39,7 +39,7 @@ export default function Hero() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Security Research</h3>
               <p className="text-gray-600 text-center">
-                Leading security research for Ethereum protocol and smart contracts
+                Conducting security research for Ethereum protocol and smart contracts
               </p>
             </div>
 

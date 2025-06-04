@@ -25,7 +25,13 @@
       "company": "Freelance",
       "period": "2017 - Present",
       "description": "Conducting independent security research, developing fuzzing tools, and contributing to open-source security projects."
-    }
+    },
+	{
+	  "title": "Software Engineer",
+	  "company": "Ittiam Systems",
+	  "period": "2007 - 2008",
+	  "description": "Wrote software and tests for Ittiam's Voice over IP phone software."
+	}
   ],
   "education": [
     {
@@ -33,10 +39,22 @@
       "institution": "Technische Universität Berlin",
       "year": "2019",
       "focus": "Static analysis and fuzzing techniques for open source bug detection"
-    }
+    },
+	{
+	  "degree": "M.Sc. in Computer Science",
+	  "institution": "Ecole Polytechnique Fédérale de Lausanne (EPFL)",
+	  "year": "2010",
+	  "focus": "Specialized in security of microcontrollers and embedded systems"
+	},
+	{
+	  "degree": "B.Tech. in Electrical Engineering",
+	  "institution": "National Institute of Technology Karnataka (NITK)",
+	  "year": "2007",
+	  "focus": "Undergraduate thesis on digital signal processing and embedded systems"
+	}
   ],
   "skills": {
-    "languages": ["Solidity", "Rust", "C++", "Python", "Go", "JavaScript"],
+    "languages": ["Solidity", "Rust", "C++", "Python", "Go"],
     "security": ["Smart Contract Auditing", "Fuzzing", "Static Analysis", "Protocol Security"],
     "blockchain": ["Ethereum", "EVM", "Consensus Mechanisms", "DeFi"],
     "tools": ["LLVM", "AFL", "Foundry", "Hardhat", "Docker"]
@@ -72,7 +90,7 @@
       "commits": 45,
       "language": "Go",
       "url": "https://github.com/bshastry/bundler-test-executor",
-      "featured": true
+      "featured": false
     },
     {
       "name": "goevmlab",
@@ -88,7 +106,7 @@
       "commits": 32,
       "language": "Solidity",
       "url": "https://github.com/bshastry/eip7702fuzzer_v3",
-      "featured": true
+      "featured": false
     },
     {
       "name": "precompilefuzzer",
@@ -112,7 +130,7 @@
       "commits": 22,
       "language": "Rust",
       "url": "https://github.com/libp2p/rust-libp2p",
-      "featured": true
+      "featured": false
     },
     {
       "name": "prysm",
