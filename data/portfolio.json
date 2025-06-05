@@ -37,20 +37,20 @@
     {
       "degree": "Ph.D. in Computer Science",
       "institution": "Technische Universität Berlin",
-      "year": "2019",
+      "year": "2013 - 2019",
       "focus": "Static analysis and fuzzing techniques for open source bug detection"
     },
-	{
-	  "degree": "M.Sc. in Computer Science",
-	  "institution": "Ecole Polytechnique Fédérale de Lausanne (EPFL)",
-	  "year": "2010",
-	  "focus": "Specialized in security of microcontrollers and embedded systems"
+    {
+      "degree": "M.Sc. in Computer Science",
+      "institution": "Ecole Polytechnique Fédérale de Lausanne (EPFL)",
+      "year": "2008 - 2010",
+      "focus": "Specialized in security of microcontrollers and embedded systems"
 	},
-	{
-	  "degree": "B.Tech. in Electrical Engineering",
-	  "institution": "National Institute of Technology Karnataka (NITK)",
-	  "year": "2007",
-	  "focus": "Undergraduate thesis on digital signal processing and embedded systems"
+    {
+      "degree": "B.Tech. in Electrical Engineering",
+      "institution": "National Institute of Technology Karnataka (NITK)",
+      "year": "2003 - 2007",
+      "focus": "Undergraduate thesis on digital signal processing and embedded systems"
 	}
   ],
   "skills": {
