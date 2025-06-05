@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href={personal.social.github}
+                href={`https://github.com/${personal.social.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
@@ -29,7 +29,7 @@ export default function Footer() {
                 <Github size={18} />
               </a>
               <a
-                href={personal.social.linkedin}
+                href={`https://linkedin.com/in/${personal.social.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
@@ -38,7 +38,7 @@ export default function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href={personal.social.twitter}
+                href={`https://twitter.com/${personal.social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
@@ -101,7 +101,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href={personal.social.scholar}
+                  href={`https://scholar.google.com/citations?user=${personal.social.scholar}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
@@ -112,7 +112,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={personal.social.keybase}
+                  href={`https://keybase.io/${personal.social.keybase}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
@@ -123,7 +123,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/bshastry"
+                  href={`https://github.com/${personal.social.github}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
@@ -134,7 +134,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/blog"
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   Blog
@@ -152,13 +152,13 @@ export default function Footer() {
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <a
-                href="#"
+                href="/privacy"
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Privacy Policy
               </a>
               <a
-                href="#"
+                href="/terms"
                 className="text-gray-400 hover:text-white text-sm transition-colors"
               >
                 Terms of Service
