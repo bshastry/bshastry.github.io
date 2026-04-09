@@ -14,7 +14,7 @@ The blog repo (Next.js 14 portfolio + blog, static export to GitHub Pages) is mi
 **Critical — broken functionality:**
 1. Blog posts never render real content. `app/blog/[slug]/page.tsx` constructs a hardcoded "This blog post is currently being migrated... The full content will be available soon" placeholder and dumps it via `whitespace-pre-line` — no markdown parser, and the `content` field in `data/blog.json` stores a path string (`"legacy-archive/_posts/..."`) that is never read.
 2. No markdown library in the dependency tree. Even loaded, content has nothing to parse it.
-3. Footer "Google Scholar" link is broken: `https://scholar.google.com/citations?user=Bhargava Shastry` contains a literal space. The correct URL (provided by user) is `https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ`.
+3. Footer "Google Scholar" link is broken. `components/Footer.tsx` constructs the URL as `https://scholar.google.com/citations?user=${personal.social.scholar}`, and `data/portfolio.json` sets `social.scholar` to the literal string `"Bhargava Shastry"` — containing a space, producing a 404. The correct URL (provided by user) is `https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ`.
 
 **Production-readiness gaps:**
 4. No `lint` script in `package.json` (ESLint is installed but unused).
@@ -26,7 +26,7 @@ The blog repo (Next.js 14 portfolio + blog, static export to GitHub Pages) is mi
 
 **Accessibility / UX:**
 10. Header nav items ("Home", "About", "Projects", "CV", "Contact") are `<button>` elements with scroll handlers instead of `<a href="#...">` links — hurts a11y, deep linking, and SEO.
-11. Social icon links in `Header.tsx`, `Contact.tsx`, `Footer.tsx` have no `aria-label`.
+11. Social icon links in `Header.tsx` (both desktop and mobile nav panels) and `Contact.tsx` have no `aria-label`. (`Footer.tsx` social links already have `aria-label` and do not need changes.)
 12. No "Blog" link in the header nav at all (only in the footer).
 
 **Repo clutter:**
@@ -82,15 +82,19 @@ Three options were considered:
 ### New dependencies
 
 ```
-"gray-matter"         ^4.0.3
-"remark"              ^15.x
-"remark-gfm"          ^4.x
-"remark-rehype"       ^11.x
-"rehype-pretty-code"  ^0.13.x
-"rehype-stringify"    ^10.x
-"shiki"               ^1.x          (peer of rehype-pretty-code)
+"gray-matter"             ^4.0.3
+"remark"                  ^15.x
+"remark-gfm"              ^4.x
+"remark-rehype"           ^11.x
+"rehype-slug"             ^6.x      (adds id attributes to headings for deep-linking)
+"rehype-autolink-headings" ^7.x     (wraps headings in anchor links)
+"rehype-pretty-code"      ^0.13.x
+"rehype-stringify"        ^10.x
+"shiki"                   ^1.x      (peer of rehype-pretty-code)
 "@tailwindcss/typography" ^0.5.x
 ```
+
+Heading anchors are included because long research posts benefit from direct-link-to-section. Autolink behavior: `append` style so the anchor icon sits after the heading text, only visible on hover (styled by Tailwind Typography).
 
 ### File layout
 
@@ -99,7 +103,7 @@ content/
   posts/
     2017-07-24-fuzzing-openvswitch.md         ← moved + renormalized from legacy-archive/_posts/
     2017-08-02-diagnosing-distributed-vulnerabilities.md
-    ... (20 posts total)
+    ... (21 posts total)
 lib/
   blog.ts                                      ← NEW: getAllPosts(), getPostBySlug(), markdown→HTML pipeline
 data/
@@ -175,11 +179,11 @@ Slug is derived from filename (`2017-07-24-fuzzing-openvswitch.md` → `fuzzing-
 
 ### Bug fixes
 
-- **Google Scholar URL.** Replace broken URL in `components/Footer.tsx` with `https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ`.
+- **Google Scholar URL.** Two-part fix: (a) update `data/portfolio.json` to store the full URL in `personal.social.scholar` (value: `https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ`), and (b) update `components/Footer.tsx` to use that value directly as the `href` instead of prepending `https://scholar.google.com/citations?user=`. Scholar profile URLs are opaque tokens, not structured identifiers, so storing the full URL is the right abstraction.
 - **Nav header missing Blog.** Add "Blog" entry to `components/Header.tsx` navigation. Since `/blog` is a separate route, render as `<a href="/blog">` (not a scroll target).
-- **Header nav semantics.** Convert "Home/About/Projects/CV/Contact" from `<button onClick={scrollTo}>` to `<a href="#section-id">`. Smooth scrolling is preserved via `scroll-smooth` already on `<html>`. Deep linking works, crawlers follow links, a11y tree is correct.
-- **Icon-link aria-labels.** Every icon-only anchor in `Header.tsx`, `Contact.tsx`, `Footer.tsx` gets an `aria-label` describing the destination (e.g., `aria-label="GitHub profile"`).
-- **Homepage `'use client'` boundary.** Narrow the boundary: create `components/ScrollSpy.tsx` (client component) that handles scroll-position tracking and passes the active section to `Header`. `app/page.tsx` becomes a Server Component that composes server-rendered sections + a thin client island for the Header/ScrollSpy.
+- **Header nav semantics.** Convert "Home/About/Projects/CV/Contact" from `<button onClick={scrollTo}>` to `<a href="#section-id">`. Also convert the "Bhargava Shastry" logo `<button>` to `<a href="#home">`. Smooth scrolling is preserved via `scroll-smooth` already on `<html>`. Deep linking works, crawlers follow links, a11y tree is correct.
+- **Icon-link aria-labels.** Every icon-only anchor in `Header.tsx` (both desktop and mobile nav panels) and `Contact.tsx` gets an `aria-label` describing the destination (e.g., `aria-label="GitHub profile"`). `Footer.tsx` already has these and is untouched.
+- **Homepage `'use client'` boundary.** Consolidate scroll tracking into `Header.tsx`. Currently `app/page.tsx` has an `activeSection` `useState` + scroll-listener `useEffect` that it passes down to `Header`; `Header.tsx` is already a client component with its own `useEffect`. Move the `activeSection` state and scroll tracking into `Header.tsx` (lifting what was in `page.tsx` into the component that already owns the UI for it). Then `app/page.tsx` drops `'use client'` and becomes a Server Component that just composes `<Header />` + the content sections. The `HeaderProps` interface changes: `activeSection` and `setActiveSection` are removed. No new `ScrollSpy` component is introduced — the state already belongs in `Header`.
 
 ### Repo cleanup
 
