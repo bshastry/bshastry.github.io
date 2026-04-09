@@ -28,17 +28,18 @@ export async function generateStaticParams() {
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   // Find the post directly since we're generating static pages
-  const post = blogData.posts.find(p => p.slug === params.slug)
+  const post = blogData.posts.find((p) => p.slug === params.slug)
 
   // Generate markdown content
-  const markdownContent = post ? `
+  const markdownContent = post
+    ? `
 # ${post.title}
 
 *Published on ${new Date(post.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })} • ${post.readTime}*
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })} • ${post.readTime}*
 
 ${post.excerpt}
 
@@ -54,7 +55,8 @@ in the legacy archive.
 
 *This post is part of a series on security research, fuzzing, and vulnerability discovery.
 For more technical content, check out the other posts in the blog.*
-  ` : ''
+  `
+    : ''
 
   if (!post) {
     return (
@@ -62,18 +64,18 @@ For more technical content, check out the other posts in the blog.*
         <div className="container-max section-padding py-12">
           <Link
             href="/blog"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-8 transition-colors"
+            className="mb-8 inline-flex items-center text-blue-600 transition-colors hover:text-blue-700"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Blog
           </Link>
 
-          <div className="text-center py-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-            <p className="text-gray-600 mb-8">The blog post you're looking for doesn't exist.</p>
+          <div className="py-12 text-center">
+            <h1 className="mb-4 text-4xl font-bold text-gray-900">Post Not Found</h1>
+            <p className="mb-8 text-gray-600">The blog post you're looking for doesn't exist.</p>
             <Link
               href="/blog"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
             >
               View All Posts
             </Link>
@@ -83,11 +85,5 @@ For more technical content, check out the other posts in the blog.*
     )
   }
 
-  return (
-    <BlogPostClient
-      post={post}
-      markdownContent={markdownContent}
-      allPosts={blogData.posts}
-    />
-  )
+  return <BlogPostClient post={post} markdownContent={markdownContent} allPosts={blogData.posts} />
 }

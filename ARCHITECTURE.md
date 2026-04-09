@@ -5,6 +5,7 @@
 This document describes the architecture of Bhargava Shastry's portfolio website, built with Next.js, TypeScript, and Tailwind CSS. The system is designed for optimal performance, maintainability, and ease of content management.
 
 ## Table of Contents
+
 1. [Architecture Overview](#architecture-overview)
 2. [Technology Stack](#technology-stack)
 3. [Project Structure](#project-structure)
@@ -19,6 +20,7 @@ This document describes the architecture of Bhargava Shastry's portfolio website
 ## Architecture Overview
 
 ### High-Level Architecture
+
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   User Browser  │    │  GitHub Pages   │    │  Static Files   │
@@ -42,6 +44,7 @@ This document describes the architecture of Bhargava Shastry's portfolio website
 ```
 
 ### Design Principles
+
 1. **Static First**: Generate static files for optimal performance and hosting simplicity
 2. **Component-Based**: Modular React components for maintainability and reusability
 3. **Data-Driven**: Centralized JSON data structure for easy content management
@@ -52,6 +55,7 @@ This document describes the architecture of Bhargava Shastry's portfolio website
 ## Technology Stack
 
 ### Core Technologies
+
 - **Framework**: Next.js 14.2.3 (App Router)
 - **Language**: TypeScript 5.4.5
 - **UI Library**: React 18.3.1
@@ -60,12 +64,14 @@ This document describes the architecture of Bhargava Shastry's portfolio website
 - **Package Manager**: npm
 
 ### Development Tools
+
 - **Linting**: ESLint with Next.js configuration
 - **Type Checking**: TypeScript compiler
 - **CSS Processing**: PostCSS with Tailwind CSS
 - **Development Server**: Next.js dev server with hot reload
 
 ### Deployment
+
 - **Hosting**: GitHub Pages (static hosting)
 - **Build Output**: Static HTML, CSS, and JavaScript files
 - **CDN**: GitHub's global CDN for fast content delivery
@@ -113,6 +119,7 @@ bshastry.github.io/
 ### Directory Responsibilities
 
 #### `/app` - Application Core
+
 - **Purpose**: Next.js App Router structure
 - **Key Files**:
   - `layout.tsx`: Root layout with metadata and global structure
@@ -120,16 +127,19 @@ bshastry.github.io/
   - `globals.css`: Global styles and Tailwind CSS imports
 
 #### `/components` - UI Components
+
 - **Purpose**: Reusable React components for each portfolio section
 - **Design Pattern**: Each component is self-contained with props interface
 - **Naming Convention**: PascalCase matching section names
 
 #### `/data` - Content Management
+
 - **Purpose**: Centralized data storage for all portfolio content
 - **Format**: JSON for easy parsing and automated updates
 - **Structure**: Hierarchical data matching component requirements
 
 #### `/memory-bank` - Documentation
+
 - **Purpose**: Project context, decisions, and maintenance information
 - **Audience**: Developers and maintainers
 - **Format**: Markdown for readability and version control
@@ -137,6 +147,7 @@ bshastry.github.io/
 ## Component Architecture
 
 ### Component Hierarchy
+
 ```
 App (layout.tsx)
 ├── Header
@@ -175,10 +186,11 @@ App (layout.tsx)
 ### Component Design Patterns
 
 #### 1. Props Interface Pattern
+
 ```typescript
 interface HeroProps {
-  personal: PersonalInfo;
-  highlights: Highlight[];
+  personal: PersonalInfo
+  highlights: Highlight[]
 }
 
 export default function Hero({ personal, highlights }: HeroProps) {
@@ -187,6 +199,7 @@ export default function Hero({ personal, highlights }: HeroProps) {
 ```
 
 #### 2. Data Consumption Pattern
+
 ```typescript
 // Data flows from portfolio.json → page.tsx → components
 const portfolioData = require('../data/portfolio.json');
@@ -203,6 +216,7 @@ export default function HomePage() {
 ```
 
 #### 3. Responsive Design Pattern
+
 ```typescript
 // Mobile-first responsive classes
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -211,9 +225,10 @@ export default function HomePage() {
 ```
 
 #### 4. Interactive State Pattern
+
 ```typescript
-const [activeFilter, setActiveFilter] = useState<string>('All');
-const [showAllProjects, setShowAllProjects] = useState<boolean>(false);
+const [activeFilter, setActiveFilter] = useState<string>('All')
+const [showAllProjects, setShowAllProjects] = useState<boolean>(false)
 
 // State management for user interactions
 ```
@@ -221,42 +236,49 @@ const [showAllProjects, setShowAllProjects] = useState<boolean>(false);
 ### Component Responsibilities
 
 #### Header Component
+
 - **Purpose**: Site navigation and branding
 - **Features**: Smooth scrolling, active section highlighting, mobile menu
 - **State**: Active section tracking, mobile menu toggle
 - **Dependencies**: Navigation data from portfolio.json
 
 #### Hero Component
+
 - **Purpose**: First impression and key information
 - **Features**: Gradient background, highlight cards, call-to-action buttons
 - **State**: Stateless (pure component)
 - **Dependencies**: Personal info and highlights from portfolio.json
 
 #### About Component
+
 - **Purpose**: Professional summary and expertise showcase
 - **Features**: Statistics grid, skill tags, technology stack
 - **State**: Stateless (pure component)
 - **Dependencies**: About data, skills, and statistics from portfolio.json
 
 #### Projects Component
+
 - **Purpose**: Interactive project showcase
 - **Features**: Language filtering, featured/all toggle, project cards
 - **State**: Filter state, display mode state
 - **Dependencies**: Projects array from portfolio.json
 
 #### CV Component
+
 - **Purpose**: Professional experience and qualifications
 - **Features**: Timeline layout, download functionality, structured sections
 - **State**: Stateless (pure component)
 - **Dependencies**: Experience, education, skills from portfolio.json
 
 #### Contact Component
+
 - **Purpose**: Contact information and communication channels
 - **Features**: Contact form (mailto), social media links
 - **State**: Form state (if enhanced with validation)
 - **Dependencies**: Contact info and social links from portfolio.json
 
 #### Footer Component
+
 - **Purpose**: Additional navigation and site information
 - **Features**: Quick links, resource links, copyright information
 - **State**: Stateless (pure component)
@@ -265,6 +287,7 @@ const [showAllProjects, setShowAllProjects] = useState<boolean>(false);
 ## Data Management
 
 ### Data Architecture
+
 ```
 portfolio.json
 ├── personal: PersonalInfo          # Basic personal information
@@ -278,39 +301,41 @@ portfolio.json
 ```
 
 ### Data Types (TypeScript Interfaces)
+
 ```typescript
 interface PersonalInfo {
-  name: string;
-  title: string;
-  location: string;
-  email: string;
-  phone?: string;
-  website?: string;
+  name: string
+  title: string
+  location: string
+  email: string
+  phone?: string
+  website?: string
 }
 
 interface Project {
-  name: string;
-  language: string;
-  description: string;
-  commits: number;
-  github: string;
-  website?: string;
-  featured: boolean;
-  tags?: string[];
+  name: string
+  language: string
+  description: string
+  commits: number
+  github: string
+  website?: string
+  featured: boolean
+  tags?: string[]
 }
 
 interface Experience {
-  title: string;
-  company: string;
-  location: string;
-  startDate: string;
-  endDate: string | 'Present';
-  description: string;
-  achievements?: string[];
+  title: string
+  company: string
+  location: string
+  startDate: string
+  endDate: string | 'Present'
+  description: string
+  achievements?: string[]
 }
 ```
 
 ### Data Flow
+
 1. **Source**: `data/portfolio.json` contains all content
 2. **Loading**: Next.js imports JSON at build time
 3. **Distribution**: Root page component distributes data to child components
@@ -318,6 +343,7 @@ interface Experience {
 5. **Updates**: Content updates only require JSON file changes
 
 ### Content Management Strategy
+
 - **Single Source of Truth**: All content in one JSON file
 - **Automated Updates**: Portfolio updater script can modify JSON
 - **Version Control**: JSON changes tracked in Git
@@ -327,6 +353,7 @@ interface Experience {
 ## Styling System
 
 ### Tailwind CSS Architecture
+
 ```
 Styling Hierarchy:
 ├── tailwind.config.js           # Tailwind configuration
@@ -336,6 +363,7 @@ Styling Hierarchy:
 ```
 
 ### Design System
+
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -347,37 +375,38 @@ module.exports = {
           500: '#3b82f6',
           600: '#2563eb',
           700: '#1d4ed8',
-        }
+        },
       },
       animation: {
-        'fadeIn': 'fadeIn 0.6s ease-in-out',
-        'slideUp': 'slideUp 0.6s ease-out',
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      }
-    }
-  }
+        fadeIn: 'fadeIn 0.6s ease-in-out',
+        slideUp: 'slideUp 0.6s ease-out',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+    },
+  },
 }
 ```
 
 ### Styling Patterns
 
 #### 1. Utility-First Approach
+
 ```tsx
-<div className="bg-gradient-to-br from-blue-600 to-purple-600 py-16 px-8">
-  <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-    {personal.name}
-  </h1>
+<div className="bg-gradient-to-br from-blue-600 to-purple-600 px-8 py-16">
+  <h1 className="mb-6 text-4xl font-bold text-white md:text-6xl">{personal.name}</h1>
 </div>
 ```
 
 #### 2. Responsive Design
+
 ```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
   {/* Responsive grid layout */}
 </div>
 ```
 
 #### 3. Component Variants
+
 ```tsx
 <button className={`btn ${variant === 'primary' ? 'btn-primary' : 'btn-secondary'}`}>
   {children}
@@ -385,11 +414,12 @@ module.exports = {
 ```
 
 #### 4. Custom Utilities
+
 ```css
 /* globals.css */
 @layer utilities {
   .btn {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply rounded-lg px-6 py-3 font-semibold transition-all duration-300;
   }
 
   .btn-primary {
@@ -399,6 +429,7 @@ module.exports = {
 ```
 
 ### Design Tokens
+
 - **Colors**: Primary blue palette with gradients
 - **Typography**: System font stack with responsive sizing
 - **Spacing**: Consistent spacing scale (4px base unit)
@@ -408,6 +439,7 @@ module.exports = {
 ## Build and Deployment
 
 ### Build Process
+
 ```
 Source Code → TypeScript Compilation → React Rendering → Static Generation → Deployment
      ↓              ↓                      ↓                ↓                ↓
@@ -416,19 +448,21 @@ Source Code → TypeScript Compilation → React Rendering → Static Generation
 ```
 
 ### Build Configuration
+
 ```javascript
 // next.config.js
 const nextConfig = {
-  output: 'export',           // Static site generation
-  trailingSlash: true,        // GitHub Pages compatibility
+  output: 'export', // Static site generation
+  trailingSlash: true, // GitHub Pages compatibility
   images: {
-    unoptimized: true         // No image optimization for static export
+    unoptimized: true, // No image optimization for static export
   },
   assetPrefix: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
 }
 ```
 
 ### Build Commands
+
 ```bash
 # Development
 npm run dev          # Start development server with hot reload
@@ -440,6 +474,7 @@ npm run lint         # Run ESLint for code quality
 ```
 
 ### Deployment Pipeline
+
 1. **Development**: Local development with hot reload
 2. **Build**: Generate optimized static files in `out/` directory
 3. **Testing**: Verify build output locally
@@ -447,6 +482,7 @@ npm run lint         # Run ESLint for code quality
 5. **Verification**: Test deployed site functionality
 
 ### Performance Optimizations
+
 - **Static Generation**: Pre-rendered HTML for fast initial load
 - **Code Splitting**: Automatic code splitting by Next.js
 - **Asset Optimization**: Minified CSS and JavaScript
@@ -456,6 +492,7 @@ npm run lint         # Run ESLint for code quality
 ## Performance Considerations
 
 ### Core Web Vitals Targets
+
 - **Largest Contentful Paint (LCP)**: < 2.5 seconds
 - **First Input Delay (FID)**: < 100 milliseconds
 - **Cumulative Layout Shift (CLS)**: < 0.1
@@ -463,57 +500,66 @@ npm run lint         # Run ESLint for code quality
 ### Optimization Strategies
 
 #### 1. Bundle Size Optimization
+
 - Tree shaking for unused code elimination
 - Dynamic imports for code splitting
 - Minimal external dependencies
 
 #### 2. Loading Performance
+
 - Static site generation for instant HTML delivery
 - Preloaded critical resources
 - Optimized font loading
 
 #### 3. Runtime Performance
+
 - React component optimization
 - Efficient state management
 - Minimal re-renders
 
 #### 4. Network Performance
+
 - CDN delivery through GitHub Pages
 - Compressed assets (gzip/brotli)
 - Efficient caching strategies
 
 ### Performance Monitoring
+
 ```typescript
 // Performance measurement example
 const observer = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
-    console.log(`${entry.name}: ${entry.duration}ms`);
+    console.log(`${entry.name}: ${entry.duration}ms`)
   }
-});
-observer.observe({ entryTypes: ['measure'] });
+})
+observer.observe({ entryTypes: ['measure'] })
 ```
 
 ## Security Considerations
 
 ### Static Site Security Benefits
+
 - **No Server**: Eliminates server-side vulnerabilities
 - **No Database**: No SQL injection or data breach risks
 - **No User Input Processing**: Minimal attack surface
 - **CDN Protection**: DDoS protection through GitHub's infrastructure
 
 ### Content Security
+
 - **Source Control**: All content versioned in Git
 - **Access Control**: GitHub repository permissions
 - **Backup Strategy**: Multiple copies in version control
 - **Audit Trail**: Git history for all changes
 
 ### Client-Side Security
+
 - **No Sensitive Data**: No API keys or secrets in client code
 - **HTTPS Only**: Secure transmission through GitHub Pages
 - **Content Validation**: TypeScript for data integrity
 - **Dependency Security**: Regular dependency updates
 
 ### Privacy Considerations
+
 - **No Analytics**: No user tracking by default
 - **No Cookies**: Stateless application
 - **No Personal Data Collection**: Contact form uses mailto
@@ -522,11 +568,13 @@ observer.observe({ entryTypes: ['measure'] });
 ## Scalability and Extensibility
 
 ### Horizontal Scaling
+
 - **CDN Distribution**: Global content delivery through GitHub Pages
 - **Static Assets**: Infinite scalability for read operations
 - **No Server Limits**: No concurrent user limitations
 
 ### Vertical Scaling
+
 - **Build Performance**: Optimized build process for large content
 - **Bundle Size Management**: Code splitting for large applications
 - **Memory Efficiency**: Minimal runtime memory usage
@@ -534,42 +582,47 @@ observer.observe({ entryTypes: ['measure'] });
 ### Extensibility Patterns
 
 #### 1. Component Extension
+
 ```typescript
 // Extend existing components
 interface ExtendedProjectProps extends ProjectProps {
-  analytics?: AnalyticsData;
+  analytics?: AnalyticsData
 }
 ```
 
 #### 2. Data Schema Evolution
+
 ```typescript
 // Backward-compatible data additions
 interface ProjectV2 extends Project {
-  technologies?: string[];
-  screenshots?: string[];
+  technologies?: string[]
+  screenshots?: string[]
 }
 ```
 
 #### 3. Feature Toggles
+
 ```typescript
 // Configuration-driven features
 const features = {
   analytics: process.env.ENABLE_ANALYTICS === 'true',
   comments: process.env.ENABLE_COMMENTS === 'true',
-};
+}
 ```
 
 #### 4. Plugin Architecture
+
 ```typescript
 // Modular feature additions
 interface PortfolioPlugin {
-  name: string;
-  component: React.ComponentType;
-  data?: any;
+  name: string
+  component: React.ComponentType
+  data?: any
 }
 ```
 
 ### Future Enhancement Opportunities
+
 1. **Content Management System**: Headless CMS integration
 2. **Analytics**: Privacy-focused analytics implementation
 3. **Internationalization**: Multi-language support
@@ -584,6 +637,7 @@ interface PortfolioPlugin {
 This architecture provides a solid foundation for a modern, performant, and maintainable portfolio website. The design emphasizes simplicity, performance, and developer experience while maintaining the flexibility to evolve with changing requirements.
 
 Key architectural strengths:
+
 - **Maintainability**: Clear component structure and centralized data
 - **Performance**: Static generation and optimized delivery
 - **Developer Experience**: Modern tooling and type safety

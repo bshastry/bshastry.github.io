@@ -40,19 +40,17 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-sm'
-          : 'bg-transparent'
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 shadow-sm backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
       <nav className="container-max section-padding">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('home')}
-              className="text-xl font-bold text-gradient hover:opacity-80 transition-opacity"
+              className="text-gradient text-xl font-bold transition-opacity hover:opacity-80"
             >
               Bhargava Shastry
             </button>
@@ -65,10 +63,10 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                     activeSection === item.id
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
                   }`}
                 >
                   {item.name}
@@ -78,12 +76,12 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
           </div>
 
           {/* Social Links */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden items-center space-x-4 md:flex">
             <a
               href="https://github.com/bshastry"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 transition-colors hover:text-primary-600"
             >
               <Github size={20} />
             </a>
@@ -91,7 +89,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
               href="https://twitter.com/ibags"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 transition-colors hover:text-primary-600"
             >
               <Twitter size={20} />
             </a>
@@ -99,7 +97,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
               href="https://linkedin.com/in/bshastry"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 transition-colors hover:text-primary-600"
             >
               <Linkedin size={20} />
             </a>
@@ -109,7 +107,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-primary-600 transition-colors"
+              className="text-gray-700 transition-colors hover:text-primary-600"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -119,15 +117,15 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
+            <div className="mt-2 space-y-1 rounded-lg bg-white px-2 pb-3 pt-2 shadow-lg">
               {navigation.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors duration-200 ${
+                  className={`block w-full rounded-md px-3 py-2 text-left text-base font-medium transition-colors duration-200 ${
                     activeSection === item.id
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+                      ? 'bg-primary-50 text-primary-600'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
                   }`}
                 >
                   {item.name}
@@ -138,7 +136,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                   href="https://github.com/bshastry"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-primary-600 transition-colors"
+                  className="text-gray-600 transition-colors hover:text-primary-600"
                 >
                   <Github size={20} />
                 </a>
@@ -146,7 +144,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                   href="https://twitter.com/ibags"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-primary-600 transition-colors"
+                  className="text-gray-600 transition-colors hover:text-primary-600"
                 >
                   <Twitter size={20} />
                 </a>
@@ -154,7 +152,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
                   href="https://linkedin.com/in/bshastry"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-primary-600 transition-colors"
+                  className="text-gray-600 transition-colors hover:text-primary-600"
                 >
                   <Linkedin size={20} />
                 </a>

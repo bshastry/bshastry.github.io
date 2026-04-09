@@ -73,3 +73,6 @@ tmp
 tmp/
 temp/
 *.tmp
+
+# Claude Code memory
+memory-bank/

@@ -26,12 +26,12 @@
       "period": "2017 - Present",
       "description": "Conducting independent security research, developing fuzzing tools, and contributing to open-source security projects."
     },
-	{
-	  "title": "Software Engineer",
-	  "company": "Ittiam Systems",
-	  "period": "2007 - 2008",
-	  "description": "Wrote software and tests for Ittiam's Voice over IP phone software."
-	}
+    {
+      "title": "Software Engineer",
+      "company": "Ittiam Systems",
+      "period": "2007 - 2008",
+      "description": "Wrote software and tests for Ittiam's Voice over IP phone software."
+    }
   ],
   "education": [
     {
@@ -45,13 +45,13 @@
       "institution": "Ecole Polytechnique Fédérale de Lausanne (EPFL)",
       "year": "2008 - 2010",
       "focus": "Specialized in security of microcontrollers and embedded systems"
-	},
+    },
     {
       "degree": "B.Tech. in Electrical Engineering",
       "institution": "National Institute of Technology Karnataka (NITK)",
       "year": "2003 - 2007",
       "focus": "Undergraduate thesis on digital signal processing and embedded systems"
-	}
+    }
   ],
   "skills": {
     "languages": ["Solidity", "Rust", "C++", "Python", "Go"],

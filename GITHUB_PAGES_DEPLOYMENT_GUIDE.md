@@ -34,6 +34,7 @@ GitHub Pages is designed primarily for **static websites** and has the following
 ### Next.js Compatibility
 
 Next.js can work with GitHub Pages **only** when configured for **Static Site Generation (SSG)**:
+
 - Uses `output: 'export'` in [`next.config.js`](next.config.js:3)
 - Generates static HTML files during build
 - No server-side features available
@@ -55,6 +56,7 @@ basePath: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
 ### Why This Is Wrong
 
 For **username.github.io** repositories (like `bshastry.github.io`):
+
 - The site is served from the **root domain**: `https://bshastry.github.io`
 - **No subdirectory** is used in the URL
 - Adding `/bshastry.github.io` creates incorrect paths like: `https://bshastry.github.io/bshastry.github.io/`
@@ -66,15 +68,18 @@ For **username.github.io** repositories (like `bshastry.github.io`):
 <diff>
 <<<<<<< SEARCH
 :start_line:8
--------
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
+
+---
+
+assetPrefix: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
+basePath: process.env.NODE_ENV === 'production' ? '/bshastry.github.io' : '',
 =======
-  // For username.github.io repositories, no basePath or assetPrefix needed
-  // The site is served from the root domain
->>>>>>> REPLACE
-</diff>
-</apply_diff>
+// For username.github.io repositories, no basePath or assetPrefix needed
+// The site is served from the root domain
+
+> > > > > > > REPLACE
+> > > > > > > </diff>
+> > > > > > > </apply_diff>
 
 ---
 
@@ -83,23 +88,27 @@ For **username.github.io** repositories (like `bshastry.github.io`):
 ### Method 1: GitHub Actions (Recommended)
 
 **Advantages**:
+
 - Automated deployment on every push
 - Consistent build environment
 - No manual build steps required
 - Proper error handling and logging
 
 **Disadvantages**:
+
 - Requires GitHub Actions setup
 - Slightly more complex initial configuration
 
 ### Method 2: Manual Build and Push
 
 **Advantages**:
+
 - Simple and direct
 - Full control over deployment timing
 - No additional configuration needed
 
 **Disadvantages**:
+
 - Manual process for every update
 - Risk of forgetting build steps
 - No automated testing
@@ -107,10 +116,12 @@ For **username.github.io** repositories (like `bshastry.github.io`):
 ### Method 3: GitHub Pages Source Branch
 
 **Advantages**:
+
 - Uses GitHub's built-in deployment
 - Simple repository settings
 
 **Disadvantages**:
+
 - Requires separate branch management
 - Manual build process still needed
 
@@ -130,7 +141,7 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
   // For username.github.io repositories, no basePath or assetPrefix needed
   // The site is served from the root domain
@@ -154,7 +165,7 @@ name: Deploy Next.js to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -163,7 +174,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -344,6 +355,7 @@ npm run build
 **Solutions**:
 
 1. **Optimize build size**
+
    ```bash
    # Analyze bundle size
    npm run build
@@ -369,12 +381,14 @@ If GitHub Pages limitations are too restrictive, consider these alternatives:
 ### 1. Vercel (Recommended for Next.js)
 
 **Advantages**:
+
 - Native Next.js support
 - Automatic deployments
 - Edge functions support
 - Custom domains
 
 **Setup**:
+
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -386,12 +400,14 @@ vercel --prod
 ### 2. Netlify
 
 **Advantages**:
+
 - Static site optimization
 - Form handling
 - Edge functions
 - Custom domains
 
 **Setup**:
+
 - Connect GitHub repository
 - Set build command: `npm run build`
 - Set publish directory: `out`
@@ -399,11 +415,13 @@ vercel --prod
 ### 3. AWS S3 + CloudFront
 
 **Advantages**:
+
 - Highly scalable
 - Custom configurations
 - Cost-effective for high traffic
 
 **Setup**:
+
 ```bash
 # Install AWS CLI
 aws configure
@@ -415,11 +433,13 @@ aws s3 sync out/ s3://your-bucket-name
 ### 4. Firebase Hosting
 
 **Advantages**:
+
 - Google infrastructure
 - Easy SSL setup
 - Good performance
 
 **Setup**:
+
 ```bash
 # Install Firebase CLI
 npm install -g firebase-tools
@@ -470,7 +490,7 @@ const nextConfig = {
   // Optimize for static export
   experimental: {
     optimizeCss: true,
-  }
+  },
 }
 ```
 
@@ -504,6 +524,7 @@ const nextConfig = {
 ### When to Consider Alternatives
 
 Consider other hosting platforms if you need:
+
 - Server-side rendering
 - API routes
 - Database connections

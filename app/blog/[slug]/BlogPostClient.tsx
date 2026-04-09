@@ -45,18 +45,18 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
         <div className="container-max section-padding py-8">
           <Link
             href="/blog"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6 transition-colors"
+            className="mb-6 inline-flex items-center text-blue-600 transition-colors hover:text-blue-700"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Blog
           </Link>
 
           <div className="mb-6">
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800"
+                  className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
                 >
                   <Tag size={12} className="mr-1" />
                   {tag}
@@ -64,17 +64,17 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
               ))}
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="mb-4 text-4xl font-bold leading-tight text-gray-900 md:text-5xl">
               {post.title}
             </h1>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center text-gray-600 mb-4 md:mb-0">
+              <div className="mb-4 flex items-center text-gray-600 md:mb-0">
                 <Calendar size={18} className="mr-2" />
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
-                  day: 'numeric'
+                  day: 'numeric',
                 })}
                 <Clock size={18} className="ml-4 mr-2" />
                 {post.readTime}
@@ -82,7 +82,7 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
 
               <button
                 onClick={handleShare}
-                className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-200"
               >
                 <Share2 size={16} className="mr-2" />
                 Share
@@ -94,10 +94,10 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
 
       {/* Content */}
       <div className="container-max section-padding py-12">
-        <div className="max-w-4xl mx-auto">
-          <article className="bg-white rounded-xl shadow-sm p-8 md:p-12">
+        <div className="mx-auto max-w-4xl">
+          <article className="rounded-xl bg-white p-8 shadow-sm md:p-12">
             <div className="prose prose-lg max-w-none">
-              <div className="whitespace-pre-line text-gray-800 leading-relaxed">
+              <div className="whitespace-pre-line leading-relaxed text-gray-800">
                 {markdownContent}
               </div>
             </div>
@@ -105,29 +105,29 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
 
           {/* Related Posts */}
           <div className="mt-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Posts</h3>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h3 className="mb-6 text-2xl font-bold text-gray-900">Related Posts</h3>
+            <div className="grid gap-6 md:grid-cols-2">
               {allPosts
-                .filter(p => p.slug !== post.slug && p.tags.some(tag => post.tags.includes(tag)))
+                .filter(
+                  (p) => p.slug !== post.slug && p.tags.some((tag) => post.tags.includes(tag)),
+                )
                 .slice(0, 2)
                 .map((relatedPost) => (
                   <Link
                     key={relatedPost.slug}
                     href={`/blog/${relatedPost.slug}`}
-                    className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border border-gray-200"
+                    className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
                   >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                    <h4 className="mb-2 text-lg font-semibold text-gray-900 transition-colors hover:text-blue-600">
                       {relatedPost.title}
                     </h4>
-                    <p className="text-gray-600 text-sm mb-3">
-                      {relatedPost.excerpt}
-                    </p>
+                    <p className="mb-3 text-sm text-gray-600">{relatedPost.excerpt}</p>
                     <div className="flex items-center text-sm text-gray-500">
                       <Calendar size={14} className="mr-1" />
                       {new Date(relatedPost.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
-                        day: 'numeric'
+                        day: 'numeric',
                       })}
                       <Clock size={14} className="ml-3 mr-1" />
                       {relatedPost.readTime}

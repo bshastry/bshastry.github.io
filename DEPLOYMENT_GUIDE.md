@@ -16,12 +16,14 @@ This guide provides step-by-step instructions for deploying your Next.js portfol
 ## Prerequisites
 
 ### Required Tools
+
 - **Git**: Version control system
 - **Node.js**: Version 18.17 or later
 - **npm**: Node package manager (comes with Node.js)
 - **GitHub Account**: With access to your repository
 
 ### Verify Prerequisites
+
 ```bash
 # Check Node.js version
 node --version
@@ -53,24 +55,27 @@ git --version
 ### Step 2: Configure GitHub Actions (Recommended)
 
 1. **Create GitHub Actions workflow directory**
+
    ```bash
    mkdir -p .github/workflows
    ```
 
 2. **Create deployment workflow file**
+
    ```bash
    touch .github/workflows/deploy.yml
    ```
 
 3. **Add the following content to `.github/workflows/deploy.yml`**
+
    ```yaml
    name: Deploy Next.js to GitHub Pages
 
    on:
      push:
-       branches: [ master ]
+       branches: [master]
      pull_request:
-       branches: [ master ]
+       branches: [master]
 
    permissions:
      contents: read
@@ -78,7 +83,7 @@ git --version
      id-token: write
 
    concurrency:
-     group: "pages"
+     group: 'pages'
      cancel-in-progress: false
 
    jobs:
@@ -123,12 +128,14 @@ git --version
 ### Step 3: Initial Push and Deployment
 
 1. **Add the workflow file to git**
+
    ```bash
    git add .github/workflows/deploy.yml
    git commit -m "feat: Add GitHub Actions deployment workflow"
    ```
 
 2. **Push all changes to GitHub**
+
    ```bash
    git push origin master
    ```
@@ -162,12 +169,14 @@ git --version
 When you need to update portfolio content, projects, or personal information:
 
 1. **Update the data file**
+
    ```bash
    # Edit portfolio data
    nano data/portfolio.json
    ```
 
 2. **Test locally (optional but recommended)**
+
    ```bash
    # Install dependencies (if not already done)
    npm install
@@ -179,6 +188,7 @@ When you need to update portfolio content, projects, or personal information:
    ```
 
 3. **Commit and push changes**
+
    ```bash
    # Stage your changes
    git add data/portfolio.json
@@ -195,6 +205,7 @@ When you need to update portfolio content, projects, or personal information:
 When you need to modify components, styling, or functionality:
 
 1. **Make your changes**
+
    ```bash
    # Example: Edit a component
    nano components/Projects.tsx
@@ -204,6 +215,7 @@ When you need to modify components, styling, or functionality:
    ```
 
 2. **Test locally**
+
    ```bash
    # Run development server
    npm run dev
@@ -214,6 +226,7 @@ When you need to modify components, styling, or functionality:
    ```
 
 3. **Build and test production version**
+
    ```bash
    # Create production build
    npm run build
@@ -223,6 +236,7 @@ When you need to modify components, styling, or functionality:
    ```
 
 4. **Commit and deploy**
+
    ```bash
    # Stage all changes
    git add .
@@ -250,6 +264,7 @@ When you need to modify components, styling, or functionality:
 #### 1. Build Failures
 
 **Problem**: GitHub Actions build fails
+
 ```bash
 # Check the build locally
 npm run build
@@ -261,6 +276,7 @@ npm run build
 ```
 
 **Solution**:
+
 - Review the error logs in GitHub Actions
 - Fix issues locally and test with `npm run build`
 - Commit and push the fixes
@@ -270,11 +286,13 @@ npm run build
 **Problem**: Changes not appearing on live site
 
 **Solutions**:
+
 1. **Check GitHub Actions**
    - Verify the workflow completed successfully
    - Look for any error messages
 
 2. **Clear browser cache**
+
    ```bash
    # Hard refresh in browser
    Ctrl+F5 (Windows/Linux)
@@ -290,6 +308,7 @@ npm run build
 **Problem**: Site shows 404 error
 
 **Solutions**:
+
 1. **Check repository name**
    - Must be exactly `bshastry.github.io`
 
@@ -306,6 +325,7 @@ npm run build
 **Problem**: CSS not loading or appearing broken
 
 **Solutions**:
+
 1. **Check asset paths**
    - Verify `next.config.js` has correct `basePath` and `assetPrefix`
 
@@ -327,6 +347,7 @@ If you encounter issues not covered here:
    - Review detailed error messages
 
 2. **Local debugging**
+
    ```bash
    # Clean install
    rm -rf node_modules package-lock.json
@@ -349,12 +370,14 @@ If you encounter issues not covered here:
 If you need to quickly revert to a previous version:
 
 1. **Find the commit to rollback to**
+
    ```bash
    # View recent commits
    git log --oneline -10
    ```
 
 2. **Revert to previous commit**
+
    ```bash
    # Revert to specific commit (replace COMMIT_HASH)
    git revert COMMIT_HASH
@@ -375,6 +398,7 @@ If you need to restore the Jekyll system:
 1. **Follow the restoration guide in `legacy-archive/README.md`**
 
 2. **Quick restoration commands**
+
    ```bash
    # Move current system to backup
    mkdir -p backup-nextjs
@@ -423,6 +447,7 @@ on:
 #### 3. API Integration
 
 For dynamic content updates, consider integrating with:
+
 - GitHub API for repository data
 - LinkedIn API for professional updates
 - RSS feeds for blog posts
@@ -444,6 +469,7 @@ Add Slack or email notifications to your workflow:
 #### 2. Uptime Monitoring
 
 Consider using services like:
+
 - **UptimeRobot**: Free website monitoring
 - **Pingdom**: Professional monitoring service
 - **GitHub Actions**: Custom health check workflows
@@ -455,12 +481,14 @@ Consider using services like:
 ### Development Workflow
 
 1. **Always test locally before pushing**
+
    ```bash
    npm run dev    # Development testing
    npm run build  # Production build testing
    ```
 
 2. **Use descriptive commit messages**
+
    ```bash
    # Good examples:
    git commit -m "feat: Add new project to portfolio"
@@ -480,6 +508,7 @@ Consider using services like:
    - Use appropriate formats (WebP, AVIF)
 
 2. **Regular dependency updates**
+
    ```bash
    # Check for updates
    npm outdated
@@ -496,6 +525,7 @@ Consider using services like:
 ### Security Considerations
 
 1. **Keep dependencies updated**
+
    ```bash
    # Check for security vulnerabilities
    npm audit
@@ -514,6 +544,7 @@ Consider using services like:
 ## Summary
 
 This deployment guide covers:
+
 - ✅ Initial GitHub Pages setup
 - ✅ Automated deployment with GitHub Actions
 - ✅ Step-by-step deployment procedures
@@ -525,6 +556,7 @@ This deployment guide covers:
 Your portfolio is now ready for professional deployment with a robust, automated workflow that ensures reliable updates and easy maintenance.
 
 For additional help, refer to:
+
 - `ARCHITECTURE.md` - Technical system details
 - `MAINTENANCE_GUIDE.md` - Day-to-day maintenance tasks
 - `MIGRATION_GUIDE.md` - System migration procedures

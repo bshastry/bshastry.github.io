@@ -1,9 +1,11 @@
 # Portfolio Migration Guide: Jekyll to Next.js
 
 ## Overview
+
 This guide documents the complete migration from a Jekyll-based portfolio website to a modern Next.js application with Tailwind CSS. The migration preserves all existing content while providing enhanced functionality, better performance, and improved maintainability.
 
 ## Table of Contents
+
 1. [Migration Summary](#migration-summary)
 2. [System Comparison](#system-comparison)
 3. [Prerequisites](#prerequisites)
@@ -18,6 +20,7 @@ This guide documents the complete migration from a Jekyll-based portfolio websit
 ## Migration Summary
 
 ### What Changed
+
 - **Framework**: Jekyll → Next.js 14 with App Router
 - **Language**: Liquid templates → TypeScript + React
 - **Styling**: Custom CSS → Tailwind CSS
@@ -26,6 +29,7 @@ This guide documents the complete migration from a Jekyll-based portfolio websit
 - **Deployment**: Direct Jekyll → Static file deployment
 
 ### What Stayed the Same
+
 - **Hosting**: GitHub Pages (static files)
 - **Domain**: Same GitHub Pages URL
 - **Content**: All portfolio information preserved
@@ -35,6 +39,7 @@ This guide documents the complete migration from a Jekyll-based portfolio websit
 ## System Comparison
 
 ### Legacy System (Jekyll)
+
 ```
 Portfolio Structure:
 ├── _config.yml          # Jekyll configuration
@@ -50,6 +55,7 @@ Portfolio Structure:
 ```
 
 **Characteristics**:
+
 - File-based content management
 - Liquid templating engine
 - YAML front matter for metadata
@@ -57,6 +63,7 @@ Portfolio Structure:
 - GitHub Pages native support
 
 ### New System (Next.js)
+
 ```
 Portfolio Structure:
 ├── package.json         # Node.js dependencies
@@ -82,6 +89,7 @@ Portfolio Structure:
 ```
 
 **Characteristics**:
+
 - Component-based architecture
 - TypeScript for type safety
 - Centralized JSON data management
@@ -91,6 +99,7 @@ Portfolio Structure:
 ## Prerequisites
 
 ### Development Environment
+
 - **Node.js**: Version 18.0 or higher
 - **npm**: Version 8.0 or higher (comes with Node.js)
 - **Git**: For version control
@@ -100,6 +109,7 @@ Portfolio Structure:
   - ES7+ React/Redux/React-Native snippets
 
 ### Knowledge Requirements
+
 - Basic understanding of React components
 - Familiarity with JSON data structures
 - Basic command line usage
@@ -108,6 +118,7 @@ Portfolio Structure:
 ## Migration Steps
 
 ### Step 1: Environment Setup
+
 ```bash
 # Navigate to your portfolio directory
 cd path/to/bshastry.github.io
@@ -121,6 +132,7 @@ npm install
 ```
 
 ### Step 2: Content Analysis and Backup
+
 ```bash
 # Create backup of legacy system
 mkdir -p legacy-backup
@@ -132,9 +144,11 @@ cat _config.yml  # Review Jekyll configuration
 ```
 
 ### Step 3: Content Transformation
+
 The migration involves transforming content from multiple markdown files into a centralized JSON structure:
 
 #### Original Content Sources:
+
 - `index.md` → Hero section data
 - `about.md` → About section data
 - `cv.md` → Professional experience data
@@ -142,6 +156,7 @@ The migration involves transforming content from multiple markdown files into a 
 - `_config.yml` → Site metadata
 
 #### Target JSON Structure:
+
 ```json
 {
   "personal": {
@@ -159,6 +174,7 @@ The migration involves transforming content from multiple markdown files into a 
 ```
 
 ### Step 4: Component Development
+
 Each section of the portfolio is implemented as a React component:
 
 1. **Header.tsx**: Navigation with smooth scrolling
@@ -170,9 +186,11 @@ Each section of the portfolio is implemented as a React component:
 7. **Footer.tsx**: Site footer with additional links
 
 ### Step 5: Styling Migration
+
 Transform custom CSS to Tailwind CSS utility classes:
 
 #### Legacy CSS Pattern:
+
 ```css
 .hero-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -182,11 +200,13 @@ Transform custom CSS to Tailwind CSS utility classes:
 ```
 
 #### New Tailwind Pattern:
+
 ```tsx
 <section className="bg-gradient-to-br from-blue-600 to-purple-600 py-16 px-8 text-center">
 ```
 
 ### Step 6: Build Configuration
+
 Configure Next.js for static site generation:
 
 ```javascript
@@ -196,14 +216,15 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: true
-  }
+    unoptimized: true,
+  },
 }
 
 module.exports = nextConfig
 ```
 
 ### Step 7: Development Testing
+
 ```bash
 # Start development server
 npm run dev
@@ -214,6 +235,7 @@ npm run dev
 ```
 
 ### Step 8: Production Build
+
 ```bash
 # Build for production
 npm run build
@@ -227,7 +249,9 @@ ls -la out/  # Should contain index.html and assets
 ### Markdown to JSON Conversion
 
 #### Example: About Section
+
 **Legacy (about.md)**:
+
 ```markdown
 ---
 layout: page
@@ -239,27 +263,26 @@ title: About
 I'm a security engineer at the Ethereum Foundation...
 
 ## Skills
+
 - Smart Contract Security
 - Fuzzing & Testing
 - Protocol Security
 ```
 
 **New (portfolio.json)**:
+
 ```json
 {
   "about": {
     "title": "About Me",
     "description": "I'm a security engineer at the Ethereum Foundation...",
-    "skills": [
-      "Smart Contract Security",
-      "Fuzzing & Testing",
-      "Protocol Security"
-    ]
+    "skills": ["Smart Contract Security", "Fuzzing & Testing", "Protocol Security"]
   }
 }
 ```
 
 ### Project Data Transformation
+
 **Legacy**: Scattered across multiple files and manual updates
 **New**: Centralized with automated commit counting
 
@@ -281,7 +304,9 @@ I'm a security engineer at the Ethereum Foundation...
 ## File Structure Changes
 
 ### Files to Archive
+
 Move these legacy Jekyll files to `legacy-archive/`:
+
 - `_config.yml`
 - `_layouts/`
 - `_includes/`
@@ -291,6 +316,7 @@ Move these legacy Jekyll files to `legacy-archive/`:
 - `Gemfile` and `Gemfile.lock`
 
 ### New Files Added
+
 - `package.json` - Node.js dependencies
 - `next.config.js` - Next.js configuration
 - `tailwind.config.js` - Tailwind CSS configuration
@@ -301,6 +327,7 @@ Move these legacy Jekyll files to `legacy-archive/`:
 - `memory-bank/` - Documentation and context
 
 ### Files to Keep
+
 - `README.md` - Update with new instructions
 - `.gitignore` - Update for Node.js/Next.js
 - Domain-specific files (CNAME, etc.)
@@ -309,17 +336,20 @@ Move these legacy Jekyll files to `legacy-archive/`:
 ## Deployment Changes
 
 ### Legacy Deployment (Jekyll)
+
 1. Push markdown files to GitHub
 2. GitHub Pages automatically builds with Jekyll
 3. Site available at username.github.io
 
 ### New Deployment (Next.js)
+
 1. Build static files locally: `npm run build`
 2. Static files generated in `out/` directory
 3. Deploy `out/` contents to GitHub Pages
 4. Site available at same URL
 
 ### Deployment Script
+
 ```bash
 #!/bin/bash
 # deploy.sh - Automated deployment script
@@ -337,12 +367,14 @@ echo "Deployment complete!"
 ## Testing and Verification
 
 ### Pre-Migration Checklist
+
 - [ ] All content identified and catalogued
 - [ ] Development environment set up
 - [ ] Dependencies installed successfully
 - [ ] Legacy system backed up
 
 ### Post-Migration Verification
+
 - [ ] All pages load correctly
 - [ ] Navigation works smoothly
 - [ ] Interactive features function (project filtering)
@@ -353,6 +385,7 @@ echo "Deployment complete!"
 - [ ] Performance is acceptable
 
 ### Testing Commands
+
 ```bash
 # Development testing
 npm run dev
@@ -370,7 +403,9 @@ npx tsc --noEmit
 ## Rollback Procedures
 
 ### If Migration Fails
+
 1. **Immediate Rollback**:
+
    ```bash
    # Restore legacy files from backup
    cp -r legacy-backup/* .
@@ -391,6 +426,7 @@ npx tsc --noEmit
    - Fix issues and re-attempt migration
 
 ### Rollback Verification
+
 - [ ] Legacy site loads correctly
 - [ ] All content is accessible
 - [ ] GitHub Pages deployment works
@@ -399,6 +435,7 @@ npx tsc --noEmit
 ## Post-Migration Tasks
 
 ### Immediate Tasks
+
 1. **Update Documentation**:
    - Update README.md with new build instructions
    - Document new development workflow
@@ -415,6 +452,7 @@ npx tsc --noEmit
    - Update deployment procedures
 
 ### Long-term Tasks
+
 1. **Automation**:
    - Set up GitHub Actions for automated deployment
    - Integrate portfolio updater with new JSON format
@@ -435,6 +473,7 @@ npx tsc --noEmit
 ### Common Issues
 
 #### Build Failures
+
 **Problem**: TypeScript compilation errors
 **Solution**: Check type definitions and fix type mismatches
 
@@ -442,6 +481,7 @@ npx tsc --noEmit
 **Solution**: Verify PostCSS configuration and Tailwind imports
 
 #### Deployment Issues
+
 **Problem**: Static files not loading correctly
 **Solution**: Check asset paths and Next.js configuration
 
@@ -449,6 +489,7 @@ npx tsc --noEmit
 **Solution**: Verify deployment process and file permissions
 
 #### Content Issues
+
 **Problem**: Missing content after migration
 **Solution**: Compare with legacy backup and update JSON data
 
@@ -456,6 +497,7 @@ npx tsc --noEmit
 **Solution**: Update asset paths for new file structure
 
 ### Getting Help
+
 - Check Next.js documentation: https://nextjs.org/docs
 - Tailwind CSS documentation: https://tailwindcss.com/docs
 - GitHub Pages documentation: https://docs.github.com/pages

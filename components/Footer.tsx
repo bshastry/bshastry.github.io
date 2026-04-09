@@ -8,22 +8,22 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-gray-900 py-12 text-white">
       <div className="container-max section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">{personal.name}</h3>
-            <p className="text-gray-300 mb-6 max-w-md">
-              {personal.title} specializing in security engineering, blockchain security,
-              and vulnerability research. Building secure systems and advancing cybersecurity.
+            <h3 className="mb-4 text-2xl font-bold">{personal.name}</h3>
+            <p className="mb-6 max-w-md text-gray-300">
+              {personal.title} specializing in security engineering, blockchain security, and
+              vulnerability research. Building secure systems and advancing cybersecurity.
             </p>
             <div className="flex space-x-4">
               <a
                 href={`https://github.com/${personal.social.github}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 transition-colors hover:bg-gray-700"
                 aria-label="GitHub"
               >
                 <Github size={18} />
@@ -32,7 +32,7 @@ export default function Footer() {
                 href={`https://linkedin.com/in/${personal.social.linkedin}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 transition-colors hover:bg-gray-700"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -41,14 +41,14 @@ export default function Footer() {
                 href={`https://twitter.com/${personal.social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 transition-colors hover:bg-gray-700"
                 aria-label="Twitter"
               >
                 <Twitter size={18} />
               </a>
               <a
                 href={`mailto:${personal.email}`}
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 transition-colors hover:bg-gray-700"
                 aria-label="Email"
               >
                 <Mail size={18} />
@@ -58,37 +58,25 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <h4 className="mb-4 text-lg font-semibold">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#about"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
+                <a href="#about" className="text-gray-300 transition-colors hover:text-white">
                   About
                 </a>
               </li>
               <li>
-                <a
-                  href="#projects"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
+                <a href="#projects" className="text-gray-300 transition-colors hover:text-white">
                   Projects
                 </a>
               </li>
               <li>
-                <a
-                  href="#cv"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
+                <a href="#cv" className="text-gray-300 transition-colors hover:text-white">
                   CV
                 </a>
               </li>
               <li>
-                <a
-                  href="#contact"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
+                <a href="#contact" className="text-gray-300 transition-colors hover:text-white">
                   Contact
                 </a>
               </li>
@@ -97,14 +85,14 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Resources</h4>
+            <h4 className="mb-4 text-lg font-semibold">Resources</h4>
             <ul className="space-y-2">
               <li>
                 <a
                   href={`https://scholar.google.com/citations?user=${personal.social.scholar}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
+                  className="inline-flex items-center space-x-1 text-gray-300 transition-colors hover:text-white"
                 >
                   <span>Google Scholar</span>
                   <ExternalLink size={14} />
@@ -115,7 +103,7 @@ export default function Footer() {
                   href={`https://keybase.io/${personal.social.keybase}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
+                  className="inline-flex items-center space-x-1 text-gray-300 transition-colors hover:text-white"
                 >
                   <span>Keybase</span>
                   <ExternalLink size={14} />
@@ -126,17 +114,14 @@ export default function Footer() {
                   href={`https://github.com/${personal.social.github}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors inline-flex items-center space-x-1"
+                  className="inline-flex items-center space-x-1 text-gray-300 transition-colors hover:text-white"
                 >
                   <span>Open Source</span>
                   <ExternalLink size={14} />
                 </a>
               </li>
               <li>
-                <a
-                  href="/blog"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
+                <a href="/blog" className="text-gray-300 transition-colors hover:text-white">
                   Blog
                 </a>
               </li>
@@ -145,27 +130,22 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
+        <div className="mt-8 border-t border-gray-800 pt-8">
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            <p className="text-sm text-gray-400">
               © {currentYear} {personal.name}. All rights reserved.
             </p>
-            <div className="flex items-center space-x-6 mt-4 md:mt-0">
+            <div className="mt-4 flex items-center space-x-6 md:mt-0">
               <a
                 href="/privacy"
-                className="text-gray-400 hover:text-white text-sm transition-colors"
+                className="text-sm text-gray-400 transition-colors hover:text-white"
               >
                 Privacy Policy
               </a>
-              <a
-                href="/terms"
-                className="text-gray-400 hover:text-white text-sm transition-colors"
-              >
+              <a href="/terms" className="text-sm text-gray-400 transition-colors hover:text-white">
                 Terms of Service
               </a>
-              <p className="text-gray-400 text-sm">
-                Built with Next.js & Tailwind CSS
-              </p>
+              <p className="text-sm text-gray-400">Built with Next.js & Tailwind CSS</p>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ export default function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,7 +18,7 @@ export default function Contact() {
     // Create mailto link with form data
     const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio')
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     )
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`
   }
@@ -26,44 +26,43 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="bg-gray-50 py-20">
       <div className="container-max section-padding">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Interested in collaboration, security research, or just want to connect?
-            I'd love to hear from you.
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Get In Touch</h2>
+          <p className="mx-auto max-w-2xl text-lg text-gray-600">
+            Interested in collaboration, security research, or just want to connect? I'd love to
+            hear from you.
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Contact Information */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                Let's Connect
-              </h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                I'm passionate about cybersecurity and welcome discussions on research collaborations, emerging security challenges, or my work in blockchain security. Feel free to connect if you'd like to explore these areas or have questions about my research.
+              <h3 className="mb-6 text-2xl font-semibold text-gray-900">Let's Connect</h3>
+              <p className="mb-8 leading-relaxed text-gray-600">
+                I'm passionate about cybersecurity and welcome discussions on research
+                collaborations, emerging security challenges, or my work in blockchain security.
+                Feel free to connect if you'd like to explore these areas or have questions about my
+                research.
               </p>
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100">
                     <Mail className="text-primary-600" size={20} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Email</h4>
                     <a
                       href={`mailto:${personal.email}`}
-                      className="text-primary-600 hover:text-primary-700 transition-colors"
+                      className="text-primary-600 transition-colors hover:text-primary-700"
                     >
                       {personal.email}
                     </a>
@@ -71,7 +70,7 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100">
                     <MapPin className="text-primary-600" size={20} />
                   </div>
                   <div>
@@ -83,13 +82,13 @@ export default function Contact() {
 
               {/* Social Links */}
               <div className="mt-8">
-                <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
+                <h4 className="mb-4 font-semibold text-gray-900">Follow Me</h4>
                 <div className="flex space-x-4">
                   <a
                     href={`https://github.com/${personal.social.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-gray-900 text-white rounded-lg flex items-center justify-center hover:bg-gray-800 transition-colors"
+                    className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-900 text-white transition-colors hover:bg-gray-800"
                   >
                     <Github size={20} />
                   </a>
@@ -97,7 +96,7 @@ export default function Contact() {
                     href={`https://linkedin.com/in/${personal.social.linkedin}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors"
+                    className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 text-white transition-colors hover:bg-blue-700"
                   >
                     <Linkedin size={20} />
                   </a>
@@ -105,7 +104,7 @@ export default function Contact() {
                     href={`https://twitter.com/${personal.social.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 bg-sky-500 text-white rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors"
+                    className="flex h-12 w-12 items-center justify-center rounded-lg bg-sky-500 text-white transition-colors hover:bg-sky-600"
                   >
                     <Twitter size={20} />
                   </a>
@@ -115,13 +114,11 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div className="card p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                Send a Message
-              </h3>
+              <h3 className="mb-6 text-2xl font-semibold text-gray-900">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-700">
                       Name
                     </label>
                     <input
@@ -131,12 +128,12 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
                       Email
                     </label>
                     <input
@@ -146,14 +143,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
                       placeholder="your.email@example.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-700">
                     Subject
                   </label>
                   <input
@@ -162,13 +159,13 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
                     placeholder="What's this about?"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-700">
                     Message
                   </label>
                   <textarea
@@ -178,27 +175,27 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
+                    className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
                     placeholder="Tell me about your project, question, or how we can work together..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="btn-primary w-full inline-flex items-center justify-center space-x-2"
+                  className="btn-primary inline-flex w-full items-center justify-center space-x-2"
                 >
                   <Send size={16} />
                   <span>Send Message</span>
                 </button>
               </form>
 
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+              <div className="mt-6 rounded-lg bg-blue-50 p-4">
                 <p className="text-sm text-blue-800">
-                  <strong>Note:</strong> This form will open your default email client.
-                  You can also reach me directly at{' '}
+                  <strong>Note:</strong> This form will open your default email client. You can also
+                  reach me directly at{' '}
                   <a
                     href={`mailto:${personal.email}`}
-                    className="text-blue-600 hover:text-blue-700 underline"
+                    className="text-blue-600 underline hover:text-blue-700"
                   >
                     {personal.email}
                   </a>

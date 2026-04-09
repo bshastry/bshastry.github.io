@@ -5,6 +5,7 @@
 This guide is designed for developers who need to maintain, update, or enhance Bhargava Shastry's portfolio website. Whether you're new to web development or experienced with different technologies, this guide will help you understand and work with the Next.js-based portfolio system.
 
 ## Table of Contents
+
 1. [Getting Started](#getting-started)
 2. [Understanding the System](#understanding-the-system)
 3. [Common Maintenance Tasks](#common-maintenance-tasks)
@@ -18,25 +19,31 @@ This guide is designed for developers who need to maintain, update, or enhance B
 ## Getting Started
 
 ### Prerequisites
+
 Before you begin, ensure you have:
+
 - **Node.js** (version 18 or higher) - [Download here](https://nodejs.org/)
 - **Git** - [Download here](https://git-scm.com/)
 - **Code Editor** - VS Code recommended ([Download here](https://code.visualstudio.com/))
 - **GitHub Account** - For accessing the repository
 
 ### Initial Setup
+
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/bshastry/bshastry.github.io.git
    cd bshastry.github.io
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Start development server**:
+
    ```bash
    npm run dev
    ```
@@ -45,6 +52,7 @@ Before you begin, ensure you have:
    Visit `http://localhost:3000` to see the site running locally.
 
 ### Development Environment
+
 - **Hot Reload**: Changes to code automatically refresh the browser
 - **Error Display**: Errors show directly in the browser during development
 - **Console Logs**: Check browser developer tools for debugging information
@@ -52,7 +60,9 @@ Before you begin, ensure you have:
 ## Understanding the System
 
 ### What is Next.js?
+
 Next.js is a React framework that makes building websites easier. Think of it as:
+
 - **React**: A library for building user interfaces with components
 - **Next.js**: Adds features like automatic optimization and easy deployment
 - **Static Site**: The final website is just HTML, CSS, and JavaScript files
@@ -60,7 +70,9 @@ Next.js is a React framework that makes building websites easier. Think of it as
 ### Key Concepts
 
 #### Components
+
 Components are reusable pieces of the website. Each section (Header, About, Projects, etc.) is a separate component:
+
 ```
 Header.tsx    → Navigation bar at the top
 Hero.tsx      → Main banner with name and highlights
@@ -72,13 +84,17 @@ Footer.tsx    → Bottom section with links
 ```
 
 #### Data-Driven Content
+
 All content comes from one file: `data/portfolio.json`. This means:
+
 - ✅ Easy to update content without touching code
 - ✅ Consistent data structure
 - ✅ Can be automated with scripts
 
 #### TypeScript
+
 TypeScript adds type checking to JavaScript:
+
 - Catches errors before they reach users
 - Provides better code completion in editors
 - Makes code more reliable and maintainable
@@ -86,6 +102,7 @@ TypeScript adds type checking to JavaScript:
 ## Common Maintenance Tasks
 
 ### 1. Updating Personal Information
+
 **File**: `data/portfolio.json`
 **Section**: `personal`
 
@@ -101,6 +118,7 @@ TypeScript adds type checking to JavaScript:
 ```
 
 **Steps**:
+
 1. Open `data/portfolio.json`
 2. Find the `personal` section
 3. Update the relevant fields
@@ -108,6 +126,7 @@ TypeScript adds type checking to JavaScript:
 5. The website will automatically update
 
 ### 2. Adding New Projects
+
 **File**: `data/portfolio.json`
 **Section**: `projects`
 
@@ -129,6 +148,7 @@ TypeScript adds type checking to JavaScript:
 ```
 
 **Steps**:
+
 1. Open `data/portfolio.json`
 2. Find the `projects` array
 3. Add a new project object with all required fields
@@ -136,6 +156,7 @@ TypeScript adds type checking to JavaScript:
 5. Save and test
 
 ### 3. Updating Work Experience
+
 **File**: `data/portfolio.json`
 **Section**: `experience`
 
@@ -149,16 +170,14 @@ TypeScript adds type checking to JavaScript:
       "startDate": "2023-01",
       "endDate": "Present",
       "description": "Brief description of role and responsibilities",
-      "achievements": [
-        "Key achievement 1",
-        "Key achievement 2"
-      ]
+      "achievements": ["Key achievement 1", "Key achievement 2"]
     }
   ]
 }
 ```
 
 **Steps**:
+
 1. Open `data/portfolio.json`
 2. Find the `experience` array
 3. Add new experience at the beginning (most recent first)
@@ -166,6 +185,7 @@ TypeScript adds type checking to JavaScript:
 5. Include 2-4 key achievements
 
 ### 4. Updating Skills and Technologies
+
 **File**: `data/portfolio.json`
 **Section**: `skills`
 
@@ -181,6 +201,7 @@ TypeScript adds type checking to JavaScript:
 ```
 
 ### 5. Updating Statistics
+
 **File**: `data/portfolio.json`
 **Section**: `about.stats`
 
@@ -206,27 +227,30 @@ TypeScript adds type checking to JavaScript:
 ## Content Updates
 
 ### Adding New Sections
+
 If you need to add entirely new sections:
 
 1. **Create the component** (e.g., `components/NewSection.tsx`):
+
 ```tsx
 interface NewSectionProps {
-  data: any; // Define proper type based on your data
+  data: any // Define proper type based on your data
 }
 
 export default function NewSection({ data }: NewSectionProps) {
   return (
-    <section className="py-16 px-8">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">{data.title}</h2>
+    <section className="px-8 py-16">
+      <div className="mx-auto max-w-6xl">
+        <h2 className="mb-8 text-3xl font-bold">{data.title}</h2>
         {/* Your content here */}
       </div>
     </section>
-  );
+  )
 }
 ```
 
 2. **Add data to portfolio.json**:
+
 ```json
 {
   "newSection": {
@@ -237,14 +261,16 @@ export default function NewSection({ data }: NewSectionProps) {
 ```
 
 3. **Import and use in page.tsx**:
+
 ```tsx
-import NewSection from '../components/NewSection';
+import NewSection from '../components/NewSection'
 
 // In the component:
-<NewSection data={portfolioData.newSection} />
+;<NewSection data={portfolioData.newSection} />
 ```
 
 ### Modifying Existing Sections
+
 To change how sections look or behave:
 
 1. **Find the component file** (e.g., `components/About.tsx`)
@@ -253,6 +279,7 @@ To change how sections look or behave:
 4. **Test your changes** with `npm run dev`
 
 ### Content Guidelines
+
 - **Keep descriptions concise**: 1-2 sentences for project descriptions
 - **Use action words**: "Developed", "Implemented", "Designed"
 - **Include metrics**: Numbers make achievements more impactful
@@ -262,6 +289,7 @@ To change how sections look or behave:
 ## Code Changes
 
 ### Understanding the File Structure
+
 ```
 bshastry.github.io/
 ├── app/                    # Next.js app structure
@@ -275,6 +303,7 @@ bshastry.github.io/
 ```
 
 ### Making Style Changes
+
 The website uses **Tailwind CSS** for styling. Common classes:
 
 ```css
@@ -296,6 +325,7 @@ lg:grid-cols-3 (large screens and up)
 ```
 
 **Example**: Making text larger on mobile
+
 ```tsx
 // Before
 <h1 className="text-2xl font-bold">Title</h1>
@@ -305,19 +335,20 @@ lg:grid-cols-3 (large screens and up)
 ```
 
 ### Adding Interactive Features
+
 For simple interactions, use React state:
 
 ```tsx
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function InteractiveComponent() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   return (
     <div>
       <button
         onClick={() => setIsVisible(!isVisible)}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="rounded bg-blue-600 px-4 py-2 text-white"
       >
         Toggle Content
       </button>
@@ -327,34 +358,41 @@ export default function InteractiveComponent() {
         </div>
       )}
     </div>
-  );
+  )
 }
 ```
 
 ### Common Code Patterns
 
 #### Mapping Over Data
+
 ```tsx
-{projects.map((project, index) => (
-  <div key={index} className="project-card">
-    <h3>{project.name}</h3>
-    <p>{project.description}</p>
-  </div>
-))}
+{
+  projects.map((project, index) => (
+    <div key={index} className="project-card">
+      <h3>{project.name}</h3>
+      <p>{project.description}</p>
+    </div>
+  ))
+}
 ```
 
 #### Conditional Rendering
+
 ```tsx
-{project.website && (
-  <a href={project.website} className="btn">
-    View Website
-  </a>
-)}
+{
+  project.website && (
+    <a href={project.website} className="btn">
+      View Website
+    </a>
+  )
+}
 ```
 
 #### Responsive Design
+
 ```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
   {/* Content adapts to screen size */}
 </div>
 ```
@@ -362,13 +400,16 @@ export default function InteractiveComponent() {
 ## Deployment Process
 
 ### Building for Production
+
 1. **Test locally**:
+
    ```bash
    npm run dev
    # Check everything works at http://localhost:3000
    ```
 
 2. **Build the site**:
+
    ```bash
    npm run build
    ```
@@ -380,15 +421,18 @@ export default function InteractiveComponent() {
    ```
 
 ### Deploying to GitHub Pages
+
 The site is hosted on GitHub Pages. To deploy:
 
 1. **Commit your changes**:
+
    ```bash
    git add .
    git commit -m "Update portfolio content"
    ```
 
 2. **Push to GitHub**:
+
    ```bash
    git push origin main
    ```
@@ -400,6 +444,7 @@ The site is hosted on GitHub Pages. To deploy:
    ```
 
 ### Automated Deployment
+
 If GitHub Actions is set up, deployment happens automatically when you push to the main branch.
 
 ## Troubleshooting
@@ -407,41 +452,52 @@ If GitHub Actions is set up, deployment happens automatically when you push to t
 ### Common Issues and Solutions
 
 #### 1. "npm install" fails
+
 **Problem**: Dependencies won't install
 **Solutions**:
+
 - Delete `node_modules` folder and `package-lock.json`
 - Run `npm install` again
 - Check Node.js version (should be 18+)
 
 #### 2. TypeScript errors
+
 **Problem**: Red squiggly lines in code editor
 **Solutions**:
+
 - Check the error message carefully
 - Ensure data types match what's expected
 - Look for typos in property names
 
 #### 3. Build fails
+
 **Problem**: `npm run build` shows errors
 **Solutions**:
+
 - Fix any TypeScript errors first
 - Check that all imported files exist
 - Ensure JSON syntax is valid
 
 #### 4. Styles not applying
+
 **Problem**: CSS changes don't show up
 **Solutions**:
+
 - Check Tailwind class names are correct
 - Clear browser cache (Ctrl+F5)
 - Restart development server
 
 #### 5. Data not showing
+
 **Problem**: Content from JSON doesn't appear
 **Solutions**:
+
 - Check JSON syntax with a validator
 - Ensure property names match component expectations
 - Check browser console for errors
 
 ### Debugging Tips
+
 1. **Use browser developer tools**: F12 to open, check Console tab for errors
 2. **Check the terminal**: Look for error messages when running `npm run dev`
 3. **Validate JSON**: Use [jsonlint.com](https://jsonlint.com/) to check JSON syntax
@@ -450,24 +506,28 @@ If GitHub Actions is set up, deployment happens automatically when you push to t
 ## Best Practices
 
 ### Code Organization
+
 - **One component per file**: Keep components focused and manageable
 - **Consistent naming**: Use PascalCase for components, camelCase for variables
 - **Comment complex logic**: Help future maintainers understand your code
 - **Keep components small**: Break large components into smaller ones
 
 ### Content Management
+
 - **Regular updates**: Keep content current and relevant
 - **Backup before changes**: Commit to Git before major updates
 - **Test thoroughly**: Check all sections after content updates
 - **Optimize images**: Compress images before adding them
 
 ### Performance
+
 - **Minimize bundle size**: Only import what you need
 - **Optimize images**: Use appropriate formats and sizes
 - **Test on mobile**: Ensure good performance on slower devices
 - **Monitor build size**: Keep an eye on the `out/` folder size
 
 ### Security
+
 - **Keep dependencies updated**: Run `npm audit` regularly
 - **Don't commit secrets**: Never put API keys in the code
 - **Validate external links**: Ensure links are safe and working
@@ -476,18 +536,21 @@ If GitHub Actions is set up, deployment happens automatically when you push to t
 ## Resources and Learning
 
 ### Essential Documentation
+
 - **Next.js**: [nextjs.org/docs](https://nextjs.org/docs)
 - **React**: [react.dev](https://react.dev/)
 - **Tailwind CSS**: [tailwindcss.com/docs](https://tailwindcss.com/docs)
 - **TypeScript**: [typescriptlang.org/docs](https://www.typescriptlang.org/docs/)
 
 ### Learning Resources
+
 - **React Tutorial**: [react.dev/learn](https://react.dev/learn)
 - **Next.js Tutorial**: [nextjs.org/learn](https://nextjs.org/learn)
 - **Tailwind CSS Tutorial**: [tailwindcss.com/docs/utility-first](https://tailwindcss.com/docs/utility-first)
 - **TypeScript Handbook**: [typescriptlang.org/docs/handbook](https://www.typescriptlang.org/docs/handbook/)
 
 ### Tools and Extensions (VS Code)
+
 - **ES7+ React/Redux/React-Native snippets**: Quick component templates
 - **Tailwind CSS IntelliSense**: Auto-completion for CSS classes
 - **TypeScript Importer**: Automatic import statements
@@ -495,6 +558,7 @@ If GitHub Actions is set up, deployment happens automatically when you push to t
 - **GitLens**: Enhanced Git integration
 
 ### Community and Support
+
 - **Stack Overflow**: [stackoverflow.com](https://stackoverflow.com/) - For specific coding questions
 - **GitHub Discussions**: Check the Next.js and React repositories
 - **Discord Communities**: React and Next.js have active Discord servers
@@ -503,6 +567,7 @@ If GitHub Actions is set up, deployment happens automatically when you push to t
 ## Quick Reference
 
 ### Common Commands
+
 ```bash
 # Development
 npm run dev          # Start development server
@@ -523,6 +588,7 @@ npm audit            # Check for security issues
 ```
 
 ### File Quick Access
+
 - **Content**: `data/portfolio.json`
 - **Styles**: `app/globals.css`
 - **Components**: `components/[SectionName].tsx`
@@ -530,7 +596,9 @@ npm audit            # Check for security issues
 - **Configuration**: `next.config.js`, `tailwind.config.js`
 
 ### Emergency Contacts
+
 If you're stuck and need help:
+
 1. **Check this guide first**
 2. **Search the error message online**
 3. **Ask on Stack Overflow** with specific error details
