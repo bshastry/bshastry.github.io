@@ -88,6 +88,7 @@ export default function Contact() {
                     href={`https://github.com/${personal.social.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="GitHub profile"
                     className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-900 text-white transition-colors hover:bg-gray-800"
                   >
                     <Github size={20} />
@@ -96,6 +97,7 @@ export default function Contact() {
                     href={`https://linkedin.com/in/${personal.social.linkedin}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="LinkedIn profile"
                     className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 text-white transition-colors hover:bg-blue-700"
                   >
                     <Linkedin size={20} />
@@ -104,6 +106,7 @@ export default function Contact() {
                     href={`https://twitter.com/${personal.social.twitter}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Twitter profile"
                     className="flex h-12 w-12 items-center justify-center rounded-lg bg-sky-500 text-white transition-colors hover:bg-sky-600"
                   >
                     <Twitter size={20} />
