@@ -2,24 +2,14 @@
 
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
-
-interface BlogPost {
-  slug: string
-  title: string
-  date: string
-  excerpt: string
-  tags: string[]
-  readTime: string
-  content: string
-}
+import type { BlogPost, BlogPostMeta } from '@/lib/blog'
 
 interface BlogPostClientProps {
   post: BlogPost
-  markdownContent: string
-  allPosts: BlogPost[]
+  allPosts: BlogPostMeta[]
 }
 
-export default function BlogPostClient({ post, markdownContent, allPosts }: BlogPostClientProps) {
+export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -28,19 +18,20 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
           text: post.excerpt,
           url: window.location.href,
         })
-      } catch (err) {
-        console.log('Error sharing:', err)
+      } catch {
+        // user cancelled
       }
     } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href)
-      alert('Link copied to clipboard!')
+      await navigator.clipboard.writeText(window.location.href)
     }
   }
 
+  const related = allPosts
+    .filter((p) => p.slug !== post.slug && p.tags.some((t) => post.tags.includes(t)))
+    .slice(0, 2)
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="container-max section-padding py-8">
           <Link
@@ -81,6 +72,7 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
               </div>
 
               <button
+                type="button"
                 onClick={handleShare}
                 className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-200"
               >
@@ -92,50 +84,44 @@ export default function BlogPostClient({ post, markdownContent, allPosts }: Blog
         </div>
       </div>
 
-      {/* Content */}
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
           <article className="rounded-xl bg-white p-8 shadow-sm md:p-12">
-            <div className="prose prose-lg max-w-none">
-              <div className="whitespace-pre-line leading-relaxed text-gray-800">
-                {markdownContent}
-              </div>
-            </div>
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
           </article>
 
-          {/* Related Posts */}
-          <div className="mt-12">
-            <h3 className="mb-6 text-2xl font-bold text-gray-900">Related Posts</h3>
-            <div className="grid gap-6 md:grid-cols-2">
-              {allPosts
-                .filter(
-                  (p) => p.slug !== post.slug && p.tags.some((tag) => post.tags.includes(tag)),
-                )
-                .slice(0, 2)
-                .map((relatedPost) => (
+          {related.length > 0 && (
+            <div className="mt-12">
+              <h3 className="mb-6 text-2xl font-bold text-gray-900">Related Posts</h3>
+              <div className="grid gap-6 md:grid-cols-2">
+                {related.map((rp) => (
                   <Link
-                    key={relatedPost.slug}
-                    href={`/blog/${relatedPost.slug}`}
+                    key={rp.slug}
+                    href={`/blog/${rp.slug}`}
                     className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
                   >
                     <h4 className="mb-2 text-lg font-semibold text-gray-900 transition-colors hover:text-blue-600">
-                      {relatedPost.title}
+                      {rp.title}
                     </h4>
-                    <p className="mb-3 text-sm text-gray-600">{relatedPost.excerpt}</p>
+                    <p className="mb-3 text-sm text-gray-600">{rp.excerpt}</p>
                     <div className="flex items-center text-sm text-gray-500">
                       <Calendar size={14} className="mr-1" />
-                      {new Date(relatedPost.date).toLocaleDateString('en-US', {
+                      {new Date(rp.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
                       })}
                       <Clock size={14} className="ml-3 mr-1" />
-                      {relatedPost.readTime}
+                      {rp.readTime}
                     </div>
                   </Link>
                 ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

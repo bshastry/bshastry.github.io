@@ -39,3 +39,28 @@
     @apply bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent;
   }
 }
+
+/* rehype-pretty-code support */
+pre [data-line] {
+  border-left: 2px solid transparent;
+  padding: 0 1rem;
+}
+pre [data-highlighted-line] {
+  background: rgba(200, 200, 255, 0.1);
+  border-left-color: #60a5fa;
+}
+code[data-line-numbers] {
+  counter-reset: line;
+}
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: gray;
+}
+figure[data-rehype-pretty-code-figure] pre {
+  padding: 1rem 0;
+}
