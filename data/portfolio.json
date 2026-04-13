@@ -59,86 +59,218 @@
     "blockchain": ["Ethereum", "EVM", "Consensus Mechanisms", "DeFi"],
     "tools": ["LLVM", "AFL", "Foundry", "Hardhat", "Docker"]
   },
-  "projects": [
+  "themes": [
     {
-      "name": "solidity",
-      "description": "The Solidity Contract-Oriented Programming Language - Core contributor to the official Solidity compiler",
-      "commits": 303,
-      "language": "C++",
-      "url": "https://github.com/ethereum/solidity",
-      "featured": true
+      "id": "protocol-security",
+      "title": "Ethereum Protocol Security",
+      "description": "Differential fuzzing and testing tools for validating EIP implementations and consensus-critical code across Ethereum execution layer clients.",
+      "tags": ["Go", "Solidity", "Python"],
+      "period": "2019 - Present",
+      "highlights": [
+        "Built differential fuzzers for EIP-7702 (account abstraction) across geth, Nethermind, and Besu",
+        "Developed PrecompileFuzzer for testing EVM precompile implementations targeting the Prague hard fork",
+        "Created EthFuzzNet, an Ethereum network resilience testing framework",
+        "33 commits to goevmlab for EVM trace analysis and test generation"
+      ],
+      "links": [
+        { "label": "goevmlab", "url": "https://github.com/holiman/goevmlab", "type": "github" }
+      ]
     },
     {
-      "name": "orthrus",
-      "description": "Advanced fuzzing framework for security testing and vulnerability discovery",
-      "commits": 216,
-      "language": "Python",
-      "url": "https://github.com/bshastry/orthrus",
-      "featured": true
+      "id": "compiler-security",
+      "title": "Compiler Security",
+      "description": "Core contributor to the Solidity compiler's testing infrastructure, with 300+ commits focused on fuzzing and correctness testing.",
+      "tags": ["C++", "Solidity"],
+      "period": "2018 - Present",
+      "highlights": [
+        "303 commits to the Solidity compiler, primarily in fuzzing and testing",
+        "Built ABI encoder v2 differential fuzzer",
+        "Discovered and reported numerous compiler correctness bugs through structure-aware fuzzing"
+      ],
+      "links": [
+        { "label": "Solidity", "url": "https://github.com/ethereum/solidity", "type": "github" }
+      ]
     },
     {
-      "name": "oss-fuzz",
-      "description": "Google's continuous fuzzing service for open source software - Active contributor",
-      "commits": 69,
-      "language": "Python",
-      "url": "https://github.com/google/oss-fuzz",
-      "featured": true
+      "id": "p2p-networking",
+      "title": "P2P & Networking Security",
+      "description": "Security testing of peer-to-peer networking stacks used in Ethereum consensus and execution clients.",
+      "tags": ["Rust", "Go", "C++"],
+      "period": "2018 - 2022",
+      "highlights": [
+        "Fuzzed libp2p (Rust implementation) for protocol-level vulnerabilities",
+        "Built mplex-dos stress testing tool for libp2p multiplexing",
+        "Contributed yamux stream multiplexer security patches",
+        "Security research on Prysm (Ethereum consensus client)"
+      ],
+      "links": [
+        { "label": "rust-libp2p", "url": "https://github.com/libp2p/rust-libp2p", "type": "github" }
+      ]
     },
     {
-      "name": "bundler-test-executor",
-      "description": "Test execution framework for Ethereum bundler implementations",
-      "commits": 45,
-      "language": "Go",
-      "url": "https://github.com/bshastry/bundler-test-executor",
-      "featured": false
+      "id": "fuzzing-infra",
+      "title": "Fuzzing Infrastructure",
+      "description": "Tools and frameworks for automated vulnerability discovery, contributed to Google's OSS-Fuzz and built standalone fuzzing frameworks.",
+      "tags": ["Python", "C++"],
+      "period": "2017 - 2020",
+      "highlights": [
+        "Built orthrus, a fuzzing framework for managing parallel fuzz campaigns (216 commits)",
+        "69 commits to Google's OSS-Fuzz continuous fuzzing platform",
+        "Developed custom protocol-buffer based mutation strategies for structure-aware fuzzing"
+      ],
+      "links": [
+        { "label": "orthrus", "url": "https://github.com/bshastry/orthrus", "type": "github" },
+        { "label": "oss-fuzz", "url": "https://github.com/google/oss-fuzz", "type": "github" }
+      ]
     },
     {
-      "name": "goevmlab",
-      "description": "EVM laboratory for testing and analysis in Go",
-      "commits": 38,
-      "language": "Go",
-      "url": "https://github.com/bshastry/goevmlab",
-      "featured": false
+      "id": "application-security",
+      "title": "Application Security",
+      "description": "Fuzzing open-source networking and language runtime software to find and fix memory safety and logic bugs.",
+      "tags": ["C", "C++", "Ruby"],
+      "period": "2017 - 2021",
+      "highlights": [
+        "Fuzzed Open vSwitch (16 commits) — found packet parsing vulnerabilities",
+        "Contributed to OVN (16 commits) — virtual network security testing",
+        "Built mruby proto fuzzer using structure-aware fuzzing techniques",
+        "Discovered and reported Boost Filesystem crash bugs"
+      ],
+      "links": [
+        { "label": "Open vSwitch", "url": "https://github.com/openvswitch/ovs", "type": "github" }
+      ]
     },
     {
-      "name": "eip7702fuzzer_v3",
-      "description": "Fuzzer for EIP-7702 account abstraction proposals",
-      "commits": 32,
-      "language": "Solidity",
-      "url": "https://github.com/bshastry/eip7702fuzzer_v3",
-      "featured": false
+      "id": "erc4337",
+      "title": "ERC-4337 / Account Abstraction",
+      "description": "Testing and compliance infrastructure for Ethereum's account abstraction ecosystem.",
+      "tags": ["Go", "Solidity"],
+      "period": "2023 - 2024",
+      "highlights": [
+        "Built bundler test executor for ERC-4337 compliance testing",
+        "Contributed to Holesky funding vault smart contract infrastructure"
+      ],
+      "links": []
+    }
+  ],
+  "talks": [
+    {
+      "title": "Fuzzing the Solidity Compiler",
+      "venue": "Devcon 5",
+      "location": "Osaka",
+      "year": 2019,
+      "slides": "/media/Fuzzing_Solidity.pdf",
+      "video": "https://youtu.be/cAU5NbrXst0"
     },
     {
-      "name": "precompilefuzzer",
-      "description": "Specialized fuzzer for Ethereum precompiled contracts",
-      "commits": 28,
-      "language": "C++",
-      "url": "https://github.com/bshastry/precompilefuzzer",
-      "featured": true
+      "title": "Fuzzing the Solidity Compiler",
+      "venue": "EthCC 3",
+      "location": "Paris",
+      "year": 2020,
+      "slides": "/media/Fuzzing_Solidity_EthCC3.pdf"
     },
     {
-      "name": "abiencoderv2-fuzzer",
-      "description": "Fuzzing tool for Solidity ABI encoder v2 testing",
-      "commits": 25,
-      "language": "C++",
-      "url": "https://github.com/bshastry/abiencoderv2-fuzzer",
-      "featured": true
+      "title": "Fuzzing the Solidity Compiler",
+      "venue": "FuzzCon EU",
+      "location": "Europe",
+      "year": 2020,
+      "slides": "/media/Fuzzing_Solidity_FuzzconEU.pdf"
     },
     {
-      "name": "rust-libp2p",
-      "description": "Rust implementation of libp2p networking stack - Security contributions",
-      "commits": 22,
-      "language": "Rust",
-      "url": "https://github.com/libp2p/rust-libp2p",
-      "featured": false
+      "title": "Can A Fuzzer Match A Human: Solidity Case Study",
+      "venue": "Ethereum Foundation",
+      "location": "",
+      "year": 2020,
+      "slides": "/media/Can_A_Fuzzer_Match_A_Human.pdf"
     },
     {
-      "name": "prysm",
-      "description": "Go implementation of Ethereum 2.0 client - Security research contributions",
-      "commits": 18,
-      "language": "Go",
-      "url": "https://github.com/prysmaticlabs/prysm",
-      "featured": false
+      "title": "Open Discussion on Solidity Fuzzing",
+      "venue": "Ethereum Meetup",
+      "location": "Berlin",
+      "year": 2019,
+      "slides": "/media/Eth_Meetup_Slides.pdf"
+    },
+    {
+      "title": "Vulnerability Search Problem and Methods",
+      "venue": "TU Berlin (Invited Talk)",
+      "location": "Berlin",
+      "year": 2019,
+      "slides": "/media/Vulnerability_Search_Problem_and_Methods.pdf"
+    }
+  ],
+  "publications": [
+    {
+      "era": "Ethereum Foundation",
+      "papers": []
+    },
+    {
+      "era": "Ph.D. — TU Berlin",
+      "papers": [
+        {
+          "title": "Follow the White Rabbit: Simplifying Fuzz Testing Using FuzzExMachina",
+          "authors": "V. Ulitzsch, D. Maier, B. Shastry",
+          "venue": "Black Hat 2018",
+          "award": null
+        },
+        {
+          "title": "Taking Control of SDN-based Cloud Systems via the Data Plane",
+          "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
+          "venue": "Symposium on SDN Research 2018",
+          "award": "Best Paper Award"
+        },
+        {
+          "title": "The vAMP Attack: Taking Control of Cloud Systems via the Unified Packet Parser",
+          "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
+          "venue": "Cloud Computing Security Workshop 2017",
+          "award": null
+        },
+        {
+          "title": "Static Program Analysis as a Fuzzing Aid",
+          "authors": "B. Shastry, M. Leutner, T. Fiebig, K. Thimmaraju, F. Yamaguchi, K. Rieck, S. Schmid, J.P. Seifert, A. Feldmann",
+          "venue": "RAID 2017",
+          "award": null
+        },
+        {
+          "title": "Static exploration of taint-style vulnerabilities found by fuzzing",
+          "authors": "B. Shastry, F. Maggi, F. Yamaguchi, K. Rieck, J.P. Seifert",
+          "venue": "USENIX WOOT 2017",
+          "award": null
+        },
+        {
+          "title": "Leveraging flawed tutorials for seeding large-scale web vulnerability discovery",
+          "authors": "T. Unruh, B. Shastry, M. Skoruppa, F. Maggi, K. Rieck, J.P. Seifert, F. Yamaguchi",
+          "venue": "USENIX WOOT 2017",
+          "award": null
+        },
+        {
+          "title": "Towards Vulnerability Discovery Using Staged Program Analysis",
+          "authors": "B. Shastry, F. Yamaguchi, K. Rieck, J.P. Seifert",
+          "venue": "DIMVA 2016",
+          "award": null
+        },
+        {
+          "title": "A First Look at Firefox OS Security",
+          "authors": "D. Defreez, B. Shastry, H. Chen, J.P. Seifert",
+          "venue": "MoST 2014",
+          "award": null
+        }
+      ]
+    },
+    {
+      "era": "Fraunhofer Secure IT",
+      "papers": [
+        {
+          "title": "Towards Taming Privilege-Escalation Attacks on Android",
+          "authors": "S. Bugiel, L. Davi, A. Dmitrienko, T. Fischer, A.R. Sadeghi, B. Shastry",
+          "venue": "NDSS 2012",
+          "award": null
+        },
+        {
+          "title": "Practical and lightweight domain isolation on android",
+          "authors": "S. Bugiel, L. Davi, A. Dmitrienko, S. Heuser, A.R. Sadeghi, B. Shastry",
+          "venue": "ACM SPSM 2011",
+          "award": null
+        }
+      ]
     }
   ]
 }
