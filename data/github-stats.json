@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-04-13T09:19:13.771Z",
+  "totals": {
+    "publicRepos": 80,
+    "privateRepos": 35,
+    "totalRepos": 115,
+    "classifiedPrivate": 30
+  },
+  "themes": {
+    "protocol-security": {
+      "privateRepos": 19,
+      "languages": {
+        "Rust": 3,
+        "Go": 9,
+        "Java": 1,
+        "Python": 4,
+        "Other": 1,
+        "Shell": 1
+      }
+    },
+    "compiler-security": {
+      "privateRepos": 2,
+      "languages": {
+        "TeX": 1,
+        "C++": 1
+      }
+    },
+    "p2p-networking": {
+      "privateRepos": 8,
+      "languages": {
+        "Other": 1,
+        "Go": 5,
+        "Rust": 2
+      }
+    },
+    "fuzzing-infra": {
+      "privateRepos": 1,
+      "languages": {
+        "C": 1
+      }
+    },
+    "application-security": {
+      "privateRepos": 0,
+      "languages": {}
+    },
+    "erc4337": {
+      "privateRepos": 0,
+      "languages": {}
+    }
+  }
+}
