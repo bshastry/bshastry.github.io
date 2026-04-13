@@ -1,9 +1,10 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
-// TODO(T3): Temporarily commented out — Projects.tsx references removed `projects` key
-// import Projects from '@/components/Projects'
+import Projects from '@/components/Projects'
 import CV from '@/components/CV'
+import Talks from '@/components/Talks'
+import Publications from '@/components/Publications'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -13,9 +14,10 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
-      {/* TODO(T3): Temporarily commented out — Projects.tsx references removed `projects` key */}
-      {/* <Projects /> */}
+      <Projects />
       <CV />
+      <Talks />
+      <Publications />
       <Contact />
       <Footer />
     </main>
