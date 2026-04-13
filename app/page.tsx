@@ -5,10 +5,14 @@ import Projects from '@/components/Projects'
 import CV from '@/components/CV'
 import Talks from '@/components/Talks'
 import Publications from '@/components/Publications'
+import GitHubActivity from '@/components/GitHubActivity'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import { getGitHubActivity } from '@/lib/github'
 
-export default function Home() {
+export default async function Home() {
+  const activity = await getGitHubActivity()
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -18,6 +22,7 @@ export default function Home() {
       <CV />
       <Talks />
       <Publications />
+      <GitHubActivity activity={activity} />
       <Contact />
       <Footer />
     </main>
