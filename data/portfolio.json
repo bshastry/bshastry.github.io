@@ -2,7 +2,7 @@
   "personal": {
     "name": "Bhargava Shastry",
     "title": "Security Engineer & Researcher",
-    "description": "Security engineer at the Ethereum Foundation and indie security researcher specializing in smart contract security, fuzzing, and blockchain technology.",
+    "description": "Security engineer at the Ethereum Foundation specializing in protocol security, differential fuzzing, and consensus client testing. Building tools that find vulnerabilities across Ethereum's execution and consensus layers.",
     "location": "Remote",
     "email": "bshastry@ethereum.org",
     "social": {
@@ -24,7 +24,13 @@
       "title": "Independent Security Researcher",
       "company": "Freelance",
       "period": "2017 - Present",
-      "description": "Conducting independent security research, developing fuzzing tools, and contributing to open-source security projects."
+      "description": "Independent security research, building fuzzing tools, and contributing to open-source security projects including Google's OSS-Fuzz and Open vSwitch."
+    },
+    {
+      "title": "Security Researcher",
+      "company": "Fraunhofer Secure IT",
+      "period": "2011 - 2012",
+      "description": "Research on Android platform security, including privilege escalation defenses and lightweight domain isolation. Published at NDSS and ACM SPSM."
     },
     {
       "title": "Software Engineer",
@@ -54,10 +60,16 @@
     }
   ],
   "skills": {
-    "languages": ["Solidity", "Rust", "C++", "Python", "Go"],
-    "security": ["Smart Contract Auditing", "Fuzzing", "Static Analysis", "Protocol Security"],
-    "blockchain": ["Ethereum", "EVM", "Consensus Mechanisms", "DeFi"],
-    "tools": ["LLVM", "AFL", "Foundry", "Hardhat", "Docker"]
+    "languages": ["Go", "Rust", "C++", "Solidity", "Python", "Java"],
+    "security": [
+      "Protocol Security",
+      "Differential Fuzzing",
+      "Consensus Client Testing",
+      "Smart Contract Auditing",
+      "Static Analysis"
+    ],
+    "blockchain": ["Ethereum", "EVM", "Execution Layer", "Consensus Layer"],
+    "tools": ["Claude Swarm", "Foundry", "cargo-fuzz", "libFuzzer", "AFL", "Slither", "Docker"]
   },
   "themes": [
     {
