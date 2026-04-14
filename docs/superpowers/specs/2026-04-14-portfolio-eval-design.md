@@ -224,7 +224,7 @@ The peer corpus uses the same four-surface model per peer where available; missi
 - **Determinism test**: run `score()` 100× on the same fixture, assert byte-identical output.
 - **Snapshot tests**: reporter markdown output.
 - **Integration test**: full pipeline on `realistic` fixture; asserts score is in an expected range and top-3 gaps match a golden list.
-- **Adversarial regression test**: run the optimizer on the adversarial fixture *with constraints disabled* and confirm it scores high. Re-enable constraints and confirm the edits are rejected. This is the live proof that C1–C4 actually bite.
+- **Adversarial regression test** (**v2-gated**): run the optimizer on the adversarial fixture *with constraints disabled* and confirm it scores high. Re-enable constraints and confirm the edits are rejected. This is the live proof that C1–C4 actually bite. Deferred to v2 because v1 does not ship an optimizer or edit generator; in v1 the adversarial fixture is only used to test that C1, C2, and the voice-distance computation produce the expected *scoring* outputs.
 
 ## 12. LLM panel (advisory, off by default)
 
@@ -259,9 +259,12 @@ v1 delivers:
 - Extractors for all four surfaces.
 - Peer corpus bootstrap + review workflow.
 - Scoring (sub-scores, weights, aggregate, stop condition evaluation).
-- Constraint framework with C1–C4 stubs (full C1 and C2 implementations; C3 and C4 stubs sufficient for scoring).
+- Constraint framework:
+  - C1 (claim provenance) and C2 (keyword stuffing): full implementations, since both are used during scoring to penalize or flag existing portfolio state.
+  - C3 (minimum voice distance): **full implementation** of the voice-distance computation is required in v1, because D7's sub-score uses the same computation. D7 in v1 is scored with the real voice-distance function, not a stub. C3's role as a hard rejection gate is not exercised in v1 (no edits are proposed), but the function it wraps is fully implemented and tested.
+  - C4 (prose vs structural classification): stub sufficient for v1 since v1 emits no edits. The classifier lands in v2 alongside the edit generators.
 - Reporter (markdown + JSON).
-- Fixtures and the full test suite described in §11.
+- Fixtures and the full test suite described in §11, excluding the adversarial regression test (see §11).
 
 v1 does **not** deliver:
 - `portfolio:fix` (auto-fix)
@@ -293,6 +296,7 @@ Any public description of this framework should use the language "honest maximiz
 - **Variance-based weights over-weight noisy dimensions.** A dimension with spurious measurement variance (e.g., inconsistent GitHub API responses) could get inflated weight. Mitigation: determinism tests and a capped max weight per dimension.
 - **D7 voice distance is hard to compute reliably.** Style fingerprints over small text samples are noisy. Mitigation: start with a simple character-n-gram Jaccard/TF-IDF measure and iterate only if v1 scoring shows it's misranking.
 - **Some dimensions have very small integer ranges.** Publication count, talk count, etc. can't meaningfully hit 90th percentile by one added item. Mitigation: use smoothed percentile estimators and document the granularity limitation in the report.
+- **Noisy percentiles at small corpus sizes.** With a peer corpus of 15, P10/P75/P90 estimates are unstable — adding or removing a single peer can shift them materially, which affects both the sub-score normalization (§6) and the stop condition (§6). Mitigation: compute percentile confidence intervals via bootstrap and surface them in the report header; require the user to approve any peer-corpus change that shifts a stop threshold by more than a documented amount. For v1 (setup-only) this only affects score reporting; for v2 it also affects when the optimizer concludes "stop."
 
 ## 18. Explicitly deferred to v2
 
