@@ -1,0 +1,61 @@
+name: Web3 Intel Crawl
+
+# Runs the Web3 security intelligence crawler in a GitHub Actions runner
+# (which has unrestricted outbound HTTPS) and commits the refreshed intel
+# files back to whatever branch the workflow was dispatched on.
+#
+# Trigger from the Actions tab with "Run workflow". No schedule — the site
+# owner decides when a fresh crawl is needed.
+
+on:
+  workflow_dispatch:
+    inputs:
+      since-days:
+        description: 'How many days back to crawl'
+        required: false
+        default: '60'
+      limit:
+        description: 'Number of top problems to surface'
+        required: false
+        default: '6'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: web3-intel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # We will commit back to the same branch — make sure we have push creds.
+          persist-credentials: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Run intel crawler
+        run: |
+          node tools/web3-intel/run.mjs \
+            --since-days "${{ github.event.inputs.since-days }}" \
+            --limit "${{ github.event.inputs.limit }}"
+
+      - name: Commit refreshed intel
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/web3-intel
+          if git diff --cached --quiet; then
+            echo "No intel changes to commit."
+          else
+            git commit -m "intel: refresh Web3 security briefs ($(date -u +%Y-%m-%d))"
+            git push
+          fi
