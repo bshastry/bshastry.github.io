@@ -87,7 +87,7 @@ tools/portfolio-eval/
 - Modify: `package.json` (add dev deps + scripts)
 - Modify: `.gitignore`
 
-- [ ] **Step 1.1** — Add dev deps: `npm install --save-dev vitest tsx pdf-parse @types/pdf-parse`
+- [ ] **Step 1.1** — Add dev deps: `npm install --save-dev vitest tsx pdf-parse`. (Skip `@types/pdf-parse` — `pdf-parse` ships its own types or lacks them; if the typecheck later complains add an `any`-typed declaration shim under `tools/portfolio-eval/src/types/pdf-parse.d.ts`.)
 - [ ] **Step 1.2** — Add scripts to root `package.json`:
   ```json
   "portfolio:score": "tsx tools/portfolio-eval/src/cli.ts score",
@@ -619,7 +619,7 @@ This is a small divergence from the DimensionExtractor interface; adjust interfa
   }
   ```
   Update D1–D6 to accept `ctx` and ignore it.
-- [ ] **Step 16.2** — Test D7: distinct prose → high; prose copy-pasted from peer → low.
+- [ ] **Step 16.2** — Test D7: distinct prose → high; prose copy-pasted from peer → low. **Use inline mock peer prose strings in the test, not the seed file** (Task 19 lands later; D7 must be testable in isolation).
 - [ ] **Step 16.3** — Implement D7.
 - [ ] **Step 16.4** — Commit: `git add -A && git commit -m "feat(portfolio-eval): dimension D7 distinctive voice"`
 
@@ -655,13 +655,49 @@ Raw feature: `bandReward(pageCount, 4, 6) + (seoMetadataComplete ? 0.5 : 0) + (o
 
 **Files:**
 - Create: `tools/portfolio-eval/data/peer-seeds.json`
+- Modify: `tools/portfolio-eval/src/types.ts` (add `SeedPeerEntry` + `inflateSeed` helper signature)
+- Modify: `tools/portfolio-eval/src/peers/corpus.ts` (add `loadSeeds(path): PeerEntry[]` that inflates)
 
-Hand-curated seed list derived from the research phase. 15 entries. Each has `name`, `org`, `role`, `surfaces.site` (or github if no site), and a `features` object with feature values eyeballed from their public surfaces.
+Hand-curated seed list from the research phase. **Reduced schema — not a full `FeatureVector`.** Hand-writing 15 full feature vectors is error-prone; instead the seed file uses a flat numeric-only shape per dimension and we inflate it to `FeatureVector` at load time.
 
-**Critical honesty note to include in the file comment:** "Feature values are hand-estimated from public surfaces, not measured. Peer corpus v1 is a structured guess; v2 will replace with measured extractions."
+Seed entry shape:
+```typescript
+export interface SeedPeerEntry {
+  id: string;
+  name: string;
+  org: string;
+  role: string;
+  surfaces: { site?: string; github?: string; linkedin?: string; resume?: string };
+  // Flat numeric features used by scoring. Missing fields default to 0 (or false for bools).
+  numeric: {
+    postCount?: number;
+    medianPostWords?: number;
+    signatureToolPresent?: boolean;
+    supportingToolCount?: number;
+    publicationCount?: number;
+    talkCount?: number;
+    talksWithVenueYear?: number;
+    coordinationRoleCount?: number;
+    namedAffiliationCount?: number;
+    pageCount?: number;
+    inflationPatternHits?: number;
+    daysSinceLastPost?: number;
+    narrativeClaimsPer1kWords?: number;
+    kpiTileCount?: number;
+  };
+  // Short prose sample (2-4 sentences of their actual public writing) used ONLY by D7.
+  proseSample: string;
+}
+```
 
-- [ ] **Step 19.1** — Write seed file with entries for: samczsun, pcaversaccio, Fredrik Svantes, Yoav Weiss, holiman, Alex Beregszászi, Kelvin Fichter, Daejun Park, Pratyush Mishra, Philippe Dumonet, Antonio Viggiano, Norswap, transmissions11, tayvano, Dan Guido. Each with plausible feature values (post count, signature tool bool, talk count, etc.) based on the research notes.
-- [ ] **Step 19.2** — Commit: `git add -A && git commit -m "data(portfolio-eval): peer seed corpus (v1 hand-curated)"`
+`inflateSeed(seed: SeedPeerEntry): PeerEntry` fills a `FeatureVector` with the numeric fields from `seed.numeric`, uses `seed.proseSample` for `site.visibleProseText`, and zeros/empty-strings everything else. D7 uses `site.visibleProseText` from each peer as its prose corpus.
+
+**Critical honesty note to include in the file as a `_comment` top-level key:** "Feature values are hand-estimated from public surfaces, not measured. Peer corpus v1 is a structured guess; v2 will replace with measured extractions."
+
+- [ ] **Step 19.1** — Update `types.ts` with `SeedPeerEntry` and export.
+- [ ] **Step 19.2** — Write seed file `peer-seeds.json` with 15 entries: samczsun, pcaversaccio, Fredrik Svantes, Yoav Weiss, holiman, Alex Beregszászi, Kelvin Fichter, Daejun Park, Pratyush Mishra, Philippe Dumonet, Antonio Viggiano, Norswap, transmissions11, tayvano, Dan Guido. Each with plausible numeric values drawn from the research notes AND a 2-4 sentence `proseSample` (quote or paraphrase their public About/bio voice — the sample only needs to reflect voice, not content).
+- [ ] **Step 19.3** — Add `loadSeeds(path): PeerEntry[]` in `peers/corpus.ts` that JSON-loads and maps through `inflateSeed`. Test: round-trips the 15 entries, each has `features.site.postCount` filled from `numeric.postCount`, and an empty `features.github.*` / `features.linkedin.*` block. Seed-schema validation: unknown keys under `numeric` fail fast with a descriptive error.
+- [ ] **Step 19.4** — Commit: `git add -A && git commit -m "data(portfolio-eval): peer seed corpus (v1 hand-curated, reduced schema)"`
 
 ---
 
@@ -831,7 +867,7 @@ Thin wrapper around `rubric/voice-distance.ts`. In v1 it only exposes `checkVoic
 
 - [ ] **Step 31.1** — Test: invoking `scoreCommand({siteDir, peersPath, outDir})` against the realistic fixture and a temporary peers file (pre-populated from seeds) writes a markdown and JSON report to `outDir` and returns an exit code of 0.
 - [ ] **Step 31.2** — Implement: dispatcher switches on `argv[2]` (`score` | `peers:bootstrap` | `peers:review`). Score command: load peers, extract features, run scorer, write reporter output to `eval-reports/YYYY-MM-DD-HHMMSS.{md,json}`.
-- [ ] **Step 31.3** — Smoke-test by hand: `npm run portfolio:peers:bootstrap && npm run portfolio:peers:review -- --approve-all && npm run portfolio:score` — must print an aggregate score and gap list for the real portfolio.
+- [ ] **Step 31.3** — Smoke-test by hand: `npm run portfolio:peers:bootstrap && npm run portfolio:peers:review -- --approve-all && npm run portfolio:score` — must print an aggregate score and gap list for the real portfolio. Expected: exit code 0 even when `private/linkedin-dump.txt` and `private/resume.pdf` are absent; the report's header should show `partial: true` with `partialReasons: [linkedin_missing, resume_missing]` and that is correct behavior, not a failure.
 - [ ] **Step 31.4** — Commit: `git add -A && git commit -m "feat(portfolio-eval): cli dispatcher + score command"`
 
 ---
