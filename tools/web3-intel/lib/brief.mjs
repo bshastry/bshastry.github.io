@@ -26,6 +26,79 @@ const SOURCE_LABEL = {
   'ethereum-magicians': 'Ethereum Magicians',
 }
 
+const TIER_LABEL = {
+  thin: 'THIN',
+  emerging: 'EMERGING',
+  pressing: 'PRESSING',
+}
+
+const TIER_HEADING = {
+  thin: 'Why this is on our radar',
+  emerging: 'Why this is worth watching',
+  pressing: 'Why this is pressing',
+}
+
+const RELIABILITY_NOTICE = {
+  thin: '> ⚠️ Thin evidence — do not cite in a post without independent verification. This brief is shown so you can decide whether to dig deeper.',
+  emerging:
+    '> ⓘ Emerging evidence — corroboration exists but is early. Verify before building a thesis on top.',
+}
+
+/**
+ * Compact one-line evidence fingerprint for the status-line header.
+ */
+function evidenceFingerprint(cluster, newestAgeDays) {
+  const sourceCount = new Set(cluster.signals.map((s) => s.source)).size
+  const signalCount = cluster.signals.length
+  const topMatch = Math.max(0, ...cluster.signals.map((s) => s.matchStrength || 0))
+  return `${signalCount} signal${signalCount === 1 ? '' : 's'} · ${sourceCount} source${sourceCount === 1 ? '' : 's'} · newest ${newestAgeDays}d · match ${topMatch}pts`
+}
+
+/**
+ * Tier-aware "Why this is ..." evidence bullets. Every claim in the output
+ * is conditioned on what the numbers actually support.
+ */
+function evidenceBullets(cluster, tier, sources, sourceLabels, totalEngagement, newestAgeDays) {
+  const lines = []
+  const matchedKW = topMatchedKeywords(cluster)
+    .map((k) => '`' + k + '`')
+    .join(', ')
+
+  if (tier === 'thin') {
+    lines.push(
+      `- **Single source.** Only one source (${sourceLabels.join(', ')}) surfaced this — ${cluster.signals.length} signal${cluster.signals.length === 1 ? '' : 's'}. Treat as a lead, not a corroborated finding.`,
+    )
+    if (matchedKW) lines.push(`- **Matched vocabulary.** ${matchedKW}.`)
+  } else if (tier === 'emerging') {
+    lines.push(
+      `- **Early corroboration.** Surfaced by **${sources.length}** independent source${sources.length === 1 ? '' : 's'} (${sourceLabels.join(', ')}) — corroboration is early but real.`,
+    )
+    lines.push(
+      `- **Volume.** ${cluster.signals.length} posts tagged this cluster in the crawl window.`,
+    )
+    lines.push(`- **Recency.** Most recent signal is ${newestAgeDays} day(s) old.`)
+    if (matchedKW) lines.push(`- **Matched vocabulary.** ${matchedKW}.`)
+  } else {
+    // pressing — retain current prose
+    lines.push(
+      `- **Cross-source breadth.** Surfaced by **${sources.length}** independent sources (${sourceLabels.join(', ')}) — not a single-community echo chamber.`,
+    )
+    lines.push(
+      `- **Volume.** ${cluster.signals.length} distinct discussions, issues, or advisories tagged this cluster in the crawl window.`,
+    )
+    lines.push(
+      `- **Engagement.** Aggregate engagement across signals: ~${totalEngagement} upvotes/comments/severity points.`,
+    )
+    lines.push(
+      `- **Recency.** Most recent signal is only ${newestAgeDays} day(s) old — the conversation is live.`,
+    )
+    if (matchedKW)
+      lines.push(`- **Matched vocabulary.** Common phrases driving this cluster: ${matchedKW}.`)
+  }
+
+  return lines.join('\n')
+}
+
 /**
  * @param {RankedCluster} cluster
  * @param {{generatedAt: string}} meta
@@ -34,17 +107,19 @@ const SOURCE_LABEL = {
 export function renderBrief(cluster, meta) {
   const topSignals = cluster.signals.slice(0, 8)
   const sources = [...new Set(cluster.signals.map((s) => s.source))]
+  const sourceLabels = sources.map((s) => SOURCE_LABEL[s] || s)
   const totalEngagement = cluster.signals.reduce((a, s) => a + (s.engagement || 0), 0)
   const newestAgeDays = Math.floor(
     (Date.now() - Math.max(...cluster.signals.map((s) => new Date(s.publishedAt).getTime()))) /
       86400000,
   )
+  const tier = cluster.tier || 'thin'
 
   const lines = []
   lines.push(`# ${cluster.label}`)
   lines.push('')
   lines.push(
-    `**Domain:** Web3 Security  ·  **Status:** Pressing  ·  **Cluster:** \`${cluster.id}\`  ·  **Score:** ${cluster.score}`,
+    `**Status:** ${TIER_LABEL[tier]}  ·  **Evidence:** ${evidenceFingerprint(cluster, newestAgeDays)}  ·  **Score:** ${cluster.score}`,
   )
   lines.push('')
   lines.push(
@@ -58,29 +133,17 @@ export function renderBrief(cluster, meta) {
   lines.push(`> ${cluster.description}`)
   lines.push('')
 
-  // Why this is pressing
-  lines.push('## Why this is pressing')
+  // Why this is ... (tier-aware heading + bullets)
+  lines.push(`## ${TIER_HEADING[tier]}`)
   lines.push('')
-  lines.push(
-    `- **Cross-source breadth.** Surfaced by **${sources.length}** independent sources (${sources
-      .map((s) => SOURCE_LABEL[s] || s)
-      .join(', ')}) — not a single-community echo chamber.`,
-  )
-  lines.push(
-    `- **Volume.** ${cluster.signals.length} distinct discussions, issues, or advisories tagged this cluster in the crawl window.`,
-  )
-  lines.push(
-    `- **Engagement.** Aggregate engagement across signals: ~${totalEngagement} upvotes/comments/severity points.`,
-  )
-  lines.push(
-    `- **Recency.** Most recent signal is only ${newestAgeDays} day(s) old — the conversation is live.`,
-  )
-  lines.push(
-    `- **Matched vocabulary.** Common phrases driving this cluster: ${topMatchedKeywords(cluster)
-      .map((k) => '`' + k + '`')
-      .join(', ')}.`,
-  )
+  lines.push(evidenceBullets(cluster, tier, sources, sourceLabels, totalEngagement, newestAgeDays))
   lines.push('')
+
+  // Reliability notice for non-pressing tiers
+  if (RELIABILITY_NOTICE[tier]) {
+    lines.push(RELIABILITY_NOTICE[tier])
+    lines.push('')
+  }
 
   // Who is affected
   lines.push('## Who is affected')
@@ -112,11 +175,13 @@ export function renderBrief(cluster, meta) {
   }
   lines.push('')
 
-  // Blog hook
-  lines.push('## Blog hook')
-  lines.push('')
-  lines.push(`> ${blogHook(cluster)}`)
-  lines.push('')
+  // Blog hook — pressing only
+  if (tier === 'pressing') {
+    lines.push('## Blog hook')
+    lines.push('')
+    lines.push(`> ${blogHook(cluster)}`)
+    lines.push('')
+  }
 
   // Sources used
   lines.push('## Sources referenced')
@@ -159,21 +224,39 @@ export function renderReport(ranked, meta) {
     lines.push(`- **${SOURCE_LABEL[src] || src}** — ${n}`)
   }
   lines.push('')
-  lines.push('## Top problems')
-  lines.push('')
-  ranked.forEach((c, i) => {
-    lines.push(`### ${i + 1}. ${c.label}`)
+
+  const byTier = {
+    pressing: ranked.filter((c) => c.tier === 'pressing'),
+    emerging: ranked.filter((c) => c.tier === 'emerging'),
+    thin: ranked.filter((c) => c.tier === 'thin'),
+  }
+
+  const tierHeadings = {
+    pressing: '## Pressing',
+    emerging: '## Emerging',
+    thin: '## Thin leads',
+  }
+
+  let idx = 0
+  for (const t of ['pressing', 'emerging', 'thin']) {
+    if (byTier[t].length === 0) continue
+    lines.push(tierHeadings[t])
     lines.push('')
-    lines.push(`- **Score:** ${c.score}`)
-    lines.push(`- **Signals:** ${c.signals.length}`)
-    lines.push(
-      `- **Sources:** ${[...new Set(c.signals.map((s) => SOURCE_LABEL[s.source] || s.source))].join(', ')}`,
-    )
-    lines.push(`- **Brief:** [\`briefs/${c.id}.md\`](briefs/${c.id}.md)`)
-    lines.push('')
-    lines.push(`${c.description}`)
-    lines.push('')
-  })
+    for (const c of byTier[t]) {
+      idx++
+      lines.push(`### ${idx}. ${c.label}`)
+      lines.push('')
+      lines.push(`- **Score:** ${c.score}`)
+      lines.push(`- **Signals:** ${c.signals.length}`)
+      lines.push(
+        `- **Sources:** ${[...new Set(c.signals.map((s) => SOURCE_LABEL[s.source] || s.source))].join(', ')}`,
+      )
+      lines.push(`- **Brief:** [\`briefs/${c.id}.md\`](briefs/${c.id}.md)`)
+      lines.push('')
+      lines.push(`${c.description}`)
+      lines.push('')
+    }
+  }
   return lines.join('\n')
 }
 
