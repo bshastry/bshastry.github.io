@@ -2,21 +2,27 @@
 //
 // The score is a weighted combination of four signals:
 //
-//   1. Cross-source breadth — how many distinct sources flagged this cluster.
-//      A problem being discussed on HN _and_ Reddit _and_ Ethereum SE is a
-//      much stronger indicator than 50 posts in one subreddit.
+//   1. Cross-source breadth — contributes (breadth-1) × 6. Single-source
+//      clusters get zero credit for their sole source's existence; they
+//      must earn their score from volume/recency/engagement.
 //
 //   2. Volume — raw signal count, diminishing (sqrt).
 //
-//   3. Recency — signals from the last 30 days count more.
+//   3. Recency — MEAN per-signal recency, not sum. A 10-day-old cluster
+//      with 10 posts should not outrank a 1-day-old cluster with 1 post.
 //
 //   4. Engagement — total upvotes/comments/views across signals, log-scaled.
 //
 //   5. Authority multiplier — GH advisories and ethereum-magicians are more
 //      authoritative than random Reddit threads.
 //
-// Each cluster also has a static `weight` from the vocabulary, which nudges
-// high-impact categories (bridges, ZK bugs) upward.
+// Each cluster also has a static `weight` from the vocabulary, BUT that
+// weight is only applied when the cluster's confidence tier is non-thin.
+// Vocab weight is a corroboration amplifier, not a noise amplifier.
+//
+// The ranked output sorts by tier first (pressing > emerging > thin) and
+// by score second within a tier. A thin cluster can never rank above an
+// emerging cluster regardless of score.
 
 /** @typedef {import('./cluster.mjs').PopulatedCluster} PopulatedCluster */
 
@@ -50,54 +56,64 @@ const SOURCE_AUTHORITY = {
   reddit: 0.9,
 }
 
+const TIER_RANK = { pressing: 2, emerging: 1, thin: 0 }
+
 /**
  * @param {PopulatedCluster} cluster
- * @returns {{score:number, breakdown: Record<string, number>}}
+ * @returns {{score:number, tier:'thin'|'emerging'|'pressing', breakdown: Record<string, number>}}
  */
 export function scoreCluster(cluster) {
   const signals = cluster.signals || []
   if (signals.length === 0) {
-    return { score: 0, breakdown: {} }
+    return { score: 0, tier: 'thin', breakdown: {} }
   }
 
   const sources = new Set(signals.map((s) => s.source))
   const breadth = sources.size
-
-  const volume = Math.sqrt(signals.length)
+  const signalCount = signals.length
+  const volumeScore = Math.sqrt(signalCount)
 
   const now = Date.now()
-  let recency = 0
+  let recencySum = 0
+  let newestAge = Infinity
   for (const s of signals) {
     const ageDays = (now - new Date(s.publishedAt).getTime()) / (86400 * 1000)
     if (Number.isNaN(ageDays)) continue
-    // Linear decay from 1.0 (today) to 0.0 (30 days old).
-    recency += Math.max(0, 1 - ageDays / 30)
+    recencySum += Math.max(0, 1 - ageDays / 30)
+    if (ageDays < newestAge) newestAge = ageDays
   }
+  const recency = recencySum / signalCount
+  const newestSignalAgeDays = Number.isFinite(newestAge) ? newestAge : Infinity
 
   const totalEngagement = signals.reduce((a, s) => a + (s.engagement || 0), 0)
   const engagementScore = Math.log1p(totalEngagement)
 
   const authority =
-    signals.reduce((a, s) => a + (SOURCE_AUTHORITY[s.source] || 1.0), 0) / signals.length
+    signals.reduce((a, s) => a + (SOURCE_AUTHORITY[s.source] || 1.0), 0) / signalCount
 
-  const vocabWeight = cluster.weight || 1.0
+  const tier = assignTier({ breadth, volume: signalCount, newestSignalAgeDays })
 
-  // Weights tuned so that breadth dominates but volume + recency matter.
-  const raw = breadth * 6 + volume * 2 + recency * 3 + engagementScore * 1.5
+  const breadthBonus = Math.max(0, breadth - 1) * 6
+  const raw = breadthBonus + volumeScore * 2 + recency * 3 + engagementScore * 1.5
 
-  const score = raw * authority * vocabWeight
+  const effectiveVocab = tier === 'thin' ? 1.0 : cluster.weight || 1.0
+  const score = raw * authority * effectiveVocab
 
   return {
     score: Number(score.toFixed(3)),
+    tier,
     breakdown: {
       breadth,
-      volume: Number(volume.toFixed(2)),
+      volume: Number(volumeScore.toFixed(2)),
       recency: Number(recency.toFixed(2)),
       engagementScore: Number(engagementScore.toFixed(2)),
       authority: Number(authority.toFixed(2)),
-      vocabWeight,
-      signalCount: signals.length,
+      vocabWeight: effectiveVocab,
+      signalCount,
       sourceCount: breadth,
+      newestSignalAgeDays: Number.isFinite(newestSignalAgeDays)
+        ? Number(newestSignalAgeDays.toFixed(2))
+        : null,
     },
   }
 }
@@ -110,6 +126,9 @@ export function rankClusters(clusters, limit = 6) {
   return clusters
     .map((c) => ({ ...c, ...scoreCluster(c) }))
     .filter((c) => c.signals.length > 0)
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      if (TIER_RANK[a.tier] !== TIER_RANK[b.tier]) return TIER_RANK[b.tier] - TIER_RANK[a.tier]
+      return b.score - a.score
+    })
     .slice(0, limit)
 }
