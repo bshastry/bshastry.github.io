@@ -20,6 +20,27 @@
 
 /** @typedef {import('./cluster.mjs').PopulatedCluster} PopulatedCluster */
 
+/**
+ * Assign a confidence tier based on breakdown metrics.
+ * Pure function — depends only on its inputs, no side effects.
+ *
+ * Thresholds:
+ *   - thin:     breadth == 1 && volume < 3 (one voice, low volume)
+ *   - emerging: breadth >= 2 OR (breadth == 1 && volume >= 3)
+ *   - pressing: breadth >= 2 && volume >= 3 && newestSignalAgeDays <= 14
+ *
+ * `volume` is raw signal count, not the sqrt-adjusted volume score used in
+ * scoreCluster.
+ *
+ * @param {{breadth: number, volume: number, newestSignalAgeDays: number}} metrics
+ * @returns {'thin'|'emerging'|'pressing'}
+ */
+export function assignTier({ breadth, volume, newestSignalAgeDays }) {
+  if (breadth >= 2 && volume >= 3 && newestSignalAgeDays <= 14) return 'pressing'
+  if (breadth >= 2 || volume >= 3) return 'emerging'
+  return 'thin'
+}
+
 const SOURCE_AUTHORITY = {
   'github-advisories': 1.4,
   'ethereum-magicians': 1.25,
