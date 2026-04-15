@@ -135,3 +135,137 @@ test('renderBrief: emerging-tier brief (single source, 3 signals) uses EMERGING 
   assert.match(md, /Emerging evidence/, 'emerging brief must include emerging notice')
   assert.doesNotMatch(md, /## Blog hook/, 'emerging brief must not include blog hook section')
 })
+
+// ---------- Pipeline ordering: tier gates sort at the report level ----------
+
+test('pipeline: a thin cluster with high score cannot rank above an emerging cluster', () => {
+  // Thin cluster: 1 reddit signal with enormous engagement and bridge vocab title.
+  // Emerging cluster: 3 reddit signals with modest engagement about a different topic.
+  const signals = [
+    makeSignal({
+      title: 'Massive Wormhole bridge incident today',
+      source: 'reddit',
+      engagement: 1_000_000,
+      daysAgo: 0,
+    }),
+    // Three reentrancy signals (single source, multi-signal → emerging)
+    makeSignal({
+      title: 'new read-only reentrancy discovery in a vault contract',
+      source: 'hackernews',
+      engagement: 1,
+      daysAgo: 0,
+    }),
+    makeSignal({
+      title: 'another read-only reentrancy case study',
+      source: 'hackernews',
+      engagement: 1,
+      daysAgo: 1,
+    }),
+    makeSignal({
+      title: 'third read-only reentrancy writeup',
+      source: 'hackernews',
+      engagement: 1,
+      daysAgo: 2,
+    }),
+  ]
+  const ranked = pipeline(signals)
+
+  const bridgeIdx = ranked.findIndex((c) => c.id === 'bridge-exploits')
+  const reentrancyIdx = ranked.findIndex((c) => c.id === 'reentrancy')
+  assert.ok(bridgeIdx >= 0 && reentrancyIdx >= 0, 'both clusters should exist')
+  assert.equal(ranked[bridgeIdx].tier, 'thin', 'bridge should be thin')
+  assert.equal(ranked[reentrancyIdx].tier, 'emerging', 'reentrancy should be emerging')
+  assert.ok(
+    reentrancyIdx < bridgeIdx,
+    `emerging reentrancy (${reentrancyIdx}) should rank above thin bridge (${bridgeIdx})`,
+  )
+})
+
+// ---------- Meta-complaint filter: end-to-end ----------
+
+test('pipeline: a single meta-complaint signal produces zero top-N briefs', () => {
+  const signals = [
+    makeSignal({
+      title:
+        '$285M from Drift, $4.4M from IoTeX — why are we still routing billions through bridges?',
+      snippet:
+        'every few months we get another bridge exploit and every time the reaction is the same.',
+      source: 'reddit',
+      engagement: 1,
+      daysAgo: 0,
+    }),
+  ]
+  const ranked = pipeline(signals)
+  assert.equal(ranked.length, 0, 'meta-complaint produces no ranked clusters')
+})
+
+// ---------- renderReport grouping ----------
+
+test('renderReport: groups clusters under Pressing / Emerging / Thin leads subheaders', () => {
+  const signals = [
+    // pressing bridge — 3 sources, fresh, keyword in title
+    makeSignal({
+      title: 'Wormhole bridge drained for $500M',
+      source: 'hackernews',
+      daysAgo: 0,
+      engagement: 500,
+    }),
+    makeSignal({
+      title: 'Wormhole bridge hack analysis',
+      source: 'reddit',
+      daysAgo: 1,
+      engagement: 200,
+    }),
+    makeSignal({
+      title: 'Wormhole bridge vulnerability advisory',
+      source: 'github-advisories',
+      daysAgo: 2,
+      engagement: 10,
+    }),
+    // emerging reentrancy — single source, 3 signals
+    makeSignal({
+      title: 'read-only reentrancy in a vault contract',
+      source: 'hackernews',
+      daysAgo: 0,
+      engagement: 5,
+    }),
+    makeSignal({
+      title: 'read-only reentrancy case study',
+      source: 'hackernews',
+      daysAgo: 1,
+      engagement: 5,
+    }),
+    makeSignal({
+      title: 'read-only reentrancy writeup part 3',
+      source: 'hackernews',
+      daysAgo: 2,
+      engagement: 5,
+    }),
+    // thin MEV — single reddit signal
+    makeSignal({
+      title: 'sandwich attack drained my swap',
+      source: 'reddit',
+      daysAgo: 0,
+      engagement: 5,
+    }),
+  ]
+  const ranked = pipeline(signals)
+  const meta = {
+    generatedAt: new Date().toISOString(),
+    totalSignals: signals.length,
+    perSource: { reddit: 3, hackernews: 3, 'github-advisories': 1 },
+  }
+  const report = renderReport(ranked, meta)
+
+  const pressingIdx = report.indexOf('## Pressing')
+  const emergingIdx = report.indexOf('## Emerging')
+  const thinIdx = report.indexOf('## Thin leads')
+
+  assert.ok(pressingIdx >= 0, 'report should contain Pressing subheader')
+  assert.ok(emergingIdx >= 0, 'report should contain Emerging subheader')
+  assert.ok(thinIdx >= 0, 'report should contain Thin leads subheader')
+  assert.ok(
+    pressingIdx < emergingIdx && emergingIdx < thinIdx,
+    'subheaders must appear in order: Pressing → Emerging → Thin',
+  )
+})
