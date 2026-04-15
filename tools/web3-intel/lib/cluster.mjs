@@ -1,12 +1,47 @@
 // Group signals into problem clusters using the curated vocabulary.
 //
-// A signal can belong to multiple clusters (reasonable — "reentrancy on a
-// cross-chain bridge" is both a bridge and a reentrancy issue). We also record
-// which keywords matched so we can show them in the brief.
+// Two hygiene rules gate cluster membership:
+//
+//   Rule 1 — Match-point threshold.
+//     Title matches are worth 2 points; snippet matches are worth 1.
+//     A signal needs ≥2 total points to join a cluster. This means either
+//     one title hit OR two distinct snippet hits. A single phrase buried
+//     in a snippet is not enough.
+//
+//   Rule 2 — Meta-complaint filter.
+//     Signals whose title or snippet contains a lament stop-phrase
+//     (e.g. "every few months", "why are we still") are excluded from
+//     ALL clusters. They are commentary, not evidence of a new incident.
+//
+// A signal can still belong to multiple clusters if it passes Rule 1 for
+// each of them. `matchStrength` is recorded on each clustered signal so
+// the renderer and the eval corpus can reason about match quality.
 
 /** @typedef {import('./sources.mjs').Signal} Signal */
 /** @typedef {import('./vocabulary.mjs').Cluster} Cluster */
-/** @typedef {Cluster & { signals: (Signal & {matchedKeywords: string[]})[] }} PopulatedCluster */
+/** @typedef {Cluster & { signals: (Signal & {matchedKeywords: string[], matchStrength: number})[] }} PopulatedCluster */
+
+const META_COMPLAINT_PHRASES = [
+  'every few months',
+  'every time',
+  'keeps happening',
+  'why are we still',
+  'here we go again',
+  'yet another',
+  'reaction is the same',
+  'same old story',
+]
+
+/**
+ * Returns true if the signal looks like a meta-complaint — a post lamenting
+ * that a class of bugs keeps recurring, rather than reporting a new incident.
+ * @param {Signal} sig
+ * @returns {boolean}
+ */
+function isMetaComplaint(sig) {
+  const hay = `${sig.title || ''} ${sig.snippet || ''}`.toLowerCase()
+  return META_COMPLAINT_PHRASES.some((p) => hay.includes(p))
+}
 
 /**
  * @param {Signal[]} signals
@@ -20,14 +55,34 @@ export function clusterSignals(signals, vocabulary) {
   const deduped = dedupeSignals(signals)
 
   for (const sig of deduped) {
-    const hay = `${sig.title} ${sig.snippet}`.toLowerCase()
+    if (isMetaComplaint(sig)) continue
+
+    const titleLower = (sig.title || '').toLowerCase()
+    const snippetLower = (sig.snippet || '').toLowerCase()
+
     for (const v of vocabulary) {
-      const matched = v.keywords.filter((k) => hay.includes(k.toLowerCase()))
-      if (matched.length === 0) continue
+      let matchPoints = 0
+      const matched = []
+      for (const k of v.keywords) {
+        const kl = k.toLowerCase()
+        if (titleLower.includes(kl)) {
+          matchPoints += 2
+          matched.push(k)
+        } else if (snippetLower.includes(kl)) {
+          matchPoints += 1
+          matched.push(k)
+        }
+      }
+      if (matchPoints < 2) continue
+
       if (!clusters.has(v.id)) {
         clusters.set(v.id, { ...v, signals: [] })
       }
-      clusters.get(v.id).signals.push({ ...sig, matchedKeywords: matched })
+      clusters.get(v.id).signals.push({
+        ...sig,
+        matchedKeywords: matched,
+        matchStrength: matchPoints,
+      })
     }
   }
 
