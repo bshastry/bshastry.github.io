@@ -1,0 +1,902 @@
+[
+  {
+    "id": "m001",
+    "source": "reddit",
+    "title": "Drift Protocol Hacked for $270M — Lazarus Group Confirmed",
+    "snippet": "Drift Protocol confirmed an active attack on April 1 and suspended all deposits and withdrawals. The attacker cashed out on Ethereum. Lazarus group attribution confirmed by on-chain researchers.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1sa47qh/drift_protocol_hacked_270m_solana_defi_exploit",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed exploit with dollar amount and Lazarus Group attribution"
+  },
+  {
+    "id": "m002",
+    "source": "reddit",
+    "title": "$285M Drift Protocol Hack: What Looked Like a Routine Exploit Was Actually a 6-Month State-Backed Intelligence Operation",
+    "snippet": "What first appeared to be a standard DeFi exploit that drained $285 million was in fact a highly sophisticated, months-long intelligence operation.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1scvjff/285m_drift_protocol_hack_what_looked_like_a/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed exploit with dollar amount and postmortem intelligence analysis"
+  },
+  {
+    "id": "m003",
+    "source": "reddit",
+    "title": "Drift Protocol Hack: $285M Stolen by Lazarus Group, Circle Under Fire",
+    "snippet": "Drift Protocol confirmed the hack, Lazarus Group identified. $285M drained and routed through multiple chains.",
+    "url": "https://en.spaziocrypto.com/hack/drift-protocol-hack-285-million-lazarus-group-circle-zachxbt/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed exploit with dollar amount and lazarus group attribution anchor"
+  },
+  {
+    "id": "m004",
+    "source": "reddit",
+    "title": "Bridged Polkadot Hit by Exploit as 1B DOT Minted and Dumped",
+    "snippet": "An attacker exploited the bridge contract allowing minting of 1 billion DOT tokens which were immediately dumped on secondary markets.",
+    "url": "https://beincrypto.com/polkadot-exploit-attacker-mints-1b-dot-tokens/",
+    "expectedCluster": ["bridge-exploits", "recent-exploits"],
+    "rationale": "Bridge exploit confirmed with massive token minting — both bridge and recent-exploit anchors"
+  },
+  {
+    "id": "m005",
+    "source": "reddit",
+    "title": "Drift lost $200M today and the attacker cashed out on Ethereum",
+    "snippet": "Drift Protocol confirmed an active attack on April 1 and suspended all deposits and withdrawals.",
+    "url": "https://www.reddit.com/r/defi/comments/1sa1zdw/drift_lost_200m_today_and_the_attacker_cashed_out/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed exploit with dollar amount lost — recent-exploit anchor"
+  },
+  {
+    "id": "m006",
+    "source": "reddit",
+    "title": "GemPad Lock's $1.9M reentrancy on Base — technical breakdown of the vulnerability and what automated tools caught",
+    "snippet": "GemPad Lock's $1.9M reentrancy on Base was a textbook CEI violation.",
+    "url": "https://www.reddit.com/r/solidity/comments/1slgrzz/gempad_locks_19m_reentrancy_on_base_technical/",
+    "expectedCluster": ["reentrancy", "recent-exploits"],
+    "rationale": "Confirmed reentrancy exploit with dollar amount — both reentrancy and recent-exploit anchors"
+  },
+  {
+    "id": "m007",
+    "source": "reddit",
+    "title": "$1.78M lost because of AI-generated smart contract code, are we trusting AI too much?",
+    "snippet": "Moonwell reportedly lost about $1.78M after an oracle bug caused by AI-generated code.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1rw2xaj/178m_lost_because_of_aigenerated_smart_contract/",
+    "expectedCluster": ["oracle-manipulation", "recent-exploits"],
+    "rationale": "Confirmed oracle exploit with dollar amount — both oracle and recent-exploit anchors"
+  },
+  {
+    "id": "m008",
+    "source": "reddit",
+    "title": "Who Was Behind Yesterday's Massive $286 Million Altcoin Hack Has Been Revealed",
+    "snippet": "On-chain researchers confirmed the attacker behind the $286 million hack has been identified and linked to known state-sponsored groups.",
+    "url": "https://en.bitcoinsistemi.com/who-was-behind-yesterday-s-massive-286-million-altcoin-hack-has-been-revealed/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed hack attribution with dollar amount — recent-exploit anchor"
+  },
+  {
+    "id": "m009",
+    "source": "reddit",
+    "title": "The $3.6m Bitcoin Depot Hack Went Unnoticed for 3 Days, Says ZachXBT",
+    "snippet": "ZachXBT confirmed the Bitcoin Depot hack went undetected for 3 days allowing the attacker to move all funds.",
+    "url": "https://bfmtimes.com/the-3-6m-bitcoin-depot-hack-went-unnoticed-for-3-days-says-zachxbt/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Confirmed hack with dollar amount and ZachXBT attribution anchor"
+  },
+  {
+    "id": "m010",
+    "source": "reddit",
+    "title": "$285M from Drift, $4.4M from IoTeX, $3M from CrossCurve — all in 2026 — why are we still routing billions through bridges?",
+    "snippet": "every few months we get another bridge exploit and every time the reaction is the same.",
+    "url": "https://www.reddit.com/r/defi/comments/1slyyy9/285m_from_drift_44m_from_iotex_3m_from_crosscurve/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Lists multiple confirmed exploits with dollar amounts — recent-exploit anchor; meta-complaint framing but explicit dollar-confirmed exploits override"
+  },
+  {
+    "id": "m011",
+    "source": "reddit",
+    "title": "Bitcoin could be broken by quantum computing, Google researchers conclude",
+    "snippet": "Google researchers revealed that quantum computers could break Bitcoin's elliptic curve cryptography with as few as 500,000 physical qubits—far below previous estimates.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1s9z71z/bitcoin_could_be_broken_by_quantum_computing/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Direct reference to Shor's algorithm threat against ECDSA — post-quantum anchor"
+  },
+  {
+    "id": "m012",
+    "source": "reddit",
+    "title": "Can \"Multi-Chain Byzantine Fault Tolerance\" Survive Q-Day? My architecture proposal to repel quantum attacks on Web3.",
+    "snippet": "With recent news from Google approaching the date of \"Q-Day\" (when quantum computing manages to break current cryptography), the conversation on Web3 has focused almost exclusively on migrating to Post-Quantum Cryptography (PQC) as Dilithium.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1s5cbv8/can_multichain_byzantine_fault_tolerance_survive/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Explicit Q-Day and post-quantum cryptography migration discussion"
+  },
+  {
+    "id": "m013",
+    "source": "ethereum-magicians",
+    "title": "Post Quantum transaction signature (PQTS) Breakout #6",
+    "snippet": "Discussion of post-quantum transaction signature proposals at Ethereum Magicians breakout session.",
+    "url": "https://ethereum-magicians.org/t/post-quantum-transaction-signature-pqts-breakout-6/28190",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Post-quantum cryptography proposal for Ethereum transaction signatures"
+  },
+  {
+    "id": "m014",
+    "source": "reddit",
+    "title": "Ethereum Whale Activity Surges by 1,500% as Developers Launch Post-Quantum Security Team",
+    "snippet": "Ethereum developers formally launch post-quantum security working group to address Shor's algorithm threats to ECDSA signatures.",
+    "url": "https://zycrypto.com/ethereum-whale-activity-surges-by-1500-as-developers-launch-post-quantum-security-team/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Explicit post-quantum security team launch — post-quantum anchor"
+  },
+  {
+    "id": "m015",
+    "source": "reddit",
+    "title": "Google Quantum AI just published a landmark paper on quantum threats to every major blockchain",
+    "snippet": "Algorand has been mentioned 32 times and seems to be the leader in Post-Quantum security. Google's paper outlines specific qubit thresholds at which Shor's algorithm breaks ECDSA.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1s90tjt/google_quantum_ai_just_published_a_landmark_paper/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Landmark quantum computing paper directly citing Shor's algorithm threat to blockchain ECDSA"
+  },
+  {
+    "id": "m016",
+    "source": "reddit",
+    "title": "Multiple audits don't actually make protocols safer",
+    "snippet": "Was going through some recent exploits and noticed a pattern: * Cetus - 3 audits, lost $223M * Balancer - 11 audits, still rekt. The audit badge is becoming meaningless theater.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1sewxg6/multiple_audits_dont_actually_make_protocols_safer/",
+    "expectedCluster": ["audit-discourse"],
+    "rationale": "Direct audit effectiveness critique with 'audited but still rekt' framing — audit-discourse anchor"
+  },
+  {
+    "id": "m017",
+    "source": "reddit",
+    "title": "Do audits actually mean anything after a few months?",
+    "snippet": "Been noticing a pattern lately - a lot of projects that got hacked had audits, but they were pretty old.",
+    "url": "https://www.reddit.com/r/defi/comments/1sg6bha/do_audits_actually_mean_anything_after_a_few/",
+    "expectedCluster": ["audit-discourse"],
+    "rationale": "Audit effectiveness debate — challenges whether audits remain valid over time"
+  },
+  {
+    "id": "m018",
+    "source": "reddit",
+    "title": "How many of you actually run a local fork and test exploits before mainnet?",
+    "snippet": "I see so many projects just trusting the \"audit completed\" badge and deploying.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1sfflas/how_many_of_you_actually_run_a_local_fork_and/",
+    "expectedCluster": ["audit-discourse"],
+    "rationale": "Critique of treating audit as checkbox rather than substantive security — audit theater pattern"
+  },
+  {
+    "id": "m019",
+    "source": "reddit",
+    "title": "Three audits, still rekt: how Balancer lost $116M despite eleven security reviews",
+    "snippet": "Postmortem incoming. Balancer confirmed drained for $116M. Attacker cashed out through Tornado Cash. The protocol had passed eleven separate audits.",
+    "url": "https://example.com/synthetic/m019",
+    "expectedCluster": ["audit-discourse", "recent-exploits"],
+    "rationale": "Synthesized: combines audit-theater framing with confirmed exploit and postmortem anchor"
+  },
+  {
+    "id": "m020",
+    "source": "reddit",
+    "title": "Audit theater is killing DeFi security culture",
+    "snippet": "Teams spend $500k on audits then deploy without fixing the medium-severity findings. The audit report becomes marketing collateral, not a security baseline.",
+    "url": "https://example.com/synthetic/m020",
+    "expectedCluster": ["audit-discourse"],
+    "rationale": "Synthesized: explicit 'audit theater' phrase — canonical audit-discourse anchor"
+  },
+  {
+    "id": "m021",
+    "source": "hackernews",
+    "title": "I Got Pwned by a Malicious AI Plugin: A Technical Breakdown",
+    "snippet": "I run OpenClaw. On Feb 5th, I installed @getfoundry/unbrowse-openclaw from npm. Within hours, my Hardhat private keys were exfiltrated via a postinstall hook.",
+    "url": "https://news.ycombinator.com/item?id=47109114",
+    "expectedCluster": ["supply-chain"],
+    "rationale": "Malicious npm package targeting Foundry/Hardhat users — supply-chain anchor"
+  },
+  {
+    "id": "m022",
+    "source": "hackernews",
+    "title": "I built a security scanner for OpenClaw after 824 malicious skills were found",
+    "snippet": "In February 2026, researchers discovered 824 malicious skills (20% of ClawHub) distributing infostealers.",
+    "url": "https://news.ycombinator.com/item?id=47370624",
+    "expectedCluster": ["supply-chain"],
+    "rationale": "Malicious plugin/infostealer distribution at scale — supply-chain anchor"
+  },
+  {
+    "id": "m023",
+    "source": "hackernews",
+    "title": "GitHub phishers use fake OpenClaw tokens to drain crypto wallets",
+    "snippet": "GitHub phishers use fake OpenClaw tokens to drain crypto wallets",
+    "url": "https://www.csoonline.com/article/4150456/github-phishers-use-fake-openclaw-tokens-to-drain-crypto-wallets.html",
+    "expectedCluster": ["supply-chain", "signature-phishing"],
+    "rationale": "Phishing campaign using hijacked dev tooling tokens to drain wallets — supply-chain + signature-phishing"
+  },
+  {
+    "id": "m024",
+    "source": "hackernews",
+    "title": "AppsFlyer Web SDK hijacked to spread crypto-stealing JavaScript code",
+    "snippet": "AppsFlyer Web SDK hijacked to spread crypto-stealing JavaScript code",
+    "url": "https://www.bleepingcomputer.com/news/security/appsflyer-web-sdk-used-to-spread-crypto-stealer-javascript-code/",
+    "expectedCluster": ["supply-chain", "frontend-compromise"],
+    "rationale": "SDK hijack spreading crypto-stealer — supply-chain and frontend-compromise anchors"
+  },
+  {
+    "id": "m025",
+    "source": "hackernews",
+    "title": "AI coding agents accidentally introduced vulnerable dependencies — here's what happened",
+    "snippet": "Recently we discovered something unexpected on one of our servers: a cryptominer running in the background. The machine was hosting a web service built using Next.js. We traced it to an npm package introduced by an AI coding agent.",
+    "url": "https://news.ycombinator.com/item?id=47387054",
+    "expectedCluster": ["supply-chain"],
+    "rationale": "Vulnerable npm dependency with crypto-mining payload introduced via AI — supply-chain anchor"
+  },
+  {
+    "id": "m026",
+    "source": "reddit",
+    "title": "Malicious hardhat plugin found in npm — steals .env private keys on postinstall",
+    "snippet": "The package hardhat-gas-reporter-pro installs a postinstall script that reads your .env file and sends PRIVATE_KEY to a remote server. 47k weekly downloads before takedown.",
+    "url": "https://example.com/synthetic/m026",
+    "expectedCluster": ["supply-chain"],
+    "rationale": "Synthesized: malicious Hardhat npm package with postinstall key exfil — canonical supply-chain anchor"
+  },
+  {
+    "id": "m027",
+    "source": "reddit",
+    "title": "wallets drained after setApprovalForAll phishing wave hits OpenSea users",
+    "snippet": "Hundreds of users report wallet drainers cleaned them out after clicking a malicious link that prompted setApprovalForAll on their NFT collections. EIP-712 blind signing enabled the attack.",
+    "url": "https://example.com/synthetic/m027",
+    "expectedCluster": ["signature-phishing"],
+    "rationale": "Synthesized: setApprovalForAll + blind signing phishing — canonical signature-phishing anchors"
+  },
+  {
+    "id": "m028",
+    "source": "reddit",
+    "title": "Drainer-as-a-service kit using permit2 bypasses hardware wallet confirmation screens",
+    "snippet": "A new wallet drainer kit exploits permit2 signatures that hardware wallets display as generic 'unknown data'. Victims lose funds even with Ledger protection.",
+    "url": "https://example.com/synthetic/m028",
+    "expectedCluster": ["signature-phishing"],
+    "rationale": "Synthesized: wallet drainer + permit2 + blind signing — canonical signature-phishing anchors"
+  },
+  {
+    "id": "m029",
+    "source": "reddit",
+    "title": "Flashloan governance attack on Compound fork — attacker borrowed $400M voting power in one block",
+    "snippet": "The attacker used a flash loan attack to temporarily acquire supermajority voting power, passed a proposal draining the treasury, all in a single transaction.",
+    "url": "https://example.com/synthetic/m029",
+    "expectedCluster": ["flashloan-governance"],
+    "rationale": "Synthesized: flashloan attack for governance takeover — canonical flashloan-governance anchors"
+  },
+  {
+    "id": "m030",
+    "source": "reddit",
+    "title": "Price oracle manipulation via Uniswap v2 spot price on a thin pool — $8M drained",
+    "snippet": "Attacker manipulated spot price on a low-liquidity Uniswap v2 pair to inflate collateral valuation, then borrowed against it. Classic oracle attack using stale price feed.",
+    "url": "https://example.com/synthetic/m030",
+    "expectedCluster": ["oracle-manipulation"],
+    "rationale": "Synthesized: spot price manipulation + stale price feed + oracle attack — canonical oracle-manipulation anchors"
+  },
+  {
+    "id": "m031",
+    "source": "reddit",
+    "title": "UUPS proxy bricked after upgrade — team forgot to call _disableInitializers",
+    "snippet": "The team deployed a UUPS proxy upgrade without calling _disableInitializers. An attacker called initialize() on the implementation contract, taking ownership and bricking the protocol.",
+    "url": "https://example.com/synthetic/m031",
+    "expectedCluster": ["proxy-upgrades"],
+    "rationale": "Synthesized: UUPS proxy + _disableInitializers missing + proxy bricked — canonical proxy-upgrades anchors"
+  },
+  {
+    "id": "m032",
+    "source": "reddit",
+    "title": "Storage collision in Diamond proxy pattern leads to silent state corruption",
+    "snippet": "Audit report reveals critical storage slot collision between facets in a Diamond proxy pattern. Two functions were reading/writing the same slot with different types.",
+    "url": "https://example.com/synthetic/m032",
+    "expectedCluster": ["proxy-upgrades"],
+    "rationale": "Synthesized: storage collision + Diamond proxy — canonical proxy-upgrades anchors"
+  },
+  {
+    "id": "m033",
+    "source": "reddit",
+    "title": "Access control bypass in unprotected initializer — $12M lost",
+    "snippet": "The protocol deployed an upgradeable contract with an unprotected initializer. Attacker called initialize() directly on the logic contract, set themselves as owner, and drained $12M.",
+    "url": "https://example.com/synthetic/m033",
+    "expectedCluster": ["access-control"],
+    "rationale": "Synthesized: unprotected initializer + access control bypass + dollar amount — canonical access-control anchors"
+  },
+  {
+    "id": "m034",
+    "source": "reddit",
+    "title": "MEV sandwich bots extracted $2M from retail Uniswap traders last week alone",
+    "snippet": "On-chain analysis shows MEV bots running sandwich attacks on Uniswap V3 extracted over $2M from retail traders in a single week. Private mempool usage remains low among regular users.",
+    "url": "https://example.com/synthetic/m034",
+    "expectedCluster": ["mev-frontrunning"],
+    "rationale": "Synthesized: sandwich attack + MEV bot + private mempool context — canonical mev-frontrunning anchors"
+  },
+  {
+    "id": "m035",
+    "source": "reddit",
+    "title": "ZK circuit soundness bug in a groth16 prover allowed forged proofs — $5M minted before patched",
+    "snippet": "Researchers disclosed an under-constrained circuit in a Groth16-based rollup prover. The circuit bug allowed a prover to construct valid-looking proofs for invalid state transitions. $5M was minted before the vulnerability was patched.",
+    "url": "https://example.com/synthetic/m035",
+    "expectedCluster": ["zk-circuit-bugs"],
+    "rationale": "Synthesized: under-constrained circuit + Groth16/snark soundness + circuit bug — canonical zk-circuit-bugs anchors"
+  },
+  {
+    "id": "m036",
+    "source": "reddit",
+    "title": "Sequencer censorship on major L2 confirmed — forced inclusion delay reaches 24 hours",
+    "snippet": "Users report sequencer censorship on the L2, with forced inclusion transactions taking over 24 hours. The centralized sequencer is rejecting transactions from sanctioned addresses.",
+    "url": "https://example.com/synthetic/m036",
+    "expectedCluster": ["rollup-sequencer"],
+    "rationale": "Synthesized: sequencer censorship + forced inclusion + centralized sequencer — canonical rollup-sequencer anchors"
+  },
+  {
+    "id": "m037",
+    "source": "reddit",
+    "title": "ERC-4337 paymaster griefing attack causes 90% of bundler nodes to go offline",
+    "snippet": "A new paymaster griefing vector discovered in ERC-4337 allows an attacker to force bundlers to submit unprofitable transactions. Most bundler operators went offline within hours.",
+    "url": "https://example.com/synthetic/m037",
+    "expectedCluster": ["account-abstraction"],
+    "rationale": "Synthesized: ERC-4337 + paymaster + bundler DoS — canonical account-abstraction anchors"
+  },
+  {
+    "id": "m038",
+    "source": "reddit",
+    "title": "Seed phrase screenshot found in iCloud — $340K drained from hardware wallet",
+    "snippet": "User reports hardware wallet drained after seed phrase was stored as a screenshot in iCloud. Cold wallet drained despite the private key never leaving the device in normal operation.",
+    "url": "https://example.com/synthetic/m038",
+    "expectedCluster": ["key-management"],
+    "rationale": "Synthesized: seed phrase + cold wallet drained — canonical key-management anchors"
+  },
+  {
+    "id": "m039",
+    "source": "reddit",
+    "title": "Private key leaked in GitHub Actions CI log — developer loses everything",
+    "snippet": "Developer accidentally printed their private key compromised in a GitHub Actions debug step. The key was immediately picked up by a bot and the wallet compromised within 2 minutes.",
+    "url": "https://example.com/synthetic/m039",
+    "expectedCluster": ["key-management"],
+    "rationale": "Synthesized: private key leaked + wallet compromised — canonical key-management anchors"
+  },
+  {
+    "id": "m040",
+    "source": "hackernews",
+    "title": "DNS hijack on popular DeFi frontend redirected users to drainer for 6 hours",
+    "snippet": "Attackers hijacked the DNS records for a top-20 DeFi protocol. The malicious frontend served users a drainer that harvested signatures for 6 hours before being detected.",
+    "url": "https://example.com/synthetic/m040",
+    "expectedCluster": ["frontend-compromise"],
+    "rationale": "Synthesized: DNS hijack + malicious frontend — canonical frontend-compromise anchors"
+  },
+  {
+    "id": "m041",
+    "source": "reddit",
+    "title": "Top 10 Crypto Hacks Total $5.7 Billion, But Proposed DeFi Fix Would Only Have Helped One",
+    "snippet": "Analysis of the top 10 crypto hacks by dollar value shows $5.7B total losses. The proposed DeFi tranching fix addresses only one root cause.",
+    "url": "https://beincrypto.com/top-crypto-hacks-defi-tranching-fix/",
+    "expectedCluster": ["recent-exploits"],
+    "rationale": "Analysis of confirmed exploit corpus with aggregate dollar amount — recent-exploits anchor"
+  },
+  {
+    "id": "m042",
+    "source": "reddit",
+    "title": "Circle Announces Quantum-Resistant Roadmap to Secure Future Digital Asset Infrastructure",
+    "snippet": "Circle is adopting post-quantum cryptography standards to protect USDC infrastructure against future quantum computing threats.",
+    "url": "https://news.bitcoin.com/circle-announces-quantum-resistant-roadmap-to-secure-future-digital-asset-infrastructure/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Post-quantum cryptography migration announcement — post-quantum anchor"
+  },
+  {
+    "id": "m043",
+    "source": "reddit",
+    "title": "Recent coverage from CoinDesk highlights renewed discussion around quantum computing risks to Bitcoin",
+    "snippet": "Recent coverage from CoinDesk highlights renewed discussion around quantum computing risks to Bitcoin.",
+    "url": "https://www.coindesk.com/daybook-us/2026/03/31/quantum-risk-resurfaces-at-the-worst-time-for-bitcoin-but-1-token-is-loving-it",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Quantum computing risk to Bitcoin cryptography — post-quantum anchor"
+  },
+  {
+    "id": "m044",
+    "source": "reddit",
+    "title": "Safeguarding cryptocurrency by disclosing quantum vulnerabilities responsibly",
+    "snippet": "Google's security team describes their responsible disclosure process for quantum vulnerabilities in blockchain ECDSA, highlighting the Shor's algorithm threat timeline.",
+    "url": "https://research.google/blog/safeguarding-cryptocurrency-by-disclosing-quantum-vulnerabilities-responsibly/",
+    "expectedCluster": ["post-quantum"],
+    "rationale": "Google responsible disclosure of quantum threats to blockchain cryptography — post-quantum anchor"
+  },
+  {
+    "id": "m045",
+    "source": "reddit",
+    "title": "I knew about North Korean hackers — they still tricked me and got into my computer",
+    "snippet": "In late March, I received a troubling message from Fortune's IT administrator. It turned out to be a sophisticated DPRK phishing attack through Zoom that compromised my credentials.",
+    "url": "https://fortune.com/2026/04/02/north-korea-dprk-zoom-phishing-social-engineering-attack-telegram/",
+    "expectedCluster": ["key-management", "recent-exploits"],
+    "rationale": "DPRK social engineering attack targeting credentials — key management compromise context; North Korean hackers attribution also matches recent-exploits cluster"
+  },
+  {
+    "id": "m046",
+    "source": "reddit",
+    "title": "The last argument against DeFi?",
+    "snippet": "the last real argument against defi is \"there are hacks\" which is usually what you hear when everything else is working Do you agree?",
+    "url": "https://www.reddit.com/r/defi/comments/1slyayx/the_last_argument_against_defi/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint about DeFi hacks as an argument class, not a specific exploit"
+  },
+  {
+    "id": "m047",
+    "source": "reddit",
+    "title": "Yet another rug pull on Base — surprise surprise",
+    "snippet": "Here we go again: yet another Base memecoin rug and the reaction is the same. Community outrage for 48 hours, then everyone moves on until the next one.",
+    "url": "https://www.reddit.com/r/defi/comments/1s0qsk7/anyone_else_exhausted_by_the_memecoin_casino/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'yet another' and 'here we go again' phrasing — lamenting that rug pulls keep recurring"
+  },
+  {
+    "id": "m048",
+    "source": "reddit",
+    "title": "Every few months another DEX gets sandwiched into oblivion",
+    "snippet": "Every few months we go through this: MEV bots drain a new DEX, the same post-mortem blame game plays out, and every time the reaction is the same. When does it stop?",
+    "url": "https://example.com/synthetic/m048",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every few months' and 'every time the reaction is the same' phrasing — lamenting recurring MEV sandwich patterns"
+  },
+  {
+    "id": "m049",
+    "source": "reddit",
+    "title": "Same old story: another protocol rekt a month after launch",
+    "snippet": "Every few months we see the same cycle — hype, launch, exploit, apology. Keeps happening.",
+    "url": "https://example.com/synthetic/m049",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'same old story' + 'every few months' + 'keeps happening' phrasings"
+  },
+  {
+    "id": "m050",
+    "source": "reddit",
+    "title": "Why are we still losing billions to bridge hacks every year?",
+    "snippet": "Why are we still routing billions through bridges that keep getting drained? Every few months another cross-chain bridge is emptied and every time the reaction is the same: shocked faces and a post-mortem.",
+    "url": "https://example.com/synthetic/m050",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'why are we still' and 'every few months' phrasing — lamenting the recurring pattern of bridge exploits"
+  },
+  {
+    "id": "m051",
+    "source": "reddit",
+    "title": "Here we go again: another multisig got compromised",
+    "snippet": "Here we go again. Another multisig gets compromised, another nine-figure loss, another round of \"we take security seriously\" press releases. Every few months this cycle repeats.",
+    "url": "https://example.com/synthetic/m051",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'here we go again' and 'every few months' phrasing — lamenting the recurring pattern of multisig compromises"
+  },
+  {
+    "id": "m052",
+    "source": "reddit",
+    "title": "Every time a lending protocol gets exploited, we blame the user",
+    "snippet": "Every time a lending protocol goes under, the post-mortem blames 'sophisticated attackers' but never the protocol design. Same old story: complex collateral math, thin oracle feeds, and we're surprised when it breaks.",
+    "url": "https://example.com/synthetic/m052",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every time' and 'same old story' phrasing — lamenting the recurring pattern of lending protocol failures"
+  },
+  {
+    "id": "m053",
+    "source": "reddit",
+    "title": "Trustless is the biggest lie in crypto",
+    "snippet": "Everyone in this space trusts something.",
+    "url": "https://www.reddit.com/r/defi/comments/1s9c04p/trustless_is_the_biggest_lie_in_crypto/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: philosophical take on trustlessness, not a security signal"
+  },
+  {
+    "id": "m054",
+    "source": "reddit",
+    "title": "Too many 'I got drained' posts",
+    "snippet": "Been seeing way too many posts about people getting drained and it's making me rethink my setup.",
+    "url": "https://www.reddit.com/r/defi/comments/1s1eyue/too_many_i_got_drained_posts/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: reaction to a trend of reports, not a specific exploit"
+  },
+  {
+    "id": "m055",
+    "source": "reddit",
+    "title": "Hardware wallets vs. Trusted CEX",
+    "snippet": "I know 'not your keys, not your coins' is the golden rule, but let's be brutally real here: most average retail people are going to lose their seed phrase, get phished, or accidentally throw away their Ledger before a top-tier exchange gets hacked.",
+    "url": "https://www.reddit.com/r/defi/comments/1rymme3/hardware_wallets_vs_trusted_cex/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent but vague: generic self-custody vs CEX debate without specific exploit or technique"
+  },
+  {
+    "id": "m056",
+    "source": "reddit",
+    "title": "Wallet safety",
+    "snippet": "I am not a pro crypto trader, but I have been in the market for a bit of time...",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1slkz6f/wallet_safety/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: generic wallet safety topic without specific technique or exploit"
+  },
+  {
+    "id": "m057",
+    "source": "reddit",
+    "title": "Why are so many crypto wallets still getting hacked in 2026?",
+    "snippet": "Lately, it feels like every other week there's news about wallets being drained or users losing funds, even when they think they're being careful.",
+    "url": "https://www.reddit.com/r/defi/comments/1sk34xb/why_are_so_many_crypto_wallets_still_getting/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: general frustration about wallet hacks without specific exploit"
+  },
+  {
+    "id": "m058",
+    "source": "reddit",
+    "title": "Operational Security for Serious Investors",
+    "snippet": "Hi everyone, I wanted to share a quick note for those who manage their own capital or third-party portfolios in a professional manner.",
+    "url": "https://www.reddit.com/r/defi/comments/1sjtjxk/operational_security_for_serious_investors/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: generic opsec advice without specific technique or exploit"
+  },
+  {
+    "id": "m059",
+    "source": "reddit",
+    "title": "What's the safest way to store crypto after recent wallet hacks?",
+    "snippet": "Lately, it feels like every week there's news about another wallet exploit or phishing scam, and honestly, it's making a lot of people rethink how they store their crypto.",
+    "url": "https://www.reddit.com/r/defi/comments/1rwwgb9/whats_the_safest_way_to_store_crypto_after_recent/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: storage advice prompted by general hack news, not specific exploit"
+  },
+  {
+    "id": "m060",
+    "source": "reddit",
+    "title": "Are top decentralized exchanges actually safer, or just feel safer?",
+    "snippet": "Lately, I've been seeing more people move away from centralized platforms after all the exchange-related issues in the past couple of years.",
+    "url": "https://www.reddit.com/r/defi/comments/1shfagr/are_top_decentralized_exchanges_actually_safer_or/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: generic DEX vs CEX safety discussion without specific exploit"
+  },
+  {
+    "id": "m061",
+    "source": "reddit",
+    "title": "How NOT to lose money",
+    "snippet": "How NOT to lose money. Two words.",
+    "url": "https://www.reddit.com/r/defi/comments/1shzz5y/how_not_lose_money/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: generic 'stay safe' style advice post"
+  },
+  {
+    "id": "m062",
+    "source": "reddit",
+    "title": "Which platforms do you trust most?",
+    "snippet": "I am finally planning to allocate a portion of my savings into digital assets, but the recent news about exchange hacks has me extremely worried.",
+    "url": "https://www.reddit.com/r/defi/comments/1sc4ek8/which_platforms_do_you_trust_most/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: platform trust question without any specific exploit or technique"
+  },
+  {
+    "id": "m063",
+    "source": "reddit",
+    "title": "Why do most people ignore who actually builds their crypto wallet?",
+    "snippet": "I've noticed something interesting — people spend hours researching coins, but almost no time thinking about the wallets they store them in.",
+    "url": "https://www.reddit.com/r/defi/comments/1sgi116/why_do_most_people_ignore_who_actually_builds/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: awareness post about wallet vendor trust without specific vulnerability"
+  },
+  {
+    "id": "m064",
+    "source": "reddit",
+    "title": "Keeps happening: users sign malicious permits without knowing",
+    "snippet": "Keeps happening: users sign what looks like a normal approval, it's actually a permit draining their entire wallet. We've had EIP-712 for years — why are we still building UX that hides what users are signing?",
+    "url": "https://example.com/synthetic/m064",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'keeps happening' and 'why are we still' phrasing — lamenting the recurrence of blind permit phishing"
+  },
+  {
+    "id": "m065",
+    "source": "reddit",
+    "title": "What are the biggest challenges in developing a secure crypto wallet today?",
+    "snippet": "I've been exploring wallet development recently, and it's surprising how security is no longer just a backend problem.",
+    "url": "https://www.reddit.com/r/defi/comments/1rxtjxn/what_are_the_biggest_challenges_in_developing_a/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: general wallet security development question, no specific technique"
+  },
+  {
+    "id": "m066",
+    "source": "reddit",
+    "title": "Why are we still writing Solidity like it's 2017?",
+    "snippet": "Why are we still writing reentrancy-vulnerable code in 2026? Every few months another protocol forgets CEI ordering or slaps a reentrancy guard on after the fact. The same old story repeats.",
+    "url": "https://example.com/synthetic/m066",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'why are we still' and 'every few months' phrasing — lamenting the recurrence of reentrancy vulnerabilities"
+  },
+  {
+    "id": "m067",
+    "source": "reddit",
+    "title": "Every few months another DeFi protocol is rekt and we're shocked",
+    "snippet": "Every few months the same cycle: new DeFi protocol launches, raises $50M, gets exploited, and every time the reaction is the same — surprise and outrage, then nothing changes.",
+    "url": "https://example.com/synthetic/m067",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every few months' and 'every time the reaction is the same' phrasing — lamenting the recurring pattern of DeFi exploits"
+  },
+  {
+    "id": "m068",
+    "source": "reddit",
+    "title": "Yet another DeFi protocol hacked on day one of mainnet launch",
+    "snippet": "Yet another project rushed to mainnet and got exploited within 24 hours. Here we go again: no audit, no bug bounty, just vibes and a Telegram announcement.",
+    "url": "https://example.com/synthetic/m068",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'yet another' and 'here we go again' phrasing — lamenting the pattern of unaudited mainnet launches being exploited"
+  },
+  {
+    "id": "m069",
+    "source": "reddit",
+    "title": "Every time a new SDK ships without security review, someone gets drained",
+    "snippet": "Every time a popular Web3 SDK releases a new version without a proper security review, someone ends up losing funds. Keeps happening and the community keeps installing blindly.",
+    "url": "https://example.com/synthetic/m069",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every time' and 'keeps happening' phrasing — lamenting the recurrence of unreviewed SDK releases causing losses"
+  },
+  {
+    "id": "m070",
+    "source": "reddit",
+    "title": "Yet another supply-chain attack through a dev tool plugin — here we go again",
+    "snippet": "Yet another malicious plugin snuck into a developer toolchain. Here we go again: postinstall hook, private key exfil, funds gone. Why are we still shipping npm packages without reproducible builds?",
+    "url": "https://example.com/synthetic/m070",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'yet another' and 'here we go again' and 'why are we still' phrasing — lamenting the recurrence of supply-chain attacks via dev tools"
+  },
+  {
+    "id": "m071",
+    "source": "reddit",
+    "title": "Same old story: uninitialized proxy, attacker takes ownership",
+    "snippet": "Same old story again: protocol deploys a UUPS proxy, forgets to call _disableInitializers, attacker takes ownership. This has been a known issue for years and it keeps happening every quarter.",
+    "url": "https://example.com/synthetic/m071",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'same old story' and 'keeps happening' phrasing — lamenting the recurrence of uninitialized proxy vulnerabilities"
+  },
+  {
+    "id": "m072",
+    "source": "hackernews",
+    "title": "Show HN: Analytics and Attribution for DeFi",
+    "snippet": "Building a successful onchain app is hard.",
+    "url": "https://formo.so/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: DeFi analytics SaaS product launch"
+  },
+  {
+    "id": "m073",
+    "source": "hackernews",
+    "title": "Show HN: TestMachine, attack simulation for smart contracts that reports exploitable bugs",
+    "snippet": "We built TestMachine after watching teams drown in AI reports full of theoretical vulnerabilities that never get fixed because nobody knows which ones actually matter.",
+    "url": "https://news.ycombinator.com/item?id=47492070",
+    "expectedCluster": [],
+    "rationale": "Off-topic: security tooling product launch, not a report of a specific vulnerability or exploit"
+  },
+  {
+    "id": "m074",
+    "source": "hackernews",
+    "title": "Show HN: I built a smart contract scanner and ran it vs. the $197M Euler exploit",
+    "snippet": "I built a smart contract scanner and ran it against the $197M Euler exploit — here's what it caught and missed",
+    "url": "https://paragraph.com/@veritasomega/i-built-a-smart-contract-scanner-and-ran-it-against-the-dollar197m-euler-exploit",
+    "expectedCluster": [],
+    "rationale": "Dev-help/tooling: uses Euler exploit as benchmark for a scanner, not reporting the exploit itself"
+  },
+  {
+    "id": "m075",
+    "source": "reddit",
+    "title": "What's your actual audit workflow in 2026?",
+    "snippet": "Curious how teams are handling smart contract security these days.",
+    "url": "https://www.reddit.com/r/solidity/comments/1s7v1q3/whats_your_actual_audit_workflow_in_2026/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: workflow question about auditing, no critique or exploit"
+  },
+  {
+    "id": "m076",
+    "source": "reddit",
+    "title": "Is AWS KMS + multisig a good setup for a DeFi vault?",
+    "snippet": "Hi, I'm currently running a strategy bot using AWS KMS to sign transactions.",
+    "url": "https://www.reddit.com/r/defi/comments/1s9tv0e/is_aws_kms_multisig_a_good_setup_for_a_defi_vault/",
+    "expectedCluster": [],
+    "rationale": "Dev-help: security architecture question, not a vulnerability report"
+  },
+  {
+    "id": "m077",
+    "source": "reddit",
+    "title": "How do you handle risk from solidity contract dependencies in real projects?",
+    "snippet": "One thing I keep running into in Solidity development is how quickly dependency risk compounds once a project grows beyond a few contracts.",
+    "url": "https://www.reddit.com/r/solidity/comments/1slue5r/how_do_you_handle_risk_from_solidity_contract/",
+    "expectedCluster": [],
+    "rationale": "Dev-help: general question about dependency risk management, no specific attack"
+  },
+  {
+    "id": "m078",
+    "source": "reddit",
+    "title": "Quantum - is it really that dangerous? No...",
+    "snippet": "Hi, I used to work as a technical full-stack developer and recently I spent some time investigating this thing everyone's talking about 'Quantum computing destroying encryption'.",
+    "url": "https://www.reddit.com/r/ethereum/comments/1se5w54/quantum_is_it_really_that_dangerous_no/",
+    "expectedCluster": [],
+    "rationale": "Opposite of post-quantum signal: downplays quantum threat, no actionable security content"
+  },
+  {
+    "id": "m079",
+    "source": "reddit",
+    "title": "Every few months another oracle gets manipulated and we're surprised",
+    "snippet": "Every few months: spot price oracle, thin pool, $10M drained. Every time the reaction is the same — 'we'll switch to a TWAP.' But the same old story plays out the next quarter.",
+    "url": "https://example.com/synthetic/m079",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every few months' and 'every time the reaction is the same' and 'same old story' phrasing — lamenting recurring oracle manipulation exploits"
+  },
+  {
+    "id": "m080",
+    "source": "reddit",
+    "title": "Here we go again: another flash loan governance attack drains the treasury",
+    "snippet": "Here we go again. Flash loan, instant voting power, malicious proposal, treasury drained. Why are we still using snapshot-based governance with no time-lock? Same old story every bull run.",
+    "url": "https://example.com/synthetic/m080",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'here we go again' and 'why are we still' and 'same old story' phrasing — lamenting the recurrence of flash loan governance attacks"
+  },
+  {
+    "id": "m081",
+    "source": "reddit",
+    "title": "Yet another governance vote captured by a whale with borrowed tokens",
+    "snippet": "Yet another DAO proposal passed by a single wallet that flash-borrowed 40% of supply at vote time. Why are we still designing governance with no delegation delay or snapshot lag? Same old story every bull run.",
+    "url": "https://example.com/synthetic/m081",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'yet another' and 'why are we still' and 'same old story' phrasing — lamenting the recurrence of flash-borrowed governance capture"
+  },
+  {
+    "id": "m082",
+    "source": "reddit",
+    "title": "Every few months another MEV bot extracts millions and we do nothing",
+    "snippet": "Every few months a new wave of sandwich attacks drains retail liquidity and every time the reaction is the same: a thread on X, a shrug, and then back to building. When does the ecosystem actually enforce fair ordering?",
+    "url": "https://example.com/synthetic/m082",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'every few months' and 'every time the reaction is the same' phrasing — lamenting the recurrence of MEV sandwich extraction with no systemic response"
+  },
+  {
+    "id": "m083",
+    "source": "hackernews",
+    "title": "Show HN: Harden – 5 AI models audit your code, then debate each other's findings",
+    "snippet": "I built harden because I kept copy-pasting code between ChatGPT, Claude, and Gemini trying to cross-check their reviews.",
+    "url": "https://harden.center/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: AI audit tooling product launch"
+  },
+  {
+    "id": "m084",
+    "source": "hackernews",
+    "title": "Tell HN: Fiverr left customer files public and searchable",
+    "snippet": "Fiverr uses a service called Cloudinary to process PDF/images in messaging. The files are public by default with predictable URLs.",
+    "url": "https://news.ycombinator.com/item?id=47769796",
+    "expectedCluster": [],
+    "rationale": "Off-topic: web2 data exposure bug, not a web3/DeFi security signal"
+  },
+  {
+    "id": "m085",
+    "source": "reddit",
+    "title": "At what point does a protocol's TVL become a false signal for security?",
+    "snippet": "Euler v1 had $1B+ TVL when it got hacked for $197M.",
+    "url": "https://www.reddit.com/r/defi/comments/1rw4jwf/at_what_point_does_a_protocols_tvl_become_a_false/",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint about TVL as a security proxy — philosophical discussion, not an exploit signal"
+  },
+  {
+    "id": "m086",
+    "source": "reddit",
+    "title": "Ethereum Foundation Puts Up $1 Million to Back Ecosystem Security Audits",
+    "snippet": "Ethereum Foundation announces $1M grant program to fund smart contract security audits across the ecosystem.",
+    "url": "https://decrypt.co/news-explorer?pinned=1380559&title=ethereum-foundation-puts-up-1-million-to-back-ecosystem-security-audits",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: grant program news, positive security investment not an exploit"
+  },
+  {
+    "id": "m087",
+    "source": "reddit",
+    "title": "How are you evaluating security risks in RWA protocols today?",
+    "snippet": "",
+    "url": "https://www.reddit.com/r/RWA/comments/1rxvfsd/how_are_you_evaluating_security_risks_in_rwa/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: open question about RWA risk evaluation, no specific exploit"
+  },
+  {
+    "id": "m088",
+    "source": "reddit",
+    "title": "What are the risks you should analyse before putting your stablecoins in the defi protocols?",
+    "snippet": "Losing your money due to the bad investment decisions is less painful than losing your stablecoins that are 'parked' waiting.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1shezwl/what_are_the_risks_you_should_analyse_before/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: generic risk analysis advice, no specific vulnerability"
+  },
+  {
+    "id": "m089",
+    "source": "reddit",
+    "title": "Saylor calmed the narrative for now? Top Quantum-Resistant Tokens by Market Capitalization",
+    "snippet": "Things were really heating up as Saylor opened up a task force last month. Here are the top quantum-resistant tokens by market cap.",
+    "url": "https://coinmarketcap.com/view/quantum-resistant/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: token price listing dressed as quantum security, investment framing dominates"
+  },
+  {
+    "id": "m090",
+    "source": "reddit",
+    "title": "Here we go again: ZK rollup soundness bug, forged proofs, funds minted",
+    "snippet": "Here we go again. Under-constrained circuit, forged validity proof accepted, tokens minted out of thin air. Every few months a ZK rollup ships with a soundness bug and every time the reaction is the same: 'we'll add more constraints next release.'",
+    "url": "https://example.com/synthetic/m090",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'here we go again' and 'every few months' and 'every time the reaction is the same' phrasing — lamenting the recurrence of ZK circuit soundness bugs"
+  },
+  {
+    "id": "m091",
+    "source": "reddit",
+    "title": "Keeps happening: hardware wallet users drained through permit2 blind signing",
+    "snippet": "Keeps happening. User has a Ledger, thinks they're safe, clicks an airdrop link, signs a permit2 message they can't read, wallet drained. Why are we still shipping interfaces that show 'unknown data' for permit signatures?",
+    "url": "https://example.com/synthetic/m091",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'keeps happening' and 'why are we still' phrasing — lamenting the recurrence of permit2 blind-signing wallet drains despite hardware wallet use"
+  },
+  {
+    "id": "m092",
+    "source": "reddit",
+    "title": "I made a platform to practice Solidity, looking for feedback from devs",
+    "snippet": "I'm sharing something I've been working on: Solingo, a gamified way to practice Solidity.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1s1i6uy/i_made_a_platform_to_practice_solidity_looking/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: Solidity learning platform announcement"
+  },
+  {
+    "id": "m093",
+    "source": "hackernews",
+    "title": "Show HN: An interactive map of Tolkien's Middle-earth",
+    "snippet": "An interactive map of Tolkien's Middle-earth, with events from across the legendarium plotted as markers.",
+    "url": "https://middle-earth-interactive-map.web.app/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: completely unrelated to web3 security"
+  },
+  {
+    "id": "m094",
+    "source": "reddit",
+    "title": "Same old story: protocol passes three audits then gets drained the week after launch",
+    "snippet": "Same old story. Three audit firms, four-week review, medium findings left open, mainnet launch, drained in 72 hours. Every time the reaction is the same: 'the auditors missed it.' When does the industry stop treating audits as a liability shield?",
+    "url": "https://example.com/synthetic/m094",
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'same old story' and 'every time the reaction is the same' phrasing — lamenting the recurrence of post-audit exploits"
+  },
+  {
+    "id": "m095",
+    "source": "reddit",
+    "title": "New EF Mandate signaling trustless sovereignty amid global instability?",
+    "snippet": "Anyone else read the EF Mandate that dropped Friday?",
+    "url": "https://www.reddit.com/r/ethereum/comments/1rv2sgz/new_ef_mandate_signaling_trustless_sovereignty/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: Ethereum Foundation governance news, no security signal"
+  },
+  {
+    "id": "m096",
+    "source": "reddit",
+    "title": "ranking staking options for the under-50-SOL crowd",
+    "snippet": "I keep reading staking guides that are clearly aimed at people with 500+ SOL.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1sdrwtx/ranking_staking_options_for_the_under50sol_crowd/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: staking yield comparison, no security content"
+  },
+  {
+    "id": "m097",
+    "source": "reddit",
+    "title": "The companies that built Bitcoin's mining infrastructure are selling their BTC and converting to AI data centers",
+    "snippet": "Not trying to be alarmist here but this is a real structural shift and I don't see it discussed much.",
+    "url": "https://www.reddit.com/r/CryptoCurrency/comments/1sl8xou/the_companies_that_built_bitcoins_mining/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: Bitcoin mining industry trend piece, no security signal"
+  },
+  {
+    "id": "m098",
+    "source": "hackernews",
+    "title": "Show HN: Git Web Manager",
+    "snippet": "Git Web Manager (GWM) is a self-hosted dashboard for deploying Git repositories to local and remote paths.",
+    "url": "https://github.com/WallabyDesigns/gitmanager",
+    "expectedCluster": [],
+    "rationale": "Off-topic: general developer tooling, no web3 or security signal"
+  },
+  {
+    "id": "m099",
+    "source": "reddit",
+    "title": "Looking for Wallet Recommendations",
+    "snippet": "The top priority is safety and security.",
+    "url": "https://www.reddit.com/r/ethereum/comments/1rxioe2/looking_for_wallet_recommendations/",
+    "expectedCluster": [],
+    "rationale": "Security-adjacent vague: wallet recommendation request, no specific vulnerability or technique"
+  },
+  {
+    "id": "m100",
+    "source": "reddit",
+    "title": "Solana Auditor Looking for New Programs to Review",
+    "snippet": "I'm an independent Solana (and EVM) smart contract auditor.",
+    "url": "https://www.reddit.com/r/ethdev/comments/1s7fiff/solana_auditor_looking_for_new_programs_to_review/",
+    "expectedCluster": [],
+    "rationale": "Off-topic: auditor advertising their services, not a security signal"
+  }
+]
