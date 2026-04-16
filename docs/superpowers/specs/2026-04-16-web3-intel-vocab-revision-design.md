@@ -31,7 +31,7 @@ Manual triage of the 214 signals identified ~86 that are security-relevant but v
 
 ### Section 1 — Vocabulary Changes
 
-Three new clusters appended to `CLUSTERS` in `tools/web3-intel/lib/vocabulary.mjs`:
+Three new clusters appended to `VOCABULARY` in `tools/web3-intel/lib/vocabulary.mjs`:
 
 **`recent-exploits`** (weight 1.25) — Active exploits, confirmed hacks, postmortems, attacker activity. Uses anchor phrases instead of protocol names (which go stale within weeks):
 
@@ -65,7 +65,7 @@ Expansions appended to existing clusters' `keywords` arrays:
 - `bridge-exploits` += `['bridged polkadot', 'unauthorized mint', 'unauthorized minting']`
 - `proxy-upgrades` += `['create2 proxy', 'minimal proxy', 'initialization vulnerability']`
 
-Net delta: 14 → 17 clusters; +44 keywords total (15+10+9 new-cluster + 6+7+3+3 expansion).
+Net delta: 14 → 17 clusters; +53 keywords total (34 new-cluster: 15+10+9; 19 expansion: 6+7+3+3).
 
 ### Section 2 — Labeled Miss-List Fixture
 
@@ -113,10 +113,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { clusterSignals } from '../lib/cluster.mjs';
+import { VOCABULARY } from '../lib/vocabulary.mjs';
 
 const fixture = JSON.parse(
   readFileSync(
     new URL('./fixtures/miss-list-2026-04-15.json', import.meta.url),
+    'utf8',
   ),
 );
 
@@ -125,7 +127,7 @@ const negative = fixture.filter(f => f.expectedCluster.length === 0);
 
 test('vocab coverage: positive corpus reaches ≥80% recall', () => {
   const signals = positive.map(toSignal);
-  const clusters = clusterSignals(signals);
+  const clusters = clusterSignals(signals, VOCABULARY);
 
   const hits = positive.filter(f => {
     const landedClusters = clusters
@@ -145,7 +147,7 @@ test('vocab coverage: positive corpus reaches ≥80% recall', () => {
 
 test('vocab coverage: negative corpus stays below 15% false-positive rate', () => {
   const signals = negative.map(toSignal);
-  const clusters = clusterSignals(signals);
+  const clusters = clusterSignals(signals, VOCABULARY);
   const clusteredIds = new Set(
     clusters.flatMap(c => c.signals.map(s => s.id)),
   );
@@ -181,7 +183,7 @@ Four commits, each buildable and testable in isolation (bisect-friendly):
 - Verify: `npm run test:intel` green (24 tests)
 
 **Commit 2 — `feat(intel): add recent-exploits, post-quantum, audit-discourse clusters`**
-- Append 3 new cluster objects to `CLUSTERS` in `lib/vocabulary.mjs`
+- Append 3 new cluster objects to `VOCABULARY` in `lib/vocabulary.mjs`
 - Verify: `npm run test:intel` green (24 tests, unchanged — new clusters are data)
 
 **Commit 3 — `feat(intel): expand supply-chain, key-management, bridge, proxy vocab`**
@@ -205,7 +207,7 @@ After Commit 4:
 1. `miss-list-2026-04-15.json` exists with ≥ 35 positive and ≥ 55 negative entries, all with `expectedCluster: string[]`.
 2. `vocab-coverage.test.mjs` exists with exactly two tests and both pass.
 3. `npm run test:intel` reports 26 passing tests.
-4. `CLUSTERS` array in `lib/vocabulary.mjs` contains entries named `recent-exploits`, `post-quantum`, `audit-discourse`.
+4. `VOCABULARY` array in `lib/vocabulary.mjs` contains entries named `recent-exploits`, `post-quantum`, `audit-discourse`.
 5. `git diff BASE HEAD -- tools/web3-intel/lib/score.mjs tools/web3-intel/lib/cluster.mjs tools/web3-intel/lib/brief.mjs` is empty (adjudication locked).
 6. Real crawl output has > 2 briefs (manual verification outside test suite).
 
