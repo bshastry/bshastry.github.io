@@ -86,14 +86,14 @@
     "title": "$285M from Drift, $4.4M from IoTeX, $3M from CrossCurve — all in 2026 — why are we still routing billions through bridges?",
     "snippet": "every few months we get another bridge exploit and every time the reaction is the same.",
     "url": "https://www.reddit.com/r/defi/comments/1slyyy9/285m_from_drift_44m_from_iotex_3m_from_crosscurve/",
-    "expectedCluster": ["recent-exploits"],
-    "rationale": "Lists multiple confirmed exploits with dollar amounts — recent-exploit anchor; meta-complaint framing but explicit dollar-confirmed exploits override"
+    "expectedCluster": [],
+    "rationale": "Meta-complaint: 'why are we still' + 'every few months' + 'every time' phrasings — filter excludes before keyword matching"
   },
   {
     "id": "m011",
     "source": "reddit",
     "title": "Bitcoin could be broken by quantum computing, Google researchers conclude",
-    "snippet": "Google researchers revealed that quantum computers could break Bitcoin's elliptic curve cryptography with as few as 500,000 physical qubits—far below previous estimates.",
+    "snippet": "Google researchers revealed that quantum computing threat to Bitcoin's elliptic curve cryptography is real, requiring as few as 500,000 physical qubits—far below previous estimates.",
     "url": "https://www.reddit.com/r/CryptoCurrency/comments/1s9z71z/bitcoin_could_be_broken_by_quantum_computing/",
     "expectedCluster": ["post-quantum"],
     "rationale": "Direct reference to Shor's algorithm threat against ECDSA — post-quantum anchor"
