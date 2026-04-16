@@ -130,10 +130,10 @@ test('vocab coverage: positive corpus reaches ≥80% recall', () => {
   const clusters = clusterSignals(signals, VOCABULARY);
 
   const hits = positive.filter(f => {
-    const landedClusters = clusters
+    const landedClusterIds = clusters
       .filter(c => c.signals.some(s => s.id === f.id))
-      .map(c => c.name);
-    return f.expectedCluster.some(ec => landedClusters.includes(ec));
+      .map(c => c.id);
+    return f.expectedCluster.some(ec => landedClusterIds.includes(ec));
   });
 
   const recall = hits.length / positive.length;
