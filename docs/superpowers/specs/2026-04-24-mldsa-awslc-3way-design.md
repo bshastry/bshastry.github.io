@@ -19,7 +19,7 @@ Under AWS KMS sits AWS-LC, AWS's maintained fork of BoringSSL. The ML-DSA code c
 
 Other near-term money-path deployments (Cloudflare mid-2026 edge→origin auth, Circle Arc mainnet 2026, Azure Key Vault PQ 2026, Go 1.27 public stdlib, CNSA 2.0 Jan 2027 cutoff) are pre-rollout. AWS KMS is the only live ML-DSA money path in production today.
 
-Adding AWS-LC as a third leg raises ACS-for-signatures from "no shipped production surface covered" to "covers the library behind ~100% of today's shipped production ML-DSA signatures."
+Adding AWS-LC as a third leg raises **deployment-weighted** ACS-for-signatures from "no shipped production surface covered" to "covers the library behind ~100% of today's shipped production ML-DSA signatures." The underlying cross-implementation oracle remains CIRCL ↔ BoringSSL-lineage; AWS-LC as a BoringSSL fork adds deployment coverage, not a new independent reading of the spec. See §11 for the consistent independence framing.
 
 ## 3. Scope
 
@@ -69,19 +69,40 @@ Rationale: matches the firmware compiled into current CloudHSM. `main`-tip is ou
 `mldsa/diff-fuzz/awslc/awslc.go` mirrors `bssl/bssl.go`:
 
 ```
-MLDSA65GenerateFromSeed(seed [32]byte) (pk, sk []byte, err error)
-MLDSA65ParsePublicKey(pkBytes []byte) (handle, error)
+MLDSA65GenerateFromSeed(seed [32]byte) (pk, skHandle, err error)
+MLDSA65ParsePublicKey(pkBytes []byte) (pkHandle, error)
 MLDSA65Sign(skHandle, msg, ctx []byte) (sig []byte, err error)
 MLDSA65Verify(pkHandle, msg, ctx, sig []byte) (bool, error)
 MLDSA65MarshalPublicKey(pkHandle) ([]byte, error)
 MLDSA44/87 variants for keygen only
 ```
 
-**Expected API-shape difference**: AWS-LC may expose ML-DSA through `EVP_PKEY` rather than direct `MLDSA65_*` symbols. The shim uses whichever path the pinned FIPS tag exposes publicly. Any non-trivial surface-shape differences go in the fork-drift map.
+**sk is returned as an opaque handle, not raw bytes.** If AWS-LC's public ML-DSA API routes through `EVP_PKEY`, the underlying sk may be a PKCS#8 envelope or an opaque struct pointer rather than the 4032-byte expanded FIPS 204 encoding. The shim exposes sk as an opaque handle to avoid premature byte-level commitments; raw-sk parity is tested only on libraries that expose the raw encoding (CIRCL does; BoringSSL does via BCM; AWS-LC via EVP_PKEY does not publicly).
+
+**Expected API-shape hazard**: AWS-LC may route ML-DSA through `EVP_PKEY` rather than direct `MLDSA65_*` symbols. The shim uses whichever path the pinned FIPS tag exposes publicly. First implementation step: inspect the pinned tag's `include/openssl/mldsa.h` (if present) and `include/openssl/evp.h` to determine the actual surface. Any non-trivial surface-shape differences go in the fork-drift map.
+
+### 4.3.1 cgo symbol-collision hazard and mitigation
+
+Both BoringSSL and AWS-LC statically archive `libcrypto.a` that defines overlapping symbols (`EVP_PKEY_new`, `SHA256_Init`, `ERR_*`, hundreds more). Two cgo sub-packages with distinct `#cgo LDFLAGS` **do not solve this** — the final Go binary performs one link step and the resolver picks one archive's `EVP_PKEY_new` for both packages. Concrete hazards:
+
+- **Header-path ordering** — both ship `<openssl/*.h>` with same-name but ABI-different struct definitions. Whichever include path is first in `-I` order per cgo file determines which ABI is compiled into that call site; mixing them within one Go binary is UB.
+- **Duplicate-symbol link** — linker services calls from both Go packages through whichever archive it picked, silently. This is the sneakiest failure mode because everything links and runs, but one package effectively calls the other library's code.
+- **ERR_* / thread-local state collisions** — both forks initialize their own error queue; first-to-init-wins.
+
+**Primary mitigation: build AWS-LC with `BORINGSSL_PREFIX`.** AWS-LC inherits BoringSSL's symbol-prefix build option. Setting `-DBORINGSSL_PREFIX=awslc` + generating the prefix header namespaces every exported symbol (`EVP_PKEY_new` → `awslc_EVP_PKEY_new`). This is the cleanest path if the pinned FIPS tag supports it. Verify support as the first implementation step.
+
+**Fallback mitigations, in order of preference:**
+
+1. `objcopy --redefine-syms` post-build pass over AWS-LC's `libcrypto.a` using a symbol map generated from `nm`.
+2. Build AWS-LC as a versioned shared object (`libawslc_crypto.so.N`) with an explicit export list; load via cgo with `-l:libawslc_crypto.so.N`.
+3. Split to entirely separate Go modules + separate test binaries; lose single-binary fuzz-campaign ergonomics but trivially correct.
+
+**Park-point**: if symbol collision is unresolved at T+3h (BORINGSSL_PREFIX + objcopy both fail), fall back to separate Go modules and document the reason in the fork-drift map. Do not burn the whole session chasing a link-ghost.
 
 ### 4.4 Harness invariants (extended to 3-way)
 
-- **Keygen parity**: `(pk, sk)` byte-identical across CIRCL, BoringSSL, AWS-LC for every seed.
+- **pk byte-equality** (firm claim): encoded pk byte-identical across CIRCL, BoringSSL, AWS-LC for every seed. FIPS 204 §5.1 pins the pk encoding deterministically; any divergence here is a noteworthy finding, not a design uncertainty.
+- **sk byte-equality** (conditional): tested only on libraries that expose the raw 4032-byte FIPS 204 §5.1 sk encoding. CIRCL does; BoringSSL does via BCM boundary. AWS-LC's public surface may be EVP_PKEY-opaque; in that case sk parity is not asserted at byte level, only behavioral (a sig produced under AWS-LC's sk handle verifies against the CIRCL- and BoringSSL-derived pk).
 - **Verify parity**: accept/reject identical across all three for every `(pk, msg, ctx, sig)`.
 - **Parse parity**: accept/reject identical; Parse→Marshal roundtrip `== pk` on each library on the both-accept branch.
 - **Malleability parity**: `bothAccept && sig != sigOK → fatal` extended across three libraries. Per-pair and three-way-unanimous branches both oracle-checked.
@@ -94,11 +115,15 @@ File: `mldsa/diff-fuzz/awslc/fork-drift-map.md`.
 Classify each textual delta between AWS-LC `crypto/fipsmodule/mldsa/mldsa.cc.inc` and BoringSSL equivalent at the two pinned commits as:
 
 - **cosmetic** — whitespace, comment, namespace or symbol renaming with no semantic change.
-- **hardening** — AWS-LC adds a validation check BoringSSL lacks.
+- **hardening** — AWS-LC adds a validation check BoringSSL lacks at the time of the tag cut.
 - **lag** — AWS-LC is missing a BoringSSL fix that has already landed upstream.
-- **independent** — AWS-LC has a local addition not present in BoringSSL (e.g. extra POST self-test).
+- **backport** — AWS-LC cherry-picks a BoringSSL fix onto its FIPS branch ahead of the FIPS-tag cut. Distinguished from "hardening" because the code originated upstream.
+- **independent** — AWS-LC has a local addition not present in BoringSSL (e.g. extra POST self-test) that is not a security-validation hardening.
+- **FIPS-structural** — deltas whose sole purpose is CMVP module boundary, self-test, or FIPS indicator requirements. Not security-relevant to signature correctness but called out because readers care about "is this a security-relevant delta."
 
-Header records exact commit SHAs for both pins and the fuzz campaign start/end timestamps. This artifact stands on its own — a reader who cares about AWS-LC vs upstream can consume it without reading the fuzz writeup.
+**Tie-break rule**: classify against BoringSSL `HEAD` as of the AWS-LC tag cut date. A check that appears in AWS-LC `fips-202X-YY-ZZ` and is also in BoringSSL HEAD on `YYYY-MM-DD` is a **backport**; a check that appears only in AWS-LC is **hardening** or **independent** depending on whether it's a validation check or a structural addition.
+
+Header records exact commit SHAs for both pins (use `git rev-parse`, not branch names — branches move, readers six months later need the SHA to reproduce) and the fuzz campaign start/end timestamps. This artifact stands on its own — a reader who cares about AWS-LC vs upstream can consume it without reading the fuzz writeup.
 
 ### 4.6 Fuzz budget
 
@@ -123,20 +148,24 @@ Probability estimates (qualitative, not calibrated):
 
 ## 7. Risks
 
-- **Symbol collisions at cgo link** between two statically-linked BoringSSL-lineage libraries. Mitigation: distinct cgo sub-packages with separate `#cgo LDFLAGS`. Escalation: split to separate Go modules if collisions persist.
+- **Symbol collisions at cgo link** — see §4.3.1 for the full hazard analysis (header-path ordering, duplicate-symbol resolution, ERR_* thread-local collisions). Primary mitigation `BORINGSSL_PREFIX`; fallbacks `objcopy --redefine-syms`, shared-object-with-versioned-symbols, or separate Go modules. Park-point at T+3h if unresolved.
 - **FIPS-tag rotation** — the "latest FIPS tag" at session start may not match current CloudHSM firmware if AWS has rotated since. Mitigation: record tag SHA prominently; caveat explicitly as "the most recent AWS-LC FIPS tag at time of writing."
-- **API surface differences** — AWS-LC may route ML-DSA through different public headers than BoringSSL. Mitigation: shim adapts; document in fork-drift map.
+- **API surface differences** — AWS-LC may route ML-DSA through `EVP_PKEY` rather than direct `MLDSA65_*` symbols. Mitigation: shim adapts to whichever surface the FIPS tag exposes; document in fork-drift map.
 - **License** — AWS-LC is ISC-licensed, same as BoringSSL. No blocker for research test-binary static linking.
 
 ## 8. Budget
 
-4–6 hours wall-time for one focused session:
+**8–12 hours wall-time**, revised upward from initial 4–6h estimate after review-phase realism check. Symbol-collision debugging is the long-tail risk.
 
-- Clone + build AWS-LC at tag: 30 min
-- Write shim: 1–2 hours
-- Retrofit 8 harnesses: 1–2 hours
+- Clone + build AWS-LC at FIPS tag: 30 min (may extend if CMake pins to specific toolchain versions)
+- Resolve symbol-collision mitigation (BORINGSSL_PREFIX + verify link): **1–3 hours, variable** — first implementation step, gates everything else
+- Write shim (EVP_PKEY path likely → more complex than direct-symbol path): 2–3 hours
+- Retrofit 8 harnesses to 3-way: 1–2 hours
 - Run fuzz suite: 30 min
 - Fork-drift static-diff + writeup: 1 hour
+- Cushion for debugging: 1 hour
+
+**Park-point**: if BORINGSSL_PREFIX + `objcopy` + shared-object fallbacks all fail within T+3h of the session, accept the separate-Go-modules fallback, document the reason in the fork-drift map, and proceed with slightly degraded ergonomics. Do not burn the session on link ghosts.
 
 ## 9. Follow-ons
 
