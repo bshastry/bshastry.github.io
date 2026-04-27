@@ -15,8 +15,8 @@ Concretely v0 ships:
 - A reproducible benchmark with a single primary target (Eliza, pinned version) and an adapter interface that allows community contributors to add other frameworks (Olas, in-house agents, future closed-vendor SaaS that opens a test endpoint).
 - A structured payload corpus keyed by **untrusted source** (the on-chain field where the attacker text enters), not just by attack technique.
 - A scoring pipeline that computes **action-space delta**: how much the agent's *paper-traded tool calls* shift in attacker-favorable directions when the same world state is re-presented with one field carrying a payload.
-- Baseline measurements against three off-the-shelf defenses (Llama-Guard, Lakera free tier, Spotlighting prefix) so the headline number is the *gap that remains after the best generic defense*.
-- One responsibly-disclosed live "canary" vignette against a public production agent on testnet.
+- Baseline measurements against four off-the-shelf defenses (naked control, Prompt-Guard-86M, DeBERTa-PI-v2, Spotlighting prefix), plus Lakera Guard free-tier as an observation-only sidebar (§4.3, §8). The headline number is the *gap that remains after the best generic defense*.
+- One self-operated canary vignette: we run our own publicly-posting Eliza-derived agent ("Inviter-Agent") on testnet, deploy adversarial tokens against ourselves, and publish the entire reference setup so others can reproduce. No third-party operators are red-teamed in v0 (§7).
 
 The companion blog post frames this as **taint analysis applied to LLM agents**, surveys the existing prompt-injection defense industry, identifies the Web3 source-taxonomy gap, and presents the benchmark as the missing artifact.
 
