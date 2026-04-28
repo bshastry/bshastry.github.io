@@ -625,6 +625,24 @@ worth naming so the negative isn't over-read:
      violations across either harness — now holds at both API-level
      oracle agreement (181M, this post) and at C-branch coverage
      (77.7M, the companion).
+
+     A 24-hour scale-up of the same 3-way harness on rented Hetzner
+     Cloud compute (CCX33, 8 vCPU, total spend ~€{{COST_EUR}})
+     extended the C-branch-driven count to **{{AGG_EXECS}}** aggregate
+     cross-implementation oracle calls, with **{{CRASH_COUNT}}**
+     primary-correctness divergences and **{{TIER1_UNIQUE}}** unique
+     tier-1 strictness-disagreement entries (the bounded mn-vs-bssl
+     §7.2-on-dkPKE class characterised in *Known blind spots #2*; the
+     harness logs these via dedup-by-`sk[0..8]` plus a per-process
+     50 k-entry cap, so the file stayed at ~{{LOG_SIZE_MB}} MB rather
+     than the unbounded ~50 GB it would otherwise have grown to).
+     Coverage held at the same plateau as the 5-minute audit —
+     mlkem-native at 89.95 % line on its ML-KEM kernel files, libcrux
+     and BoringSSL at the K=2/K=4-dead-code-drag-bounded ~60 % each.
+     End-to-end setup (apt install → upstream clones → build → CCTV
+     ingest → 24 h campaign) is documented at
+     `docs/cloud-rental-howto.md` in the libFuzzer-direct repo; the
+     underlying spec-clean negative scales linearly with budget.
   5. **Side channels.** Timing divergences, memory-access-pattern
      leaks, and any non-byte-level signal are not in scope. The
      harness makes no constant-time claims — byte-level diff-fuzz
