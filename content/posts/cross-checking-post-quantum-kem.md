@@ -734,7 +734,7 @@ Filed issues: [cloudflare/circl#597][issue],
 
 The 5-way diff-fuzz harness — Go-cgo-driven, targeting the public
 KEM-API surface of all five libraries — is open source at
-**[REPO-URL-DIFF-FUZZ-TBD]** under Apache 2.0. The repo carries
+**private; available on request** under Apache 2.0. The repo carries
 the cgo shims for all five libraries, the full 5-way harness set,
 build scripts that pin each upstream library to the exact SHA tested
 here (BoringSSL `eaaf6a8e…` (ToT 2026-04-16), CIRCL v1.6.3, Go stdlib
@@ -747,7 +747,7 @@ The libFuzzer-direct-against-C companion that addresses the
 cgo-opaque coverage gap named in *Known blind spots #4* —
 SanitizerCoverage-instrumented, symbol-namespaced so all five libs
 co-link in one binary — is a separate project at
-**[REPO-URL-LIBFUZZER-DIRECT-TBD]**. It is newer than the
+**private; available on request**. It is newer than the
 Go-cgo harness, exercises the C at the branch level rather than the
 API level, and is the right fit if you want coverage-driven
 exploration rather than differential oracle agreement. The two
