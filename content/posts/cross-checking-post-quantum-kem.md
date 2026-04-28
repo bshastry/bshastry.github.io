@@ -734,11 +734,11 @@ Filed issues: [cloudflare/circl#597][issue],
 
 The 5-way diff-fuzz harness — Go-cgo-driven, targeting the public
 KEM-API surface of all five libraries — is open source at
-**[REPO-URL-DIFF-FUZZ-TBD]** under [LICENSE-TBD]. The repo carries
+**[REPO-URL-DIFF-FUZZ-TBD]** under Apache 2.0. The repo carries
 the cgo shims for all five libraries, the full 5-way harness set,
 build scripts that pin each upstream library to the exact SHA tested
-here (BoringSSL [SHA-TBD], CIRCL v1.6.3, Go stdlib 1.26,
-libcrux-ml-kem [SHA-TBD], mlkem-native v1.1.0 `d2cae2be…`), a
+here (BoringSSL `eaaf6a8e…` (ToT 2026-04-16), CIRCL v1.6.3, Go stdlib
+1.26, libcrux-ml-kem `d979ce59…`, mlkem-native v1.1.0 `d2cae2be…`), a
 reproducible `make` entry point that clones + builds + runs the
 full campaign, and the methodology note from this post in
 `docs/`.
