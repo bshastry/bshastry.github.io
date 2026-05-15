@@ -3,6 +3,8 @@ import { getAllSlugs } from '@/lib/blog'
 
 const BASE = 'https://bshastry.github.io'
 
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, changeFrequency: 'monthly', priority: 1 },

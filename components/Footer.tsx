@@ -1,6 +1,7 @@
 'use client'
 
 import { Github, Linkedin, Twitter, Mail, ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 import portfolioData from '@/data/portfolio.json'
 
 export default function Footer() {
@@ -121,9 +122,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/blog" className="text-gray-300 transition-colors hover:text-white">
+                <Link href="/blog" className="text-gray-300 transition-colors hover:text-white">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

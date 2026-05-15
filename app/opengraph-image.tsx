@@ -5,6 +5,7 @@ import { ImageResponse } from 'next/og'
 // causes `next build` to error. `next/og` works at build time in the
 // default Node runtime when the static export target is set.
 
+export const dynamic = 'force-static'
 export const alt = 'Bhargava Shastry — Security Engineer & Researcher'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
