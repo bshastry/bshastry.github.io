@@ -1,7 +1,7 @@
 ---
 title: "Cross-checking the post-quantum KEM behind the web"
 date: 2026-04-24
-excerpt: "Five ML-KEM libraries, one diff-fuzz harness, one BoGo handshake matrix, one SHAKE256 external oracle, two upstream filings — circl#597 (wontfix on policy) and chromium/504820808 (voluntarily tightened)."
+excerpt: "Five ML-KEM libraries, one diff-fuzz harness, one 2-way BoGo handshake matrix, one SHAKE256 external oracle, two upstream filings — circl#597 (wontfix on policy) and chromium/504820808 (voluntarily tightened)."
 tags: ["post-quantum", "ml-kem", "fips-203", "differential-fuzzing", "cryptography"]
 ---
 
@@ -13,15 +13,18 @@ day somebody finishes a cryptographically relevant quantum computer. The
 hedge only holds if both halves are correctly implemented, and if the
 two ends of the channel agree on which inputs to accept.
 
-Five libraries sit behind essentially all of that traffic — three on
-the web, one in secure messaging, and one under AWS KMS and the Rust
-TLS fleet:
+Five libraries sit behind the bulk of that traffic plus the adjacent
+secure-messaging and cloud-KMS surface the modern internet relies on
+— three on the web, one in secure messaging, and one under AWS KMS
+and the Rust TLS fleet:
 
   - BoringSSL — Chrome, Android, and Cloudflare's edge. The ~60% figure in
     Cloudflare's [2025 PQ report][pq2025] multiplies out to roughly 8% of
     the global human web ([Radar 2025][radar2025]).
-  - Go 1.24+ `crypto/mlkem` — every default Go HTTP/gRPC/SSH server,
-    Kubernetes v1.33+ control plane, most Go-based infrastructure.
+  - Go 1.24+ `crypto/mlkem` — `crypto/tls` enabled `X25519MLKEM768`
+    by default, so every default Go HTTPS/gRPC server, the
+    Kubernetes v1.33+ control plane, and most Go-based
+    infrastructure picked it up.
   - Cloudflare's CIRCL `kem/mlkem/mlkem768` — cfgo fork, Lux Network's
     warp bridge, a long tail of Go applications.
   - Cryspen's **libcrux-ml-kem** — Signal's [PQXDH][pqxdh] backend,
@@ -95,9 +98,9 @@ Here is the concrete finding. FIPS 203 defines two MUST-level
 input-validation checks on decapsulation-key bytes, one in each of two
 adjacent clauses:
 
-1. **§7.3 item 3 — hash check (Eq 7.2).** `H(ek_embedded)` inside the
+1. **§7.3 item 3 — hash check.** `H(ek_embedded)` inside the
    decapsulation key must equal the cached 32-byte hash stored alongside it.
-2. **§7.2 item 2 — modulus check (Eq 7.1).** Every 12-bit coefficient of
+2. **§7.2 item 2 — modulus check.** Every 12-bit coefficient of
    the embedded encapsulation key must be in `[0, q)` with `q = 3329`.
    Equivalently: `ByteEncode_12(ByteDecode_12(ek)) == ek`.
 
@@ -265,7 +268,8 @@ if !bytes.Equal(dk.h[:], b[:32]) {
 ```
 
 BoringSSL's `mlkem_parse_private_key` template
-(`crypto/fipsmodule/mlkem/mlkem.cc.inc:857–870`, as of the 2026-04-16 ToT)
+(`crypto/fipsmodule/mlkem/mlkem.cc.inc:857–870`, as of the 2026-04-16
+tip of tree)
 copied the stored hash verbatim without recomputing it from the parsed
 `ek`:
 
@@ -298,11 +302,11 @@ not be used"* — so a parser that returns OK on a dk whose stored hash
 doesn't match `H(ek_embedded)` has accepted an un-checked key. The
 **permissive** one treats §7.3 as a pre-condition for `ML-KEM.Decaps`,
 satisfiable either by trusted keygen provenance or by caller
-re-verification; under BoringSSL's architecture, where `include/openssl/
-mlkem.h` exposes seed-based import only and `BCM_mlkem{768,1024}_parse_
-private_key` is reachable only at the BCM boundary (ACVP test harness,
-CAST self-test, downstream BCM consumers like AWS-LC), the permissive
-reading is defensible.
+re-verification; under BoringSSL's architecture, where
+`include/openssl/mlkem.h` exposes seed-based import only and
+`BCM_mlkem{768,1024}_parse_private_key` is reachable only at the BCM
+boundary (ACVP test harness, CAST self-test, downstream BCM consumers
+like AWS-LC), the permissive reading is defensible.
 
 Filed 2026-04-21. The maintainer response picked the permissive reading
 and pushed back on the spec-compliance framing — *"BoringSSL only
@@ -350,8 +354,9 @@ F* proofs cover the math — but the cross-check still matters, because
 the C actually linked into Signal comes out of the
 Charon/Eurydice/KaRaMeL transpile pipeline, and that encoding boundary
 is exactly where F1 and G1 lived in the other libraries. The 4-way
-harness ran ~10M cross-library executions over the libcrux surface
-with zero divergences.
+harness (pre-mlkem-native) ran ~10M cross-library executions over the
+libcrux surface with zero divergences — a precursor superseded by the
+5-way campaign below.
 
 Adding **mlkem-native** as a fifth leg is what makes the coverage
 number stick. AWS-LC imported `pq-code-package/mlkem-native` v1.1.0 on
@@ -444,7 +449,7 @@ Separate those two things:
     implementation that still ships in Chrome, Android, and the
     Cloudflare edge.
   - **Go stdlib `crypto/mlkem`** — Go 1.24+ enables `X25519MLKEM768` by
-    default in `crypto/tls`. Every default-configured Go HTTP/gRPC/SSH
+    default in `crypto/tls`. Every default-configured Go HTTPS/gRPC
     server is implicitly on this path, including Kubernetes v1.33+.
     Same clean result across the same comparable surface. Go stdlib was also the
     static oracle against which G1 was identified — the explicit
@@ -548,10 +553,13 @@ worth naming so the negative isn't over-read:
      check); libcrux's decap is total; CIRCL's
      `cpapke.PrivateKey.Unpack` silently `Normalize()`s mod q.
 
-     Aggregating across both harnesses, the 5-way picture on the
-     §7.2-on-sk-components clauses is:
+     Aggregating across both harnesses, the 5-way picture on §7.2
+     *as applied to embedded sk components* (standalone-ek §7.2 is
+     enforced by all five libraries via their public `check_pk` /
+     `validate_public_key` / equivalent entry points — see F1 and
+     the harness scope above) is:
 
-     | Impl | dkPKE coef check | Embedded ek coef check |
+     | Impl | dkPKE coef check (sk-internal) | Embedded-ek coef check (sk-internal) |
      |---|---|---|
      | mlkem-native | omitted | omitted |
      | libcrux | omitted | omitted |
@@ -621,10 +629,10 @@ worth naming so the negative isn't over-read:
      respective ML-KEM files, the gap being mostly K=2 / K=4
      monomorphisations the K=3 harness never reaches. The full report
      is at `docs/fuzz-audit-report-mlkem-2026-04-28.md` in the
-     libFuzzer-direct companion. The headline negative — no spec
-     violations across either harness — now holds at both API-level
-     oracle agreement (181M, this post) and at C-branch coverage
-     (77.7M, the companion).
+     libFuzzer-direct companion. The headline negative — no
+     primary-correctness divergences across either harness — now
+     holds at both API-level oracle agreement (181M, this post) and
+     at C-branch coverage (77.7M, the companion).
 
      A 24-hour scale-up of the same 3-way harness on rented Hetzner
      Cloud compute (CCX33, 8 vCPU, total spend ~€3.10)
@@ -632,13 +640,14 @@ worth naming so the negative isn't over-read:
      cross-implementation oracle calls, with **zero**
      primary-correctness divergences and **25,461** unique
      tier-1 strictness-disagreement entries (the bounded mn-vs-bssl
-     §7.2-on-dkPKE class characterised in *Known blind spots #2*; the
-     harness logs these via dedup-by-`sk[0..8]` plus a per-process
-     50 k-entry cap, so the file stayed at ~3.5 MB rather
-     than the unbounded ~50 GB it would otherwise have grown to).
-     Coverage held at the same plateau as the 5-minute audit —
-     mlkem-native at 89.95 % line on its ML-KEM kernel files, libcrux
-     and BoringSSL at the K=2/K=4-dead-code-drag-bounded ~60 % each.
+     §7.2-on-dkPKE class characterised in the *embedded-sk-validation
+     blind spot* above; the harness logs these via
+     dedup-by-`sk[0..8]` plus a per-process 50k-entry cap, so the
+     file stayed at ~3.5 MB rather than the unbounded ~50 GB it would
+     otherwise have grown to). Coverage held at the same plateau as
+     the 5-minute audit — mlkem-native at 89.95% line on its ML-KEM
+     kernel files, libcrux and BoringSSL at the
+     K=2/K=4-dead-code-drag-bounded ~60% each.
      End-to-end setup (apt install → upstream clones → build → CCTV
      ingest → 24 h campaign) is documented at
      `docs/cloud-rental-howto.md` in the libFuzzer-direct repo; the
@@ -762,7 +771,8 @@ full campaign, and the methodology note from this post in
 `docs/`.
 
 The libFuzzer-direct-against-C companion that addresses the
-cgo-opaque coverage gap named in *Known blind spots #4* —
+cgo-opaque coverage gap (the *corpus-depth and cgo-opaque coverage*
+blind spot above) —
 SanitizerCoverage-instrumented, symbol-namespaced so all five libs
 co-link in one binary — is a separate project at
 **private; available on request**. It is newer than the
@@ -771,14 +781,15 @@ API level, and is the right fit if you want coverage-driven
 exploration rather than differential oracle agreement. The two
 harnesses are complementary; the libFuzzer-direct companion is
 also what extended F1's defect class to mlkem-native and libcrux
-on the `dkPKE` polynomial-bytes path documented in
-*Known blind spots #2*. Its first audit report —
+on the `dkPKE` polynomial-bytes path documented in the
+*embedded-sk-validation* blind spot above. Its first audit report —
 `docs/fuzz-audit-report-mlkem-2026-04-28.md` in that repo — is the
 quantitative complement to this post: 77.7 million C-branch-driven
 oracle calls across the 3-way slice, zero primary-correctness
 divergences, mlkem-native at 89.95% line coverage on its ML-KEM
-kernel files. See *Known blind spots #4* for how that closes the
-"next arc" loop with concrete numbers.
+kernel files. See the *corpus-depth and cgo-opaque coverage* blind
+spot above for how that closes the "next arc" loop with concrete
+numbers.
 
 ## References
 
@@ -812,7 +823,6 @@ kernel files. See *Known blind spots #4* for how that closes the
 [filippo]: https://words.filippo.io/mlkem768/
 [seeds]: https://words.filippo.io/ml-kem-seeds/
 [fips203]: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf
-[boring]: https://github.com/cloudflare/boring
 [qb]: https://blog.quarkslab.com/finding-bugs-in-implementations-of-hqc-the-fifth-post-quantum-standard.html
 [tches]: https://eprint.iacr.org/2024/1122
 [pq2025]: https://blog.cloudflare.com/pq-2025/
