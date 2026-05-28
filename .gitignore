@@ -78,3 +78,12 @@ temp/
 memory-bank/
 legacy-archive/
 scripts/
+
+# Local research / drafts not intended for publication
+private/
+
+# Claude Code local state
+.claude/
+
+# Coverage profile artefacts
+*.profraw
