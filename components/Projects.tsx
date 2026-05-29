@@ -3,12 +3,12 @@ import portfolioData from '@/data/portfolio.json'
 import githubStats from '@/data/github-stats.json'
 
 const themeIcons: Record<string, React.ReactNode> = {
-  'protocol-security': <Shield size={24} />,
-  'compiler-security': <Code size={24} />,
-  'p2p-networking': <Network size={24} />,
-  'fuzzing-infra': <Bug size={24} />,
-  'application-security': <Globe size={24} />,
-  erc4337: <Wallet size={24} />,
+  'protocol-security': <Shield size={16} />,
+  'compiler-security': <Code size={16} />,
+  'p2p-networking': <Network size={16} />,
+  'fuzzing-infra': <Bug size={16} />,
+  'application-security': <Globe size={16} />,
+  erc4337: <Wallet size={16} />,
 }
 
 export default function Projects() {
@@ -19,34 +19,40 @@ export default function Projects() {
   >
 
   return (
-    <section id="projects" className="bg-gray-50 py-20">
+    <section id="projects" className="bg-bg py-24 md:py-28">
       <div className="container-max section-padding">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Security Research</h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
+        <div className="mb-16">
+          <p className="eyebrow mb-4">02 — RESEARCH</p>
+          <h2 className="section-title">Security Research</h2>
+          <p className="mt-4 max-w-2xl text-lg text-muted">
             Building tools and techniques to find vulnerabilities before attackers do
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {themes.map((theme) => {
+        <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
+          {themes.map((theme, index) => {
             const themeStats = stats[theme.id]
             const privateCount = themeStats?.privateRepos ?? 0
 
             return (
-              <div key={theme.id} className="card flex flex-col p-6">
-                <div className="mb-4 flex items-center space-x-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
-                    {themeIcons[theme.id] || <Shield size={24} />}
-                  </div>
+              <div key={theme.id} className="flex flex-col bg-bg p-6">
+                <div className="mb-4 flex items-baseline gap-3">
+                  <span className="font-mono text-sm text-faint">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">{theme.title}</h3>
-                    <span className="text-sm text-gray-500">{theme.period}</span>
+                    <h3 className="flex items-center gap-2 text-lg font-semibold text-fg">
+                      <span className="text-faint">
+                        {themeIcons[theme.id] || <Shield size={16} />}
+                      </span>
+                      {theme.title}
+                    </h3>
+                    <span className="font-mono text-sm text-faint">{theme.period}</span>
                   </div>
                 </div>
 
                 {privateCount > 0 && (
-                  <div className="mb-3 inline-flex w-fit items-center space-x-1.5 rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-gray-200">
+                  <div className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-md border border-line px-2.5 py-1 font-mono text-xs text-faint">
                     <Lock size={11} />
                     <span>
                       {privateCount} private repo{privateCount !== 1 ? 's' : ''}
@@ -54,12 +60,12 @@ export default function Projects() {
                   </div>
                 )}
 
-                <p className="mb-4 text-sm leading-relaxed text-gray-600">{theme.description}</p>
+                <p className="mb-4 text-sm leading-relaxed text-muted">{theme.description}</p>
 
                 <ul className="mb-4 flex-1 space-y-2">
                   {theme.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start text-sm text-gray-600">
-                      <span className="mr-2 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-500" />
+                    <li key={i} className="flex items-start text-sm text-muted">
+                      <span className="mr-2 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
                       {highlight}
                     </li>
                   ))}
@@ -68,10 +74,7 @@ export default function Projects() {
                 <div className="mt-auto">
                   <div className="mb-3 flex flex-wrap gap-1.5">
                     {theme.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700"
-                      >
+                      <span key={tag} className="chip">
                         {tag}
                       </span>
                     ))}
@@ -85,7 +88,7 @@ export default function Projects() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center space-x-1 text-sm text-gray-600 transition-colors hover:text-primary-600"
+                          className="link-accent inline-flex items-center gap-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           {link.type === 'github' ? (
                             <Github size={14} />

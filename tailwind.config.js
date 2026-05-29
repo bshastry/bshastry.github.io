@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,6 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Semantic tokens backed by CSS variables (RGB-triplet channels so
+        // Tailwind /opacity modifiers like `bg-bg/90` work). Values flip via
+        // the `dark` class on <html>.
+        bg: 'rgb(var(--bg) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        fg: 'rgb(var(--fg) / <alpha-value>)',
+        muted: 'rgb(var(--muted) / <alpha-value>)',
+        faint: 'rgb(var(--faint) / <alpha-value>)',
+        line: 'rgb(var(--line) / <alpha-value>)',
+        'line-strong': 'rgb(var(--line-strong) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        // Legacy palette retained for any unmigrated references.
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',

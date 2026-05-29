@@ -87,3 +87,6 @@ private/
 
 # Coverage profile artefacts
 *.profraw
+
+# AI-assisted process artifacts (keep out of the public repo)
+docs/superpowers/

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
 import type { BlogPost, BlogPostMeta } from '@/lib/blog'
+import ThemeToggle from '@/components/ThemeToggle'
 
 interface BlogPostClientProps {
   post: BlogPost
@@ -31,50 +32,50 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
     .slice(0, 2)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm">
+    <div className="min-h-screen bg-bg">
+      <div className="border-b border-line">
         <div className="container-max section-padding py-8">
-          <Link
-            href="/blog"
-            className="mb-6 inline-flex items-center text-blue-600 transition-colors hover:text-blue-700"
-          >
-            <ArrowLeft size={20} className="mr-2" />
-            Back to Blog
-          </Link>
+          <div className="mb-6 flex items-center justify-between">
+            <Link
+              href="/blog"
+              className="link-accent inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <ArrowLeft size={20} className="mr-2" />
+              Back to Blog
+            </Link>
+            <ThemeToggle />
+          </div>
 
           <div className="mb-6">
             <div className="mb-4 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
-                >
-                  <Tag size={12} className="mr-1" />
+                <span key={tag} className="chip">
+                  <Tag size={12} className="mr-1 text-faint" />
                   {tag}
                 </span>
               ))}
             </div>
 
-            <h1 className="mb-4 text-4xl font-bold leading-tight text-gray-900 md:text-5xl">
+            <h1 className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl">
               {post.title}
             </h1>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div className="mb-4 flex items-center text-gray-600 md:mb-0">
-                <Calendar size={18} className="mr-2" />
+              <div className="mb-4 flex items-center text-sm text-faint md:mb-0">
+                <Calendar size={16} className="mr-2" />
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                 })}
-                <Clock size={18} className="ml-4 mr-2" />
+                <Clock size={16} className="ml-4 mr-2" />
                 {post.readTime}
               </div>
 
               <button
                 type="button"
                 onClick={handleShare}
-                className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-200"
+                className="btn-ghost inline-flex items-center text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <Share2 size={16} className="mr-2" />
                 Share
@@ -86,28 +87,28 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
 
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
-          <article className="rounded-xl bg-white p-8 shadow-sm md:p-12">
+          <article>
             <div
-              className="prose prose-lg max-w-none"
+              className="prose prose-lg max-w-none dark:prose-invert prose-a:text-accent hover:prose-a:opacity-80"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
           </article>
 
           {related.length > 0 && (
-            <div className="mt-12">
-              <h3 className="mb-6 text-2xl font-bold text-gray-900">Related Posts</h3>
-              <div className="grid gap-6 md:grid-cols-2">
+            <div className="mt-16 border-t border-line pt-12">
+              <h3 className="mb-6 text-2xl font-semibold tracking-tight text-fg">Related Posts</h3>
+              <div className="divide-y divide-line border-y border-line">
                 {related.map((rp) => (
                   <Link
                     key={rp.slug}
                     href={`/blog/${rp.slug}`}
-                    className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                    className="group block py-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
-                    <h4 className="mb-2 text-lg font-semibold text-gray-900 transition-colors hover:text-blue-600">
+                    <h4 className="mb-2 text-lg font-semibold text-fg transition-colors group-hover:text-accent">
                       {rp.title}
                     </h4>
-                    <p className="mb-3 text-sm text-gray-600">{rp.excerpt}</p>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <p className="mb-3 text-sm text-muted">{rp.excerpt}</p>
+                    <div className="flex items-center text-sm text-faint">
                       <Calendar size={14} className="mr-1" />
                       {new Date(rp.date).toLocaleDateString('en-US', {
                         year: 'numeric',
