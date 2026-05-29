@@ -61,9 +61,7 @@ export default function PrivacyPolicyPage() {
                   Information I Collect
                 </h2>
 
-                <h3 className="mb-3 text-xl font-semibold text-fg">
-                  Information You Provide
-                </h3>
+                <h3 className="mb-3 text-xl font-semibold text-fg">Information You Provide</h3>
                 <ul className="mb-6 list-inside list-disc space-y-2 text-muted">
                   <li>Contact information when you reach out via email or contact forms</li>
                   <li>Any messages or communications you send directly</li>
@@ -91,9 +89,7 @@ export default function PrivacyPolicyPage() {
 
               {/* How I Use Information */}
               <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">
-                  How I Use Your Information
-                </h2>
+                <h2 className="mb-4 text-2xl font-bold text-fg">How I Use Your Information</h2>
                 <ul className="list-inside list-disc space-y-2 text-muted">
                   <li>To respond to your inquiries and communications</li>
                   <li>To improve the website content and user experience</li>

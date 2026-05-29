@@ -21,10 +21,7 @@ export default function Hero() {
   }
 
   return (
-    <section
-      id="home"
-      className="flex min-h-screen items-center justify-center bg-bg pt-16"
-    >
+    <section id="home" className="flex min-h-screen items-center justify-center bg-bg pt-16">
       <div className="container-max section-padding">
         <div className="animate-fade-in text-center">
           {/* Main heading */}
@@ -42,10 +39,7 @@ export default function Hero() {
           {/* Stats row */}
           <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 divide-line border-y border-line md:grid-cols-4 md:divide-x">
             {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col items-center gap-2 px-4 py-8"
-              >
+              <div key={stat.label} className="flex flex-col items-center gap-2 px-4 py-8">
                 <span className="font-mono text-4xl font-semibold tracking-tight text-fg md:text-5xl">
                   {stat.value}
                 </span>

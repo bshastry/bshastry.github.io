@@ -90,10 +90,7 @@ export default function About() {
             <h4 className="eyebrow mb-2">By the numbers</h4>
             <dl className="divide-y divide-line border-y border-line">
               {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-baseline justify-between gap-4 py-5"
-                >
+                <div key={stat.label} className="flex items-baseline justify-between gap-4 py-5">
                   <dt className="text-sm text-muted">{stat.label}</dt>
                   <dd className="font-mono text-3xl font-semibold tracking-tight text-fg md:text-4xl">
                     {stat.value}

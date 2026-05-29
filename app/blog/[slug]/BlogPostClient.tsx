@@ -89,7 +89,7 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
         <div className="mx-auto max-w-4xl">
           <article>
             <div
-              className="prose prose-lg dark:prose-invert max-w-none prose-a:text-accent hover:prose-a:opacity-80"
+              className="prose prose-lg max-w-none dark:prose-invert prose-a:text-accent hover:prose-a:opacity-80"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
           </article>

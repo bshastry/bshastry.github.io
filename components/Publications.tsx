@@ -25,7 +25,10 @@ export default function Publications() {
               </h3>
               <div className="space-y-4">
                 {group.papers.map((paper, i) => (
-                  <div key={i} className="rounded-lg border border-line p-4 transition-colors hover:border-line-strong">
+                  <div
+                    key={i}
+                    className="rounded-lg border border-line p-4 transition-colors hover:border-line-strong"
+                  >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <p className="font-medium text-fg">{paper.title}</p>

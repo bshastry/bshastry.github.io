@@ -42,7 +42,9 @@ export default function Projects() {
                   </span>
                   <div className="flex-1">
                     <h3 className="flex items-center gap-2 text-lg font-semibold text-fg">
-                      <span className="text-faint">{themeIcons[theme.id] || <Shield size={16} />}</span>
+                      <span className="text-faint">
+                        {themeIcons[theme.id] || <Shield size={16} />}
+                      </span>
                       {theme.title}
                     </h3>
                     <span className="font-mono text-sm text-faint">{theme.period}</span>

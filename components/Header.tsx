@@ -51,9 +51,7 @@ export default function Header() {
   const linkClass = (item: NavItem) => {
     const isActive = item.id && activeSection === item.id
     return `px-1 py-2 text-sm font-medium border-b-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-      isActive
-        ? 'text-fg border-accent'
-        : 'text-muted border-transparent hover:text-fg'
+      isActive ? 'text-fg border-accent' : 'text-muted border-transparent hover:text-fg'
     }`
   }
 
