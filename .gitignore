@@ -79,6 +79,14 @@ memory-bank/
 legacy-archive/
 scripts/
 
-# AI-assisted process artifacts (keep out of the public repo)
+# Local research / drafts not intended for publication
+private/
+
+# Claude Code local state
 .claude/
+
+# Coverage profile artefacts
+*.profraw
+
+# AI-assisted process artifacts (keep out of the public repo)
 docs/superpowers/
