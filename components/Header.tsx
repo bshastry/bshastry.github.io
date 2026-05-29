@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, Github, Twitter, Linkedin } from 'lucide-react'
+import ThemeToggle from '@/components/ThemeToggle'
 
 interface NavItem {
   name: string
@@ -15,10 +16,8 @@ const navigation: NavItem[] = [
   { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
   { name: 'Research', href: '#projects', id: 'projects' },
-  { name: 'CV', href: '#cv', id: 'cv' },
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Pubs', href: '#publications', id: 'publications' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
   { name: 'Blog', href: '/blog' },
 ]
 
@@ -30,7 +29,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      const sections = ['home', 'about', 'projects', 'cv', 'talks', 'publications', 'contact']
+      const sections = ['home', 'about', 'projects', 'talks', 'publications']
       const scrollPosition = window.scrollY + 100
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -51,10 +50,10 @@ export default function Header() {
 
   const linkClass = (item: NavItem) => {
     const isActive = item.id && activeSection === item.id
-    return `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+    return `px-1 py-2 text-sm font-medium border-b-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
       isActive
-        ? 'text-primary-600 bg-primary-50'
-        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
+        ? 'text-fg border-accent'
+        : 'text-muted border-transparent hover:text-fg'
     }`
   }
 
@@ -72,7 +71,7 @@ export default function Header() {
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 shadow-sm backdrop-blur-sm' : 'bg-transparent'
+        isScrolled ? 'border-b border-line bg-bg/90 backdrop-blur' : 'bg-transparent'
       }`}
     >
       <nav className="container-max section-padding">
@@ -80,14 +79,14 @@ export default function Header() {
           <div className="flex-shrink-0">
             <a
               href="#home"
-              className="text-gradient text-xl font-bold transition-opacity hover:opacity-80"
+              className="rounded-sm text-xl font-semibold tracking-tight text-fg transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               Bhargava Shastry
             </a>
           </div>
 
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-baseline space-x-6">
               {navigation.map((item) => renderLink(item))}
             </div>
           </div>
@@ -98,7 +97,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub profile"
-              className="text-gray-600 transition-colors hover:text-primary-600"
+              className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <Github size={20} />
             </a>
@@ -107,7 +106,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter profile"
-              className="text-gray-600 transition-colors hover:text-primary-600"
+              className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <Twitter size={20} />
             </a>
@@ -116,10 +115,11 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile"
-              className="text-gray-600 transition-colors hover:text-primary-600"
+              className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <Linkedin size={20} />
             </a>
+            <ThemeToggle />
           </div>
 
           <div className="md:hidden">
@@ -128,7 +128,7 @@ export default function Header() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={isMenuOpen}
-              className="text-gray-700 transition-colors hover:text-primary-600"
+              className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -137,15 +137,15 @@ export default function Header() {
 
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="mt-2 space-y-1 rounded-lg bg-white px-2 pb-3 pt-2 shadow-lg">
+            <div className="mt-2 space-y-1 rounded-lg border border-line bg-surface px-2 pb-3 pt-2">
               {navigation.map((item) => renderLink(item, closeMobile))}
-              <div className="flex items-center space-x-4 px-3 py-2">
+              <div className="flex items-center space-x-4 px-1 py-2">
                 <a
                   href="https://github.com/bshastry"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub profile"
-                  className="text-gray-600 transition-colors hover:text-primary-600"
+                  className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Github size={20} />
                 </a>
@@ -154,7 +154,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter profile"
-                  className="text-gray-600 transition-colors hover:text-primary-600"
+                  className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Twitter size={20} />
                 </a>
@@ -163,10 +163,11 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn profile"
-                  className="text-gray-600 transition-colors hover:text-primary-600"
+                  className="rounded-sm text-muted transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Linkedin size={20} />
                 </a>
+                <ThemeToggle />
               </div>
             </div>
           </div>
