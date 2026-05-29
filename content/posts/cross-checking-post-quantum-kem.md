@@ -7,58 +7,55 @@ tags: ["post-quantum", "ml-kem", "fips-203", "differential-fuzzing", "cryptograp
 
 ## Roughly one in twelve
 
-Roughly one in every twelve human web connections right now rides
-`X25519MLKEM768` — a hybrid post-quantum key exchange hedging against the
+About one in every twelve human web connections right now rides
+`X25519MLKEM768`, a hybrid post-quantum key exchange hedging against the
 day somebody finishes a cryptographically relevant quantum computer. The
-hedge only holds if both halves are correctly implemented, and if the
-two ends of the channel agree on which inputs to accept.
+hedge only holds if both halves are correctly implemented and the two
+ends of the channel agree on which inputs to accept.
 
 Five libraries sit behind the bulk of that traffic plus the adjacent
-secure-messaging and cloud-KMS surface the modern internet relies on
-— three on the web, one in secure messaging, and one under AWS KMS
-and the Rust TLS fleet:
+secure-messaging and cloud-KMS surface:
 
   - BoringSSL — Chrome, Android, and Cloudflare's edge. The ~60% figure in
     Cloudflare's [2025 PQ report][pq2025] multiplies out to roughly 8% of
     the global human web ([Radar 2025][radar2025]).
   - Go 1.24+ `crypto/mlkem` — `crypto/tls` enabled `X25519MLKEM768`
     by default, so every default Go HTTPS/gRPC server, the
-    Kubernetes v1.33+ control plane, and most Go-based
-    infrastructure picked it up.
+    Kubernetes v1.33+ control plane, and most Go infrastructure
+    picked it up.
   - Cloudflare's CIRCL `kem/mlkem/mlkem768` — cfgo fork, Lux Network's
     warp bridge, a long tail of Go applications.
   - Cryspen's **libcrux-ml-kem** — Signal's [PQXDH][pqxdh] backend,
-    roughly 40 million daily users, billions of messages a day.
-    Rust-native, formally verified by Cryspen against a spec model in
-    F*, and exposed to downstream consumers (Signal, Microsoft
-    SymCrypt) as auto-generated portable C via the
+    roughly 40 million daily users. Rust-native, formally verified
+    against a spec model in F*, and shipped to downstream consumers
+    (Signal, Microsoft SymCrypt) as auto-generated portable C via the
     Charon/Eurydice/KaRaMeL pipeline.
   - **pq-code-package/mlkem-native** — AWS KMS's ML-KEM, the default in
     libOQS (≥ 0.13.0), and the ML-KEM backing rustls (≥ 0.23.28, via
     AWS-LC's [2026-03-16 import][mlkemnative-awslc-pr] of upstream
     v1.1.0). Pure C, CBMC-verified on the C, HOL-Light + s2n-bignum
-    verified on the aarch64 / x86_64 asm for functional correctness
+    verified on the aarch64/x86_64 asm for functional correctness
     *and* constant-time. Maintained by Hanno Becker (AWS) and Matthias
-    Kannwischer (zeroRISC); hosted under the PQCA / Linux Foundation
+    Kannwischer (zeroRISC), hosted under the PQCA / Linux Foundation
     consortium.
 
-I also run a small scraper over Reddit, Ethereum Magicians, and a few
-other feeds to flag security topics trending in web3. It kept surfacing
-post-quantum — [Algorand's Falcon mainnet numbers][algofalcon],
+I run a small scraper over Reddit, Ethereum Magicians, and a few other
+feeds to flag security topics trending in web3, and it kept surfacing
+post-quantum — [Algorand's Falcon numbers][algofalcon],
 [Circle's roadmap][circlepq], [QRL's testnet][qrlzond],
 [Google's quantum threat paper][gidney]. Almost all of that is the
-signature side (ML-DSA, Falcon), which is a different library set. But
-it was enough of a nudge to go look at the KEM side, which is where the
-actual deployed traffic is.
+signature side (ML-DSA, Falcon), a different library set, but it was
+enough of a nudge to go look at the KEM side, where the deployed
+traffic is.
 
-So I wired the five libraries into a single diff-fuzz harness.
-Roughly 181 million cross-implementation oracle calls across the
+So I wired the five libraries into a single diff-fuzz harness: roughly
+181 million cross-implementation oracle calls across the
 EK/SK/encap/decap surface, plus a full-domain integer sweep over
-Compress and Decompress. The 181M is an exec count, not a coverage
-claim — more on that in *Known blind spots* below. Two spec-tightness
-questions came out of the exercise — one from byte-level divergence
-in the harness, one from static reading against the same spec
-clauses — each filed upstream, each resolved differently.
+Compress and Decompress. That 181M is an exec count, not a coverage
+claim — see *Known blind spots* below. Two spec-tightness questions
+came out of it, one from byte-level divergence in the harness, one from
+static reading against the same spec clauses. Each was filed upstream
+and resolved differently.
 
 **F1** — [cloudflare/circl#597][issue] — is a §7.2 modulus-check bypass
 in CIRCL's expanded-SK parser, caught by the harness as a byte-level
@@ -66,17 +63,17 @@ accept/reject divergence against Go stdlib. Closed wontfix on policy
 grounds (use seed-based keygen, not expanded-SK imports).
 
 **G1** — [issues.chromium.org/504820808][crbug] — is a §7.3 H(ek)
-hash-check gap in BoringSSL's `mlkem_parse_private_key`, found not via
-byte divergence but by reading the BoringSSL parser against Go stdlib's
-explicit equality check at the same layer. The maintainer called the
-permissive reading defensible — the function is reachable only at the
-BCM boundary, not from the public `mlkem.h` API — then tightened it
-anyway in [CL 93247][crbug-cl] for parity with a recent ML-DSA parser
-change.
+hash-check gap in BoringSSL's `mlkem_parse_private_key`, found by
+reading the BoringSSL parser against Go stdlib's explicit equality
+check at the same layer rather than by byte divergence. The maintainer
+called the permissive reading defensible — the function is reachable
+only at the BCM boundary, not from the public `mlkem.h` API — then
+tightened it anyway in [CL 93247][crbug-cl] for parity with a recent
+ML-DSA parser change.
 
-No CVE, no CVSS, no advisory on either one. The interesting story is
-mostly what *didn't* diverge; the two filings are the receipt that the
-methodology produced something.
+No CVE, no CVSS, no advisory on either. Most of what the harness
+produced is what *didn't* diverge; the two filings are what fell out
+along the way.
 
 ## Disclaimer
 
@@ -88,15 +85,14 @@ when they disagree.
 
 The technique generalizes. Diff fuzzing doesn't care whether you can do the
 math. It treats two implementations as oracles of each other and leans on the
-fact that *they should not disagree*. If they do, somebody is wrong. The
+fact that *they should not disagree*. If they do, somebody is wrong — the
 fuzzer doesn't know which one. That's a problem for the spec authors and the
 maintainers.
 
 ## F1 — the one defect the harness caught
 
-Here is the concrete finding. FIPS 203 defines two MUST-level
-input-validation checks on decapsulation-key bytes, one in each of two
-adjacent clauses:
+FIPS 203 defines two MUST-level input-validation checks on
+decapsulation-key bytes, one in each of two adjacent clauses:
 
 1. **§7.3 item 3 — hash check.** `H(ek_embedded)` inside the
    decapsulation key must equal the cached 32-byte hash stored alongside it.
@@ -225,9 +221,9 @@ The one-line fix:
 
 ## Not a vulnerability — the threat model
 
-This is worth saying plainly: under any reasonable threat model, a missing
-§7.2 modulus check in `PrivateKey.Unpack` is not a vulnerability. CIRCL's own
-keygen emits canonical keys. Non-canonical SK bytes can only come from:
+Under any reasonable threat model, a missing §7.2 modulus check in
+`PrivateKey.Unpack` is not a vulnerability. CIRCL's own keygen emits
+canonical keys. Non-canonical SK bytes can only come from:
 
   - **(a) a peer ML-KEM implementation with its own bug** — CIRCL silently
     fixes their output, and the peer's bug stays hidden,
@@ -318,82 +314,65 @@ ML-DSA private-key parser. [CL 93247][crbug-cl], authored by davidben on
 2026-04-22, now recomputes `H(ek)` inside the parser and rejects on
 mismatch.
 
-So G1 is not a compliance win in the shape F1 would have been if CIRCL
-had accepted it; it's a parser hardening the maintainer classified as
-belt-and-braces given the function's BCM-boundary reach. Worth filing
-because the code pattern — *parser copies a cached hash that a
-downstream operation then trusts* — is the same shape as F1, and the
-same differential-reading approach (three libraries against one spec
-clause) surfaced both.
+So G1 isn't the compliance win F1 would have been had CIRCL accepted
+it; it's a parser hardening the maintainer classified as belt-and-braces
+given the function's BCM-boundary reach. It was worth filing because the
+code pattern — *parser copies a cached hash that a downstream operation
+then trusts* — is the same shape as F1, and the same differential-reading
+approach (three libraries against one spec clause) surfaced both.
 
 ## Assurance-coverage share
 
-The metric I've been trying to hold this work against is something I'll
-call Assurance-Coverage Share, or ACS: the fraction of today's
-encrypted human communication whose ML-KEM library has been
-cross-implementation diff-fuzzed against at least one other independent
-implementation at the KEM API surface. It is a coverage number, not a
-soundness number. "Not diverged under ~181M executions" is not the same
-thing as "correct." It is the evidence we actually have, and — as
-*Known blind spots* spells out below — that evidence is about
-oracle-agreement on randomly-mutated input, not about branch
-exploration inside the C libraries themselves.
+I'll call the metric this work tries to hold itself against
+Assurance-Coverage Share (ACS): the fraction of today's encrypted human
+communication whose ML-KEM library has been cross-implementation
+diff-fuzzed against at least one other independent implementation at the
+KEM API surface. It's a coverage number, not a soundness number. "Not
+diverged under ~181M executions" is not the same as "correct," and that
+evidence is about oracle-agreement on mutated input, not branch
+exploration inside the C libraries (see *Known blind spots*).
 
 By that definition, the three web-facing libraries cover on the order
-of 10–15% of Q-day-at-risk human web traffic: BoringSSL's share via
-Cloudflare and Chrome (~8% of the human web, from the
-Cloudflare-Radar-times-PQ-adoption product in [the 2025 PQ
-report][pq2025]), plus the Go 1.24+ fleet (hard to put a traffic-%
-figure on — Kubernetes, etcd, Docker, Terraform agents, every
-default-configured Go server — but large), plus CIRCL's smaller but
-named footprint. Adding libcrux-ml-kem extends coverage off the web
-and onto Signal's messaging path: roughly 40 million daily users,
-billions of encrypted messages a day through PQXDH. Cryspen's formal
-verification against the Rust kernel lowers the expected find-rate —
-F* proofs cover the math — but the cross-check still matters, because
-the C actually linked into Signal comes out of the
-Charon/Eurydice/KaRaMeL transpile pipeline, and that encoding boundary
-is exactly where F1 and G1 lived in the other libraries. The 4-way
-harness (pre-mlkem-native) ran ~10M cross-library executions over the
-libcrux surface with zero divergences — a precursor superseded by the
-5-way campaign below.
+of 10–15% of Q-day-at-risk human web traffic: BoringSSL's ~8% via
+Cloudflare and Chrome (the Radar-times-PQ-adoption product in [the 2025
+PQ report][pq2025]), the Go 1.24+ fleet (hard to put a traffic figure
+on — Kubernetes, etcd, Docker, Terraform agents, every default Go
+server — but large), and CIRCL's smaller named footprint. libcrux-ml-kem
+extends coverage off the web onto Signal's PQXDH path, ~40 million daily
+users. Cryspen's F* proofs cover the math kernel and lower the expected
+find-rate, but the cross-check still matters: the C actually linked into
+Signal comes out of the Charon/Eurydice/KaRaMeL transpile, and that
+encoding boundary is exactly where F1 and G1 lived. An earlier 4-way
+harness ran ~10M executions over the libcrux surface with zero
+divergences, superseded by the 5-way campaign below.
 
-Adding **mlkem-native** as a fifth leg is what makes the coverage
-number stick. AWS-LC imported `pq-code-package/mlkem-native` v1.1.0 on
-2026-03-16 and shipped it in release `v1.50.0`, replacing BoringSSL's
-`crypto/fipsmodule/mlkem/mlkem.cc.inc` as the ML-KEM implementation
-for every downstream AWS-LC consumer. As of April 2026 those consumers
-include AWS KMS (ML-KEM keys live under FIPS 140-3 Level 3 HSMs; the
-ML-KEM ops execute inside the validated module), libOQS ≥ 0.13.0 (where
-mlkem-native is the default provider and the reference libOQS-built
-servers like nginx-OQS, openssl-oqs, and curl-oqs all pick it up), and
-rustls ≥ 0.23.28 (transitively via AWS-LC's `aws-lc-rs` default crypto
-provider, which means essentially every Rust TLS server updated to
-that line). mlkem-native is a genuinely independent codebase — not a
-BoringSSL fork, not a Rust transpile — hand-written C with CBMC
-memory-safety and type-safety proofs on all imported C, plus HOL-Light
-+ s2n-bignum proofs of functional correctness *and* constant-time for
-the aarch64 and x86_64 asm backends at the object-code level. Its
-primary contributors are Hanno Becker (AWS Principal Applied
-Scientist) and Matthias Kannwischer (zeroRISC); the project is hosted
-by the PQCA at the Linux Foundation. The 5-way harness ran ~181M
-cross-library oracle calls covering the mlkem-native surface — at
-180 seconds per harness across seven harnesses, read against the
-caveat in *Known blind spots* below — with zero divergences, and the
-three-library deterministic-encap byte-equality invariant now holds
-across stdlib, libcrux, *and* mlkem-native on the same `(pk, r)` —
-three independent implementations of FIPS 203 Algorithm 17 produce
-bit-identical ciphertexts on the same inputs.
+Adding **mlkem-native** as a fifth leg is what makes the number stick.
+AWS-LC imported `pq-code-package/mlkem-native` v1.1.0 on 2026-03-16 and
+shipped it in `v1.50.0`, replacing BoringSSL's
+`crypto/fipsmodule/mlkem/mlkem.cc.inc` for every downstream AWS-LC
+consumer. As of April 2026 those include AWS KMS (ML-KEM ops execute
+inside FIPS 140-3 Level 3 HSMs), libOQS ≥ 0.13.0 (default provider, so
+nginx-OQS, openssl-oqs, curl-oqs all pick it up), and rustls ≥ 0.23.28
+(transitively via AWS-LC's `aws-lc-rs` default provider — essentially
+every Rust TLS server on that line). It's a genuinely independent
+codebase — not a BoringSSL fork, not a Rust transpile — hand-written C
+with CBMC memory- and type-safety proofs on all imported C, plus
+HOL-Light + s2n-bignum proofs of functional correctness *and*
+constant-time for the aarch64/x86_64 asm backends at the object-code
+level. The 5-way harness ran ~181M cross-library oracle calls covering
+its surface with zero divergences, and the deterministic-encap
+byte-equality invariant now holds across stdlib, libcrux, *and*
+mlkem-native: three independent implementations of FIPS 203 Algorithm 17
+produce bit-identical ciphertexts on the same `(pk, r)`.
 
-Two further steps still raise the number. An OpenSSH `libmlkem` shim
-picks up the SSH money path. And the TLS-handshake-level matrix — the
-surface adversaries on the wire actually reach — is now partly done:
-BoGo driving Go stdlib and BoringSSL across 34 adversarial
-`X25519MLKEM768` tests (low-order X25519 point, non-canonical
-encap-key coefficients, key-share padding and truncation, both client
-and server roles) produced zero semantic divergences. CIRCL via the
-cfgo fork is the remaining leg; wiring it in is what turns this into
-a 3-way handshake matrix.
+Two steps would raise the number further. An OpenSSH `libmlkem` shim
+picks up the SSH path. And the TLS-handshake matrix — the surface
+adversaries on the wire actually reach — is partly done: BoGo driving
+Go stdlib and BoringSSL across 34 adversarial `X25519MLKEM768` tests
+(low-order X25519 point, non-canonical encap-key coefficients, key-share
+padding and truncation, both client and server roles) produced zero
+semantic divergences. CIRCL via the cfgo fork is the remaining leg that
+turns this into a 3-way handshake matrix.
 
 ## Why the gap survived
 
@@ -426,86 +405,51 @@ The mode exists in ACVP. Almost nobody exercises it.
 
 ## Who this actually affects, by library
 
-F1 and G1's blast radii are both small. The harness's coverage is not.
-Separate those two things:
+F1 and G1's blast radii are both small; the harness's coverage is not.
+All five libraries showed zero divergences against each other over the
+~181M cross-library oracle calls on the comparable public surface
+(seed-based keygen, parse/marshal public-key, public-from-private,
+encap roundtrip, decap, §7.2 validate). The per-library specifics:
 
-  - **BoringSSL** — protects roughly 8% of the global human web via
-    Cloudflare plus Chrome plus Android. Zero divergences against Go
-    stdlib, CIRCL, libcrux, *and* mlkem-native across the cross-lib-
-    comparable public `mlkem.h` surface — seed-based keygen,
-    parse/marshal public-key, public-from-private, encap roundtrip,
-    decap — over ~181M cross-library oracle calls. Randomized
-    `*_generate_key` is the
-    one public entry point that doesn't admit cross-implementation
-    comparison (no shared input); the seed variant covers the
-    deterministic equivalent. The one filing here, G1, sits at the
-    BCM-boundary `mlkem_parse_private_key` parser (reachable via BCM
-    symbols, not from the public `mlkem.h` API) and was tightened
-    post-filing in [CL 93247][crbug-cl] for parity with a recent
-    ML-DSA parser change. Note that AWS-LC — BoringSSL's most prominent
-    downstream fork — swapped *its* ML-KEM out of this tree on
-    2026-03-16 and now routes AWS KMS, libOQS, and rustls through
-    mlkem-native (see below); BoringSSL's `mlkem.cc.inc` is the
-    implementation that still ships in Chrome, Android, and the
-    Cloudflare edge.
-  - **Go stdlib `crypto/mlkem`** — Go 1.24+ enables `X25519MLKEM768` by
-    default in `crypto/tls`. Every default-configured Go HTTPS/gRPC
-    server is implicitly on this path, including Kubernetes v1.33+.
-    Same clean result across the same comparable surface. Go stdlib was also the
-    static oracle against which G1 was identified — the explicit
-    `bytes.Equal(dk.h[:], b[:32])` in `mlkem768.go` is what made the
-    BoringSSL gap visible at a read.
-  - **CIRCL Go `mlkem768`** — small deployment footprint. Cloudflare's
-    cfgo toolchain fork for experimental PQ work; Lux Network's
-    cross-chain warp messaging. Carries F1. Whether Lux's warp flow
-    ever feeds `PrivateKey.Unpack` an attacker-controlled blob is not
-    public. The public filing at circl#597 was closed wontfix on
-    policy grounds ("use seed-based SKs"); the §7.2 gap remains.
-  - **libcrux-ml-kem** — Signal's PQXDH backend, ~40M daily users,
-    billions of messages a day. Rust-native; the C linked here is the
-    Charon/Eurydice/KaRaMeL extract that Signal and Microsoft SymCrypt
-    consume. Zero divergences against the other four libraries over
-    the same ~181M 5-way cross-library oracle calls at the seed-keygen
-    / encap / decap / §7.2-validate surface. Cryspen's F* proofs cover
-    the Rust math kernel, not the transpiled-C encoding layer — which
-    is exactly where F1 and G1 lived in the other libraries.
-  - **mlkem-native** — AWS KMS, libOQS (as of ≥ 0.13.0, default),
-    rustls (as of ≥ 0.23.28, transitively via AWS-LC). Pure C,
-    CBMC-verified memory / type safety on all imported C, plus
-    HOL-Light + s2n-bignum functional-correctness and constant-time
-    proofs on the aarch64 and x86_64 asm backends at the object-code
-    level. This is a stronger formal-verification story than libcrux
-    delivers on the *C that gets compiled and linked* — libcrux's F*
-    proofs cover the Rust kernel but not the extracted C, whereas
-    mlkem-native's CBMC proofs sit directly on the C that ends up in
-    the archive. Zero divergences against the other four libraries
-    over ~181M 5-way cross-library oracle calls across the full
-    seed-keygen / parse-public-key / §7.2-validate / encap / decap
-    surface, plus a three-way
-    deterministic-encap byte-equality invariant with stdlib and
-    libcrux that held exactly on every `(pk, r)` we threw at it. No
-    filings. The library is ~16 months old, has had its CVE-class
-    wrapper bugs (a 4-byte x86_64 rej-uniform overread; missing
-    zeroization of pkpv/pk/sk) already caught and fixed in releases
-    prior to v1.1.0, and the maintainer lineage is the same two people
-    who built the HOL-Light + s2n-bignum infrastructure this is
-    verified against.
+  - **BoringSSL** — ~8% of the human web via Cloudflare, Chrome, and
+    Android. Randomized `*_generate_key` is the one public entry point
+    that admits no cross-implementation comparison (no shared input);
+    the seed variant covers the deterministic equivalent. The one
+    filing here, G1, sits at the BCM-boundary `mlkem_parse_private_key`
+    parser (reachable via BCM symbols, not the public `mlkem.h` API)
+    and was tightened post-filing in [CL 93247][crbug-cl]. AWS-LC swapped
+    *its* ML-KEM out of this tree on 2026-03-16 and now routes AWS KMS,
+    libOQS, and rustls through mlkem-native; BoringSSL's `mlkem.cc.inc`
+    is what still ships in Chrome, Android, and the Cloudflare edge.
+  - **Go stdlib `crypto/mlkem`** — every default Go HTTPS/gRPC server,
+    including Kubernetes v1.33+, is implicitly on this path. It was also
+    the static oracle for G1: the explicit `bytes.Equal(dk.h[:], b[:32])`
+    in `mlkem768.go` is what made the BoringSSL gap visible at a read.
+  - **CIRCL Go `mlkem768`** — small footprint (cfgo fork, Lux Network's
+    warp messaging). Carries F1. Whether Lux's warp flow ever feeds
+    `PrivateKey.Unpack` an attacker-controlled blob is not public. The
+    circl#597 filing was closed wontfix ("use seed-based SKs"); the §7.2
+    gap remains.
+  - **libcrux-ml-kem** — Signal's PQXDH backend. Cryspen's F* proofs
+    cover the Rust math kernel, not the transpiled-C encoding layer
+    where F1 and G1 lived in the other libraries.
+  - **mlkem-native** — AWS KMS, libOQS, rustls. Its CBMC proofs sit
+    directly on the C that ends up in the archive, a stronger story
+    than libcrux's F* proofs on the Rust kernel (not the extracted C).
+    No filings. The library is ~16 months old; its CVE-class wrapper
+    bugs (a 4-byte x86_64 rej-uniform overread, missing zeroization of
+    pkpv/pk/sk) were caught and fixed before v1.1.0, and the maintainer
+    lineage is the same two people who built the HOL-Light + s2n-bignum
+    infrastructure it's verified against.
 
-What this work does *not* cover:
-
-  - **OpenSSH ≥ 9.9 `libmlkem`** — same `X25519MLKEM768` group, the C
-    implementation from libmlkem. Not in my harness. Adding a cgo shim
-    is the next obvious move.
-
-If the blast radius of F1 or G1 were wider, this post would be a
-private advisory, not a methodology note. It isn't. The blast radius of
-the methodology itself — the clean negative — is the part worth
-writing about.
+What this work does *not* cover: **OpenSSH ≥ 9.9 `libmlkem`** — same
+`X25519MLKEM768` group, the C implementation from libmlkem, not in my
+harness. A cgo shim is the next obvious move.
 
 ## Known blind spots of the methodology
 
 A clean multi-way negative is narrower than it sounds. Five gaps are
-worth naming so the negative isn't over-read:
+worth naming:
 
   1. **Shared-correctness bugs.** If every library misreads the same
      spec clause, misplaces the same domain-separation byte, or shares
@@ -520,9 +464,8 @@ worth naming so the negative isn't over-read:
      commented upstream as "This implements the Modulus check in 7.2
      2"; mlkem-native's `check_pk`, with an explicit FIPS 203 §7.2
      docstring in `mlkem_native.h`), so that clause now has five
-     independent oracles reached by five different implementation
-     paths with five different formal-verification stories. Narrower
-     is not zero.
+     independent oracles reached by five different paths with five
+     different verification stories. Narrower, not zero.
   2. **FIPS 203 §7.1 Key pair check item 2** — "Check ek̄ as
      specified in Section 7.2." The embedded ek inside a dk blob
      must itself pass the §7.2 modulus check. The harness probes
@@ -585,36 +528,27 @@ worth naming so the negative isn't over-read:
      harness doesn't call it, matching the 4-way's original scope.)
   4. **Corpus depth and the cgo-opaque coverage problem.** Go's native
      fuzzer is coverage-guided on the *Go* side: it instruments Go
-     branches, builds a bitmap from them, and mutates toward inputs
-     that expand it. The C libraries — BoringSSL, libcrux,
-     mlkem-native — are called across the cgo boundary and return
-     bytes; their branch coverage never reaches the mutation
-     scheduler. Each harness body in this work is roughly a hundred
-     lines of Go, mostly `bytes.Equal` checks, so the Go bitmap
-     saturates within about a minute per harness — the "new
-     interesting" counter plateaus in the first 60s and sits flat for
-     the remaining 120s of every run. After that point, additional
+     branches and mutates toward inputs that expand the bitmap. The C
+     libraries are called across the cgo boundary and return bytes;
+     their branch coverage never reaches the mutation scheduler. Each
+     harness body is roughly a hundred lines of Go, mostly
+     `bytes.Equal` checks, so the Go bitmap saturates within about a
+     minute — the "new interesting" counter plateaus in the first 60s
+     and sits flat for the remaining 120s of every run, after which
      executions are uninformed random inputs into the cgo boundary
-     rather than coverage-directed mutations. So the ~181M figure is
-     an honest count of cross-library oracle-agreement checks on
+     rather than coverage-directed mutations. So the ~181M figure is an
+     honest count of cross-library oracle-agreement checks on
      differentiated input — the right metric for *differential*
-     fuzzing, where a byte divergence surfaces regardless of whether
-     the mutation was coverage-guided — but it is **not** a coverage
-     claim about the underlying C libraries, and it would be
-     misleading to read it as one. The five libraries have roughly
-     1500–3000 lines of C each (mlkem-native at the high end,
-     BoringSSL's `mlkem.cc.inc` in the middle, the Go stdlib's
-     `internal/fips140/mlkem` at the low end because it is split
-     across helpers), plus libcrux's 370 KB extracted-C tree with
-     monomorphised K=2/3/4 instances, all with deep branching through
-     SampleNTT, SampleCBD, NTT/INTT, Barrett reduction, polynomial
-     encode/decode; the Go fuzzer cannot see any of it. A libFuzzer
-     harness compiled directly against the C static libs with
-     SanitizerCoverage + ASan would drive mutation from C-branch
-     feedback and would almost certainly reach orders of magnitude
-     more effective coverage per exec. That's the next arc, not this
-     one. It's the honest caveat under which the 181M number should
-     be read.
+     fuzzing, where a byte divergence surfaces regardless of how the
+     mutation was chosen — but it is **not** a coverage claim about the
+     underlying C. The five libraries have roughly 1500–3000 lines of C
+     each, plus libcrux's 370 KB extracted-C tree with monomorphised
+     K=2/3/4 instances, all with deep branching through SampleNTT,
+     SampleCBD, NTT/INTT, Barrett reduction, and polynomial
+     encode/decode that the Go fuzzer cannot see. A libFuzzer harness
+     compiled directly against the C static libs with SanitizerCoverage
+     + ASan drives mutation from C-branch feedback and reaches orders
+     of magnitude more effective coverage per exec — the next arc.
 
      The companion libFuzzer-direct project has since executed that
      arc on the 3-way mlkem-native / libcrux / BoringSSL slice of the
@@ -700,16 +634,15 @@ three-way comparisons.
 PASS
 ```
 
-Zero divergences. Every single `x` agrees across all three oracles. The
-`+q/2` rounding offset combined with the `& ((1<<d)-1)` mask makes the
+Zero divergences. Every `x` agrees across all three oracles. The `+q/2`
+rounding offset combined with the `& ((1<<d)-1)` mask makes the
 approximation exact over the whole valid range, despite what the comment
-suggests. The comment is conservative, not sloppy.
+suggests — the comment is conservative, not sloppy.
 
-A clean negative matters. Compress/Decompress is not a silent-
-correctness bug hiding in CIRCL, and the only API-surface finding from
-this exercise remains F1. Sometimes the methodology tells you things
-are fine; write that down too. Most of what a diff-fuzz matrix does, if
-it's doing its job, is produce clean negatives.
+So Compress/Decompress is not a silent-correctness bug hiding in CIRCL,
+and the only API-surface finding from this exercise remains F1. Most of
+what a diff-fuzz matrix produces, if it's working, is clean negatives;
+those are worth writing down too.
 
 ## Takeaway
 
@@ -717,42 +650,35 @@ Diff-fuzz is the cheap insurance on a crypto migration. Pick the
 libraries with the most traffic behind them. Wire them into one
 harness. Run until an oracle disagrees or you run out of clock.
 
-The API-surface oracle disagreed once here, at CIRCL's expanded-SK
-parser — F1, a compliance gap, not a vulnerability. It did not
-disagree anywhere else: roughly 181 million cross-implementation
-oracle calls across the five libraries at the public KEM-API surface
-(seed-based keygen, parse/marshal public-key, public-from-private,
-encap roundtrip, decap, §7.2 validate) — read against the caveat in
-*Known blind spots* about what that count does and does not prove —
-plus a full-domain sweep of Compress and Decompress, and the 2-way
-BoGo matrix at the TLS-handshake surface — all clean. A second filing, G1, came from
-applying the same methodology by static reading rather than
-byte-level fuzzing — BoringSSL's `mlkem_parse_private_key` against
-Go stdlib's explicit `H(ek)` equality check — and was tightened
-voluntarily by the maintainer for parity with an earlier ML-DSA
-change. Two filings, two outcomes; both from the same posture of
-holding independent libraries against the same spec clauses.
+The API-surface oracle disagreed once, at CIRCL's expanded-SK parser:
+F1, a compliance gap, not a vulnerability. It did not disagree anywhere
+else, across ~181M cross-implementation oracle calls at the public
+KEM-API surface, a full-domain sweep of Compress and Decompress, and
+the 2-way BoGo matrix at the TLS-handshake surface — all clean, read
+against the caveat in *Known blind spots* about what that count does
+and does not prove. The second filing, G1, came from applying the same
+methodology by static reading rather than byte-level fuzzing —
+BoringSSL's `mlkem_parse_private_key` against Go stdlib's explicit
+`H(ek)` equality check — and was tightened voluntarily for parity with
+an earlier ML-DSA change. Two filings, two outcomes, both from holding
+independent libraries against the same spec clauses.
 
-Byte-equivalence between two libraries has a well-known blind spot:
-both implementations can be wrong in the same way, agree with each
-other, and pass. To close that, I reconstructed FIPS 203 Algorithm 18
-step 7 — `K̄ := J(z || c)` with SHAKE256 — directly in the test, and
-compared each library's implicit-reject decapsulation output against
-the external oracle independently. Across ten thousand
-random-invalid ciphertexts, both Go stdlib and BoringSSL matched the
-oracle bit-for-bit. Property-level assurance that doesn't route
-through either library agreeing with the other — the third oracle in
-what was otherwise a two-oracle harness.
+Byte-equivalence between two libraries has a known blind spot: both can
+be wrong the same way, agree, and pass. To close that I reconstructed
+FIPS 203 Algorithm 18 step 7 — `K̄ := J(z || c)` with SHAKE256 —
+directly in the test and compared each library's implicit-reject decap
+output against that external oracle independently. Across ten thousand
+random-invalid ciphertexts, both Go stdlib and BoringSSL matched it
+bit-for-bit: a third oracle that doesn't route through either library
+agreeing with the other.
 
-The honest part is naming what isn't covered. OpenSSH's `libmlkem`
-carries the SSH fleet and is still not in this harness. CIRCL is in
-the KEM-API diff-fuzz but not in the BoGo 2-way at the handshake
-layer — a 3-way TLS matrix adding the cfgo fork is the next step.
-libcrux and mlkem-native are both in at the KEM primitive layer, but
-Signal's PQXDH handshake (above libcrux) and AWS KMS's RPC (above
-mlkem-native) sit a level above the primitive and haven't been
-diff-fuzzed at the protocol surface. Each of those is a finite,
-scoped unit of work that raises the coverage number.
+What isn't covered: OpenSSH's `libmlkem` carries the SSH fleet and is
+still not in the harness. CIRCL is in the KEM-API diff-fuzz but not the
+BoGo handshake matrix — adding the cfgo fork makes it 3-way. libcrux
+and mlkem-native are in at the KEM primitive layer, but Signal's PQXDH
+handshake and AWS KMS's RPC sit a level above and haven't been
+diff-fuzzed at the protocol surface. Each is a scoped unit of work that
+raises the coverage number.
 
 Filed issues: [cloudflare/circl#597][issue],
 [issues.chromium.org/504820808][crbug].
@@ -770,26 +696,18 @@ reproducible `make` entry point that clones + builds + runs the
 full campaign, and the methodology note from this post in
 `docs/`.
 
-The libFuzzer-direct-against-C companion that addresses the
-cgo-opaque coverage gap (the *corpus-depth and cgo-opaque coverage*
-blind spot above) —
-SanitizerCoverage-instrumented, symbol-namespaced so all five libs
-co-link in one binary — is a separate project at
-**private; available on request**. It is newer than the
-Go-cgo harness, exercises the C at the branch level rather than the
-API level, and is the right fit if you want coverage-driven
-exploration rather than differential oracle agreement. The two
-harnesses are complementary; the libFuzzer-direct companion is
-also what extended F1's defect class to mlkem-native and libcrux
-on the `dkPKE` polynomial-bytes path documented in the
-*embedded-sk-validation* blind spot above. Its first audit report —
-`docs/fuzz-audit-report-mlkem-2026-04-28.md` in that repo — is the
-quantitative complement to this post: 77.7 million C-branch-driven
-oracle calls across the 3-way slice, zero primary-correctness
-divergences, mlkem-native at 89.95% line coverage on its ML-KEM
-kernel files. See the *corpus-depth and cgo-opaque coverage* blind
-spot above for how that closes the "next arc" loop with concrete
-numbers.
+The libFuzzer-direct-against-C companion that addresses the cgo-opaque
+coverage gap — SanitizerCoverage-instrumented, symbol-namespaced so all
+five libs co-link in one binary — is a separate project, also
+**private; available on request**. It's newer, exercises the C at the
+branch level rather than the API level, and is the right fit for
+coverage-driven exploration rather than differential oracle agreement.
+It's also what extended F1's defect class to mlkem-native and libcrux on
+the `dkPKE` polynomial-bytes path. Its first audit report,
+`docs/fuzz-audit-report-mlkem-2026-04-28.md`, is the quantitative
+complement to this post: 77.7 million C-branch-driven oracle calls
+across the 3-way slice, zero primary-correctness divergences,
+mlkem-native at 89.95% line coverage on its ML-KEM kernel files.
 
 ## References
 
