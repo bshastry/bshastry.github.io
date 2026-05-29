@@ -78,3 +78,7 @@ temp/
 memory-bank/
 legacy-archive/
 scripts/
+
+# AI-assisted process artifacts (keep out of the public repo)
+.claude/
+docs/superpowers/
