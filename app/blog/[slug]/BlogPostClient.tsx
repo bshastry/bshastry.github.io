@@ -2,15 +2,24 @@
 
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
-import type { BlogPost, BlogPostMeta } from '@/lib/blog'
+import type { BlogPost, BlogPostMeta, SeriesPart } from '@/lib/blog'
 import ThemeToggle from '@/components/ThemeToggle'
+import { SeriesNav, SeriesPager } from '@/components/SeriesNav'
+import { PostTitle } from '@/components/PostTitle'
 
 interface BlogPostClientProps {
   post: BlogPost
   allPosts: BlogPostMeta[]
+  seriesTitle: string | null
+  seriesParts: SeriesPart[]
 }
 
-export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) {
+export default function BlogPostClient({
+  post,
+  allPosts,
+  seriesTitle,
+  seriesParts,
+}: BlogPostClientProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -56,8 +65,8 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
               ))}
             </div>
 
-            <h1 className="mb-4 text-4xl font-bold leading-tight tracking-tight text-fg md:text-5xl">
-              {post.title}
+            <h1 className="mb-4 max-w-3xl text-balance text-3xl font-bold leading-[1.1] tracking-tight text-fg sm:text-4xl md:text-5xl">
+              <PostTitle title={post.title} variant="full" />
             </h1>
 
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -87,12 +96,16 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
 
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
+          {seriesTitle && <SeriesNav title={seriesTitle} parts={seriesParts} />}
+
           <article>
             <div
               className="prose prose-lg max-w-none dark:prose-invert prose-a:text-accent hover:prose-a:opacity-80"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
           </article>
+
+          <SeriesPager parts={seriesParts} />
 
           {related.length > 0 && (
             <div className="mt-16 border-t border-line pt-12">
@@ -104,8 +117,8 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
                     href={`/blog/${rp.slug}`}
                     className="group block py-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
-                    <h4 className="mb-2 text-lg font-semibold text-fg transition-colors group-hover:text-accent">
-                      {rp.title}
+                    <h4 className="mb-2 text-balance text-lg font-semibold leading-snug text-fg transition-colors group-hover:text-accent">
+                      <PostTitle title={rp.title} variant="inline" />
                     </h4>
                     <p className="mb-3 text-sm text-muted">{rp.excerpt}</p>
                     <div className="flex items-center text-sm text-faint">

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Search, Tag } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import ThemeToggle from '@/components/ThemeToggle'
+import { PostTitle } from '@/components/PostTitle'
 
 interface BlogIndexClientProps {
   posts: BlogPostMeta[]
@@ -119,8 +120,10 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
                   </div>
                 </div>
 
-                <h2 className="mb-3 text-2xl font-bold text-fg transition-colors hover:text-accent">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                <h2 className="mb-3 text-balance text-2xl font-bold text-fg transition-colors hover:text-accent">
+                  <Link href={`/blog/${post.slug}`}>
+                    <PostTitle title={post.title} variant="inline" />
+                  </Link>
                 </h2>
 
                 <p className="mb-4 leading-relaxed text-muted">{post.excerpt}</p>
