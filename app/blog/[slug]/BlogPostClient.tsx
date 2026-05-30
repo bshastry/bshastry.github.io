@@ -2,15 +2,23 @@
 
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
-import type { BlogPost, BlogPostMeta } from '@/lib/blog'
+import type { BlogPost, BlogPostMeta, SeriesPart } from '@/lib/blog'
 import ThemeToggle from '@/components/ThemeToggle'
+import { SeriesNav, SeriesPager } from '@/components/SeriesNav'
 
 interface BlogPostClientProps {
   post: BlogPost
   allPosts: BlogPostMeta[]
+  seriesTitle: string | null
+  seriesParts: SeriesPart[]
 }
 
-export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) {
+export default function BlogPostClient({
+  post,
+  allPosts,
+  seriesTitle,
+  seriesParts,
+}: BlogPostClientProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -87,12 +95,16 @@ export default function BlogPostClient({ post, allPosts }: BlogPostClientProps) 
 
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
+          {seriesTitle && <SeriesNav title={seriesTitle} parts={seriesParts} />}
+
           <article>
             <div
               className="prose prose-lg max-w-none dark:prose-invert prose-a:text-accent hover:prose-a:opacity-80"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
           </article>
+
+          <SeriesPager parts={seriesParts} />
 
           {related.length > 0 && (
             <div className="mt-16 border-t border-line pt-12">
