@@ -46,7 +46,10 @@ export function SeriesNav({ title, parts }: { title: string; parts: SeriesPart[]
                   className="flex items-center gap-3 rounded-md bg-accent/10 px-2 py-2 text-sm text-fg"
                 >
                   <PartNumber part={p.part} active />
-                  <span className="font-medium">{p.label}</span>
+                  <span className="font-medium">
+                    <span className="sr-only">Part {p.part}: </span>
+                    {p.label}
+                  </span>
                   <span className="eyebrow ml-auto text-accent">You are here</span>
                 </span>
               </li>
@@ -57,7 +60,10 @@ export function SeriesNav({ title, parts }: { title: string; parts: SeriesPart[]
                   className="group flex items-center gap-3 rounded-md px-2 py-2 text-sm text-muted transition-colors hover:bg-accent/5 hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <PartNumber part={p.part} active={false} />
-                  <span className="transition-colors group-hover:text-fg">{p.label}</span>
+                  <span className="transition-colors group-hover:text-fg">
+                    <span className="sr-only">Part {p.part}: </span>
+                    {p.label}
+                  </span>
                 </Link>
               </li>
             ),
@@ -69,7 +75,8 @@ export function SeriesNav({ title, parts }: { title: string; parts: SeriesPart[]
 }
 
 /**
- * Bottom-of-article previous/next pager within a series.
+ * Bottom-of-article previous/next pager within a series. A lone card (first
+ * or last part) spans the full row instead of floating in one column.
  */
 export function SeriesPager({ parts }: { parts: SeriesPart[] }) {
   if (parts.length < 2) return null
@@ -82,9 +89,11 @@ export function SeriesPager({ parts }: { parts: SeriesPart[] }) {
   return (
     <nav
       aria-label="Series navigation"
-      className="mt-16 grid gap-4 border-t border-line pt-8 sm:grid-cols-2"
+      className={`mt-16 grid gap-4 border-t border-line pt-8 ${
+        prev && next ? 'sm:grid-cols-2' : 'sm:grid-cols-1'
+      }`}
     >
-      {prev ? (
+      {prev && (
         <Link
           href={`/blog/${prev.slug}`}
           className="panel group p-4 transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
@@ -97,16 +106,14 @@ export function SeriesPager({ parts }: { parts: SeriesPart[] }) {
             {prev.label}
           </span>
         </Link>
-      ) : (
-        <span className="hidden sm:block" />
       )}
 
-      {next ? (
+      {next && (
         <Link
           href={`/blog/${next.slug}`}
-          className="panel group p-4 text-right transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="panel group p-4 transition-colors hover:border-line-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:text-right"
         >
-          <span className="eyebrow flex items-center justify-end gap-1">
+          <span className="eyebrow flex items-center gap-1 sm:justify-end">
             Next · Part {next.part}
             <ArrowRight size={12} />
           </span>
@@ -114,8 +121,6 @@ export function SeriesPager({ parts }: { parts: SeriesPart[] }) {
             {next.label}
           </span>
         </Link>
-      ) : (
-        <span className="hidden sm:block" />
       )}
     </nav>
   )

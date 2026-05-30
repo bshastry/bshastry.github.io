@@ -3,6 +3,7 @@ title: "Inferring Program Input Format"
 date: 2017-08-03
 excerpt: "Techniques for automatically inferring and understanding the input format requirements of programs for more effective testing."
 tags: ["program-analysis", "input-format", "reverse-engineering", "testing"]
+seriesId: compiler-assisted-vuln-diagnosis
 series: "Compiler-assisted vulnerability diagnosis"
 seriesPart: 2
 seriesLabel: "Inferring program input format"

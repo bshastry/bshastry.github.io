@@ -3,6 +3,7 @@ title: "Diagnosing Distributed Vulnerabilities"
 date: 2017-08-02
 excerpt: "Methods and techniques for identifying and analyzing security vulnerabilities in distributed systems and network protocols."
 tags: ["security", "distributed-systems", "vulnerabilities", "analysis"]
+seriesId: compiler-assisted-vuln-diagnosis
 series: "Compiler-assisted vulnerability diagnosis"
 seriesPart: 1
 seriesLabel: "Diagnosing distributed vulnerabilities"

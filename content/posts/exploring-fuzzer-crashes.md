@@ -3,6 +3,7 @@ title: "Exploring Fuzzer Crashes"
 date: 2017-08-04
 excerpt: "Deep dive into analyzing and understanding crashes discovered through fuzzing, including crash triage and root cause analysis."
 tags: ["fuzzing", "crash-analysis", "debugging", "security"]
+seriesId: compiler-assisted-vuln-diagnosis
 series: "Compiler-assisted vulnerability diagnosis"
 seriesPart: 3
 seriesLabel: "Exploring fuzzer crashes"

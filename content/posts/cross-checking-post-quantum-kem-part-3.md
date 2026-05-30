@@ -3,6 +3,7 @@ title: "Cross-checking the post-quantum KEM behind the web — Part 3: blind spo
 date: 2026-04-26
 excerpt: "Part 3 of 3. What a clean multi-way negative does and doesn't prove — the methodology's blind spots — plus the takeaway and how to reproduce the work."
 tags: ["post-quantum", "ml-kem", "fips-203", "differential-fuzzing", "cryptography"]
+seriesId: mlkem-cross-check
 series: "Cross-checking the post-quantum KEM behind the web"
 seriesPart: 3
 seriesLabel: "Blind spots & what's next"

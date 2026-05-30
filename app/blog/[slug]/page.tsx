@@ -14,7 +14,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getPostBySlug(params.slug)
   if (!post) notFound()
   const allPosts = getAllPostsMeta()
-  const seriesParts = post.series ? getSeriesParts(post.series.title, post.slug) : []
+  const seriesParts = post.series ? getSeriesParts(post.series.id, post.slug) : []
   return (
     <BlogPostClient
       post={post}
