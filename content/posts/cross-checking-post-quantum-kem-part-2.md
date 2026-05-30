@@ -3,9 +3,10 @@ title: "Cross-checking the post-quantum KEM behind the web — Part 2: the Borin
 date: 2026-04-25
 excerpt: "Part 2 of 3. G1, a §7.3 hash-check gap in BoringSSL found by reading rather than fuzzing; the assurance-coverage share across the encrypted web; who each finding affects; and the Compress/Decompress clean sweep."
 tags: ["post-quantum", "ml-kem", "fips-203", "differential-fuzzing", "cryptography"]
+series: "Cross-checking the post-quantum KEM behind the web"
+seriesPart: 2
+seriesLabel: "The BoringSSL §7.3 finding & coverage"
 ---
-
-[Part 1](/blog/cross-checking-post-quantum-kem) \| **Part 2** \| [Part 3](/blog/cross-checking-post-quantum-kem-part-3)
 
 > **TL;DR (Part 2 of 3).** The second filing, **G1**, came from *reading* code
 > rather than fuzzing: BoringSSL's BCM-boundary `mlkem_parse_private_key`

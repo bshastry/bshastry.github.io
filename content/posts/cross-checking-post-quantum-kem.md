@@ -3,9 +3,10 @@ title: "Cross-checking the post-quantum KEM behind the web — Part 1: the setup
 date: 2026-04-24
 excerpt: "Part 1 of 3. One in twelve web connections rides X25519MLKEM768. I wired the five ML-KEM libraries behind it into one diff-fuzz harness — and it caught F1, a FIPS 203 §7.2 modulus-check bypass in CIRCL's expanded-SK parser."
 tags: ["post-quantum", "ml-kem", "fips-203", "differential-fuzzing", "cryptography"]
+series: "Cross-checking the post-quantum KEM behind the web"
+seriesPart: 1
+seriesLabel: "Setup & the CIRCL §7.2 finding"
 ---
-
-**Part 1** \| [Part 2](/blog/cross-checking-post-quantum-kem-part-2) \| [Part 3](/blog/cross-checking-post-quantum-kem-part-3)
 
 > **TL;DR (Part 1 of 3).** Roughly one in twelve human web connections rides
 > `X25519MLKEM768`. I wired the five ML-KEM libraries behind it into one

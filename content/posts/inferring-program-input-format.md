@@ -3,9 +3,10 @@ title: "Inferring Program Input Format"
 date: 2017-08-03
 excerpt: "Techniques for automatically inferring and understanding the input format requirements of programs for more effective testing."
 tags: ["program-analysis", "input-format", "reverse-engineering", "testing"]
+series: "Compiler-assisted vulnerability diagnosis"
+seriesPart: 2
+seriesLabel: "Inferring program input format"
 ---
-
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
 
 ## Prologue
 
@@ -204,10 +205,5 @@ However, dictionaries can support them by triggering these code paths much faste
 You can read the [full paper][5] (to be published in the proceedings of RAID'17 by Springer) that this work produced and form your own opinion.
 
 
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
-
-[1]: {{ site.baseurl }}{% post_url 2017-08-02-Diagnosing-Distributed-Vulnerabilities %}
-[2]: {{ site.baseurl }}{% post_url 2017-08-03-Inferring-Program-Input-Format %}
-[3]: {{ site.baseurl }}{% post_url 2017-08-04-Exploring-Fuzzer-Crashes %}
 [4]: https://llvm.org/docs/LibFuzzer.html
 [5]: http://users.sec.t-labs.tu-berlin.de/~bshastry/raid17.pdf

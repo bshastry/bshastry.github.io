@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { getAllSlugs, getAllPostsMeta, getPostBySlug } from '@/lib/blog'
+import { getAllSlugs, getAllPostsMeta, getPostBySlug, getSeriesParts } from '@/lib/blog'
 import BlogPostClient from './BlogPostClient'
 
 interface BlogPostPageProps {
@@ -14,5 +14,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getPostBySlug(params.slug)
   if (!post) notFound()
   const allPosts = getAllPostsMeta()
-  return <BlogPostClient post={post} allPosts={allPosts} />
+  const seriesParts = post.series ? getSeriesParts(post.series.title, post.slug) : []
+  return (
+    <BlogPostClient
+      post={post}
+      allPosts={allPosts}
+      seriesTitle={post.series?.title ?? null}
+      seriesParts={seriesParts}
+    />
+  )
 }

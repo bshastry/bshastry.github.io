@@ -12,6 +12,22 @@ import rehypeStringify from 'rehype-stringify'
 
 const POSTS_DIR = path.join(process.cwd(), 'content/posts')
 
+export interface SeriesInfo {
+  /** Display title of the series; also the grouping key across posts. */
+  title: string
+  /** 1-based position of this post within the series. */
+  part: number
+  /** Short label for this part in the nav; falls back to the post title. */
+  label?: string
+}
+
+export interface SeriesPart {
+  slug: string
+  part: number
+  label: string
+  isCurrent: boolean
+}
+
 export interface BlogPostMeta {
   slug: string
   title: string
@@ -19,6 +35,7 @@ export interface BlogPostMeta {
   excerpt: string
   tags: string[]
   readTime: string
+  series?: SeriesInfo
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -30,6 +47,18 @@ interface PostFrontmatter {
   date: string | Date
   excerpt: string
   tags: string[]
+  series?: string
+  seriesPart?: number
+  seriesLabel?: string
+}
+
+function parseSeries(frontmatter: PostFrontmatter): SeriesInfo | undefined {
+  if (!frontmatter.series || frontmatter.seriesPart == null) return undefined
+  return {
+    title: frontmatter.series,
+    part: frontmatter.seriesPart,
+    label: frontmatter.seriesLabel,
+  }
 }
 
 function normalizeDate(date: string | Date): string {
@@ -63,7 +92,7 @@ export function getAllSlugs(): string[] {
 
 export function getAllPostsMeta(): BlogPostMeta[] {
   return getAllSlugs()
-    .map((slug) => {
+    .map((slug): BlogPostMeta | null => {
       const parsed = readPostFile(slug)
       if (!parsed) return null
       const { frontmatter, body } = parsed
@@ -74,10 +103,28 @@ export function getAllPostsMeta(): BlogPostMeta[] {
         excerpt: frontmatter.excerpt,
         tags: frontmatter.tags ?? [],
         readTime: computeReadTime(body),
+        series: parseSeries(frontmatter),
       }
     })
     .filter((p): p is BlogPostMeta => p !== null)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
+}
+
+/**
+ * All posts in a series, ordered by part. Returns [] when the series has
+ * fewer than two posts (a lone post is not a series).
+ */
+export function getSeriesParts(seriesTitle: string, currentSlug?: string): SeriesPart[] {
+  const parts = getAllPostsMeta()
+    .filter((p) => p.series?.title === seriesTitle)
+    .sort((a, b) => a.series!.part - b.series!.part)
+    .map((p) => ({
+      slug: p.slug,
+      part: p.series!.part,
+      label: p.series!.label ?? p.title,
+      isCurrent: p.slug === currentSlug,
+    }))
+  return parts.length > 1 ? parts : []
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
@@ -105,6 +152,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     excerpt: frontmatter.excerpt,
     tags: frontmatter.tags ?? [],
     readTime: computeReadTime(body),
+    series: parseSeries(frontmatter),
     contentHtml: String(processed),
   }
 }

@@ -3,9 +3,10 @@ title: "Exploring Fuzzer Crashes"
 date: 2017-08-04
 excerpt: "Deep dive into analyzing and understanding crashes discovered through fuzzing, including crash triage and root cause analysis."
 tags: ["fuzzing", "crash-analysis", "debugging", "security"]
+series: "Compiler-assisted vulnerability diagnosis"
+seriesPart: 3
+seriesLabel: "Exploring fuzzer crashes"
 ---
-
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
 
 ## Prologue
 
@@ -313,11 +314,6 @@ Prominently, we showed that our method could spot a security issue that was a re
 The analysis undertaken is fast and thus doable on a regular basis e.g., CI.
 I think the approach taken in this work holds promise for catching other classes of recurring vulns in large codebases.
 
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
-
-[1]: {{ site.baseurl }}{% post_url 2017-08-02-Diagnosing-Distributed-Vulnerabilities %}
-[2]: {{ site.baseurl }}{% post_url 2017-08-03-Inferring-Program-Input-Format %}
-[3]: {{ site.baseurl }}{% post_url 2017-08-04-Exploring-Fuzzer-Crashes %}
 [4]: https://dl.acm.org/citation.cfm?id=2519842
 [5]: https://github.com/jfoote/exploitable
 [6]: http://releases.llvm.org/3.8.1/tools/docs/SanitizerCoverage.html

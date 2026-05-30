@@ -3,9 +3,10 @@ title: "Diagnosing Distributed Vulnerabilities"
 date: 2017-08-02
 excerpt: "Methods and techniques for identifying and analyzing security vulnerabilities in distributed systems and network protocols."
 tags: ["security", "distributed-systems", "vulnerabilities", "analysis"]
+series: "Compiler-assisted vulnerability diagnosis"
+seriesPart: 1
+seriesLabel: "Diagnosing distributed vulnerabilities"
 ---
-
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
 
 ## Prologue
 
@@ -180,11 +181,6 @@ main() -> vulnerable()
 
 I have had modest success with the proposed approach. The proposal definitely provides more context for identifying vulnerabilities in source code. Specifically, enlisting LLVM passes to tell me more about a local bug has helped navigate code and identify false positives early. Moreover, the prototype scales up nicely to large codebases such as Chromium, and Firefox. For example, I could perform end-to-end analysis of these and MySQL codebases in under 48h (roughly 100 Euros renting a 32 vCPU EC2 instance). Having said that, the [vulnerabilities identified by the present incarnation of the tool][8] are limited to known issues in the evaluated projects. A more extensive evaluation of the tool across a larger number of open-source projects will help understand its utility towards early vulnerability diagnosis.
 
-[Part 1][1] \| [Part 2][2] \| [Part 3][3]
-
-[1]: {{ site.baseurl }}{% post_url 2017-08-02-Diagnosing-Distributed-Vulnerabilities %}
-[2]: {{ site.baseurl }}{% post_url 2017-08-03-Inferring-Program-Input-Format %}
-[3]: {{ site.baseurl }}{% post_url 2017-08-04-Exploring-Fuzzer-Crashes %}
 [4]: https://link.springer.com/chapter/10.1007/978-3-319-40667-1_5
 [5]: https://www.github.com/bshastry/melange-checkers
 [6]: https://github.com/bshastry/vagrant-pallang
