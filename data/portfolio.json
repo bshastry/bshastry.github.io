@@ -166,6 +166,13 @@
   ],
   "talks": [
     {
+      "title": "Trust No Single Witness: Differential Fuzzing & Bug-Bounty Triage for Ethereum Clients",
+      "venue": "Berlin Ethereum Day",
+      "location": "Berlin",
+      "year": 2026,
+      "slides": "/media/Trust_No_Single_Witness.pdf"
+    },
+    {
       "title": "Fuzzing the Solidity Compiler",
       "venue": "Devcon 5",
       "location": "Osaka",
