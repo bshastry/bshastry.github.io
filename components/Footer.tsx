@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Github, Linkedin, Twitter, Mail, ExternalLink } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
@@ -71,9 +72,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/blog" className="text-muted transition-colors hover:text-fg">
+                <Link href="/blog" className="text-muted transition-colors hover:text-fg">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -116,9 +117,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/blog" className="text-muted transition-colors hover:text-fg">
+                <Link href="/blog" className="text-muted transition-colors hover:text-fg">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -131,18 +132,18 @@ export default function Footer() {
               © {currentYear} {personal.name}. All rights reserved.
             </p>
             <div className="mt-4 flex items-center space-x-6 md:mt-0">
-              <a
+              <Link
                 href="/privacy"
                 className="font-mono text-xs text-faint transition-colors hover:text-fg"
               >
                 Privacy Policy
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/terms"
                 className="font-mono text-xs text-faint transition-colors hover:text-fg"
               >
                 Terms of Service
-              </a>
+              </Link>
               <p className="font-mono text-xs text-faint">Built with Next.js &amp; Tailwind CSS</p>
             </div>
           </div>

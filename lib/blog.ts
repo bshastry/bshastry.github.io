@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import matter from 'gray-matter'
+import { load } from 'js-yaml'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
@@ -67,6 +67,7 @@ function parseSeries(frontmatter: PostFrontmatter, slug: string): SeriesInfo | u
   }
   return { id: seriesId, title: series, part: seriesPart, label: frontmatter.seriesLabel }
 }
+const frontmatterPattern = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/
 
 function normalizeDate(date: string | Date): string {
   if (date instanceof Date) {
@@ -85,8 +86,16 @@ function readPostFile(slug: string): { frontmatter: PostFrontmatter; body: strin
   const fullPath = path.join(POSTS_DIR, `${slug}.md`)
   if (!fs.existsSync(fullPath)) return null
   const raw = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(raw)
-  return { frontmatter: data as PostFrontmatter, body: content }
+  const match = raw.match(frontmatterPattern)
+  if (!match) {
+    return { frontmatter: {} as PostFrontmatter, body: raw }
+  }
+
+  const data = load(match[1])
+  const frontmatter =
+    data && typeof data === 'object' ? (data as PostFrontmatter) : ({} as PostFrontmatter)
+
+  return { frontmatter, body: raw.slice(match[0].length) }
 }
 
 export function getAllSlugs(): string[] {

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllSlugs } from '@/lib/blog'
+export const dynamic = 'force-static'
 
 const BASE = 'https://bshastry.github.io'
 

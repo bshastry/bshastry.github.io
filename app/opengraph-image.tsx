@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 
+export const dynamic = 'force-static'
 // Note: intentionally NOT declaring `export const runtime = 'edge'`.
 // With `output: 'export'` (static export), declaring the edge runtime
 // causes `next build` to error. `next/og` works at build time in the

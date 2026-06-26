@@ -8,7 +8,7 @@ Personal portfolio and security-research blog for Bhargava Shastry, security eng
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + `@tailwindcss/typography` for long-form prose
 - **Content:** Blog posts live in `content/posts/*.md`; metadata via frontmatter
-- **Markdown pipeline:** `gray-matter` + `remark` + `remark-gfm` + `remark-rehype` + `rehype-slug` + `rehype-autolink-headings` + `rehype-pretty-code` (Shiki) + `rehype-stringify`
+- **Markdown pipeline:** `js-yaml` front matter + `remark` + `remark-gfm` + `remark-rehype` + `rehype-slug` + `rehype-autolink-headings` + `rehype-pretty-code` (Shiki) + `rehype-stringify`
 - **Icons:** `lucide-react`
 - **Hosting:** GitHub Pages via GitHub Actions
 - **Quality gates:** Prettier, ESLint (`next/core-web-vitals`), `tsc --noEmit`, all enforced in CI
