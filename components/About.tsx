@@ -2,38 +2,36 @@
 
 export default function About() {
   const stats = [
-    { label: 'Years of Experience', value: '8+' },
+    { label: 'Years of Experience', value: '10+' },
     { label: 'Open Source Projects', value: '20+' },
     { label: 'Security Vulnerabilities Found', value: '50+' },
     { label: 'Community Contributions', value: '1000+' },
   ]
 
   const expertise = [
-    'Smart Contract Security',
-    'Fuzzing & Testing',
-    'Protocol Security',
-    'Static Analysis',
+    'Differential Fuzzing',
+    'Ethereum Protocol Security',
+    'Bug Bounty Triage',
     'Vulnerability Research',
-    'Open Source Development',
+    'Post-Quantum Cryptography',
+    'AI-Assisted Security Tooling',
   ]
 
   const technologies = [
-    'Solidity',
+    'Go',
     'Rust',
     'C++',
     'Python',
-    'Go',
-    'JavaScript',
-    'LLVM',
-    'AFL',
-    'Foundry',
-    'Hardhat',
-    'Docker',
-    'Git',
+    'Solidity',
     'Ethereum',
     'EVM',
-    'DeFi',
-    'Smart Contracts',
+    'goevmlab',
+    'libFuzzer',
+    'cargo-fuzz',
+    'AFL',
+    'Foundry',
+    'Docker',
+    'LLM Agents',
   ]
 
   return (
@@ -52,21 +50,23 @@ export default function About() {
                 Security Engineer & Researcher
               </h3>
               <p className="mb-4 leading-relaxed text-muted">
-                I'm a security engineer at the Ethereum Foundation and an independent security
-                researcher with a deep passion for blockchain technology and smart contract
-                security. My work focuses on identifying vulnerabilities, developing security tools,
-                and contributing to the overall security posture of decentralized systems.
+                I'm a security engineer at the Ethereum Foundation working on protocol security for
+                the execution layer. My day-to-day is differential fuzzing of Ethereum clients,
+                hard-fork readiness testing, and technical evaluation of submissions to the Ethereum
+                Foundation's bug bounty program.
               </p>
               <p className="mb-4 leading-relaxed text-muted">
-                With over 300 commits to the Solidity compiler and contributions to numerous
-                critical projects, I've been at the forefront of blockchain security research. My
-                expertise spans fuzzing, static analysis, protocol security, and vulnerability
-                discovery.
+                I came to Ethereum through compiler security — 300+ commits to the Solidity
+                compiler's fuzzing and testing infrastructure — and before that a Ph.D. on fuzzing
+                and static analysis at TU Berlin. That background in oracle-driven testing shapes my
+                client work today: if two independent implementations disagree, at least one of them
+                is wrong.
               </p>
               <p className="leading-relaxed text-muted">
-                I believe in the power of open-source collaboration and have contributed to projects
-                like Google's OSS-Fuzz, various Ethereum clients, and developed specialized security
-                tools that are used by the broader blockchain community.
+                I work in the open where I can: upstream fixes merged in Erigon, Nethermind, revm,
+                and the executable Ethereum specs, contributions to Google's OSS-Fuzz, and a blog
+                about differential testing — most recently cross-checking post-quantum cryptography
+                implementations against each other.
               </p>
             </div>
 

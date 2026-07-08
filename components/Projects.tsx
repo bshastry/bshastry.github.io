@@ -1,9 +1,25 @@
-import { Shield, Code, Network, Bug, Globe, Wallet, ExternalLink, Github, Lock } from 'lucide-react'
+import {
+  Shield,
+  Code,
+  Network,
+  Bug,
+  Globe,
+  Wallet,
+  Crosshair,
+  Atom,
+  Bot,
+  ExternalLink,
+  Github,
+  Lock,
+} from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 import githubStats from '@/data/github-stats.json'
 
 const themeIcons: Record<string, React.ReactNode> = {
   'protocol-security': <Shield size={16} />,
+  'bug-bounty': <Crosshair size={16} />,
+  'post-quantum': <Atom size={16} />,
+  'ai-security': <Bot size={16} />,
   'compiler-security': <Code size={16} />,
   'p2p-networking': <Network size={16} />,
   'fuzzing-infra': <Bug size={16} />,

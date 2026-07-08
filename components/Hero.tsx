@@ -4,7 +4,7 @@ import { ArrowDown } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 const stats = [
-  { value: '8+', label: 'years' },
+  { value: '10+', label: 'years' },
   { value: '20+', label: 'projects' },
   { value: '50+', label: 'vulnerabilities' },
   { value: '1000+', label: 'contributions' },
