@@ -18,7 +18,7 @@
       "title": "Security Engineer",
       "company": "Ethereum Foundation",
       "period": "2019 - Present",
-      "description": "Conducting security research and development for Ethereum protocol, focusing on smart contract security, consensus mechanisms, and protocol-level vulnerabilities."
+      "description": "Protocol security for Ethereum: differential fuzzing of execution clients, hard-fork readiness testing, and technical evaluation of bug bounty submissions across execution- and consensus-layer clients."
     },
     {
       "title": "Independent Security Researcher",
@@ -65,7 +65,8 @@
       "Protocol Security",
       "Differential Fuzzing",
       "Consensus Client Testing",
-      "Smart Contract Auditing",
+      "Bug Bounty Triage",
+      "Post-Quantum Cryptography",
       "Static Analysis"
     ],
     "blockchain": ["Ethereum", "EVM", "Execution Layer", "Consensus Layer"],
@@ -75,25 +76,82 @@
     {
       "id": "protocol-security",
       "title": "Ethereum Protocol Security",
-      "description": "Differential fuzzing and testing tools for validating EIP implementations and consensus-critical code across Ethereum execution layer clients.",
-      "tags": ["Go", "Solidity", "Python"],
+      "description": "Differential fuzzing and hard-fork readiness testing across Ethereum execution clients — finding consensus divergences before they reach mainnet.",
+      "tags": ["Go", "Rust", "Python"],
       "period": "2019 - Present",
       "highlights": [
-        "Built differential fuzzers for EIP-7702 (account abstraction) across geth, Nethermind, and Besu",
-        "Developed PrecompileFuzzer for testing EVM precompile implementations targeting the Prague hard fork",
-        "Created EthFuzzNet, an Ethereum network resilience testing framework",
-        "33 commits to goevmlab for EVM trace analysis and test generation"
+        "Coverage-guided differential fuzzing of state-test execution across geth, Besu, Nethermind, Erigon, and revm, built on goevmlab",
+        "Hard-fork readiness testing for upcoming upgrades: gas repricing, block-level access lists, and new EIP semantics validated against the executable specs",
+        "Upstream fixes merged in Erigon, Nethermind, revm, and ethereum/execution-specs",
+        "Earlier: EIP-7702 differential fuzzers across geth, Nethermind, and Besu; PrecompileFuzzer for the Prague hard fork; EthFuzzNet network-resilience testing"
       ],
       "links": [
-        { "label": "goevmlab", "url": "https://github.com/holiman/goevmlab", "type": "github" }
+        { "label": "goevmlab", "url": "https://github.com/holiman/goevmlab", "type": "github" },
+        {
+          "label": "execution-specs",
+          "url": "https://github.com/ethereum/execution-specs",
+          "type": "github"
+        }
       ]
+    },
+    {
+      "id": "bug-bounty",
+      "title": "Bug Bounty Triage",
+      "description": "Technical evaluator for the Ethereum Foundation bug bounty program: reproducing, assessing, and routing reported vulnerabilities across execution- and consensus-layer clients.",
+      "tags": ["Go", "Python"],
+      "period": "2026 - Present",
+      "highlights": [
+        "Evaluate submissions for consensus, finality, and denial-of-service impact to assign severity",
+        "Reproduce reported issues and confirm cross-client blast radius with differential test harnesses",
+        "Built internal tooling that manages the submission-to-triage workflow end to end"
+      ],
+      "links": [
+        { "label": "Ethereum Bug Bounty", "url": "https://bounty.ethereum.org", "type": "external" }
+      ]
+    },
+    {
+      "id": "post-quantum",
+      "title": "Post-Quantum Cryptography",
+      "description": "Differential testing of post-quantum standards: cross-checking independent ML-KEM (FIPS 203) and ML-DSA (FIPS 204) implementations against each other.",
+      "tags": ["C", "Rust"],
+      "period": "2026 - Present",
+      "highlights": [
+        "Built a coverage-guided differential fuzzer co-linking mlkem-native, BoringSSL, and libcrux",
+        "Functional-equivalence and constant-time checks across implementations",
+        "Published a four-part blog series on the approach and results"
+      ],
+      "links": [
+        {
+          "label": "ML-KEM series",
+          "url": "/blog/cross-checking-post-quantum-kem",
+          "type": "external"
+        },
+        {
+          "label": "ML-DSA post",
+          "url": "/blog/cross-checking-post-quantum-signature",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "id": "ai-security",
+      "title": "AI-Assisted Vulnerability Research",
+      "description": "Agentic systems that put LLMs to work on Ethereum client security: deterministic orchestration, auditable logs, and human review at the decision points.",
+      "tags": ["Python", "Go"],
+      "period": "2026 - Present",
+      "highlights": [
+        "Agent frameworks that decompose vulnerability research into context building, harness generation, PoC validation, and triage",
+        "Autonomous audit pipelines run against Ethereum client codebases in sandboxed environments",
+        "LLM-assisted severity assessment integrated into the bug bounty triage workflow"
+      ],
+      "links": []
     },
     {
       "id": "compiler-security",
       "title": "Compiler Security",
       "description": "Core contributor to the Solidity compiler's testing infrastructure, with 300+ commits focused on fuzzing and correctness testing.",
       "tags": ["C++", "Solidity"],
-      "period": "2018 - Present",
+      "period": "2018 - 2022",
       "highlights": [
         "303 commits to the Solidity compiler, primarily in fuzzing and testing",
         "Built ABI encoder v2 differential fuzzer",

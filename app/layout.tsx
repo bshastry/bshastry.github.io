@@ -11,12 +11,14 @@ export const metadata: Metadata = {
     template: '%s — Bhargava Shastry',
   },
   description:
-    'Security engineer at the Ethereum Foundation and indie security researcher specializing in smart contract security, fuzzing, and blockchain technology.',
+    'Security engineer at the Ethereum Foundation and indie security researcher specializing in protocol security, differential fuzzing, and Ethereum client testing.',
   keywords: [
     'security engineer',
     'ethereum',
     'blockchain',
-    'smart contracts',
+    'protocol security',
+    'differential fuzzing',
+    'bug bounty',
     'fuzzing',
     'security research',
   ],
