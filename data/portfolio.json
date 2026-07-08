@@ -78,7 +78,7 @@
       "title": "Ethereum Protocol Security",
       "description": "Differential fuzzing and hard-fork readiness testing across Ethereum execution clients — finding consensus divergences before they reach mainnet.",
       "tags": ["Go", "Rust", "Python"],
-      "period": "2019 - Present",
+      "period": "2022 - Present",
       "highlights": [
         "Coverage-guided differential fuzzing of state-test execution across geth, Besu, Nethermind, Erigon, and revm, built on goevmlab",
         "Hard-fork readiness testing for upcoming upgrades: gas repricing, block-level access lists, and new EIP semantics validated against the executable specs",
@@ -166,8 +166,9 @@
       "title": "P2P & Networking Security",
       "description": "Security testing of peer-to-peer networking stacks used in Ethereum consensus and execution clients.",
       "tags": ["Rust", "Go", "C++"],
-      "period": "2018 - 2022",
+      "period": "2022 - Present",
       "highlights": [
+        "Security testing of Ethereum wire protocols (eth/6x, snap/1), including upstream sync-protocol fixes merged in Nethermind",
         "Fuzzed libp2p (Rust implementation) for protocol-level vulnerabilities",
         "Built mplex-dos stress testing tool for libp2p multiplexing",
         "Contributed yamux stream multiplexer security patches",
