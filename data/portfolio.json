@@ -99,7 +99,7 @@
       "title": "Bug Bounty Triage",
       "description": "Technical evaluator for the Ethereum Foundation bug bounty program: reproducing, assessing, and routing reported vulnerabilities across execution- and consensus-layer clients.",
       "tags": ["Go", "Python"],
-      "period": "2025 - Present",
+      "period": "2026 - Present",
       "highlights": [
         "Evaluate submissions for consensus, finality, and denial-of-service impact to assign severity",
         "Reproduce reported issues and confirm cross-client blast radius with differential test harnesses",
@@ -138,7 +138,7 @@
       "title": "AI-Assisted Vulnerability Research",
       "description": "Agentic systems that put LLMs to work on Ethereum client security: deterministic orchestration, auditable logs, and human review at the decision points.",
       "tags": ["Python", "Go"],
-      "period": "2025 - Present",
+      "period": "2026 - Present",
       "highlights": [
         "Agent frameworks that decompose vulnerability research into context building, harness generation, PoC validation, and triage",
         "Autonomous audit pipelines run against Ethereum client codebases in sandboxed environments",
