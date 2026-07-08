@@ -151,7 +151,7 @@
       "title": "Compiler Security",
       "description": "Core contributor to the Solidity compiler's testing infrastructure, with 300+ commits focused on fuzzing and correctness testing.",
       "tags": ["C++", "Solidity"],
-      "period": "2018 - Present",
+      "period": "2018 - 2022",
       "highlights": [
         "303 commits to the Solidity compiler, primarily in fuzzing and testing",
         "Built ABI encoder v2 differential fuzzer",
