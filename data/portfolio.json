@@ -283,7 +283,8 @@
           "title": "Finding and Understanding Miscompilation Bugs in the Solidity Compiler",
           "authors": "B. Shastry",
           "venue": "arXiv preprint arXiv:2607.07217, 2026",
-          "award": null
+          "award": null,
+          "url": "https://arxiv.org/abs/2607.07217"
         }
       ]
     },
@@ -294,49 +295,57 @@
           "title": "Follow the White Rabbit: Simplifying Fuzz Testing Using FuzzExMachina",
           "authors": "V. Ulitzsch, D. Maier, B. Shastry",
           "venue": "Black Hat 2018",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Taking Control of SDN-based Cloud Systems via the Data Plane",
           "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
           "venue": "Symposium on SDN Research 2018",
-          "award": "Best Paper Award"
+          "award": "Best Paper Award",
+          "url": null
         },
         {
           "title": "The vAMP Attack: Taking Control of Cloud Systems via the Unified Packet Parser",
           "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
           "venue": "Cloud Computing Security Workshop 2017",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Static Program Analysis as a Fuzzing Aid",
           "authors": "B. Shastry, M. Leutner, T. Fiebig, K. Thimmaraju, F. Yamaguchi, K. Rieck, S. Schmid, J.P. Seifert, A. Feldmann",
           "venue": "RAID 2017",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Static exploration of taint-style vulnerabilities found by fuzzing",
           "authors": "B. Shastry, F. Maggi, F. Yamaguchi, K. Rieck, J.P. Seifert",
           "venue": "USENIX WOOT 2017",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Leveraging flawed tutorials for seeding large-scale web vulnerability discovery",
           "authors": "T. Unruh, B. Shastry, M. Skoruppa, F. Maggi, K. Rieck, J.P. Seifert, F. Yamaguchi",
           "venue": "USENIX WOOT 2017",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Towards Vulnerability Discovery Using Staged Program Analysis",
           "authors": "B. Shastry, F. Yamaguchi, K. Rieck, J.P. Seifert",
           "venue": "DIMVA 2016",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "A First Look at Firefox OS Security",
           "authors": "D. Defreez, B. Shastry, H. Chen, J.P. Seifert",
           "venue": "MoST 2014",
-          "award": null
+          "award": null,
+          "url": null
         }
       ]
     },
@@ -347,13 +356,15 @@
           "title": "Towards Taming Privilege-Escalation Attacks on Android",
           "authors": "S. Bugiel, L. Davi, A. Dmitrienko, T. Fischer, A.R. Sadeghi, B. Shastry",
           "venue": "NDSS 2012",
-          "award": null
+          "award": null,
+          "url": null
         },
         {
           "title": "Practical and lightweight domain isolation on android",
           "authors": "S. Bugiel, L. Davi, A. Dmitrienko, S. Heuser, A.R. Sadeghi, B. Shastry",
           "venue": "ACM SPSM 2011",
-          "award": null
+          "award": null,
+          "url": null
         }
       ]
     }

@@ -31,7 +31,18 @@ export default function Publications() {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <p className="font-medium text-fg">{paper.title}</p>
+                        {paper.url ? (
+                          <a
+                            href={paper.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-fg hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                          >
+                            {paper.title}
+                          </a>
+                        ) : (
+                          <p className="font-medium text-fg">{paper.title}</p>
+                        )}
                         <p className="mt-1 text-sm text-muted">{paper.authors}</p>
                         <p className="mt-1 text-sm font-medium text-accent">{paper.venue}</p>
                       </div>
