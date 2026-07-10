@@ -278,7 +278,14 @@
   "publications": [
     {
       "era": "Ethereum Foundation",
-      "papers": []
+      "papers": [
+        {
+          "title": "Finding and Understanding Miscompilation Bugs in the Solidity Compiler",
+          "authors": "B. Shastry",
+          "venue": "arXiv preprint arXiv:2607.07217, 2026",
+          "award": null
+        }
+      ]
     },
     {
       "era": "Ph.D. — TU Berlin",
