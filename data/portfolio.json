@@ -67,6 +67,7 @@
       "Consensus Client Testing",
       "Bug Bounty Triage",
       "Post-Quantum Cryptography",
+      "Side-Channel Analysis",
       "Static Analysis"
     ],
     "blockchain": ["Ethereum", "EVM", "Execution Layer", "Consensus Layer"],
@@ -130,6 +131,29 @@
           "label": "ML-DSA post",
           "url": "/blog/cross-checking-post-quantum-signature",
           "type": "external"
+        }
+      ]
+    },
+    {
+      "id": "crypto-side-channels",
+      "title": "Cryptographic Side-Channel Research",
+      "description": "Constant-time analysis of widely deployed cryptographic libraries: finding secret-dependent timing paths in Mbed TLS / TF-PSA-Crypto and reporting them through coordinated disclosure.",
+      "tags": ["C"],
+      "period": "2026 - Present",
+      "highlights": [
+        "Reported a variable-time division in mbedtls_mpi_mod_int reachable from RSA prime generation on a secret-data path — fixed in Mbed TLS 3.6.7 and TF-PSA-Crypto",
+        "Flagged a timing side channel in the ECC optimized modular reduction (ecp_modp) that was later confirmed exploitable, leading to the July 2026 Mbed TLS security advisory"
+      ],
+      "links": [
+        {
+          "label": "Mbed TLS advisory 2026-07",
+          "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/",
+          "type": "external"
+        },
+        {
+          "label": "TF-PSA-Crypto ChangeLog",
+          "url": "https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/ChangeLog",
+          "type": "github"
         }
       ]
     },
