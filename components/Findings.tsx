@@ -17,8 +17,8 @@ export default function Findings() {
           <p className="eyebrow mb-4">03 — Findings</p>
           <h2 className="section-title">Selected Findings</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
-            Don&apos;t take the numbers on faith — every entry below links to a public artifact:
-            a merged fix, upstreamed tests, or published research.
+            Don&apos;t take the numbers on faith — every entry below links to a public artifact: a
+            merged fix, upstreamed tests, or published research.
           </p>
         </div>
 
