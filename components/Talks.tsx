@@ -8,7 +8,7 @@ export default function Talks() {
     <section id="talks" className="py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
-          <p className="eyebrow mb-4">03 — Talks</p>
+          <p className="eyebrow mb-4">04 — Talks</p>
           <h2 className="section-title">Talks</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             Conference presentations and invited talks on fuzzing, compiler security, and
@@ -24,6 +24,12 @@ export default function Talks() {
             >
               <div className="min-w-0">
                 <h3 className="text-lg font-semibold text-fg">{talk.title}</h3>
+
+                {talk.summary && (
+                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+                    {talk.summary}
+                  </p>
+                )}
 
                 <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-faint">
                   <span className="flex items-center">

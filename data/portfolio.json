@@ -223,13 +223,80 @@
       "links": []
     }
   ],
+  "findings": [
+    {
+      "title": "25 miscompilation bugs in the Solidity compiler",
+      "description": "SolSmith, a semantics-aware differential fuzzer, surfaced miscompilation bugs that had gone unnoticed — some for years — with a root-cause analysis of each.",
+      "project": "ethereum/solidity",
+      "type": "Paper",
+      "date": "Jul 2026",
+      "url": "https://arxiv.org/abs/2607.07217"
+    },
+    {
+      "title": "Hard-fork readiness tests upstreamed to the executable spec",
+      "description": "EIP-8037 regression tests — state-gas refund on failed CREATE2 with init storage — merged into ethereum/execution-specs ahead of the fork.",
+      "project": "ethereum/execution-specs",
+      "type": "Merged tests",
+      "date": "Jun 2026",
+      "url": "https://github.com/ethereum/execution-specs/pull/3011"
+    },
+    {
+      "title": "Snap-sync trie-node response-limit fix in Nethermind",
+      "description": "Fix to FlatSnapServer's trie-node response limit, merged upstream as part of sync-protocol security testing of Ethereum's wire protocols.",
+      "project": "NethermindEth/nethermind",
+      "type": "Merged fix",
+      "date": "May 2026",
+      "url": "https://github.com/NethermindEth/nethermind/pull/11809"
+    },
+    {
+      "title": "BLOCKHASH returned zero for block 0 in revm",
+      "description": "revm's BlockHashCache incorrectly returned zero for the genesis block — a correctness divergence caught by differential state-test fuzzing; fix merged upstream.",
+      "project": "bluealloy/revm",
+      "type": "Merged fix",
+      "date": "Jan 2026",
+      "url": "https://github.com/bluealloy/revm/pull/3319"
+    },
+    {
+      "title": "EVM memory-size overflow crash in Nethermind",
+      "description": "Extreme memory-expansion requests could overflow the EVM's memory-size computation and crash the client; guard merged upstream.",
+      "project": "NethermindEth/nethermind",
+      "type": "Merged fix",
+      "date": "Dec 2025",
+      "url": "https://github.com/NethermindEth/nethermind/pull/9887"
+    },
+    {
+      "title": "Coinbase touched on failed transactions in Nethermind",
+      "description": "Nethermind's state-test path touched the coinbase account even when the transaction failed, diverging from other clients; fix merged upstream.",
+      "project": "NethermindEth/nethermind",
+      "type": "Merged fix",
+      "date": "Dec 2025",
+      "url": "https://github.com/NethermindEth/nethermind/pull/9865"
+    },
+    {
+      "title": "Spec-aware blob base-fee fraction in revm's state-test runner",
+      "description": "The statetest runner applied one blob base-fee update fraction across all forks; spec-aware fix merged upstream to keep differential comparisons honest.",
+      "project": "bluealloy/revm",
+      "type": "Merged fix",
+      "date": "Dec 2025",
+      "url": "https://github.com/bluealloy/revm/pull/3210"
+    },
+    {
+      "title": "State-test messages aligned with other clients in Erigon",
+      "description": "Erigon's statetest harness constructed transaction messages differently from other clients, skewing cross-client comparison; fix merged upstream.",
+      "project": "erigontech/erigon",
+      "type": "Merged fix",
+      "date": "Dec 2025",
+      "url": "https://github.com/erigontech/erigon/pull/18121"
+    }
+  ],
   "talks": [
     {
       "title": "Trust No Single Witness: Differential Fuzzing & Bug-Bounty Triage for Ethereum Clients",
       "venue": "Berlin Ethereum Day",
       "location": "Berlin",
       "year": 2026,
-      "slides": "/media/Trust_No_Single_Witness.pdf"
+      "slides": "/media/Trust_No_Single_Witness.pdf",
+      "summary": "There is no ground truth in Ethereum — only witnesses that disagree. How differential fuzzing across ~8 execution clients catches consensus splits within hours of a commit, how LLM property-based testing attacks the blind spots all clients share, and how a three-witness severity model (reporter, AI swarm, network blast radius) keeps AI-era bounty triage honest. Takeaway: a green checkmark is an agreed-upon guess."
     },
     {
       "title": "Fuzzing the Solidity Compiler",
@@ -237,42 +304,48 @@
       "location": "Osaka",
       "year": 2019,
       "slides": "/media/Fuzzing_Solidity.pdf",
-      "video": "https://youtu.be/cAU5NbrXst0"
+      "video": "https://youtu.be/cAU5NbrXst0",
+      "summary": "Threat model: incorrect code generation. Randomly generated valid Solidity/Yul programs stress the compiler's codegen and optimizer before releases ship."
     },
     {
       "title": "Fuzzing the Solidity Compiler",
       "venue": "EthCC 3",
       "location": "Paris",
       "year": 2020,
-      "slides": "/media/Fuzzing_Solidity_EthCC3.pdf"
+      "slides": "/media/Fuzzing_Solidity_EthCC3.pdf",
+      "summary": "Updated iteration of the Devcon 5 talk: nine bugs found via semantic fuzzing of the compiler's code generation."
     },
     {
       "title": "Fuzzing the Solidity Compiler",
       "venue": "FuzzCon EU",
       "location": "Europe",
       "year": 2020,
-      "slides": "/media/Fuzzing_Solidity_FuzzconEU.pdf"
+      "slides": "/media/Fuzzing_Solidity_FuzzconEU.pdf",
+      "summary": "The compiler-fuzzing pipeline presented to a fuzzing-practitioner audience: generating valid programs, differential oracles, and OSS-Fuzz integration."
     },
     {
       "title": "Can A Fuzzer Match A Human: Solidity Case Study",
       "venue": "Ethereum Foundation",
       "location": "",
       "year": 2020,
-      "slides": "/media/Can_A_Fuzzer_Match_A_Human.pdf"
+      "slides": "/media/Can_A_Fuzzer_Match_A_Human.pdf",
+      "summary": "A fuzzer is no match for a human tester — but it finds security-critical bugs humans miss, and it shines at differential (A/B) testing."
     },
     {
       "title": "Open Discussion on Solidity Fuzzing",
       "venue": "Ethereum Meetup",
       "location": "Berlin",
       "year": 2019,
-      "slides": "/media/Eth_Meetup_Slides.pdf"
+      "slides": "/media/Eth_Meetup_Slides.pdf",
+      "summary": "The state of Solidity compiler testing — unit, regression, and fuzz tests — and where community input could help."
     },
     {
       "title": "Vulnerability Search Problem and Methods",
       "venue": "TU Berlin (Invited Talk)",
       "location": "Berlin",
       "year": 2019,
-      "slides": "/media/Vulnerability_Search_Problem_and_Methods.pdf"
+      "slides": "/media/Vulnerability_Search_Problem_and_Methods.pdf",
+      "summary": "Why vulnerabilities are expensive, and how static analysis and fuzzing complement each other in finding them."
     }
   ],
   "publications": [

@@ -16,6 +16,7 @@ const navigation: NavItem[] = [
   { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
   { name: 'Research', href: '#projects', id: 'projects' },
+  { name: 'Findings', href: '#findings', id: 'findings' },
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Pubs', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
@@ -29,7 +30,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      const sections = ['home', 'about', 'projects', 'talks', 'publications']
+      const sections = ['home', 'about', 'projects', 'findings', 'talks', 'publications']
       const scrollPosition = window.scrollY + 100
       for (const section of sections) {
         const element = document.getElementById(section)

@@ -72,9 +72,24 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href="#findings" className="text-muted transition-colors hover:text-fg">
+                  Selected Findings
+                </a>
+              </li>
+              <li>
                 <Link href="/blog" className="text-muted transition-colors hover:text-fg">
                   Blog
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="/media/Bhargava_Shastry_CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted transition-colors hover:text-fg"
+                >
+                  CV (PDF)
+                </a>
               </li>
             </ul>
           </div>
@@ -102,6 +117,17 @@ export default function Footer() {
                   className="inline-flex items-center space-x-1 text-muted transition-colors hover:text-fg"
                 >
                   <span>Keybase</span>
+                  <ExternalLink size={14} className="text-faint" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://keybase.io/${personal.social.keybase}/pgp_keys.asc`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1 text-muted transition-colors hover:text-fg"
+                >
+                  <span>PGP Key</span>
                   <ExternalLink size={14} className="text-faint" />
                 </a>
               </li>
