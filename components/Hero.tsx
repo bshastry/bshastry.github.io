@@ -1,16 +1,31 @@
 'use client'
 
-import { ArrowDown } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowDown, FileDown, Sparkles } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 const stats = [
   { value: '10+', label: 'years' },
   { value: '20+', label: 'projects' },
   { value: '50+', label: 'vulnerabilities' },
-  { value: '1000+', label: 'contributions' },
+  { value: '11', label: 'publications' },
 ]
 
-export default function Hero() {
+interface LatestPost {
+  slug: string
+  title: string
+  date: string
+}
+
+function formatDate(date: string): string {
+  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    timeZone: 'UTC',
+  })
+}
+
+export default function Hero({ latestPost }: { latestPost: LatestPost | null }) {
   const { email } = portfolioData.personal
 
   const scrollToAbout = () => {
@@ -36,6 +51,21 @@ export default function Hero() {
             Independent Security Researcher
           </p>
 
+          {/* Latest activity */}
+          {latestPost && (
+            <Link
+              href={`/blog/${latestPost.slug}`}
+              className="group mx-auto mt-8 inline-flex max-w-full items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <Sparkles size={14} className="flex-shrink-0 text-accent" />
+              <span className="eyebrow flex-shrink-0">Latest</span>
+              <span className="truncate">{latestPost.title}</span>
+              <span className="flex-shrink-0 font-mono text-xs text-faint">
+                {formatDate(latestPost.date)}
+              </span>
+            </Link>
+          )}
+
           {/* Stats row */}
           <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 divide-line border-y border-line md:grid-cols-4 md:divide-x">
             {stats.map((stat) => (
@@ -51,10 +81,19 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div className="mt-16 flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="#projects"
+              href="#findings"
               className="btn-primary px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              View research
+              View findings
+            </a>
+            <a
+              href="/media/Bhargava_Shastry_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <FileDown size={16} />
+              <span>Download CV</span>
             </a>
             <a
               href={`mailto:${email}`}

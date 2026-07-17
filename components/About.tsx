@@ -5,7 +5,7 @@ export default function About() {
     { label: 'Years of Experience', value: '10+' },
     { label: 'Open Source Projects', value: '20+' },
     { label: 'Security Vulnerabilities Found', value: '50+' },
-    { label: 'Community Contributions', value: '1000+' },
+    { label: 'Publications & Preprints', value: '11' },
   ]
 
   const expertise = [
