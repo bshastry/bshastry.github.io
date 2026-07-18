@@ -1,10 +1,22 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowLeft, FileText, Scale, AlertTriangle, Mail } from 'lucide-react'
+import { ArrowLeft, Scale } from 'lucide-react'
+import portfolioData from '@/data/portfolio.json'
 
-export default function TermsOfServicePage() {
+export const metadata: Metadata = {
+  title: 'Disclaimer',
+  description:
+    'Disclaimer for bshastry.github.io: personal views, no warranties, and responsible use of published security research.',
+  alternates: { canonical: '/terms/' },
+}
+
+const LAST_UPDATED = 'July 18, 2026'
+
+export default function DisclaimerPage() {
+  const { email } = portfolioData.personal
+
   return (
-    <div className="min-h-screen bg-bg">
-      {/* Header */}
+    <main id="main-content" className="min-h-screen bg-bg">
       <div className="border-b border-line">
         <div className="container-max section-padding py-8">
           <Link
@@ -17,223 +29,59 @@ export default function TermsOfServicePage() {
 
           <div className="mb-4 flex items-center">
             <Scale size={32} className="mr-3 text-faint" />
-            <h1 className="section-title">Terms of Service</h1>
+            <h1 className="section-title">Disclaimer</h1>
           </div>
 
-          <p className="text-lg text-muted">
-            Last updated:{' '}
-            {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
+          <p className="text-lg text-muted">Last updated: {LAST_UPDATED}</p>
         </div>
       </div>
 
-      {/* Content */}
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
           <div className="panel p-8 md:p-12">
             <div className="prose prose-lg max-w-none">
-              {/* Introduction */}
               <section className="mb-8">
-                <h2 className="mb-4 flex items-center text-2xl font-bold text-fg">
-                  <FileText size={24} className="mr-2 text-faint" />
-                  Agreement to Terms
-                </h2>
+                <h2 className="mb-4 text-2xl font-bold text-fg">Personal views</h2>
                 <p className="leading-relaxed text-muted">
-                  By accessing and using this website (bshastry.github.io), you accept and agree to
-                  be bound by the terms and provision of this agreement. This is the personal
-                  portfolio website of Bhargava Shastry, Security Engineer at the Ethereum
-                  Foundation.
-                </p>
-                <p className="mt-4 leading-relaxed text-muted">
-                  If you do not agree to abide by the above, please do not use this service.
+                  This is my personal website. Everything published here — posts, findings, talks,
+                  and opinions — is my own and does not represent the position of the Ethereum
+                  Foundation or any other organization I work with, unless explicitly stated.
                 </p>
               </section>
 
-              {/* Use License */}
               <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Use License</h2>
-                <p className="mb-4 leading-relaxed text-muted">
-                  Permission is granted to temporarily download one copy of the materials on this
-                  website for personal, non-commercial transitory viewing only. This is the grant of
-                  a license, not a transfer of title, and under this license you may not:
-                </p>
-                <ul className="mb-4 list-inside list-disc space-y-2 text-muted">
-                  <li>modify or copy the materials</li>
-                  <li>
-                    use the materials for any commercial purpose or for any public display
-                    (commercial or non-commercial)
-                  </li>
-                  <li>
-                    attempt to decompile or reverse engineer any software contained on the website
-                  </li>
-                  <li>remove any copyright or other proprietary notations from the materials</li>
-                </ul>
+                <h2 className="mb-4 text-2xl font-bold text-fg">Security research</h2>
                 <p className="leading-relaxed text-muted">
-                  This license shall automatically terminate if you violate any of these
-                  restrictions and may be terminated by me at any time. Upon terminating your
-                  viewing of these materials or upon the termination of this license, you must
-                  destroy any downloaded materials in your possession whether in electronic or
-                  printed format.
+                  Vulnerability write-ups and security research on this site are published for
+                  defensive and educational purposes, after coordinated disclosure where applicable.
+                  Don&apos;t use anything here to attack systems you are not authorized to test.
                 </p>
               </section>
 
-              {/* Content and Research */}
               <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Content and Research</h2>
-                <p className="mb-4 leading-relaxed text-muted">
-                  This website contains information about security research, software engineering,
-                  and academic work. Please note:
-                </p>
-                <ul className="mb-4 list-inside list-disc space-y-2 text-muted">
-                  <li>
-                    Research content is provided for educational and informational purposes only
-                  </li>
-                  <li>Security research information should not be used for malicious purposes</li>
-                  <li>Code examples and technical content are provided "as is" without warranty</li>
-                  <li>
-                    Always follow responsible disclosure practices when dealing with security
-                    vulnerabilities
-                  </li>
-                </ul>
-
-                <div className="mb-6 border-l-2 border-accent bg-accent/10 p-4">
-                  <div className="flex items-start">
-                    <AlertTriangle size={20} className="mr-2 mt-1 flex-shrink-0 text-accent" />
-                    <div>
-                      <p className="font-semibold text-fg">Important Notice</p>
-                      <p className="mt-1 text-muted">
-                        Any security research or vulnerability information shared on this site is
-                        intended for defensive and educational purposes. Misuse of this information
-                        for malicious activities is strictly prohibited and may be illegal.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Disclaimer */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Disclaimer</h2>
-                <p className="mb-4 leading-relaxed text-muted">
-                  The materials on this website are provided on an 'as is' basis. I make no
-                  warranties, expressed or implied, and hereby disclaim and negate all other
-                  warranties including without limitation, implied warranties or conditions of
-                  merchantability, fitness for a particular purpose, or non-infringement of
-                  intellectual property or other violation of rights.
-                </p>
+                <h2 className="mb-4 text-2xl font-bold text-fg">No warranty</h2>
                 <p className="leading-relaxed text-muted">
-                  Further, I do not warrant or make any representations concerning the accuracy,
-                  likely results, or reliability of the use of the materials on its website or
-                  otherwise relating to such materials or on any sites linked to this site.
+                  Content, including code samples, is provided &quot;as is&quot; without warranty of
+                  any kind. Technical material can become outdated or contain errors, and I accept
+                  no liability for damages arising from its use. Links to external sites are
+                  provided for convenience and do not imply endorsement.
                 </p>
               </section>
 
-              {/* Limitations */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Limitations</h2>
+              <section>
+                <h2 className="mb-4 text-2xl font-bold text-fg">Questions</h2>
                 <p className="leading-relaxed text-muted">
-                  In no event shall Bhargava Shastry or his employers be liable for any damages
-                  (including, without limitation, damages for loss of data or profit, or due to
-                  business interruption) arising out of the use or inability to use the materials on
-                  this website, even if I or my authorized representative has been notified orally
-                  or in writing of the possibility of such damage. Because some jurisdictions do not
-                  allow limitations on implied warranties, or limitations of liability for
-                  consequential or incidental damages, these limitations may not apply to you.
+                  If anything here seems wrong or you have questions about this site, email me at{' '}
+                  <a href={`mailto:${email}`} className="link-accent">
+                    {email}
+                  </a>
+                  .
                 </p>
               </section>
-
-              {/* Professional Disclaimer */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Professional Disclaimer</h2>
-                <p className="mb-4 leading-relaxed text-muted">
-                  The views and opinions expressed on this website are my own and do not necessarily
-                  reflect the official policy or position of the Ethereum Foundation or any other
-                  organization I am affiliated with.
-                </p>
-                <p className="leading-relaxed text-muted">
-                  Any content related to security research, vulnerability disclosure, or technical
-                  analysis represents my personal research and should not be attributed to my
-                  employers unless explicitly stated otherwise.
-                </p>
-              </section>
-
-              {/* Accuracy of Materials */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Accuracy of Materials</h2>
-                <p className="leading-relaxed text-muted">
-                  The materials appearing on this website could include technical, typographical, or
-                  photographic errors. I do not warrant that any of the materials on its website are
-                  accurate, complete, or current. I may make changes to the materials contained on
-                  its website at any time without notice. However, I do not make any commitment to
-                  update the materials.
-                </p>
-              </section>
-
-              {/* Links */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Links</h2>
-                <p className="leading-relaxed text-muted">
-                  I have not reviewed all of the sites linked to this website and am not responsible
-                  for the contents of any such linked site. The inclusion of any link does not imply
-                  endorsement by me of the site. Use of any such linked website is at the user's own
-                  risk.
-                </p>
-              </section>
-
-              {/* Modifications */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Modifications</h2>
-                <p className="leading-relaxed text-muted">
-                  I may revise these terms of service for its website at any time without notice. By
-                  using this website, you are agreeing to be bound by the then current version of
-                  these terms of service.
-                </p>
-              </section>
-
-              {/* Governing Law */}
-              <section className="mb-8">
-                <h2 className="mb-4 text-2xl font-bold text-fg">Governing Law</h2>
-                <p className="leading-relaxed text-muted">
-                  These terms and conditions are governed by and construed in accordance with the
-                  laws of Germany and you irrevocably submit to the exclusive jurisdiction of the
-                  courts in that State or location.
-                </p>
-              </section>
-
-              {/* Contact Information */}
-              <section className="mb-8">
-                <h2 className="mb-4 flex items-center text-2xl font-bold text-fg">
-                  <Mail size={24} className="mr-2 text-faint" />
-                  Contact Information
-                </h2>
-                <p className="mb-4 leading-relaxed text-muted">
-                  If you have any questions about these Terms of Service, please contact me:
-                </p>
-                <div className="panel p-4">
-                  <p className="text-muted">
-                    <strong>Email:</strong> Available through the contact form on this website
-                  </p>
-                  <p className="text-muted">
-                    <strong>Response Time:</strong> I aim to respond within 48 hours
-                  </p>
-                </div>
-              </section>
-
-              {/* Footer */}
-              <div className="mt-8 border-t border-line pt-6">
-                <p className="text-center text-sm text-faint">
-                  These terms of service are designed to protect both visitors and the content
-                  creator while promoting responsible use of security research information.
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

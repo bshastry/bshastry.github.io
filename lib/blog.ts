@@ -40,8 +40,14 @@ export interface BlogPostMeta {
   series?: SeriesInfo
 }
 
+export interface PostHeading {
+  id: string
+  text: string
+}
+
 export interface BlogPost extends BlogPostMeta {
   contentHtml: string
+  headings: PostHeading[]
 }
 
 interface PostFrontmatter {
@@ -143,6 +149,28 @@ export function getSeriesParts(seriesId: string, currentSlug?: string): SeriesPa
   return parts.length > 1 ? parts : []
 }
 
+/**
+ * Top-level (h2) headings extracted from the rendered HTML, used for the
+ * table of contents. Ids come from rehype-slug, so anchors always match.
+ */
+function extractHeadings(contentHtml: string): PostHeading[] {
+  const headings: PostHeading[] = []
+  const pattern = /<h2 id="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g
+  let match: RegExpExecArray | null
+  while ((match = pattern.exec(contentHtml)) !== null) {
+    const text = match[2]
+      .replace(/<[^>]+>/g, '')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#x27;|&#39;/g, "'")
+      .trim()
+    if (text) headings.push({ id: match[1], text })
+  }
+  return headings
+}
+
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const parsed = readPostFile(slug)
   if (!parsed) return null
@@ -161,6 +189,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     .use(rehypeStringify)
     .process(body)
 
+  const contentHtml = String(processed)
+
   return {
     slug,
     title: frontmatter.title,
@@ -169,6 +199,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     tags: frontmatter.tags ?? [],
     readTime: computeReadTime(body),
     series: parseSeries(frontmatter, slug),
-    contentHtml: String(processed),
+    contentHtml,
+    headings: extractHeadings(contentHtml),
   }
 }

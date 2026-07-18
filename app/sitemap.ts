@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getAllSlugs } from '@/lib/blog'
+import { getAllPostsMeta } from '@/lib/blog'
 export const dynamic = 'force-static'
 
 const BASE = 'https://bshastry.github.io'
@@ -7,12 +7,13 @@ const BASE = 'https://bshastry.github.io'
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, changeFrequency: 'monthly', priority: 1 },
-    { url: `${BASE}/blog`, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/terms`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/blog/`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${BASE}/privacy/`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/terms/`, changeFrequency: 'yearly', priority: 0.3 },
   ]
-  const postRoutes: MetadataRoute.Sitemap = getAllSlugs().map((slug) => ({
-    url: `${BASE}/blog/${slug}`,
+  const postRoutes: MetadataRoute.Sitemap = getAllPostsMeta().map((post) => ({
+    url: `${BASE}/blog/${post.slug}/`,
+    lastModified: new Date(`${post.date}T00:00:00Z`),
     changeFrequency: 'yearly',
     priority: 0.7,
   }))

@@ -87,7 +87,11 @@
         "Earlier: EIP-7702 differential fuzzers across geth, Nethermind, and Besu; PrecompileFuzzer for the Prague hard fork; EthFuzzNet network-resilience testing"
       ],
       "links": [
-        { "label": "goevmlab", "url": "https://github.com/holiman/goevmlab", "type": "github" },
+        {
+          "label": "goevmlab",
+          "url": "https://github.com/holiman/goevmlab",
+          "type": "github"
+        },
         {
           "label": "execution-specs",
           "url": "https://github.com/ethereum/execution-specs",
@@ -107,7 +111,11 @@
         "Built internal tooling that manages the submission-to-triage workflow end to end"
       ],
       "links": [
-        { "label": "Ethereum Bug Bounty", "url": "https://bounty.ethereum.org", "type": "external" }
+        {
+          "label": "Ethereum Bug Bounty",
+          "url": "https://bounty.ethereum.org",
+          "type": "external"
+        }
       ]
     },
     {
@@ -182,7 +190,11 @@
         "Discovered and reported numerous compiler correctness bugs through structure-aware fuzzing"
       ],
       "links": [
-        { "label": "Solidity", "url": "https://github.com/ethereum/solidity", "type": "github" }
+        {
+          "label": "Solidity",
+          "url": "https://github.com/ethereum/solidity",
+          "type": "github"
+        }
       ]
     },
     {
@@ -199,7 +211,11 @@
         "Security research on Prysm (Ethereum consensus client)"
       ],
       "links": [
-        { "label": "rust-libp2p", "url": "https://github.com/libp2p/rust-libp2p", "type": "github" }
+        {
+          "label": "rust-libp2p",
+          "url": "https://github.com/libp2p/rust-libp2p",
+          "type": "github"
+        }
       ]
     },
     {
@@ -214,8 +230,16 @@
         "Developed custom protocol-buffer based mutation strategies for structure-aware fuzzing"
       ],
       "links": [
-        { "label": "orthrus", "url": "https://github.com/bshastry/orthrus", "type": "github" },
-        { "label": "oss-fuzz", "url": "https://github.com/google/oss-fuzz", "type": "github" }
+        {
+          "label": "orthrus",
+          "url": "https://github.com/bshastry/orthrus",
+          "type": "github"
+        },
+        {
+          "label": "oss-fuzz",
+          "url": "https://github.com/google/oss-fuzz",
+          "type": "github"
+        }
       ]
     },
     {
@@ -231,7 +255,11 @@
         "Discovered and reported Boost Filesystem crash bugs"
       ],
       "links": [
-        { "label": "Open vSwitch", "url": "https://github.com/openvswitch/ovs", "type": "github" }
+        {
+          "label": "Open vSwitch",
+          "url": "https://github.com/openvswitch/ovs",
+          "type": "github"
+        }
       ]
     },
     {
@@ -409,56 +437,56 @@
           "authors": "V. Ulitzsch, D. Maier, B. Shastry",
           "venue": "Black Hat 2018",
           "award": null,
-          "url": null
+          "url": "https://i.blackhat.com/us-18/Thu-August-9/us-18-Ulitzsch-Follow-The-White-Rabbit-Simplifying-Fuzz-Testing-Using-FuzzExMachina.pdf"
         },
         {
           "title": "Taking Control of SDN-based Cloud Systems via the Data Plane",
           "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
           "venue": "Symposium on SDN Research 2018",
           "award": "Best Paper Award",
-          "url": null
+          "url": "https://doi.org/10.1145/3185467.3185468"
         },
         {
           "title": "The vAMP Attack: Taking Control of Cloud Systems via the Unified Packet Parser",
           "authors": "K. Thimmaraju, B. Shastry, T. Fiebig, F. Hetzelt, J.P. Seifert, A. Feldmann, S. Schmid",
           "venue": "Cloud Computing Security Workshop 2017",
           "award": null,
-          "url": null
+          "url": "https://doi.org/10.1145/3140649.3140651"
         },
         {
           "title": "Static Program Analysis as a Fuzzing Aid",
           "authors": "B. Shastry, M. Leutner, T. Fiebig, K. Thimmaraju, F. Yamaguchi, K. Rieck, S. Schmid, J.P. Seifert, A. Feldmann",
           "venue": "RAID 2017",
           "award": null,
-          "url": null
+          "url": "https://doi.org/10.1007/978-3-319-66332-6_2"
         },
         {
           "title": "Static exploration of taint-style vulnerabilities found by fuzzing",
           "authors": "B. Shastry, F. Maggi, F. Yamaguchi, K. Rieck, J.P. Seifert",
           "venue": "USENIX WOOT 2017",
           "award": null,
-          "url": null
+          "url": "https://www.usenix.org/conference/woot17/workshop-program/presentation/shastry"
         },
         {
           "title": "Leveraging flawed tutorials for seeding large-scale web vulnerability discovery",
           "authors": "T. Unruh, B. Shastry, M. Skoruppa, F. Maggi, K. Rieck, J.P. Seifert, F. Yamaguchi",
           "venue": "USENIX WOOT 2017",
           "award": null,
-          "url": null
+          "url": "https://www.usenix.org/conference/woot17/workshop-program/presentation/unruh"
         },
         {
           "title": "Towards Vulnerability Discovery Using Staged Program Analysis",
           "authors": "B. Shastry, F. Yamaguchi, K. Rieck, J.P. Seifert",
           "venue": "DIMVA 2016",
           "award": null,
-          "url": null
+          "url": "https://doi.org/10.1007/978-3-319-40667-1_5"
         },
         {
           "title": "A First Look at Firefox OS Security",
           "authors": "D. Defreez, B. Shastry, H. Chen, J.P. Seifert",
           "venue": "MoST 2014",
           "award": null,
-          "url": null
+          "url": "https://arxiv.org/abs/1410.7754"
         }
       ]
     },
@@ -470,14 +498,14 @@
           "authors": "S. Bugiel, L. Davi, A. Dmitrienko, T. Fischer, A.R. Sadeghi, B. Shastry",
           "venue": "NDSS 2012",
           "award": null,
-          "url": null
+          "url": "https://www.ndss-symposium.org/ndss2012/ndss-2012-programme/towards-taming-privilege-escalation-attacks-android/"
         },
         {
           "title": "Practical and lightweight domain isolation on android",
           "authors": "S. Bugiel, L. Davi, A. Dmitrienko, S. Heuser, A.R. Sadeghi, B. Shastry",
           "venue": "ACM SPSM 2011",
           "award": null,
-          "url": null
+          "url": "https://doi.org/10.1145/2046614.2046624"
         }
       ]
     }

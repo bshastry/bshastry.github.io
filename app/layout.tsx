@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Bhargava Shastry' }],
   alternates: {
     canonical: '/',
+    types: {
+      'application/rss+xml': [{ url: '/feed.xml', title: 'Bhargava Shastry — Blog' }],
+    },
   },
   openGraph: {
     type: 'website',
@@ -60,7 +63,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   )
 }

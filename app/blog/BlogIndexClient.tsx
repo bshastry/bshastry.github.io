@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Calendar, Clock, ArrowLeft, Search, Tag } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, Search, Tag, Rss } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import ThemeToggle from '@/components/ThemeToggle'
 import { PostTitle } from '@/components/PostTitle'
@@ -36,7 +36,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
   }, [searchTerm, selectedTag, posts])
 
   return (
-    <div className="min-h-screen bg-bg">
+    <main id="main-content" className="min-h-screen bg-bg">
       <div className="border-b border-line">
         <div className="container-max section-padding py-8">
           <div className="mb-6 flex items-center justify-between">
@@ -58,6 +58,13 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
               security, and vulnerability research. Sharing knowledge from years of security
               engineering experience.
             </p>
+            <a
+              href="/feed.xml"
+              className="link-accent mt-4 inline-flex items-center text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <Rss size={14} className="mr-2" />
+              Subscribe via RSS
+            </a>
           </div>
 
           <div className="mb-8 flex flex-col gap-4 md:flex-row">
@@ -110,11 +117,13 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
                 <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
                   <div className="mb-2 flex items-center text-sm text-faint md:mb-0">
                     <Calendar size={16} className="mr-2" />
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                    <time dateTime={post.date}>
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
                     <Clock size={16} className="ml-4 mr-2" />
                     {post.readTime}
                   </div>
@@ -154,6 +163,6 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
           </div>
         )}
       </div>
-    </div>
+    </main>
   )
 }

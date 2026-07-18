@@ -41,7 +41,7 @@ export default function BlogPostClient({
     .slice(0, 2)
 
   return (
-    <div className="min-h-screen bg-bg">
+    <main id="main-content" className="min-h-screen bg-bg">
       <div className="border-b border-line">
         <div className="container-max section-padding py-8">
           <div className="mb-6 flex items-center justify-between">
@@ -72,11 +72,13 @@ export default function BlogPostClient({
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="mb-4 flex items-center text-sm text-faint md:mb-0">
                 <Calendar size={16} className="mr-2" />
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
                 <Clock size={16} className="ml-4 mr-2" />
                 {post.readTime}
               </div>
@@ -97,6 +99,24 @@ export default function BlogPostClient({
       <div className="container-max section-padding py-12">
         <div className="mx-auto max-w-4xl">
           {seriesTitle && <SeriesNav title={seriesTitle} parts={seriesParts} />}
+
+          {post.headings.length >= 3 && (
+            <nav aria-label="Table of contents" className="mb-10 border-l-2 border-line py-1 pl-6">
+              <p className="eyebrow mb-3">On this page</p>
+              <ul className="space-y-2">
+                {post.headings.map((heading) => (
+                  <li key={heading.id}>
+                    <a
+                      href={`#${heading.id}`}
+                      className="text-sm text-muted transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
 
           <article>
             <div
@@ -123,11 +143,13 @@ export default function BlogPostClient({
                     <p className="mb-3 text-sm text-muted">{rp.excerpt}</p>
                     <div className="flex items-center text-sm text-faint">
                       <Calendar size={14} className="mr-1" />
-                      {new Date(rp.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      })}
+                      <time dateTime={rp.date}>
+                        {new Date(rp.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </time>
                       <Clock size={14} className="ml-3 mr-1" />
                       {rp.readTime}
                     </div>
@@ -138,6 +160,6 @@ export default function BlogPostClient({
           )}
         </div>
       </div>
-    </div>
+    </main>
   )
 }

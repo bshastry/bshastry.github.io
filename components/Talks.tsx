@@ -2,7 +2,7 @@ import { FileText, Video, MapPin, Calendar } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 export default function Talks() {
-  const { talks } = portfolioData
+  const talks = [...portfolioData.talks].sort((a, b) => b.year - a.year)
 
   return (
     <section id="talks" className="py-24 md:py-28">
