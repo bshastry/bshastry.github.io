@@ -2,29 +2,33 @@
 
 import Link from 'next/link'
 import { ArrowDown, Sparkles } from 'lucide-react'
+import type { BlogPostMeta } from '@/lib/blog'
+import { formatDate } from '@/lib/format'
 
-const stats = [
-  { value: '10+', label: 'years' },
-  { value: '20+', label: 'projects' },
-  { value: '50+', label: 'vulnerabilities' },
-  { value: '11', label: 'publications' },
-]
+type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
 
-interface LatestPost {
-  slug: string
-  title: string
-  date: string
+interface HeroProps {
+  latestPost: LatestPost | null
+  // Counts come from the server component so this client component doesn't
+  // ship the whole portfolio JSON just to render two numbers.
+  findingsCount: number
+  publicationsCount: number
 }
 
-function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    timeZone: 'UTC',
-  })
-}
+export default function Hero({ latestPost, findingsCount, publicationsCount }: HeroProps) {
+  // Every number links to the evidence behind it — no unexplained totals.
+  const stats = [
+    { value: '10+', label: 'years in security', href: '#about' },
+    {
+      value: '300+',
+      label: 'compiler commits',
+      href: 'https://github.com/ethereum/solidity/commits?author=bshastry',
+      external: true,
+    },
+    { value: String(findingsCount), label: 'public findings', href: '#findings' },
+    { value: String(publicationsCount), label: 'publications', href: '#publications' },
+  ]
 
-export default function Hero({ latestPost }: { latestPost: LatestPost | null }) {
   const scrollToAbout = () => {
     const element = document.getElementById('about')
     if (element) {
@@ -46,16 +50,17 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
 
           {/* Defining statement */}
           <p className="mx-auto mt-8 max-w-3xl text-xl text-muted md:text-2xl">
-            <span className="text-accent">Ethereum protocol security</span> through differential
-            testing — finding cross-client divergences, hard-fork bugs, and cryptographic
-            implementation failures before deployment.
+            I find <span className="text-accent">cross-implementation failures</span> before they
+            become production incidents — differential testing of Ethereum clients, cryptographic
+            libraries, and compilers that turns disagreement between systems into reproducible
+            evidence.
           </p>
 
-          {/* Currently */}
+          {/* Proof line */}
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-faint">
-            Currently: Security Engineer at the Ethereum Foundation — differential fuzzing of
-            execution clients and bug-bounty triage. Open to research collaboration and speaking
-            invitations.
+            Security Engineer at the Ethereum Foundation. Beyond the day job, I design and build
+            AI-driven triage and vulnerability-discovery pipelines that scale this method — agentic
+            systems with auditable logs and human review at the decision points.
           </p>
 
           {/* Latest activity */}
@@ -71,43 +76,54 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
                 dateTime={latestPost.date}
                 className="flex-shrink-0 font-mono text-xs text-faint"
               >
-                {formatDate(latestPost.date)}
+                {formatDate(latestPost.date, { year: 'numeric', month: 'short' })}
               </time>
             </Link>
           )}
 
-          {/* Stats row */}
+          {/* Stats row — each stat links to its evidence */}
           <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 divide-line border-y border-line md:grid-cols-4 md:divide-x">
             {stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center gap-2 px-4 py-8">
+              <a
+                key={stat.label}
+                href={stat.href}
+                {...(stat.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="flex flex-col items-center gap-2 px-4 py-8 transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+              >
                 <span className="font-mono text-4xl font-semibold tracking-tight text-fg md:text-5xl">
                   {stat.value}
                 </span>
                 <span className="eyebrow">{stat.label}</span>
-              </div>
+              </a>
             ))}
           </div>
 
           {/* CTA Buttons */}
           <div className="mt-16 flex flex-col justify-center gap-4 sm:flex-row">
             <a
-              href="#findings"
+              href="#case-studies"
               className="btn-primary px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Explore verified findings
+              See case studies
             </a>
             <a
               href="#contact"
               className="btn-ghost px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Work with me
+              Discuss a scoped review
             </a>
           </div>
+
+          {/* Independence qualifier */}
+          <p className="mx-auto mt-6 max-w-xl text-xs leading-relaxed text-faint">
+            Independent engagements are limited and subject to conflict review. Employer affiliation
+            does not imply endorsement.
+          </p>
 
           {/* Scroll indicator */}
           <button
             onClick={scrollToAbout}
-            className="mt-20 animate-bounce text-faint transition-colors duration-200 hover:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="mt-16 animate-bounce text-faint transition-colors duration-200 hover:text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Scroll to about section"
           >
             <ArrowDown size={24} />

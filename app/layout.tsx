@@ -12,13 +12,14 @@ export const metadata: Metadata = {
     template: '%s — Bhargava Shastry',
   },
   description:
-    'Security engineer at the Ethereum Foundation and indie security researcher specializing in protocol security, differential fuzzing, and Ethereum client testing.',
+    'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures in Ethereum clients, cryptographic libraries, and compilers before they become production incidents.',
   keywords: [
-    'security engineer',
-    'ethereum',
-    'blockchain',
-    'protocol security',
+    'differential testing',
     'differential fuzzing',
+    'ethereum',
+    'protocol security',
+    'post-quantum cryptography',
+    'AI-assisted vulnerability research',
     'bug bounty',
     'fuzzing',
     'security research',
@@ -31,12 +32,14 @@ export const metadata: Metadata = {
     url: 'https://bshastry.github.io',
     siteName: 'Bhargava Shastry',
     title: 'Bhargava Shastry — Security Engineer & Researcher',
-    description: 'Security engineer at the Ethereum Foundation and indie security researcher.',
+    description:
+      'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures before they become production incidents.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Bhargava Shastry — Security Engineer & Researcher',
-    description: 'Security engineer at the Ethereum Foundation and indie security researcher.',
+    description:
+      'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures before they become production incidents.',
     creator: '@ibags',
   },
 }

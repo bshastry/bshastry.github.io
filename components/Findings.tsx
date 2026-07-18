@@ -1,11 +1,14 @@
-import { ExternalLink, FileText, GitMerge } from 'lucide-react'
+import { ExternalLink, FileText, GitMerge, ShieldAlert } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 const typeIcons: Record<string, React.ReactNode> = {
   Paper: <FileText size={12} />,
   'Merged fix': <GitMerge size={12} />,
   'Merged tests': <GitMerge size={12} />,
+  'Fixed upstream': <GitMerge size={12} />,
+  'Security advisory': <ShieldAlert size={12} />,
 }
+const fallbackTypeIcon = <FileText size={12} />
 
 export default function Findings() {
   const { findings } = portfolioData
@@ -14,11 +17,12 @@ export default function Findings() {
     <section id="findings" className="py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
-          <p className="eyebrow mb-4">03 — Findings</p>
+          <p className="eyebrow mb-4">04 — Findings</p>
           <h2 className="section-title">Selected Findings</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
-            Don&apos;t take the numbers on faith — every entry below links to a public artifact: a
-            merged fix, upstreamed tests, or published research.
+            The evidence index behind the case studies. Don&apos;t take the numbers on faith — every
+            entry below links to a public artifact: a merged fix, upstreamed tests, or published
+            research.
           </p>
         </div>
 
@@ -33,7 +37,7 @@ export default function Findings() {
             >
               <div className="mb-3 flex items-center justify-between gap-3">
                 <span className="chip gap-1.5">
-                  {typeIcons[finding.type]}
+                  {typeIcons[finding.type] ?? fallbackTypeIcon}
                   <span>{finding.type}</span>
                 </span>
                 <span className="font-mono text-xs text-faint">{finding.date}</span>

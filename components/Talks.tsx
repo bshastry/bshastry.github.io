@@ -8,7 +8,7 @@ export default function Talks() {
     <section id="talks" className="py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
-          <p className="eyebrow mb-4">04 — Talks</p>
+          <p className="eyebrow mb-4">05 — Talks</p>
           <h2 className="section-title">Talks</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             Conference presentations and invited talks on fuzzing, compiler security, and

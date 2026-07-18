@@ -16,8 +16,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="mb-4 text-2xl font-semibold tracking-tight text-fg">{personal.name}</h3>
             <p className="mb-6 max-w-md text-muted">
-              {personal.title} specializing in security engineering, blockchain security, and
-              vulnerability research. Building secure systems and advancing cybersecurity.
+              Differential testing for critical protocol and cryptographic implementations — finding
+              cross-implementation failures before they become production incidents.
             </p>
             <div className="flex space-x-5">
               <a
@@ -64,6 +64,11 @@ export default function Footer() {
               <li>
                 <a href="#about" className="text-muted transition-colors hover:text-fg">
                   About
+                </a>
+              </li>
+              <li>
+                <a href="#case-studies" className="text-muted transition-colors hover:text-fg">
+                  Case Studies
                 </a>
               </li>
               <li>
@@ -166,6 +171,10 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-8 border-t border-line pt-8">
+          <p className="mb-6 text-center font-mono text-xs text-faint md:text-left">
+            Views and independent engagements are my own and do not represent or imply endorsement
+            by the Ethereum Foundation.
+          </p>
           <div className="flex flex-col items-center justify-between md:flex-row">
             <p className="font-mono text-xs text-faint">
               © {currentYear} {personal.name}. All rights reserved.

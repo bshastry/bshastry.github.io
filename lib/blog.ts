@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { cache } from 'react'
 import { load } from 'js-yaml'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
@@ -158,20 +159,24 @@ function extractHeadings(contentHtml: string): PostHeading[] {
   const pattern = /<h2 id="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g
   let match: RegExpExecArray | null
   while ((match = pattern.exec(contentHtml)) !== null) {
+    // &amp; must decode last: decoding it first would turn a literal
+    // "&amp;lt;" in the source into "&lt;" and then into "<".
     const text = match[2]
       .replace(/<[^>]+>/g, '')
-      .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#x27;|&#39;/g, "'")
+      .replace(/&amp;/g, '&')
       .trim()
     if (text) headings.push({ id: match[1], text })
   }
   return headings
 }
 
-export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+// cache() dedupes the markdown pipeline within a render pass — without it,
+// generateMetadata and the page component each recompile every post at build.
+export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
   const parsed = readPostFile(slug)
   if (!parsed) return null
   const { frontmatter, body } = parsed
@@ -202,4 +207,4 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     contentHtml,
     headings: extractHeadings(contentHtml),
   }
-}
+})

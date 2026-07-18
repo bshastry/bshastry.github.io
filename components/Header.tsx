@@ -13,14 +13,29 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
+  { name: 'Case Studies', href: '#case-studies', id: 'case-studies' },
   { name: 'Research', href: '#research', id: 'research' },
   { name: 'Findings', href: '#findings', id: 'findings' },
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Pubs', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
+  { name: 'Work', href: '#contact', id: 'contact' },
+]
+
+// Scroll-spy tracks every homepage section, including ones without a nav
+// item (home, writing) — otherwise the previous section's link would stay
+// highlighted while the user scrolls through them.
+const sectionIds = [
+  'home',
+  'about',
+  'case-studies',
+  'research',
+  'findings',
+  'talks',
+  'writing',
+  'publications',
+  'contact',
 ]
 
 export default function Header() {
@@ -31,9 +46,8 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      const sections = navigation.flatMap((item) => (item.id ? [item.id] : []))
       const scrollPosition = window.scrollY + 100
-      for (const section of sections) {
+      for (const section of sectionIds) {
         const element = document.getElementById(section)
         if (!element) continue
         const { offsetTop, offsetHeight } = element

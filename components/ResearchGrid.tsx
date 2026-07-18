@@ -5,7 +5,6 @@ import {
   Bug,
   Globe,
   Wallet,
-  Crosshair,
   Atom,
   Bot,
   Timer,
@@ -27,10 +26,9 @@ export interface Theme {
 
 const themeIcons: Record<string, React.ReactNode> = {
   'protocol-security': <Shield size={16} />,
-  'bug-bounty': <Crosshair size={16} />,
+  'ai-pipelines': <Bot size={16} />,
   'post-quantum': <Atom size={16} />,
   'crypto-side-channels': <Timer size={16} />,
-  'ai-security': <Bot size={16} />,
   'compiler-security': <Code size={16} />,
   'p2p-networking': <Network size={16} />,
   'fuzzing-infra': <Bug size={16} />,
@@ -41,8 +39,11 @@ const themeIcons: Record<string, React.ReactNode> = {
 const linkClass =
   'link-accent inline-flex items-center gap-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
 
-function ThemeLink({ link }: { link: Theme['links'][number] }) {
-  if (link.url.startsWith('/')) {
+export function ThemeLink({ link }: { link: Theme['links'][number] }) {
+  // Only page routes go through next/link; root-relative static assets
+  // (e.g. /media/*.pdf) must stay plain anchors or the router prefetches
+  // them as RSC payloads and opens them without a new tab.
+  if (link.url.startsWith('/') && !link.url.startsWith('/media/')) {
     return (
       <Link href={link.url} className={linkClass}>
         <ArrowRight size={14} />

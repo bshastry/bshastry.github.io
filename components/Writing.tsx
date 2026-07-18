@@ -1,15 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, Calendar, Clock } from 'lucide-react'
+import { ArrowRight, Calendar, Clock, Rss } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
-
-function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'UTC',
-  })
-}
+import { formatDate } from '@/lib/format'
 
 export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
   return (
@@ -17,7 +9,7 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
       <div className="container-max section-padding">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-4">05 — Writing</p>
+            <p className="eyebrow mb-4">06 — Writing</p>
             <h2 className="section-title">Recent Writing</h2>
             <p className="mt-4 max-w-2xl text-lg text-muted">
               Long-form notes on differential testing, most recently a series cross-checking
@@ -43,7 +35,7 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
               <div className="flex flex-shrink-0 items-center gap-4 font-mono text-xs text-faint md:w-44 md:flex-col md:items-start md:gap-1.5">
                 <span className="flex items-center gap-1.5">
                   <Calendar size={12} className="flex-shrink-0" />
-                  {formatDate(post.date)}
+                  {formatDate(post.date, { year: 'numeric', month: 'short', day: 'numeric' })}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock size={12} className="flex-shrink-0" />
@@ -61,6 +53,15 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
             </Link>
           ))}
         </div>
+
+        <p className="mt-8 text-sm text-faint">
+          New writeups land in the feed first —{' '}
+          <a href="/feed.xml" className="link-accent inline-flex items-center gap-1.5">
+            <Rss size={13} />
+            subscribe via RSS
+          </a>
+          .
+        </p>
       </div>
     </section>
   )

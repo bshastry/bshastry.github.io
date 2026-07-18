@@ -2,7 +2,7 @@
   "personal": {
     "name": "Bhargava Shastry",
     "title": "Security Engineer & Researcher",
-    "description": "Security engineer at the Ethereum Foundation specializing in protocol security, differential fuzzing, and consensus client testing. Building tools that find vulnerabilities across Ethereum's execution and consensus layers.",
+    "description": "I find cross-implementation failures before they become production incidents — differential testing of Ethereum clients, cryptographic libraries, and compilers, scaled by AI-driven triage and vulnerability-discovery pipelines I design and build.",
     "location": "Remote",
     "email": "bshastry@posteo.de",
     "social": {
@@ -77,7 +77,7 @@
     {
       "id": "protocol-security",
       "title": "Ethereum Protocol Security",
-      "description": "Differential fuzzing and hard-fork readiness testing across Ethereum execution clients — finding consensus divergences before they reach mainnet.",
+      "description": "Differential fuzzing I build and run across Ethereum execution clients, plus hard-fork readiness testing — catching consensus divergences before they can split the network.",
       "tags": ["Go", "Rust", "Python"],
       "period": "2022 - Present",
       "highlights": [
@@ -100,20 +100,27 @@
       ]
     },
     {
-      "id": "bug-bounty",
-      "title": "Bug Bounty Triage",
-      "description": "Technical evaluator for the Ethereum Foundation bug bounty program: reproducing, assessing, and routing reported vulnerabilities across execution- and consensus-layer clients.",
-      "tags": ["Go", "Python"],
+      "id": "ai-pipelines",
+      "title": "AI-Driven Triage & Vulnerability Discovery",
+      "description": "Pipelines I design and build that put LLM agents to work on client security — vulnerability research decomposed into context building, harness generation, PoC validation, and triage, with deterministic orchestration, auditable logs, and human review at the decision points.",
+      "tags": ["Python", "Go"],
       "period": "2026 - Present",
       "highlights": [
-        "Evaluate submissions for consensus, finality, and denial-of-service impact to assign severity",
-        "Reproduce reported issues and confirm cross-client blast radius with differential test harnesses",
-        "Built internal tooling that manages the submission-to-triage workflow end to end"
+        "Agent frameworks that decompose vulnerability research into context building, harness generation, PoC validation, and triage",
+        "Autonomous audit pipelines run against Ethereum client codebases in sandboxed environments",
+        "Bug-bounty triage for the Ethereum Foundation: reproducing reported issues, confirming cross-client blast radius with differential harnesses, and assessing consensus, finality, and denial-of-service impact",
+        "A three-witness severity model — reporter, AI swarm, network blast radius — keeps AI-era triage honest",
+        "Built the internal tooling that manages the submission-to-triage workflow end to end"
       ],
       "links": [
         {
           "label": "Ethereum Bug Bounty",
           "url": "https://bounty.ethereum.org",
+          "type": "external"
+        },
+        {
+          "label": "Trust No Single Witness (slides)",
+          "url": "/media/Trust_No_Single_Witness.pdf",
           "type": "external"
         }
       ]
@@ -164,19 +171,6 @@
           "type": "github"
         }
       ]
-    },
-    {
-      "id": "ai-security",
-      "title": "AI-Assisted Vulnerability Research",
-      "description": "Agentic systems that put LLMs to work on Ethereum client security: deterministic orchestration, auditable logs, and human review at the decision points.",
-      "tags": ["Python", "Go"],
-      "period": "2026 - Present",
-      "highlights": [
-        "Agent frameworks that decompose vulnerability research into context building, harness generation, PoC validation, and triage",
-        "Autonomous audit pipelines run against Ethereum client codebases in sandboxed environments",
-        "LLM-assisted severity assessment integrated into the bug bounty triage workflow"
-      ],
-      "links": []
     },
     {
       "id": "compiler-security",
@@ -273,6 +267,69 @@
         "Contributed to Holesky funding vault smart contract infrastructure"
       ],
       "links": []
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "client-divergence",
+      "eyebrow": "Ethereum execution clients",
+      "title": "Finding cross-client divergence before it can split the chain",
+      "stakes": "Ethereum runs on independently developed execution clients that must agree on every state transition. A single divergence between them can partition the network — and hundreds of billions of dollars in value ride on that agreement.",
+      "approach": "Coverage-guided differential fuzzing of state-test execution across geth, Besu, Nethermind, Erigon, and revm, built on goevmlab, plus hard-fork readiness testing validated against the executable specs.",
+      "result": "Upstream fixes merged across clients — a genesis-block BLOCKHASH divergence in revm, coinbase state touched on failed transactions and an EVM memory-size overflow crash in Nethermind — and regression tests upstreamed to the executable spec ahead of a fork.",
+      "demonstrates": "Independent differential validation of a multi-implementation system before release.",
+      "evidence": [
+        {
+          "label": "revm fix",
+          "url": "https://github.com/bluealloy/revm/pull/3319"
+        },
+        {
+          "label": "Nethermind fix",
+          "url": "https://github.com/NethermindEth/nethermind/pull/9865"
+        },
+        {
+          "label": "execution-specs tests",
+          "url": "https://github.com/ethereum/execution-specs/pull/3011"
+        }
+      ]
+    },
+    {
+      "id": "mbedtls-timing",
+      "eyebrow": "Cryptographic implementations",
+      "title": "Timing side channels in a TLS stack that ships everywhere",
+      "stakes": "Mbed TLS runs on billions of embedded devices. A secret-dependent timing path can leak private-key material without ever failing a functional test — the class of bug ordinary test suites cannot see.",
+      "approach": "Constant-time analysis of secret-data paths in the bignum and elliptic-curve code, followed by coordinated disclosure with the maintainers.",
+      "result": "A variable-time division reachable from RSA prime generation fixed in Mbed TLS 3.6.7 and TF-PSA-Crypto, and an ECC modular-reduction timing channel later confirmed exploitable and fixed under the July 2026 security advisory.",
+      "demonstrates": "Side-channel review of high-consequence cryptographic code, delivered through responsible disclosure.",
+      "evidence": [
+        {
+          "label": "Security advisory 2026-07",
+          "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/"
+        },
+        {
+          "label": "TF-PSA-Crypto ChangeLog",
+          "url": "https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/ChangeLog"
+        }
+      ]
+    },
+    {
+      "id": "post-quantum",
+      "eyebrow": "Post-quantum cryptography",
+      "title": "Cross-checking post-quantum standards before the migration wave",
+      "stakes": "ML-KEM (FIPS 203) and ML-DSA (FIPS 204) implementations are young, and migrations are starting. Implementations that silently disagree mean broken interoperability at best — and exploitable divergence at worst.",
+      "approach": "A coverage-guided differential fuzzer co-linking mlkem-native, BoringSSL, and libcrux, with functional-equivalence and constant-time oracles — including an honest analysis of where coverage does and does not reach.",
+      "result": "A reproducible cross-implementation testing harness and a four-part public series documenting the method, the results, and the blind spots.",
+      "demonstrates": "Differential validation of cryptographic standards ahead of production deployment.",
+      "evidence": [
+        {
+          "label": "ML-KEM series",
+          "url": "/blog/cross-checking-post-quantum-kem"
+        },
+        {
+          "label": "ML-DSA post",
+          "url": "/blog/cross-checking-post-quantum-signature"
+        }
+      ]
     }
   ],
   "findings": [

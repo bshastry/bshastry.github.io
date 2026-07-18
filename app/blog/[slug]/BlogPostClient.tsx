@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
 import type { BlogPost, BlogPostMeta, SeriesPart } from '@/lib/blog'
+import { formatDate } from '@/lib/format'
 import ThemeToggle from '@/components/ThemeToggle'
 import { SeriesNav, SeriesPager } from '@/components/SeriesNav'
 import { PostTitle } from '@/components/PostTitle'
@@ -72,13 +73,7 @@ export default function BlogPostClient({
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="mb-4 flex items-center text-sm text-faint md:mb-0">
                 <Calendar size={16} className="mr-2" />
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
                 <Clock size={16} className="ml-4 mr-2" />
                 {post.readTime}
               </div>
@@ -144,11 +139,7 @@ export default function BlogPostClient({
                     <div className="flex items-center text-sm text-faint">
                       <Calendar size={14} className="mr-1" />
                       <time dateTime={rp.date}>
-                        {new Date(rp.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
+                        {formatDate(rp.date, { year: 'numeric', month: 'short', day: 'numeric' })}
                       </time>
                       <Clock size={14} className="ml-3 mr-1" />
                       {rp.readTime}
@@ -158,6 +149,26 @@ export default function BlogPostClient({
               </div>
             </div>
           )}
+
+          <aside className="mt-16 border-t border-line pt-10">
+            <p className="eyebrow mb-3">Next step</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted">
+              If you work on a system where independent implementations must agree — an Ethereum
+              client, a cryptographic library, a compiler — I take on a small number of scoped
+              differential-testing engagements and workshops.
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+              <Link href="/#contact" className="link-accent font-medium">
+                Discuss a scoped review
+              </Link>
+              <Link href="/#case-studies" className="link-accent font-medium">
+                See case studies
+              </Link>
+              <a href="/feed.xml" className="link-accent font-medium">
+                Subscribe via RSS
+              </a>
+            </div>
+          </aside>
         </div>
       </div>
     </main>
