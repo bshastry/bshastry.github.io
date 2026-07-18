@@ -9,8 +9,7 @@ import Publications from '@/components/Publications'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import { getAllPostsMeta } from '@/lib/blog'
-
-const SITE_URL = 'https://bshastry.github.io'
+import { SITE_URL, serializeJsonLd } from '@/lib/seo'
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -52,13 +51,13 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(personJsonLd) }}
       />
       <Header />
       <main id="main-content" className="min-h-screen">
         <Hero latestPost={latestPost} />
         <About />
-        <Projects featured />
+        <Projects />
         <Findings />
         <Talks />
         <Writing posts={recentPosts} />

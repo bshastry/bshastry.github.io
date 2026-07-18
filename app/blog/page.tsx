@@ -1,34 +1,34 @@
 import type { Metadata } from 'next'
 import { getAllPostsMeta } from '@/lib/blog'
-import { pageAlternates } from '@/lib/seo'
+import { pageAlternates, serializeJsonLd, AUTHOR, FEED_TITLE, SITE_URL } from '@/lib/seo'
 import BlogIndexClient from './BlogIndexClient'
+
+const BLOG_DESCRIPTION =
+  'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.'
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description:
-    'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research by Bhargava Shastry.',
+  description: `${BLOG_DESCRIPTION.slice(0, -1)} by ${AUTHOR}.`,
   alternates: pageAlternates('/blog/'),
   openGraph: {
     type: 'website',
-    url: 'https://bshastry.github.io/blog/',
-    siteName: 'Bhargava Shastry',
-    title: 'Blog — Bhargava Shastry',
-    description:
-      'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.',
+    url: `${SITE_URL}/blog/`,
+    siteName: AUTHOR,
+    title: FEED_TITLE,
+    description: BLOG_DESCRIPTION,
   },
 }
 
 const blogJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'Bhargava Shastry — Blog',
-  url: 'https://bshastry.github.io/blog/',
-  description:
-    'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.',
+  name: FEED_TITLE,
+  url: `${SITE_URL}/blog/`,
+  description: BLOG_DESCRIPTION,
   author: {
     '@type': 'Person',
-    name: 'Bhargava Shastry',
-    url: 'https://bshastry.github.io',
+    name: AUTHOR,
+    url: SITE_URL,
   },
 }
 
@@ -38,7 +38,7 @@ export default function BlogPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogJsonLd) }}
       />
       <BlogIndexClient posts={posts} />
     </>

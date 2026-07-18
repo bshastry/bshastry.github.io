@@ -31,7 +31,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      const sections = ['home', 'about', 'research', 'findings', 'talks', 'publications', 'contact']
+      const sections = navigation.flatMap((item) => (item.id ? [item.id] : []))
       const scrollPosition = window.scrollY + 100
       for (const section of sections) {
         const element = document.getElementById(section)

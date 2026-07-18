@@ -63,22 +63,27 @@ app/
     [slug]/
       page.tsx            Post page (server component)
       BlogPostClient.tsx  Share button + layout
+  research/               Full research-area archive (homepage features 5)
   privacy/, terms/        Static legal pages
+  feed.xml/               RSS feed generator
   robots.ts               robots.txt generator
   sitemap.ts              sitemap.xml generator
   icon.svg                Favicon (terminal prompt in ETH diamond)
   opengraph-image.tsx     Dynamic OG image for social shares
 
 components/
-  Header, Hero, About, Projects, CV, Contact, Footer
+  Header, Hero, About, Projects (featured research), ResearchGrid,
+  Findings, Talks, Writing, Publications, Contact, Footer
+  (CV download lives in About)
 
 content/posts/            Blog markdown files
 
 lib/
   blog.ts                 Markdown parsing pipeline
+  seo.ts                  Site constants, canonical/RSS alternates, JSON-LD serializer
 
 data/
-  portfolio.json          CV, projects, social data
+  portfolio.json          CV, research themes, findings, talks, publications
 ```
 
 ## Deployment

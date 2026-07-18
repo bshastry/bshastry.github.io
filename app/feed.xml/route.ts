@@ -1,8 +1,7 @@
 import { getAllPostsMeta } from '@/lib/blog'
+import { FEED_TITLE, SITE_URL } from '@/lib/seo'
 
 export const dynamic = 'force-static'
-
-const SITE_URL = 'https://bshastry.github.io'
 
 function escapeXml(value: string): string {
   return value
@@ -36,7 +35,7 @@ ${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join('\
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bhargava Shastry — Blog</title>
+    <title>${escapeXml(FEED_TITLE)}</title>
     <link>${SITE_URL}/blog/</link>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.</description>

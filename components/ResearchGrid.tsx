@@ -14,9 +14,16 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
-import portfolioData from '@/data/portfolio.json'
 
-type Theme = (typeof portfolioData.themes)[number]
+export interface Theme {
+  id: string
+  title: string
+  period: string
+  description: string
+  highlights: string[]
+  tags: string[]
+  links: { label: string; url: string; type: string }[]
+}
 
 const themeIcons: Record<string, React.ReactNode> = {
   'protocol-security': <Shield size={16} />,
@@ -31,13 +38,40 @@ const themeIcons: Record<string, React.ReactNode> = {
   erc4337: <Wallet size={16} />,
 }
 
+const linkClass =
+  'link-accent inline-flex items-center gap-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
+
+function ThemeLink({ link }: { link: Theme['links'][number] }) {
+  if (link.url.startsWith('/')) {
+    return (
+      <Link href={link.url} className={linkClass}>
+        <ArrowRight size={14} />
+        <span>{link.label}</span>
+      </Link>
+    )
+  }
+  return (
+    <a href={link.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+      {link.type === 'github' ? <Github size={14} /> : <ExternalLink size={14} />}
+      <span>{link.label}</span>
+    </a>
+  )
+}
+
 export default function ResearchGrid({
   themes,
-  moreCount = 0,
+  hiddenThemes = [],
 }: {
   themes: Theme[]
-  moreCount?: number
+  /** Themes not shown here; when non-empty, a card links to the /research archive. */
+  hiddenThemes?: Theme[]
 }) {
+  // The hairline-grid trick (gap-px over bg-line) shows bare line-colored
+  // blocks wherever the last row is incomplete, so pad it with bg-bg cells.
+  const cells = themes.length + (hiddenThemes.length > 0 ? 1 : 0)
+  const mdFill = (2 - (cells % 2)) % 2
+  const lgFill = (3 - (cells % 3)) % 3
+
   return (
     <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
       {themes.map((theme, index) => (
@@ -78,16 +112,7 @@ export default function ResearchGrid({
             {theme.links.length > 0 && (
               <div className="flex flex-wrap gap-3">
                 {theme.links.map((link) => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-accent inline-flex items-center gap-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  >
-                    {link.type === 'github' ? <Github size={14} /> : <ExternalLink size={14} />}
-                    <span>{link.label}</span>
-                  </a>
+                  <ThemeLink key={link.url} link={link} />
                 ))}
               </div>
             )}
@@ -95,16 +120,17 @@ export default function ResearchGrid({
         </div>
       ))}
 
-      {moreCount > 0 && (
+      {hiddenThemes.length > 0 && (
         <Link
-          href="/research"
+          href="/research/"
           className="group flex flex-col items-center justify-center gap-3 bg-bg p-6 text-center transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
         >
           <span className="text-lg font-semibold text-fg transition-colors group-hover:text-accent">
             All research areas
           </span>
           <span className="text-sm text-muted">
-            {moreCount} more, from compiler security to P2P networking
+            {hiddenThemes.length} more, from {hiddenThemes[0].title} to{' '}
+            {hiddenThemes[hiddenThemes.length - 1].title}
           </span>
           <span className="link-accent inline-flex items-center gap-1.5 text-sm font-medium">
             <span>View the full archive</span>
@@ -112,6 +138,13 @@ export default function ResearchGrid({
           </span>
         </Link>
       )}
+
+      {Array.from({ length: mdFill }, (_, i) => (
+        <div key={`md-fill-${i}`} aria-hidden="true" className="hidden bg-bg md:block lg:hidden" />
+      ))}
+      {Array.from({ length: lgFill }, (_, i) => (
+        <div key={`lg-fill-${i}`} aria-hidden="true" className="hidden bg-bg lg:block" />
+      ))}
     </div>
   )
 }

@@ -1,5 +1,3 @@
-'use client'
-
 import { FileDown } from 'lucide-react'
 
 export default function About() {
