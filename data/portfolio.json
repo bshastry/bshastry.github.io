@@ -67,6 +67,7 @@
       "Consensus Client Testing",
       "Bug Bounty Triage",
       "Post-Quantum Cryptography",
+      "Side-Channel Analysis",
       "Static Analysis"
     ],
     "blockchain": ["Ethereum", "EVM", "Execution Layer", "Consensus Layer"],
@@ -130,6 +131,29 @@
           "label": "ML-DSA post",
           "url": "/blog/cross-checking-post-quantum-signature",
           "type": "external"
+        }
+      ]
+    },
+    {
+      "id": "crypto-side-channels",
+      "title": "Cryptographic Side-Channel Research",
+      "description": "Constant-time analysis of widely deployed cryptographic libraries: finding secret-dependent timing paths in Mbed TLS / TF-PSA-Crypto and reporting them through coordinated disclosure.",
+      "tags": ["C"],
+      "period": "2026 - Present",
+      "highlights": [
+        "Reported a variable-time division in mbedtls_mpi_mod_int reachable from RSA prime generation on a secret-data path — fixed in Mbed TLS 3.6.7 and TF-PSA-Crypto",
+        "Flagged a timing side channel in the ECC optimized modular reduction (ecp_modp) that was later confirmed exploitable, leading to the July 2026 Mbed TLS security advisory"
+      ],
+      "links": [
+        {
+          "label": "Mbed TLS advisory 2026-07",
+          "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/",
+          "type": "external"
+        },
+        {
+          "label": "TF-PSA-Crypto ChangeLog",
+          "url": "https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/ChangeLog",
+          "type": "github"
         }
       ]
     },
@@ -224,6 +248,22 @@
     }
   ],
   "findings": [
+    {
+      "title": "Exploitable timing side channel in Mbed TLS ECC modular reduction",
+      "description": "Flagged a secret-dependent iteration count in the optimized modular reduction (ecp_modp); later confirmed exploitable and fixed under a coordinated security advisory.",
+      "project": "Mbed-TLS/mbedtls",
+      "type": "Security advisory",
+      "date": "Jul 2026",
+      "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/"
+    },
+    {
+      "title": "Variable-time division on Mbed TLS RSA prime-generation path",
+      "description": "Reported a variable-time DIV in mbedtls_mpi_mod_int reachable from RSA prime generation with secret data; fixed in Mbed TLS 3.6.7 and TF-PSA-Crypto.",
+      "project": "Mbed-TLS/TF-PSA-Crypto",
+      "type": "Fixed upstream",
+      "date": "Jul 2026",
+      "url": "https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/ChangeLog"
+    },
     {
       "title": "25 miscompilation bugs in the Solidity compiler",
       "description": "SolSmith, a semantics-aware differential fuzzer, surfaced miscompilation bugs that had gone unnoticed — some for years — with a root-cause analysis of each.",
