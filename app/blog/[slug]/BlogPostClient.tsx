@@ -158,6 +158,26 @@ export default function BlogPostClient({
               </div>
             </div>
           )}
+
+          <aside className="mt-16 border-t border-line pt-10">
+            <p className="eyebrow mb-3">Next step</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted">
+              If you work on a system where independent implementations must agree — an Ethereum
+              client, a cryptographic library, a compiler — I take on a small number of scoped
+              differential-testing engagements and workshops.
+            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+              <Link href="/#contact" className="link-accent font-medium">
+                Discuss a scoped review
+              </Link>
+              <Link href="/#case-studies" className="link-accent font-medium">
+                See case studies
+              </Link>
+              <a href="/feed.xml" className="link-accent font-medium">
+                Subscribe via RSS
+              </a>
+            </div>
+          </aside>
         </div>
       </div>
     </main>

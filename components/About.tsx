@@ -2,12 +2,12 @@ import { FileDown } from 'lucide-react'
 
 export default function About() {
   const expertise = [
-    'Differential Fuzzing',
+    'Differential Testing & Fuzzing',
+    'AI-Driven Triage & Vuln Discovery',
     'Ethereum Protocol Security',
-    'Bug Bounty Triage',
-    'Vulnerability Research',
     'Post-Quantum Cryptography',
-    'AI-Assisted Security Tooling',
+    'Side-Channel Analysis',
+    'Bug Bounty Triage',
   ]
 
   const technologies = [
@@ -38,24 +38,30 @@ export default function About() {
         <div className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Prose */}
           <div>
-            <h3 className="mb-4 text-2xl font-semibold text-fg">Security Engineer & Researcher</h3>
+            <h3 className="mb-4 text-2xl font-semibold text-fg">
+              Turning disagreement into evidence
+            </h3>
             <p className="mb-4 leading-relaxed text-muted">
-              I'm a security engineer at the Ethereum Foundation working on protocol security for
-              the execution layer. My day-to-day is differential fuzzing of Ethereum clients,
-              hard-fork readiness testing, and technical evaluation of submissions to the Ethereum
-              Foundation's bug bounty program.
+              My working thesis: in a system with more than one implementation there is no ground
+              truth — only witnesses that can disagree. I make them disagree under controlled
+              conditions. I build coverage-guided differential fuzzers that run Ethereum&apos;s
+              execution clients, post-quantum cryptography libraries, and compilers against each
+              other, so every divergence becomes a reproducible bug report before it becomes a
+              production incident.
             </p>
             <p className="mb-4 leading-relaxed text-muted">
-              I came to Ethereum through compiler security — 300+ commits to the Solidity compiler's
-              fuzzing and testing infrastructure — and before that a Ph.D. on fuzzing and static
-              analysis at TU Berlin. That background in oracle-driven testing shapes my client work
-              today: if two independent implementations disagree, at least one of them is wrong.
+              I practice this as a security engineer at the Ethereum Foundation — differential
+              fuzzing of execution clients, hard-fork readiness testing, and bug-bounty triage. To
+              scale the method, I design and build AI-driven pipelines that decompose vulnerability
+              research into context building, harness generation, PoC validation, and triage:
+              deterministic orchestration, auditable logs, and human review at the decision points.
             </p>
             <p className="leading-relaxed text-muted">
-              I work in the open where I can: upstream fixes merged in Erigon, Nethermind, revm, and
-              the executable Ethereum specs, contributions to Google's OSS-Fuzz, and a blog about
-              differential testing — most recently cross-checking post-quantum cryptography
-              implementations against each other.
+              The method has deep roots — a Ph.D. on fuzzing and static analysis at TU Berlin, 300+
+              commits to the Solidity compiler&apos;s fuzzing infrastructure, contributions to
+              Google&apos;s OSS-Fuzz — and I work in the open where I can: upstream fixes merged in
+              Erigon, Nethermind, revm, and the executable Ethereum specs, most recently
+              cross-checking post-quantum cryptography implementations against each other.
             </p>
           </div>
 

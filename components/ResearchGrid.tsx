@@ -5,7 +5,6 @@ import {
   Bug,
   Globe,
   Wallet,
-  Crosshair,
   Atom,
   Bot,
   Timer,
@@ -27,10 +26,9 @@ export interface Theme {
 
 const themeIcons: Record<string, React.ReactNode> = {
   'protocol-security': <Shield size={16} />,
-  'bug-bounty': <Crosshair size={16} />,
+  'ai-pipelines': <Bot size={16} />,
   'post-quantum': <Atom size={16} />,
   'crypto-side-channels': <Timer size={16} />,
-  'ai-security': <Bot size={16} />,
   'compiler-security': <Code size={16} />,
   'p2p-networking': <Network size={16} />,
   'fuzzing-infra': <Bug size={16} />,

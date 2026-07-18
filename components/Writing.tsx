@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Calendar, Clock } from 'lucide-react'
+import { ArrowRight, Calendar, Clock, Rss } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 
 function formatDate(date: string): string {
@@ -17,7 +17,7 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
       <div className="container-max section-padding">
         <div className="mb-16 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-4">05 — Writing</p>
+            <p className="eyebrow mb-4">06 — Writing</p>
             <h2 className="section-title">Recent Writing</h2>
             <p className="mt-4 max-w-2xl text-lg text-muted">
               Long-form notes on differential testing, most recently a series cross-checking
@@ -61,6 +61,15 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
             </Link>
           ))}
         </div>
+
+        <p className="mt-8 text-sm text-faint">
+          New writeups land in the feed first —{' '}
+          <a href="/feed.xml" className="link-accent inline-flex items-center gap-1.5">
+            <Rss size={13} />
+            subscribe via RSS
+          </a>
+          .
+        </p>
       </div>
     </section>
   )

@@ -9,7 +9,7 @@ export default function Publications() {
     <section id="publications" className="bg-bg py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
-          <p className="eyebrow mb-3">06 — Publications</p>
+          <p className="eyebrow mb-3">07 — Publications</p>
           <h2 className="section-title">Publications</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             Peer-reviewed research in security, fuzzing, and program analysis

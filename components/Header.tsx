@@ -13,14 +13,14 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
+  { name: 'Case Studies', href: '#case-studies', id: 'case-studies' },
   { name: 'Research', href: '#research', id: 'research' },
   { name: 'Findings', href: '#findings', id: 'findings' },
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Pubs', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
+  { name: 'Work', href: '#contact', id: 'contact' },
 ]
 
 export default function Header() {

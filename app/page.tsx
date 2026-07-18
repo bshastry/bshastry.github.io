@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
+import CaseStudies from '@/components/CaseStudies'
 import Projects from '@/components/Projects'
 import Findings from '@/components/Findings'
 import Talks from '@/components/Talks'
@@ -32,11 +33,12 @@ const personJsonLd = {
     'https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ',
   ],
   knowsAbout: [
+    'Differential testing',
     'Fuzzing',
     'Ethereum protocol security',
-    'Differential testing',
+    'AI-assisted vulnerability research',
     'Post-quantum cryptography',
-    'Vulnerability research',
+    'Side-channel analysis',
   ],
 }
 
@@ -57,6 +59,7 @@ export default function Home() {
       <main id="main-content" className="min-h-screen">
         <Hero latestPost={latestPost} />
         <About />
+        <CaseStudies />
         <Projects />
         <Findings />
         <Talks />
