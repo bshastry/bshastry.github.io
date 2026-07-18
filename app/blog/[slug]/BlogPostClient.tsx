@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
 import type { BlogPost, BlogPostMeta, SeriesPart } from '@/lib/blog'
+import { formatDate } from '@/lib/format'
 import ThemeToggle from '@/components/ThemeToggle'
 import { SeriesNav, SeriesPager } from '@/components/SeriesNav'
 import { PostTitle } from '@/components/PostTitle'
@@ -72,13 +73,7 @@ export default function BlogPostClient({
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="mb-4 flex items-center text-sm text-faint md:mb-0">
                 <Calendar size={16} className="mr-2" />
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
                 <Clock size={16} className="ml-4 mr-2" />
                 {post.readTime}
               </div>
@@ -144,11 +139,7 @@ export default function BlogPostClient({
                     <div className="flex items-center text-sm text-faint">
                       <Calendar size={14} className="mr-1" />
                       <time dateTime={rp.date}>
-                        {new Date(rp.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
+                        {formatDate(rp.date, { year: 'numeric', month: 'short', day: 'numeric' })}
                       </time>
                       <Clock size={14} className="ml-3 mr-1" />
                       {rp.readTime}

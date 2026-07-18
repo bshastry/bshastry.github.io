@@ -1,15 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Calendar, Clock, Rss } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
-
-function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'UTC',
-  })
-}
+import { formatDate } from '@/lib/format'
 
 export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
   return (
@@ -43,7 +35,7 @@ export default function Writing({ posts }: { posts: BlogPostMeta[] }) {
               <div className="flex flex-shrink-0 items-center gap-4 font-mono text-xs text-faint md:w-44 md:flex-col md:items-start md:gap-1.5">
                 <span className="flex items-center gap-1.5">
                   <Calendar size={12} className="flex-shrink-0" />
-                  {formatDate(post.date)}
+                  {formatDate(post.date, { year: 'numeric', month: 'short', day: 'numeric' })}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock size={12} className="flex-shrink-0" />

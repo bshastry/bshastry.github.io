@@ -11,6 +11,7 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import { getAllPostsMeta } from '@/lib/blog'
 import { SITE_URL, serializeJsonLd } from '@/lib/seo'
+import portfolioData from '@/data/portfolio.json'
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -45,9 +46,12 @@ const personJsonLd = {
 export default function Home() {
   const posts = getAllPostsMeta()
   const recentPosts = posts.slice(0, 3)
-  const latestPost = posts[0]
-    ? { slug: posts[0].slug, title: posts[0].title, date: posts[0].date }
-    : null
+  const latestPost = posts[0] ?? null
+  const findingsCount = portfolioData.findings.length
+  const publicationsCount = portfolioData.publications.reduce(
+    (sum, group) => sum + group.papers.length,
+    0,
+  )
 
   return (
     <>
@@ -57,7 +61,11 @@ export default function Home() {
       />
       <Header />
       <main id="main-content" className="min-h-screen">
-        <Hero latestPost={latestPost} />
+        <Hero
+          latestPost={latestPost}
+          findingsCount={findingsCount}
+          publicationsCount={publicationsCount}
+        />
         <About />
         <CaseStudies />
         <Projects />

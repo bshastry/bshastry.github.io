@@ -1,5 +1,5 @@
 import { getAllPostsMeta } from '@/lib/blog'
-import { FEED_TITLE, SITE_URL } from '@/lib/seo'
+import { FEED_TITLE, FEED_DESCRIPTION, SITE_URL } from '@/lib/seo'
 
 export const dynamic = 'force-static'
 
@@ -38,7 +38,7 @@ ${post.tags.map((tag) => `      <category>${escapeXml(tag)}</category>`).join('\
     <title>${escapeXml(FEED_TITLE)}</title>
     <link>${SITE_URL}/blog/</link>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-    <description>Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.</description>
+    <description>${escapeXml(FEED_DESCRIPTION)}</description>
     <language>en-us</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
 ${items}

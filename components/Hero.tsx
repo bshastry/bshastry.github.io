@@ -2,36 +2,33 @@
 
 import Link from 'next/link'
 import { ArrowDown, Sparkles } from 'lucide-react'
-import portfolioData from '@/data/portfolio.json'
+import type { BlogPostMeta } from '@/lib/blog'
+import { formatDate } from '@/lib/format'
 
-// Every number links to the evidence behind it — no unexplained totals.
-const stats = [
-  { value: '10+', label: 'years in security', href: '#about' },
-  {
-    value: '300+',
-    label: 'compiler commits',
-    href: 'https://github.com/ethereum/solidity/commits?author=bshastry',
-    external: true,
-  },
-  { value: String(portfolioData.findings.length), label: 'public findings', href: '#findings' },
-  { value: '11', label: 'publications', href: '#publications' },
-]
+type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
 
-interface LatestPost {
-  slug: string
-  title: string
-  date: string
+interface HeroProps {
+  latestPost: LatestPost | null
+  // Counts come from the server component so this client component doesn't
+  // ship the whole portfolio JSON just to render two numbers.
+  findingsCount: number
+  publicationsCount: number
 }
 
-function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    timeZone: 'UTC',
-  })
-}
+export default function Hero({ latestPost, findingsCount, publicationsCount }: HeroProps) {
+  // Every number links to the evidence behind it — no unexplained totals.
+  const stats = [
+    { value: '10+', label: 'years in security', href: '#about' },
+    {
+      value: '300+',
+      label: 'compiler commits',
+      href: 'https://github.com/ethereum/solidity/commits?author=bshastry',
+      external: true,
+    },
+    { value: String(findingsCount), label: 'public findings', href: '#findings' },
+    { value: String(publicationsCount), label: 'publications', href: '#publications' },
+  ]
 
-export default function Hero({ latestPost }: { latestPost: LatestPost | null }) {
   const scrollToAbout = () => {
     const element = document.getElementById('about')
     if (element) {
@@ -79,7 +76,7 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
                 dateTime={latestPost.date}
                 className="flex-shrink-0 font-mono text-xs text-faint"
               >
-                {formatDate(latestPost.date)}
+                {formatDate(latestPost.date, { year: 'numeric', month: 'short' })}
               </time>
             </Link>
           )}

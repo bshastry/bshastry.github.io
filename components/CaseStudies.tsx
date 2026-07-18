@@ -1,11 +1,5 @@
-import { ExternalLink } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
-
-const rows = [
-  { key: 'stakes', label: 'Stakes' },
-  { key: 'approach', label: 'Approach' },
-  { key: 'result', label: 'Result' },
-] as const
+import { ThemeLink } from '@/components/ResearchGrid'
 
 export default function CaseStudies() {
   const { caseStudies } = portfolioData
@@ -31,28 +25,24 @@ export default function CaseStudies() {
                 {cs.title}
               </h3>
               <dl className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-3">
-                {rows.map(({ key, label }) => (
-                  <div key={key}>
-                    <dt className="eyebrow mb-2">{label}</dt>
-                    <dd className="text-sm leading-relaxed text-muted">{cs[key]}</dd>
-                  </div>
-                ))}
+                <div>
+                  <dt className="eyebrow mb-2">Stakes</dt>
+                  <dd className="text-sm leading-relaxed text-muted">{cs.stakes}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow mb-2">Approach</dt>
+                  <dd className="text-sm leading-relaxed text-muted">{cs.approach}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow mb-2">Result</dt>
+                  <dd className="text-sm leading-relaxed text-muted">{cs.result}</dd>
+                </div>
               </dl>
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <span className="font-mono text-xs text-faint">{cs.demonstrates}</span>
                 <span className="flex flex-wrap items-center gap-4">
                   {cs.evidence.map((link) => (
-                    <a
-                      key={link.url}
-                      href={link.url}
-                      {...(link.url.startsWith('/')
-                        ? {}
-                        : { target: '_blank', rel: 'noopener noreferrer' })}
-                      className="link-accent inline-flex items-center gap-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                    >
-                      <ExternalLink size={13} className="flex-shrink-0" />
-                      {link.label}
-                    </a>
+                    <ThemeLink key={link.url} link={{ ...link, type: 'external' }} />
                   ))}
                 </span>
               </div>

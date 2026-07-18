@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
-import { getAllSlugs, getPostBySlug } from '@/lib/blog'
+import { getAllSlugs, getAllPostsMeta } from '@/lib/blog'
+import { formatDate } from '@/lib/format'
 
 export const dynamic = 'force-static'
 
@@ -14,18 +15,11 @@ export const alt = 'Blog post by Bhargava Shastry'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-function formatDate(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC',
-  })
-}
-
 export default async function OGImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await getPostBySlug(slug)
+  // The image only needs title and date — frontmatter metadata is enough;
+  // running the full markdown pipeline here would triple the build cost.
+  const post = getAllPostsMeta().find((p) => p.slug === slug)
   const title = post?.title ?? 'Blog'
   // Long titles get a smaller type size so they stay inside the canvas.
   const titleSize = title.length > 70 ? 52 : title.length > 45 ? 62 : 72

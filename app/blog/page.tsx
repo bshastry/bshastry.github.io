@@ -1,10 +1,16 @@
 import type { Metadata } from 'next'
 import { getAllPostsMeta } from '@/lib/blog'
-import { pageAlternates, serializeJsonLd, AUTHOR, FEED_TITLE, SITE_URL } from '@/lib/seo'
+import {
+  pageAlternates,
+  serializeJsonLd,
+  AUTHOR,
+  FEED_TITLE,
+  FEED_DESCRIPTION,
+  SITE_URL,
+} from '@/lib/seo'
 import BlogIndexClient from './BlogIndexClient'
 
-const BLOG_DESCRIPTION =
-  'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.'
+const BLOG_DESCRIPTION = FEED_DESCRIPTION
 
 export const metadata: Metadata = {
   title: 'Blog',

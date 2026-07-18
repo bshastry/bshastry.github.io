@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Calendar, Clock, ArrowLeft, Search, Rss } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { COLLECTIONS, collectionFor, type Collection } from '@/lib/collections'
+import { formatDate } from '@/lib/format'
 import ThemeToggle from '@/components/ThemeToggle'
 import { PostTitle } from '@/components/PostTitle'
 
@@ -12,21 +13,26 @@ interface BlogIndexClientProps {
   posts: BlogPostMeta[]
 }
 
+const chipClass = (active: boolean) =>
+  `chip transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
+    active ? 'border-accent text-accent' : ''
+  }`
+
 export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCollection, setSelectedCollection] = useState<Collection | ''>('')
 
   // Granular tags stay in post metadata; readers navigate six collections.
-  const collectionOf = useMemo(
-    () => new Map(posts.map((p) => [p.slug, collectionFor(p.tags)])),
-    [posts],
-  )
-  const visibleCollections = COLLECTIONS.filter((c) =>
-    posts.some((p) => collectionOf.get(p.slug) === c),
-  )
+  const { annotatedPosts, visibleCollections } = useMemo(() => {
+    const annotated = posts.map((p) => ({ ...p, collection: collectionFor(p.tags) }))
+    return {
+      annotatedPosts: annotated,
+      visibleCollections: COLLECTIONS.filter((c) => annotated.some((p) => p.collection === c)),
+    }
+  }, [posts])
 
-  const filteredPosts = posts.filter((p) => {
-    if (selectedCollection && collectionOf.get(p.slug) !== selectedCollection) return false
+  const filteredPosts = annotatedPosts.filter((p) => {
+    if (selectedCollection && p.collection !== selectedCollection) return false
     if (searchTerm) {
       const q = searchTerm.toLowerCase()
       return (
@@ -94,9 +100,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
               type="button"
               onClick={() => setSelectedCollection('')}
               aria-pressed={selectedCollection === ''}
-              className={`chip transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
-                selectedCollection === '' ? 'border-accent text-accent' : ''
-              }`}
+              className={chipClass(selectedCollection === '')}
             >
               All posts
             </button>
@@ -108,9 +112,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
                   setSelectedCollection(selectedCollection === collection ? '' : collection)
                 }
                 aria-pressed={selectedCollection === collection}
-                className={`chip transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
-                  selectedCollection === collection ? 'border-accent text-accent' : ''
-                }`}
+                className={chipClass(selectedCollection === collection)}
               >
                 {collection}
               </button>
@@ -131,13 +133,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
                 <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
                   <span className="flex items-center">
                     <Calendar size={16} className="mr-2" />
-                    <time dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
                   </span>
                   <span className="flex items-center">
                     <Clock size={16} className="mr-2" />
@@ -145,10 +141,10 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
                   </span>
                   <button
                     type="button"
-                    onClick={() => setSelectedCollection(collectionOf.get(post.slug) ?? 'Archive')}
+                    onClick={() => setSelectedCollection(post.collection)}
                     className="chip focus-visible:ring-2 focus-visible:ring-accent"
                   >
-                    {collectionOf.get(post.slug)}
+                    {post.collection}
                   </button>
                 </div>
 

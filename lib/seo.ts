@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 export const SITE_URL = 'https://bshastry.github.io'
 export const AUTHOR = 'Bhargava Shastry'
 export const FEED_TITLE = 'Bhargava Shastry — Blog'
+export const FEED_DESCRIPTION =
+  'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.'
 
 /**
  * Next.js replaces (rather than deep-merges) the `alternates` object when a
