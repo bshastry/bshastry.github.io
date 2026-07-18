@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { pageAlternates } from '@/lib/seo'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,12 +24,7 @@ export const metadata: Metadata = {
     'security research',
   ],
   authors: [{ name: 'Bhargava Shastry' }],
-  alternates: {
-    canonical: '/',
-    types: {
-      'application/rss+xml': [{ url: '/feed.xml', title: 'Bhargava Shastry — Blog' }],
-    },
-  },
+  alternates: pageAlternates('/'),
   openGraph: {
     type: 'website',
     locale: 'en_US',

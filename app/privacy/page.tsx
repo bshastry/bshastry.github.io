@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, Shield } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
+import { pageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Privacy',
   description:
     'Privacy notice for bshastry.github.io: a static site with no cookies, no analytics, and no contact forms.',
-  alternates: { canonical: '/privacy/' },
+  alternates: pageAlternates('/privacy/'),
 }
 
 const LAST_UPDATED = 'July 18, 2026'

@@ -1,13 +1,6 @@
-'use client'
+import { FileDown } from 'lucide-react'
 
 export default function About() {
-  const stats = [
-    { label: 'Years of Experience', value: '10+' },
-    { label: 'Open Source Projects', value: '20+' },
-    { label: 'Security Vulnerabilities Found', value: '50+' },
-    { label: 'Publications & Preprints', value: '11' },
-  ]
-
   const expertise = [
     'Differential Fuzzing',
     'Ethereum Protocol Security',
@@ -44,32 +37,30 @@ export default function About() {
 
         <div className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Prose */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="mb-4 text-2xl font-semibold text-fg">
-                Security Engineer & Researcher
-              </h3>
-              <p className="mb-4 leading-relaxed text-muted">
-                I'm a security engineer at the Ethereum Foundation working on protocol security for
-                the execution layer. My day-to-day is differential fuzzing of Ethereum clients,
-                hard-fork readiness testing, and technical evaluation of submissions to the Ethereum
-                Foundation's bug bounty program.
-              </p>
-              <p className="mb-4 leading-relaxed text-muted">
-                I came to Ethereum through compiler security — 300+ commits to the Solidity
-                compiler's fuzzing and testing infrastructure — and before that a Ph.D. on fuzzing
-                and static analysis at TU Berlin. That background in oracle-driven testing shapes my
-                client work today: if two independent implementations disagree, at least one of them
-                is wrong.
-              </p>
-              <p className="leading-relaxed text-muted">
-                I work in the open where I can: upstream fixes merged in Erigon, Nethermind, revm,
-                and the executable Ethereum specs, contributions to Google's OSS-Fuzz, and a blog
-                about differential testing — most recently cross-checking post-quantum cryptography
-                implementations against each other.
-              </p>
-            </div>
+          <div>
+            <h3 className="mb-4 text-2xl font-semibold text-fg">Security Engineer & Researcher</h3>
+            <p className="mb-4 leading-relaxed text-muted">
+              I'm a security engineer at the Ethereum Foundation working on protocol security for
+              the execution layer. My day-to-day is differential fuzzing of Ethereum clients,
+              hard-fork readiness testing, and technical evaluation of submissions to the Ethereum
+              Foundation's bug bounty program.
+            </p>
+            <p className="mb-4 leading-relaxed text-muted">
+              I came to Ethereum through compiler security — 300+ commits to the Solidity compiler's
+              fuzzing and testing infrastructure — and before that a Ph.D. on fuzzing and static
+              analysis at TU Berlin. That background in oracle-driven testing shapes my client work
+              today: if two independent implementations disagree, at least one of them is wrong.
+            </p>
+            <p className="leading-relaxed text-muted">
+              I work in the open where I can: upstream fixes merged in Erigon, Nethermind, revm, and
+              the executable Ethereum specs, contributions to Google's OSS-Fuzz, and a blog about
+              differential testing — most recently cross-checking post-quantum cryptography
+              implementations against each other.
+            </p>
+          </div>
 
+          {/* Expertise + CV */}
+          <div className="space-y-8">
             <div>
               <h4 className="mb-4 text-lg font-semibold text-fg">Core Expertise</h4>
               <ul className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
@@ -83,21 +74,16 @@ export default function About() {
                 ))}
               </ul>
             </div>
-          </div>
 
-          {/* Stat ledger */}
-          <div>
-            <h4 className="eyebrow mb-2">By the numbers</h4>
-            <dl className="divide-y divide-line border-y border-line">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-baseline justify-between gap-4 py-5">
-                  <dt className="text-sm text-muted">{stat.label}</dt>
-                  <dd className="font-mono text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <a
+              href="/media/Bhargava_Shastry_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <FileDown size={16} />
+              <span>Download CV (PDF)</span>
+            </a>
           </div>
         </div>
 

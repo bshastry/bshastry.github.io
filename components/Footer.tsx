@@ -67,8 +67,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#projects" className="text-muted transition-colors hover:text-fg">
-                  Projects
+                <a href="#research" className="text-muted transition-colors hover:text-fg">
+                  Research
                 </a>
               </li>
               <li>
