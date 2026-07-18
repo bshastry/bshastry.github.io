@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllSlugs, getAllPostsMeta, getPostBySlug, getSeriesParts } from '@/lib/blog'
+import { pageAlternates } from '@/lib/seo'
 import BlogPostClient from './BlogPostClient'
 
 const SITE_URL = 'https://bshastry.github.io'
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     title: post.title,
     description: post.excerpt,
     keywords: post.tags,
-    alternates: { canonical },
+    alternates: pageAlternates(canonical),
     openGraph: {
       type: 'article',
       url: `${SITE_URL}${canonical}`,

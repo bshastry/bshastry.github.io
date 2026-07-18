@@ -58,7 +58,7 @@ export default function Home() {
       <main id="main-content" className="min-h-screen">
         <Hero latestPost={latestPost} />
         <About />
-        <Projects />
+        <Projects featured />
         <Findings />
         <Talks />
         <Writing posts={recentPosts} />

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowDown, FileDown, Sparkles } from 'lucide-react'
+import { ArrowDown, Sparkles } from 'lucide-react'
 
 const stats = [
   { value: '10+', label: 'years' },
@@ -44,10 +44,18 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
             <span className="block text-accent">Shastry</span>
           </h1>
 
-          {/* Role line */}
+          {/* Defining statement */}
           <p className="mx-auto mt-8 max-w-3xl text-xl text-muted md:text-2xl">
-            Security Engineer at the <span className="text-accent">Ethereum Foundation</span> &amp;
-            Independent Security Researcher
+            <span className="text-accent">Ethereum protocol security</span> through differential
+            testing — finding cross-client divergences, hard-fork bugs, and cryptographic
+            implementation failures before deployment.
+          </p>
+
+          {/* Currently */}
+          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-faint">
+            Currently: Security Engineer at the Ethereum Foundation — differential fuzzing of
+            execution clients and bug-bounty triage. Open to research collaboration and speaking
+            invitations.
           </p>
 
           {/* Latest activity */}
@@ -59,9 +67,12 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
               <Sparkles size={14} className="flex-shrink-0 text-accent" />
               <span className="eyebrow flex-shrink-0">Latest</span>
               <span className="truncate">{latestPost.title}</span>
-              <span className="flex-shrink-0 font-mono text-xs text-faint">
+              <time
+                dateTime={latestPost.date}
+                className="flex-shrink-0 font-mono text-xs text-faint"
+              >
                 {formatDate(latestPost.date)}
-              </span>
+              </time>
             </Link>
           )}
 
@@ -83,16 +94,7 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
               href="#findings"
               className="btn-primary px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              View findings
-            </a>
-            <a
-              href="/media/Bhargava_Shastry_CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              <FileDown size={16} />
-              <span>Download CV</span>
+              Explore verified findings
             </a>
             <a
               href="#contact"

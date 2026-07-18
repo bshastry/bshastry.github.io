@@ -1,17 +1,13 @@
 import type { Metadata } from 'next'
 import { getAllPostsMeta } from '@/lib/blog'
+import { pageAlternates } from '@/lib/seo'
 import BlogIndexClient from './BlogIndexClient'
 
 export const metadata: Metadata = {
   title: 'Blog',
   description:
     'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research by Bhargava Shastry.',
-  alternates: {
-    canonical: '/blog/',
-    types: {
-      'application/rss+xml': [{ url: '/feed.xml', title: 'Bhargava Shastry — Blog' }],
-    },
-  },
+  alternates: pageAlternates('/blog/'),
   openGraph: {
     type: 'website',
     url: 'https://bshastry.github.io/blog/',
@@ -22,7 +18,29 @@ export const metadata: Metadata = {
   },
 }
 
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Bhargava Shastry — Blog',
+  url: 'https://bshastry.github.io/blog/',
+  description:
+    'Writing on fuzzing, Ethereum client security, post-quantum cryptography, and vulnerability research.',
+  author: {
+    '@type': 'Person',
+    name: 'Bhargava Shastry',
+    url: 'https://bshastry.github.io',
+  },
+}
+
 export default function BlogPage() {
   const posts = getAllPostsMeta()
-  return <BlogIndexClient posts={posts} />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+      <BlogIndexClient posts={posts} />
+    </>
+  )
 }

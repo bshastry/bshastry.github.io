@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft, Scale } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
+import { pageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Disclaimer',
   description:
     'Disclaimer for bshastry.github.io: personal views, no warranties, and responsible use of published security research.',
-  alternates: { canonical: '/terms/' },
+  alternates: pageAlternates('/terms/'),
 }
 
 const LAST_UPDATED = 'July 18, 2026'
