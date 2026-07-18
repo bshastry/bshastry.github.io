@@ -91,6 +91,11 @@ export default function Footer() {
                   CV (PDF)
                 </a>
               </li>
+              <li>
+                <a href="#contact" className="text-muted transition-colors hover:text-fg">
+                  Work with me
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -147,6 +152,14 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <a
+                  href="/feed.xml"
+                  className="inline-flex items-center space-x-1 text-muted transition-colors hover:text-fg"
+                >
+                  <span>RSS Feed</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -162,13 +175,13 @@ export default function Footer() {
                 href="/privacy"
                 className="font-mono text-xs text-faint transition-colors hover:text-fg"
               >
-                Privacy Policy
+                Privacy
               </Link>
               <Link
                 href="/terms"
                 className="font-mono text-xs text-faint transition-colors hover:text-fg"
               >
-                Terms of Service
+                Disclaimer
               </Link>
               <p className="font-mono text-xs text-faint">Built with Next.js &amp; Tailwind CSS</p>
             </div>

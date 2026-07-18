@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { ArrowDown, FileDown, Sparkles } from 'lucide-react'
-import portfolioData from '@/data/portfolio.json'
 
 const stats = [
   { value: '10+', label: 'years' },
@@ -26,8 +25,6 @@ function formatDate(date: string): string {
 }
 
 export default function Hero({ latestPost }: { latestPost: LatestPost | null }) {
-  const { email } = portfolioData.personal
-
   const scrollToAbout = () => {
     const element = document.getElementById('about')
     if (element) {
@@ -37,7 +34,9 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
 
   return (
     <section id="home" className="flex min-h-screen items-center justify-center bg-bg pt-16">
-      <div className="container-max section-padding">
+      {/* min-w-0 lets the latest-post pill's nowrap title truncate instead of
+          inflating this flex item's min-content width past the viewport. */}
+      <div className="container-max section-padding w-full min-w-0">
         <div className="animate-fade-in text-center">
           {/* Main heading */}
           <h1 className="text-6xl font-semibold tracking-tight text-fg md:text-8xl">
@@ -96,10 +95,10 @@ export default function Hero({ latestPost }: { latestPost: LatestPost | null }) 
               <span>Download CV</span>
             </a>
             <a
-              href={`mailto:${email}`}
+              href="#contact"
               className="btn-ghost px-6 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              Email me
+              Work with me
             </a>
           </div>
 

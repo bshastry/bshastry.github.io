@@ -20,6 +20,7 @@ const navigation: NavItem[] = [
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Pubs', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 export default function Header() {
@@ -30,7 +31,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      const sections = ['home', 'about', 'projects', 'findings', 'talks', 'publications']
+      const sections = ['home', 'about', 'projects', 'findings', 'talks', 'publications', 'contact']
       const scrollPosition = window.scrollY + 100
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -56,16 +57,18 @@ export default function Header() {
     }`
   }
 
-  const renderLink = (item: NavItem, onClick?: () => void) =>
-    item.id ? (
-      <a key={item.name} href={item.href} onClick={onClick} className={linkClass(item)}>
+  const renderLink = (item: NavItem, onClick?: () => void, block = false) => {
+    const className = block ? `block ${linkClass(item)}` : linkClass(item)
+    return item.id ? (
+      <a key={item.name} href={item.href} onClick={onClick} className={className}>
         {item.name}
       </a>
     ) : (
-      <Link key={item.name} href={item.href} onClick={onClick} className={linkClass(item)}>
+      <Link key={item.name} href={item.href} onClick={onClick} className={className}>
         {item.name}
       </Link>
     )
+  }
 
   return (
     <header
@@ -137,7 +140,7 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="mt-2 space-y-1 rounded-lg border border-line bg-surface px-2 pb-3 pt-2">
-              {navigation.map((item) => renderLink(item, closeMobile))}
+              {navigation.map((item) => renderLink(item, closeMobile, true))}
               <div className="flex items-center space-x-4 px-1 py-2">
                 <a
                   href="https://github.com/bshastry"
