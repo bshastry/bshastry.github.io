@@ -36,7 +36,15 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          'Cascadia Code',
+          'Roboto Mono',
+          'Menlo',
+          'Consolas',
+          'monospace',
+        ],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

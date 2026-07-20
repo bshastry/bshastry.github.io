@@ -38,10 +38,10 @@ export default function About() {
         <div className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Prose */}
           <div>
-            <h3 className="mb-4 text-2xl font-semibold text-fg">
+            <h3 className="mb-5 text-2xl font-semibold text-fg">
               Turning disagreement into evidence
             </h3>
-            <p className="mb-4 leading-relaxed text-muted">
+            <p className="mb-5 text-lg leading-relaxed text-fg">
               My working thesis: in a system with more than one implementation there is no ground
               truth — only witnesses that can disagree. I make them disagree under controlled
               conditions. I build coverage-guided differential fuzzers that run Ethereum&apos;s
@@ -66,7 +66,7 @@ export default function About() {
           </div>
 
           {/* Expertise + CV */}
-          <div className="space-y-8">
+          <div className="h-fit space-y-8 rounded-xl border border-line bg-surface/50 p-6 sm:p-8">
             <div>
               <h4 className="mb-4 text-lg font-semibold text-fg">Core Expertise</h4>
               <ul className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">

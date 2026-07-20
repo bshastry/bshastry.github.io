@@ -29,7 +29,7 @@ export default function ThemeToggle({ className = '' }: { className?: string }) 
     setIsDark(next)
   }
 
-  const base = `inline-flex h-9 w-9 items-center justify-center rounded-md text-muted transition-colors hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${className}`
+  const base = `inline-flex h-10 w-10 items-center justify-center rounded-md text-muted transition-colors hover:text-fg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${className}`
 
   if (!mounted) {
     return <span className={base} aria-hidden="true" />
