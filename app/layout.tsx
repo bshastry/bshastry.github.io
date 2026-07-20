@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import { pageAlternates } from '@/lib/seo'
+import portfolioData from '@/data/portfolio.json'
 import './globals.css'
 
 // The CSS variable keeps Tailwind's font-sans token pointing at the self-hosted
 // next/font family; nothing else loads a face literally named "Inter".
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+// 400 covers eyebrows/chips/body mono; 600 gives the hero stat digits a real
+// semibold face instead of browser-synthesized bold.
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-jetbrains-mono',
+})
+
+const siteDescription = portfolioData.personal.description
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bshastry.github.io'),
@@ -13,8 +23,7 @@ export const metadata: Metadata = {
     default: 'Bhargava Shastry — Security Engineer & Researcher',
     template: '%s — Bhargava Shastry',
   },
-  description:
-    'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures in Ethereum clients, cryptographic libraries, and compilers before they become production incidents.',
+  description: siteDescription,
   keywords: [
     'differential testing',
     'differential fuzzing',
@@ -34,14 +43,12 @@ export const metadata: Metadata = {
     url: 'https://bshastry.github.io',
     siteName: 'Bhargava Shastry',
     title: 'Bhargava Shastry — Security Engineer & Researcher',
-    description:
-      'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures before they become production incidents.',
+    description: siteDescription,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Bhargava Shastry — Security Engineer & Researcher',
-    description:
-      'Differential testing for critical protocol and cryptographic implementations — finding cross-implementation failures before they become production incidents.',
+    description: siteDescription,
     creator: '@ibags',
   },
 }
@@ -60,7 +67,11 @@ const themeScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${inter.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`dark scroll-smooth ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

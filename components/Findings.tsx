@@ -11,7 +11,11 @@ const typeIcons: Record<string, React.ReactNode> = {
 const fallbackTypeIcon = <FileText size={12} />
 
 export default function Findings() {
-  const { findings } = portfolioData
+  // Featured entries must lead the grid for their full-width rows to lay out
+  // cleanly; the stable sort keeps the data file's curation order otherwise.
+  const findings = [...portfolioData.findings].sort(
+    (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+  )
 
   return (
     <section id="findings" className="py-24 md:py-28">
@@ -33,7 +37,9 @@ export default function Findings() {
               href={finding.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col bg-bg p-6 transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+              className={`group flex flex-col bg-bg p-6 transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent ${
+                finding.featured ? 'border-t-2 border-accent md:col-span-2 md:p-8' : ''
+              }`}
             >
               <div className="mb-3 flex items-center justify-between gap-3">
                 <span className="chip gap-1.5">
@@ -42,7 +48,11 @@ export default function Findings() {
                 </span>
                 <span className="font-mono text-xs text-faint">{finding.date}</span>
               </div>
-              <h3 className="text-base font-semibold text-fg transition-colors group-hover:text-accent">
+              <h3
+                className={`${
+                  finding.featured ? 'text-lg' : 'text-base'
+                } font-semibold text-fg transition-colors group-hover:text-accent`}
+              >
                 {finding.title}
               </h3>
               <p className="mb-4 mt-2 flex-1 text-sm leading-relaxed text-muted">

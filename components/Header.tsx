@@ -18,7 +18,7 @@ const navigation: NavItem[] = [
   { name: 'Research', href: '#research', id: 'research' },
   { name: 'Findings', href: '#findings', id: 'findings' },
   { name: 'Talks', href: '#talks', id: 'talks' },
-  { name: 'Pubs', href: '#publications', id: 'publications' },
+  { name: 'Papers', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
   { name: 'Work', href: '#contact', id: 'contact' },
 ]
