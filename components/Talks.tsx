@@ -1,8 +1,13 @@
-import { FileText, Video, MapPin, Calendar } from 'lucide-react'
+import { Fragment } from 'react'
+import Link from 'next/link'
+import { BookOpen, FileText, Video } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
+const latestVenueYear = (talk: (typeof portfolioData.talks)[number]) =>
+  Math.max(...talk.venues.map((venue) => venue.year))
+
 export default function Talks() {
-  const talks = [...portfolioData.talks].sort((a, b) => b.year - a.year)
+  const talks = [...portfolioData.talks].sort((a, b) => latestVenueYear(b) - latestVenueYear(a))
 
   return (
     <section id="talks" className="py-24 md:py-28">
@@ -17,59 +22,54 @@ export default function Talks() {
         </div>
 
         <div className="border-t border-line">
-          {talks.map((talk, i) => (
-            <div
-              key={i}
-              className="flex flex-col gap-4 border-b border-line py-6 md:flex-row md:items-start md:justify-between"
-            >
-              <div className="min-w-0">
-                <h3 className="text-lg font-semibold text-fg">{talk.title}</h3>
+          {talks.map((talk) => (
+            <article key={talk.title} className="border-b border-line py-6">
+              <h3 className="text-lg font-semibold text-fg">{talk.title}</h3>
 
-                {talk.summary && (
-                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
-                    {talk.summary}
-                  </p>
-                )}
+              {talk.summary && (
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">{talk.summary}</p>
+              )}
 
-                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-faint">
-                  <span className="flex items-center">
-                    <Calendar size={14} className="mr-2 flex-shrink-0" />
-                    {talk.venue}, {talk.year}
-                  </span>
-                  {talk.location && (
-                    <span className="flex items-center">
-                      <MapPin size={14} className="mr-2 flex-shrink-0" />
-                      {talk.location}
-                    </span>
-                  )}
-                </div>
-              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                {talk.venues.map((venue) => (
+                  <Fragment key={`${talk.title}-${venue.venue}`}>
+                    <a
+                      href={venue.slides}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={venue.location ? `${venue.venue}, ${venue.location}` : venue.venue}
+                      className="chip gap-1.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <FileText size={13} />
+                      <span>
+                        {venue.venue} &apos;{String(venue.year).slice(-2)}
+                      </span>
+                    </a>
+                    {'video' in venue && venue.video && (
+                      <a
+                        href={venue.video}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="chip gap-1.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        <Video size={13} />
+                        <span>{venue.venue} video</span>
+                      </a>
+                    )}
+                  </Fragment>
+                ))}
 
-              <div className="flex flex-shrink-0 items-center gap-3">
-                {talk.slides && (
-                  <a
-                    href={talk.slides}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                {'essay' in talk && talk.essay && (
+                  <Link
+                    href={talk.essay}
                     className="chip gap-1.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
-                    <FileText size={14} />
-                    <span>Slides</span>
-                  </a>
-                )}
-                {talk.video && (
-                  <a
-                    href={talk.video}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="chip gap-1.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                  >
-                    <Video size={14} />
-                    <span>Video</span>
-                  </a>
+                    <BookOpen size={13} />
+                    <span>Long version</span>
+                  </Link>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

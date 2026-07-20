@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowDown, Sparkles } from 'lucide-react'
+import { ArrowDown, FileText } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
 
@@ -101,14 +101,19 @@ function MethodTrace() {
 
 export default function Hero({ latestPost, findingsCount, publicationsCount }: HeroProps) {
   const stats = [
-    { value: '10+', label: 'years in security', href: '#about' },
     {
-      value: '300+',
-      label: 'compiler commits',
-      href: 'https://github.com/ethereum/solidity/commits?author=bshastry',
+      value: String(findingsCount),
+      label: 'public findings · 2025–26',
+      href: '#findings',
+    },
+    {
+      value: '1',
+      label: 'security advisory',
+      href: 'https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/',
       external: true,
     },
-    { value: String(findingsCount), label: 'public findings', href: '#findings' },
+    // geth, Besu, Nethermind, Erigon, and revm — see caseStudies[0].approach.
+    { value: '5', label: 'EVM implementations cross-checked', href: '#case-studies' },
     { value: String(publicationsCount), label: 'publications', href: '#publications' },
   ]
 
@@ -122,40 +127,45 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
       <div className="container-max section-padding w-full py-16 sm:py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.12fr)_minmax(20rem,0.88fr)] lg:gap-16">
           <div className="min-w-0 animate-fade-in">
-            <p className="eyebrow flex items-center gap-3 text-accent">
+            <p className="eyebrow flex items-center gap-3 text-muted">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Protocol security · differential testing
+              Security Engineer · Ethereum Foundation
             </p>
 
-            <h1 className="mt-6 text-[clamp(3.75rem,8vw,6.75rem)] font-semibold leading-[0.88] tracking-[-0.055em] text-fg">
-              <span className="block">Bhargava</span>
-              <span className="block text-accent">Shastry</span>
+            <h1 className="mt-5 whitespace-nowrap text-[clamp(2.25rem,10.8vw,2.55rem)] font-semibold leading-none tracking-[-0.045em] text-fg sm:text-5xl md:text-7xl">
+              Bhargava <span className="text-accent">Shastry</span>
             </h1>
 
-            <p className="mt-8 max-w-2xl text-xl leading-relaxed text-muted sm:text-2xl">
-              I find <span className="font-medium text-accent">cross-implementation failures</span>{' '}
-              before they become production incidents — turning disagreement between Ethereum
-              clients, cryptographic libraries, and compilers into reproducible evidence.
+            <p className="mt-7 max-w-2xl text-xl leading-relaxed text-fg sm:text-2xl">
+              I run independent implementations against each other — Ethereum clients, post-quantum
+              cryptography libraries, compilers — and turn every disagreement into a reproducible
+              bug report.
             </p>
 
-            <p className="mt-6 max-w-xl text-sm leading-relaxed text-faint">
-              Security Engineer at the Ethereum Foundation. Beyond the day job, I design AI-driven
-              triage and vulnerability-discovery pipelines with auditable logs and human review at
-              the decision points.
-            </p>
-
-            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
-              <a href="#case-studies" className="btn-primary px-6 py-3">
-                See case studies
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+              Recently: a confirmed-exploitable timing channel in Mbed TLS (
+              <a
+                href="https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-accent"
+              >
+                security advisory, Jul 2026
               </a>
-              <a href="#contact" className="btn-ghost px-6 py-3">
-                Discuss a scoped review
+              ), upstream fixes merged in Erigon, Nethermind, and revm (
+              <a href="#findings" className="link-accent">
+                findings
               </a>
-            </div>
-
-            <p className="mt-5 max-w-xl text-xs leading-relaxed text-faint">
-              Independent engagements are limited and subject to conflict review. Employer
-              affiliation does not imply endorsement.
+              ), and 25 miscompilation bugs found in the Solidity compiler (
+              <a
+                href="https://arxiv.org/abs/2607.07217"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-accent"
+              >
+                paper
+              </a>
+              ).
             </p>
 
             {latestPost && (
@@ -163,7 +173,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
                 href={`/blog/${latestPost.slug}`}
                 className="focus-ring group mt-8 inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-surface/60 px-4 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg"
               >
-                <Sparkles size={14} className="flex-shrink-0 text-accent" />
+                <FileText size={14} className="flex-shrink-0 text-accent" />
                 <span className="eyebrow flex-shrink-0">Latest</span>
                 <span className="truncate">{latestPost.title}</span>
                 <time
@@ -208,6 +218,20 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
               <span className="eyebrow text-center">{stat.label}</span>
             </a>
           ))}
+        </div>
+
+        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
+          <a href="#case-studies" className="btn-primary px-6 py-3">
+            See case studies
+          </a>
+          <a
+            href="/media/Bhargava_Shastry_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-ghost px-6 py-3"
+          >
+            Download CV (PDF)
+          </a>
         </div>
 
         <a

@@ -16,8 +16,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="mb-4 text-2xl font-semibold tracking-tight text-fg">{personal.name}</h3>
             <p className="mb-6 max-w-md text-muted">
-              Differential testing for critical protocol and cryptographic implementations — finding
-              cross-implementation failures before they become production incidents.
+              Security engineer at the Ethereum Foundation. I test systems where independent
+              implementations must agree.
             </p>
             <div className="flex space-x-5">
               <a

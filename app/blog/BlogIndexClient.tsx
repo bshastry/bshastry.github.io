@@ -13,6 +13,8 @@ interface BlogIndexClientProps {
   posts: BlogPostMeta[]
 }
 
+const START_HERE_SLUG = 'trust-no-single-witness'
+
 const chipClass = (active: boolean) =>
   `chip transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
     active ? 'border-accent text-accent' : ''
@@ -24,7 +26,9 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
 
   // Granular tags stay in post metadata; readers navigate six collections.
   const { annotatedPosts, visibleCollections } = useMemo(() => {
-    const annotated = posts.map((p) => ({ ...p, collection: collectionFor(p.tags) }))
+    const annotated = posts
+      .map((p) => ({ ...p, collection: collectionFor(p.tags) }))
+      .sort((a, b) => Number(b.slug === START_HERE_SLUG) - Number(a.slug === START_HERE_SLUG))
     return {
       annotatedPosts: annotated,
       visibleCollections: COLLECTIONS.filter((c) => annotated.some((p) => p.collection === c)),
@@ -131,6 +135,9 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
             {filteredPosts.map((post) => (
               <article key={post.slug} className="py-10">
                 <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
+                  {post.slug === START_HERE_SLUG && (
+                    <span className="chip border-accent text-accent">Start here</span>
+                  )}
                   <span className="flex items-center">
                     <Calendar size={16} className="mr-2" />
                     <time dateTime={post.date}>{formatDate(post.date)}</time>

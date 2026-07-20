@@ -2,7 +2,7 @@
   "personal": {
     "name": "Bhargava Shastry",
     "title": "Security Engineer & Researcher",
-    "description": "I find cross-implementation failures before they become production incidents — differential testing of Ethereum clients, cryptographic libraries, and compilers, scaled by AI-driven triage and vulnerability-discovery pipelines I design and build.",
+    "description": "Security engineer at the Ethereum Foundation. Differential testing of Ethereum clients, post-quantum cryptography, and compilers — plus the AI-assisted triage pipelines that scale it.",
     "location": "Remote",
     "email": "bshastry@posteo.de",
     "social": {
@@ -18,25 +18,25 @@
       "title": "Security Engineer",
       "company": "Ethereum Foundation",
       "period": "2019 - Present",
-      "description": "Protocol security for Ethereum: differential fuzzing of execution clients, hard-fork readiness testing, and technical evaluation of bug bounty submissions across execution- and consensus-layer clients."
+      "description": "Differential fuzzing, hard-fork readiness, and bug-bounty triage across Ethereum clients."
     },
     {
       "title": "Independent Security Researcher",
       "company": "Freelance",
       "period": "2017 - Present",
-      "description": "Independent security research, building fuzzing tools, and contributing to open-source security projects including Google's OSS-Fuzz and Open vSwitch."
+      "description": "Open-source security research, fuzzing tools, and contributions to OSS-Fuzz and Open vSwitch."
     },
     {
       "title": "Security Researcher",
       "company": "Fraunhofer Secure IT",
       "period": "2011 - 2012",
-      "description": "Research on Android platform security, including privilege escalation defenses and lightweight domain isolation. Published at NDSS and ACM SPSM."
+      "description": "Android platform security research; published at NDSS and ACM SPSM."
     },
     {
       "title": "Software Engineer",
       "company": "Ittiam Systems",
       "period": "2007 - 2008",
-      "description": "Wrote software and tests for Ittiam's Voice over IP phone software."
+      "description": "VoIP phone software and tests."
     }
   ],
   "education": [
@@ -339,7 +339,17 @@
       "project": "Mbed-TLS/mbedtls",
       "type": "Security advisory",
       "date": "Jul 2026",
-      "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/"
+      "url": "https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/",
+      "featured": true
+    },
+    {
+      "title": "25 miscompilation bugs in the Solidity compiler",
+      "description": "SolSmith, a semantics-aware differential fuzzer, surfaced miscompilation bugs that had gone unnoticed — some for years — with a root-cause analysis of each.",
+      "project": "ethereum/solidity",
+      "type": "Paper",
+      "date": "Jul 2026",
+      "url": "https://arxiv.org/abs/2607.07217",
+      "featured": true
     },
     {
       "title": "Variable-time division on Mbed TLS RSA prime-generation path",
@@ -348,14 +358,6 @@
       "type": "Fixed upstream",
       "date": "Jul 2026",
       "url": "https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/ChangeLog"
-    },
-    {
-      "title": "25 miscompilation bugs in the Solidity compiler",
-      "description": "SolSmith, a semantics-aware differential fuzzer, surfaced miscompilation bugs that had gone unnoticed — some for years — with a root-cause analysis of each.",
-      "project": "ethereum/solidity",
-      "type": "Paper",
-      "date": "Jul 2026",
-      "url": "https://arxiv.org/abs/2607.07217"
     },
     {
       "title": "Hard-fork readiness tests upstreamed to the executable spec",
@@ -417,59 +419,74 @@
   "talks": [
     {
       "title": "Trust No Single Witness: Differential Fuzzing & Bug-Bounty Triage for Ethereum Clients",
-      "venue": "Berlin Ethereum Day",
-      "location": "Berlin",
-      "year": 2026,
-      "slides": "/media/Trust_No_Single_Witness.pdf",
-      "summary": "There is no ground truth in Ethereum — only witnesses that disagree. How differential fuzzing across ~8 execution clients catches consensus splits within hours of a commit, how LLM property-based testing attacks the blind spots all clients share, and how a three-witness severity model (reporter, AI swarm, network blast radius) keeps AI-era bounty triage honest. Takeaway: a green checkmark is an agreed-upon guess."
+      "venues": [
+        {
+          "venue": "Berlin Ethereum Day",
+          "location": "Berlin",
+          "year": 2026,
+          "slides": "/media/Trust_No_Single_Witness.pdf"
+        }
+      ],
+      "essay": "/blog/trust-no-single-witness",
+      "summary": "How differential fuzzing across ~8 execution clients catches consensus splits within hours of a commit, how LLM property-based testing attacks shared blind spots, and how a three-witness severity model (reporter, AI swarm, network blast radius) keeps AI-era bounty triage honest."
     },
     {
       "title": "Fuzzing the Solidity Compiler",
-      "venue": "Devcon 5",
-      "location": "Osaka",
-      "year": 2019,
-      "slides": "/media/Fuzzing_Solidity.pdf",
-      "video": "https://youtu.be/cAU5NbrXst0",
-      "summary": "Threat model: incorrect code generation. Randomly generated valid Solidity/Yul programs stress the compiler's codegen and optimizer before releases ship."
-    },
-    {
-      "title": "Fuzzing the Solidity Compiler",
-      "venue": "EthCC 3",
-      "location": "Paris",
-      "year": 2020,
-      "slides": "/media/Fuzzing_Solidity_EthCC3.pdf",
-      "summary": "Updated iteration of the Devcon 5 talk: nine bugs found via semantic fuzzing of the compiler's code generation."
-    },
-    {
-      "title": "Fuzzing the Solidity Compiler",
-      "venue": "FuzzCon EU",
-      "location": "Europe",
-      "year": 2020,
-      "slides": "/media/Fuzzing_Solidity_FuzzconEU.pdf",
-      "summary": "The compiler-fuzzing pipeline presented to a fuzzing-practitioner audience: generating valid programs, differential oracles, and OSS-Fuzz integration."
+      "venues": [
+        {
+          "venue": "Devcon 5",
+          "location": "Osaka",
+          "year": 2019,
+          "slides": "/media/Fuzzing_Solidity.pdf",
+          "video": "https://youtu.be/cAU5NbrXst0"
+        },
+        {
+          "venue": "EthCC 3",
+          "location": "Paris",
+          "year": 2020,
+          "slides": "/media/Fuzzing_Solidity_EthCC3.pdf"
+        },
+        {
+          "venue": "FuzzCon EU",
+          "year": 2020,
+          "slides": "/media/Fuzzing_Solidity_FuzzconEU.pdf"
+        }
+      ],
+      "summary": "Threat model: incorrect code generation. Randomly generated valid Solidity/Yul programs stress the compiler's codegen and optimizer before releases ship — nine bugs found via semantic fuzzing."
     },
     {
       "title": "Can A Fuzzer Match A Human: Solidity Case Study",
-      "venue": "Ethereum Foundation",
-      "location": "",
-      "year": 2020,
-      "slides": "/media/Can_A_Fuzzer_Match_A_Human.pdf",
+      "venues": [
+        {
+          "venue": "Ethereum Foundation",
+          "year": 2020,
+          "slides": "/media/Can_A_Fuzzer_Match_A_Human.pdf"
+        }
+      ],
       "summary": "A fuzzer is no match for a human tester — but it finds security-critical bugs humans miss, and it shines at differential (A/B) testing."
     },
     {
       "title": "Open Discussion on Solidity Fuzzing",
-      "venue": "Ethereum Meetup",
-      "location": "Berlin",
-      "year": 2019,
-      "slides": "/media/Eth_Meetup_Slides.pdf",
+      "venues": [
+        {
+          "venue": "Ethereum Meetup",
+          "location": "Berlin",
+          "year": 2019,
+          "slides": "/media/Eth_Meetup_Slides.pdf"
+        }
+      ],
       "summary": "The state of Solidity compiler testing — unit, regression, and fuzz tests — and where community input could help."
     },
     {
       "title": "Vulnerability Search Problem and Methods",
-      "venue": "TU Berlin (Invited Talk)",
-      "location": "Berlin",
-      "year": 2019,
-      "slides": "/media/Vulnerability_Search_Problem_and_Methods.pdf",
+      "venues": [
+        {
+          "venue": "TU Berlin (Invited Talk)",
+          "location": "Berlin",
+          "year": 2019,
+          "slides": "/media/Vulnerability_Search_Problem_and_Methods.pdf"
+        }
+      ],
       "summary": "Why vulnerabilities are expensive, and how static analysis and fuzzing complement each other in finding them."
     }
   ],

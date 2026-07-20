@@ -47,13 +47,14 @@ export default function CaseStudies() {
                   <dd className="text-sm leading-relaxed text-muted">{cs.result}</dd>
                 </div>
               </dl>
-              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
-                <span className="font-mono text-xs text-faint">{cs.demonstrates}</span>
-                <span className="flex flex-wrap items-center gap-4">
+              <div className="mt-7 border-t border-line pt-5">
+                <p className="eyebrow mb-2 text-accent">Demonstrates</p>
+                <p className="max-w-3xl text-sm leading-relaxed text-muted">{cs.demonstrates}</p>
+                <div className="mt-4 flex flex-wrap items-center gap-4">
                   {cs.evidence.map((link) => (
                     <ThemeLink key={link.url} link={{ ...link, type: 'external' }} />
                   ))}
-                </span>
+                </div>
               </div>
             </article>
           ))}

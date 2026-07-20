@@ -1,4 +1,4 @@
-import { Award, BookOpen } from 'lucide-react'
+import { Award } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 export default function Publications() {
@@ -12,31 +12,25 @@ export default function Publications() {
           <p className="eyebrow mb-3">07 — Publications</p>
           <h2 className="section-title">Publications</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
-            Peer-reviewed research in security, fuzzing, and program analysis
+            Research in security, fuzzing, and program analysis
           </p>
         </div>
 
-        <div className="mx-auto max-w-4xl space-y-12">
+        <div className="mx-auto max-w-4xl space-y-10">
           {nonEmpty.map((group) => (
             <div key={group.era}>
-              <h3 className="mb-4 flex items-center text-xl font-semibold text-fg">
-                <BookOpen size={20} className="mr-2 text-faint" />
-                {group.era}
-              </h3>
-              <div className="space-y-4">
+              <h3 className="mb-4 text-xl font-semibold text-fg">{group.era}</h3>
+              <div className="border-t border-line">
                 {group.papers.map((paper, i) => (
-                  <div
-                    key={i}
-                    className="rounded-lg border border-line p-4 transition-colors hover:border-line-strong"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
+                  <article key={i} className="border-b border-line py-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0 flex-1">
                         {paper.url ? (
                           <a
                             href={paper.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-medium text-fg hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                            className="font-medium text-fg transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                           >
                             {paper.title}
                           </a>
@@ -53,7 +47,7 @@ export default function Publications() {
                         </span>
                       )}
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </div>
