@@ -43,9 +43,11 @@ export default function Findings() {
                 Open vSwitch, GNU oSIP2, Snort++, and tcpdump: {disclosureSummary.memoryCorruption}{' '}
                 memory-corruption findings, {disclosureSummary.outOfBoundsReads} out-of-bounds
                 reads, and {disclosureSummary.logicOrDos} logic/denial-of-service findings. The
-                compiler ledger separately maps seven of SolSmith’s 25 findings to Solidity’s
-                official security-relevant bug records: five optimizer bugs, one code-generation
-                bug, and one front-end validation bug.
+                compiler ledger separately maps {soliditySecuritySummary.total} of SolSmith’s 25
+                findings to Solidity’s official security-relevant bug records:{' '}
+                {soliditySecuritySummary.incorrectOptimization} optimizer bugs,{' '}
+                {soliditySecuritySummary.codeGeneration} code-generation bug, and{' '}
+                {soliditySecuritySummary.frontEnd} front-end validation bug.
               </p>
             </div>
             <Link

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowDown, FileText } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
-import { disclosureSummary, soliditySecuritySummary } from '@/lib/disclosures'
+import { disclosureSummary, disclosureYearRange, soliditySecuritySummary } from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
 
 type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
@@ -110,7 +110,7 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
   const stats = [
     {
       value: String(disclosureSummary.cves),
-      label: 'CVE-backed disclosures · 2016–17',
+      label: `CVE-backed disclosures · ${disclosureYearRange}`,
       href: '/findings/#cve-disclosures',
     },
     {

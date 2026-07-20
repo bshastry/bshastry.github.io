@@ -32,7 +32,7 @@ Do not send vulnerability details, credentials, secrets, or source code by ordin
 ## External profiles
 
 - [GitHub](https://github.com/bshastry): Public code, contributions, issues, and merged fixes.
-- [Google Scholar](https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ): Publication record and citations.
+- [Google Scholar](https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ): Publication record and citations.
 - [Keybase](https://keybase.io/bshastry): Public identity and encryption keys.
 
 ## Optional

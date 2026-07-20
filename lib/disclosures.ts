@@ -325,6 +325,15 @@ export const soliditySecuritySummary = {
 
 export const allCveDisclosures = disclosureGroups.flatMap((group) => group.cves)
 
+// Derived from the group periods so the hero label can't drift from the ledger.
+const disclosureYears = disclosureGroups.flatMap((group) =>
+  (group.period.match(/\d{4}/g) ?? []).map(Number),
+)
+const oldestYear = Math.min(...disclosureYears)
+const newestYear = Math.max(...disclosureYears)
+export const disclosureYearRange =
+  oldestYear === newestYear ? String(oldestYear) : `${oldestYear}–${String(newestYear).slice(-2)}`
+
 export const disclosureSummary = {
   cves: allCveDisclosures.length,
   projects: disclosureGroups.length,

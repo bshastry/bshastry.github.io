@@ -14,8 +14,7 @@ import { pageAlternates, serializeJsonLd, SITE_URL } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Security Findings & Disclosures',
-  description:
-    'Public security work by Bhargava Shastry: 55 CVE-backed disclosures, seven Solidity security-relevant compiler bugs found with SolSmith, and recent upstream fixes, advisories, and research.',
+  description: `Public security work by Bhargava Shastry: ${disclosureSummary.cves} CVE-backed disclosures, ${soliditySecuritySummary.total} Solidity security-relevant compiler bugs found with SolSmith, and recent upstream fixes, advisories, and research.`,
   alternates: pageAlternates('/findings/'),
 }
 

@@ -111,9 +111,10 @@ export default function DisclosureLedger() {
                 A CVE is the public vulnerability record. A vendor or distributor may separately
                 publish an advisory, and a public finding may instead be documented in a patch,
                 issue, or paper without receiving a CVE. This ledger uses “CVE-backed disclosure”
-                for the 55 assigned records and keeps the non-CVE pinctrl fix separate. Solidity’s
-                own term is “known security-relevant compiler bugs”; those SOL records are shown in
-                a separate ledger below. Severity is never inferred from an identifier.
+                for the {disclosureSummary.cves} assigned records and keeps the non-CVE pinctrl fix
+                separate. Solidity’s own term is “known security-relevant compiler bugs”; those SOL
+                records are shown in a separate ledger below. Severity is never inferred from an
+                identifier.
               </p>
             </div>
           </div>
@@ -133,9 +134,10 @@ export default function DisclosureLedger() {
           <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted">
             The SolSmith paper documents 25 patched miscompilation bugs found through semantic
             differential fuzzing. Cross-referencing its linked reports with Solidity’s official{' '}
-            <code className="font-mono text-xs text-fg">docs/bugs.json</code> ledger yields these
-            seven exact matches. They are security-relevant compiler bug records, not CVEs; the
-            severity and affected version ranges below come from the official ledger.
+            <code className="font-mono text-xs text-fg">docs/bugs.json</code> ledger yields these{' '}
+            {soliditySecuritySummary.total} exact matches. They are security-relevant compiler bug
+            records, not CVEs; the severity and affected version ranges below come from the official
+            ledger.
           </p>
         </div>
 

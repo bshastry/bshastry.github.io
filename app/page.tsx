@@ -31,7 +31,7 @@ const personJsonLd = {
     'https://github.com/bshastry',
     'https://twitter.com/ibags',
     'https://linkedin.com/in/bshastry',
-    'https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ',
+    'https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ',
   ],
   knowsAbout: [
     'Differential testing',
