@@ -31,7 +31,7 @@ const personJsonLd = {
     'https://github.com/bshastry',
     'https://twitter.com/ibags',
     'https://linkedin.com/in/bshastry',
-    'https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ',
+    'https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ',
   ],
   knowsAbout: [
     'Differential testing',
@@ -47,7 +47,6 @@ export default function Home() {
   const posts = getAllPostsMeta()
   const recentPosts = posts.slice(0, 3)
   const latestPost = posts[0] ?? null
-  const findingsCount = portfolioData.findings.length
   const publicationsCount = portfolioData.publications.reduce(
     (sum, group) => sum + group.papers.length,
     0,
@@ -61,11 +60,7 @@ export default function Home() {
       />
       <Header />
       <main id="main-content" className="min-h-screen">
-        <Hero
-          latestPost={latestPost}
-          findingsCount={findingsCount}
-          publicationsCount={publicationsCount}
-        />
+        <Hero latestPost={latestPost} publicationsCount={publicationsCount} />
         <About />
         <CaseStudies />
         <Projects />

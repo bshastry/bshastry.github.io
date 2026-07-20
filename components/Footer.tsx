@@ -165,6 +165,11 @@ export default function Footer() {
                   <span>RSS Feed</span>
                 </a>
               </li>
+              <li>
+                <a href="/llms.txt" className="text-muted transition-colors hover:text-fg">
+                  LLM index
+                </a>
+              </li>
             </ul>
           </div>
         </div>

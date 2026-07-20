@@ -10,7 +10,7 @@
       "github": "bshastry",
       "twitter": "ibags",
       "linkedin": "bshastry",
-      "scholar": "https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ",
+      "scholar": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ",
       "keybase": "bshastry"
     }
   },
@@ -182,12 +182,22 @@
       "highlights": [
         "303 commits to the Solidity compiler, primarily in fuzzing and testing",
         "Built ABI encoder v2 differential fuzzer",
-        "Discovered and reported numerous compiler correctness bugs through structure-aware fuzzing"
+        "Discovered 25 patched miscompilation bugs with SolSmith; seven are catalogued in Solidity's official security-relevant bug ledger"
       ],
       "links": [
         {
-          "label": "Solidity",
-          "url": "https://github.com/ethereum/solidity",
+          "label": "Security-relevant bug evidence",
+          "url": "/findings/#solidity-security-bugs",
+          "type": "internal"
+        },
+        {
+          "label": "SolSmith paper",
+          "url": "https://arxiv.org/abs/2607.07217",
+          "type": "external"
+        },
+        {
+          "label": "Solidity repository",
+          "url": "https://github.com/argotorg/solidity",
           "type": "github"
         }
       ]
@@ -227,7 +237,17 @@
       "links": [
         {
           "label": "orthrus",
-          "url": "https://github.com/bshastry/orthrus",
+          "url": "https://github.com/test-pipeline/orthrus",
+          "type": "github"
+        },
+        {
+          "label": "Melange checkers",
+          "url": "https://github.com/bshastry/melange-checkers",
+          "type": "github"
+        },
+        {
+          "label": "afl-sancov",
+          "url": "https://github.com/bshastry/afl-sancov",
           "type": "github"
         },
         {
@@ -345,8 +365,8 @@
     },
     {
       "title": "25 miscompilation bugs in the Solidity compiler",
-      "description": "SolSmith, a semantics-aware differential fuzzer, surfaced miscompilation bugs that had gone unnoticed — some for years — with a root-cause analysis of each.",
-      "project": "ethereum/solidity",
+      "description": "SolSmith, a semantics-aware differential fuzzer, surfaced 25 patched miscompilation bugs — seven also catalogued in Solidity's official security-relevant known-bug ledger — with a root-cause analysis of each.",
+      "project": "argotorg/solidity",
       "type": "Paper",
       "date": "Jul 2026",
       "url": "https://arxiv.org/abs/2607.07217",

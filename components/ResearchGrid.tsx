@@ -76,7 +76,7 @@ export default function ResearchGrid({
   return (
     <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
       {themes.map((theme, index) => (
-        <div key={theme.id} className="flex flex-col bg-bg p-6">
+        <div key={theme.id} id={theme.id} className="flex scroll-mt-24 flex-col bg-bg p-6">
           <div className="mb-4 flex items-baseline gap-3">
             <span className="font-mono text-sm text-faint">
               {String(index + 1).padStart(2, '0')}

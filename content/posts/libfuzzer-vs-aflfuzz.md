@@ -28,7 +28,7 @@ Let's compare test harnesses for libfuzzer and afl-fuzz by using libpng as an ex
 
 Here's test harness for libpng in its entirety taken from oss-fuzz (Tip: You can skip the 125 lines of code that follows)
 
-{% gist 7666502bc1fc0513d45f64f6fa3ffc83 %}
+[View the libpng harness on GitHub Gist](https://gist.github.com/7666502bc1fc0513d45f64f6fa3ffc83)
 
 A few meta things:
   - If you want to fuzz libpng for fun or to simply try your hand at fuzzing, you probably don't want to write the test harness shown above

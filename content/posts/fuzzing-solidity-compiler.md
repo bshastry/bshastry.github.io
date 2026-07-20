@@ -97,7 +97,7 @@ How is the input string (solidity program) serialized into a JSON object you ask
 
 Simple, the fuzzed input goes into a field called `sources[""]["content"]`. Here's a sample input accepted by `compileStandard`
 
-{% gist 30193d6a3ae438043821d04ff3f863dd %}
+[View the sample compiler input on GitHub Gist](https://gist.github.com/30193d6a3ae438043821d04ff3f863dd)
 
 The other fields in this JSON object are targeted at configuring compilation parameters such as optimization level, compiler output formating etc.
 The output produced by the API is rather long but very detailed, so let's overlook that for now.
@@ -264,7 +264,7 @@ std::exception::what:
 Let's fire up gdb and find out what the failing assertion in `Types.cpp` on line `2127` is all about.
 
 Here's the buggy code in question
-{% gist f9d7c7104c79954fc2d38d8c050620b0 %}
+[View the buggy compiler code on GitHub Gist](https://gist.github.com/f9d7c7104c79954fc2d38d8c050620b0)
 
 ```
 (gdb) p var->annotation().type.get()
