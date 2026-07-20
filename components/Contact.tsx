@@ -13,7 +13,7 @@ const engagements = [
   {
     icon: FlaskConical,
     title: 'Differential-testing diagnostic',
-    mechanics: 'Fixed scope · timing confirmed in proposal',
+    mechanics: 'Typical duration · 1–2 weeks',
     audience: 'For teams that suspect cross-implementation or oracle risk.',
     deliverables:
       'A divergence and threat model, a target matrix, a harness and coverage roadmap, and a prioritized-risk debrief — the same artifact structure as the case studies above.',
@@ -21,7 +21,7 @@ const engagements = [
   {
     icon: ShieldCheck,
     title: 'Critical implementation review',
-    mechanics: 'Milestone-bound scope · timing confirmed in proposal',
+    mechanics: 'Typical duration · 3–6 weeks',
     audience: 'For teams approaching a hard fork, protocol upgrade, or cryptographic rollout.',
     deliverables:
       'Independent tests of high-consequence behavior, reproducible findings with severity analysis, and remediation verification.',
@@ -29,22 +29,23 @@ const engagements = [
   {
     icon: GraduationCap,
     title: 'Team workshop & advisory',
-    mechanics: 'Tailored session · follow-up office hours',
+    mechanics: '½–1 day session · 1–2 weeks preparation',
     audience: 'For teams building their own fuzzing or differential-testing capability.',
     deliverables:
       'A tailored workshop with practical exercises and reference material, followed by focused office hours.',
   },
 ]
 
-const process = ['Inquiry', 'Conflict check', 'Scoped proposal', 'Delivery & debrief']
+const process = ['Enquiry', 'EF COI check', 'Availability discussion']
 
 // Structured inquiry template (agreed qualification fields, nothing sensitive).
 // A prefilled mailto keeps the site static and the privacy page truthful.
-const inquirySubject = 'Scoped engagement inquiry'
+const inquirySubject = 'Scoped engagement enquiry'
 const inquiryBody = `Organization and role:
 Engagement type (diagnostic / review / workshop / speaking / research):
 Trigger (release, hard fork, audit, standardization, other):
 Desired start window:
+Expected duration or immovable deadline:
 Budget band:
 Problem, in one sentence (nothing confidential):
 Possible conflicts (does this touch Ethereum Foundation responsibilities?):
@@ -100,11 +101,18 @@ export default function Contact() {
         </div>
 
         <div className="mt-16 border-t border-line pt-12">
-          <p className="eyebrow mb-3 text-accent">Independent engagements — limited</p>
+          <p className="eyebrow mb-3 text-accent">
+            Independent engagements · availability subject to enquiry
+          </p>
           <h3 className="text-2xl font-semibold text-fg">Scoped security engagements</h3>
           <p className="mt-3 max-w-2xl text-muted">
             For teams that need independent evidence before a release, upgrade, or standardization
             milestone.
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-faint">
+            The ranges below are planning estimates for a focused scope, not availability
+            commitments. Timing is confirmed only after an Ethereum Foundation conflict-of-interest
+            (COI) check and an availability discussion.
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -140,7 +148,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <ol className="mt-10 grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-10 grid grid-cols-1 gap-px border border-line bg-line sm:grid-cols-3">
             {process.map((step, index) => (
               <li key={step} className="flex items-center gap-3 bg-bg px-4 py-4">
                 <span className="font-mono text-xs text-accent">
@@ -154,7 +162,7 @@ export default function Contact() {
           <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <a href={inquiryHref} className="btn-primary inline-flex items-center gap-2 px-6 py-3">
               <Mail size={16} />
-              <span>Start a structured inquiry</span>
+              <span>Start a structured enquiry</span>
             </a>
             <a
               href={`https://keybase.io/${social.keybase}/pgp_keys.asc`}

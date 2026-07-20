@@ -1,4 +1,6 @@
-import { ExternalLink, FileText, GitMerge, ShieldAlert } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, ExternalLink, FileText, GitMerge, ShieldAlert } from 'lucide-react'
+import { disclosureSummary, soliditySecuritySummary } from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
 
 const typeIcons: Record<string, React.ReactNode> = {
@@ -24,10 +26,36 @@ export default function Findings() {
           <p className="eyebrow mb-4">04 — Findings</p>
           <h2 className="section-title">Selected Findings</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
-            The evidence index behind the case studies. Don&apos;t take the numbers on faith — every
-            entry below links to a public artifact: a merged fix, upstreamed tests, or published
-            research.
+            The evidence index behind the case studies and the restored disclosure archive. Every
+            claim links to a public artifact: a CVE record, advisory, merged fix, upstreamed test,
+            or published paper.
           </p>
+        </div>
+
+        <div className="mb-10 rounded-xl border border-line bg-surface/50 p-6 sm:p-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div>
+              <p className="eyebrow mb-3 text-accent">Historical disclosure archive</p>
+              <h3 className="text-2xl font-semibold text-fg">
+                {disclosureSummary.cves} CVEs + {soliditySecuritySummary.total} Solidity known bugs
+              </h3>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                Open vSwitch, GNU oSIP2, Snort++, and tcpdump: {disclosureSummary.memoryCorruption}{' '}
+                memory-corruption findings, {disclosureSummary.outOfBoundsReads} out-of-bounds
+                reads, and {disclosureSummary.logicOrDos} logic/denial-of-service findings. The
+                compiler ledger separately maps seven of SolSmith’s 25 findings to Solidity’s
+                official security-relevant bug records: five optimizer bugs, one code-generation
+                bug, and one front-end validation bug.
+              </p>
+            </div>
+            <Link
+              href="/findings/"
+              className="btn-ghost inline-flex w-fit items-center gap-2 px-5 py-2.5"
+            >
+              <span>Explore the full ledger</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2">

@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { ArrowDown, FileText } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
+import { disclosureSummary, soliditySecuritySummary } from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
 
 type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
 
 interface HeroProps {
   latestPost: LatestPost | null
-  findingsCount: number
   publicationsCount: number
 }
 
@@ -100,28 +100,23 @@ function MethodTrace() {
   )
 }
 
-// Derived from the findings ledger so the hero can't drift from the evidence
-// it links to: the advisory count/URL and the year range track portfolio.json.
+// Derived from the findings ledgers so the hero can't drift from the evidence
+// it links to: the advisory URL tracks portfolio.json and the historical totals
+// track lib/disclosures.ts.
 const advisories = portfolioData.findings.filter((f) => f.type === 'Security advisory')
 const advisoryUrl = advisories[0]?.url ?? '#findings'
-const findingYears = portfolioData.findings.map((f) => Number(f.date.slice(-4)))
-const oldestYear = Math.min(...findingYears)
-const newestYear = Math.max(...findingYears)
-const findingsRange =
-  oldestYear === newestYear ? String(oldestYear) : `${oldestYear}–${String(newestYear).slice(-2)}`
 
-export default function Hero({ latestPost, findingsCount, publicationsCount }: HeroProps) {
+export default function Hero({ latestPost, publicationsCount }: HeroProps) {
   const stats = [
     {
-      value: String(findingsCount),
-      label: `public findings · ${findingsRange}`,
-      href: '#findings',
+      value: String(disclosureSummary.cves),
+      label: 'CVE-backed disclosures · 2016–17',
+      href: '/findings/#cve-disclosures',
     },
     {
-      value: String(advisories.length),
-      label: advisories.length === 1 ? 'security advisory' : 'security advisories',
-      href: advisoryUrl,
-      external: advisories.length > 0,
+      value: String(soliditySecuritySummary.total),
+      label: 'Solidity security-relevant bug records',
+      href: '/findings/#solidity-security-bugs',
     },
     // geth, Besu, Nethermind, Erigon, and revm — see caseStudies[0].approach.
     { value: '5', label: 'EVM implementations cross-checked', href: '#case-studies' },
@@ -216,7 +211,6 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
             <a
               key={stat.label}
               href={stat.href}
-              {...(stat.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               className={`flex min-h-28 flex-col items-center justify-center gap-2 px-4 py-6 transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent ${
                 index % 2 === 1 ? 'border-l border-line' : ''
               } ${index < 2 ? 'border-b border-line md:border-b-0' : ''} ${

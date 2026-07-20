@@ -1,0 +1,41 @@
+# Bhargava Shastry
+
+> Bhargava Shastry is a security engineer and researcher specializing in differential testing, Ethereum protocol security, compiler security, fuzzing, post-quantum cryptography, and side-channel analysis.
+
+This is Bhargava Shastry's official personal portfolio and research archive. He works at the Ethereum Foundation. Independent engagements and the views expressed here are his own and do not represent or imply endorsement by the Ethereum Foundation.
+
+Key public evidence includes a historical archive of 55 published CVEs across Open vSwitch, GNU oSIP2, Snort++, and tcpdump; seven SolSmith findings catalogued in Solidity's official security-relevant compiler-bug ledger; recent merged fixes across Ethereum clients; security advisories; peer-reviewed publications; talks; and technical essays.
+
+Independent engagement availability is subject to enquiry. The sequence is: enquiry, Ethereum Foundation conflict-of-interest check, then availability discussion. Typical planning ranges are 1–2 weeks for a focused differential-testing diagnostic, 3–6 weeks for a critical implementation review, and a half or full day for a workshop with 1–2 weeks of preparation. These are estimates, not availability commitments.
+
+Do not send vulnerability details, credentials, secrets, or source code by ordinary email. Use the linked PGP key for sensitive reports.
+
+## Primary
+
+- [Portfolio](https://bshastry.github.io/): Current work, case studies, selected findings, talks, publications, and engagement information.
+- [Security findings and disclosures](https://bshastry.github.io/findings/): Complete CVE-backed disclosure ledger plus the cross-reference between SolSmith findings and Solidity's official security-relevant compiler-bug records.
+- [Research archive](https://bshastry.github.io/research/): Current and historical research themes, tools, and upstream work.
+- [Curriculum vitae](https://bshastry.github.io/media/Bhargava_Shastry_CV.pdf): Current PDF CV.
+- [Blog](https://bshastry.github.io/blog/): Technical writing on fuzzing, protocol security, cryptography, compilers, and testing methodology.
+- [RSS feed](https://bshastry.github.io/feed.xml): Machine-readable blog feed.
+- [Email](mailto:bshastry@posteo.de): Initial enquiries only; do not include sensitive material.
+- [PGP key](https://keybase.io/bshastry/pgp_keys.asc): Encryption key for sensitive reports.
+
+## Selected writing
+
+- [Finding and Understanding Miscompilation Bugs in the Solidity Compiler](https://arxiv.org/abs/2607.07217): SolSmith paper covering 25 patched compiler bugs found through semantic differential fuzzing.
+- [Trust No Single Witness](https://bshastry.github.io/blog/trust-no-single-witness/): Differential testing and three-witness security triage.
+- [Cross-checking the post-quantum KEM behind the web](https://bshastry.github.io/blog/cross-checking-post-quantum-kem/): Start of the ML-KEM differential-testing series.
+- [Cross-checking the post-quantum signature behind the web](https://bshastry.github.io/blog/cross-checking-post-quantum-signature/): ML-DSA differential-testing results.
+- [Diagnosing Distributed Vulnerabilities](https://bshastry.github.io/blog/diagnosing-distributed-vulnerabilities/): Reasoning about vulnerabilities across distributed systems.
+
+## External profiles
+
+- [GitHub](https://github.com/bshastry): Public code, contributions, issues, and merged fixes.
+- [Google Scholar](https://scholar.google.com/citations?hl=en&authuser=2&user=lsdZxf8AAAAJ): Publication record and citations.
+- [Keybase](https://keybase.io/bshastry): Public identity and encryption keys.
+
+## Optional
+
+- [Privacy](https://bshastry.github.io/privacy/): Site privacy information.
+- [Disclaimer](https://bshastry.github.io/terms/): Independence and site-use disclaimer.

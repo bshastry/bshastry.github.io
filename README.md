@@ -1,10 +1,10 @@
 # Bhargava Shastry — Portfolio & Blog
 
-Personal portfolio and security-research blog for Bhargava Shastry, security engineer at the Ethereum Foundation. Built with Next.js 14 (App Router) and deployed as a static site to GitHub Pages at [bshastry.github.io](https://bshastry.github.io).
+Personal portfolio and security-research blog for Bhargava Shastry, security engineer at the Ethereum Foundation. Built with Next.js 15 (App Router) and deployed as a static site to GitHub Pages at [bshastry.github.io](https://bshastry.github.io).
 
 ## Stack
 
-- **Framework:** Next.js 14 (App Router) with `output: 'export'` for static HTML
+- **Framework:** Next.js 15 (App Router) with `output: 'export'` for static HTML
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS + `@tailwindcss/typography` for long-form prose
 - **Content:** Blog posts live in `content/posts/*.md`; metadata via frontmatter
@@ -64,6 +64,8 @@ app/
       page.tsx            Post page (server component)
       BlogPostClient.tsx  Share button + layout
   research/               Full research-area archive (homepage features 5)
+  findings/               CVE + Solidity security-relevant bug ledgers
+  bugs/                   No-index legacy alias for /findings
   privacy/, terms/        Static legal pages
   feed.xml/               RSS feed generator
   robots.ts               robots.txt generator
@@ -73,17 +75,22 @@ app/
 
 components/
   Header, Hero, About, Projects (featured research), ResearchGrid,
-  Findings, Talks, Writing, Publications, Contact, Footer
+  Findings, DisclosureLedger, Talks, Writing, Publications, Contact, Footer
   (CV download lives in About)
 
 content/posts/            Blog markdown files
 
 lib/
   blog.ts                 Markdown parsing pipeline
+  disclosures.ts          CVE and Solidity known-bug ledgers + aggregates
   seo.ts                  Site constants, canonical/RSS alternates, JSON-LD serializer
 
 data/
   portfolio.json          CV, research themes, findings, talks, publications
+
+public/
+  llms.txt                Curated agent-readable site index
+  <year>/.../*.html       Legacy Jekyll article redirects
 ```
 
 ## Deployment
@@ -102,7 +109,7 @@ No custom domain is configured; the site serves from the default `bshastry.githu
 ## Maintenance
 
 - **Dependencies:** Update periodically with `npm outdated` + `npm update`. For major bumps (Next.js, Tailwind), test thoroughly in a branch first.
-- **Legacy archive:** `legacy-archive/` contains the original Jekyll site. Retained as historical reference; scheduled for removal once live deploy is verified with the new blog pipeline.
+- **Legacy continuity:** Keep the static redirect files under `public/` and the `/bugs/` alias when changing routes; external links to the Jekyll-era site still depend on them.
 - **Content updates:** Blog posts live in `content/posts/`; portfolio data (projects, CV) lives in `data/portfolio.json`.
 
 ## License

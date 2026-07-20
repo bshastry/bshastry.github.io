@@ -148,7 +148,6 @@ More edges covered is better than fewer edges covered (more is better).
 
 Before I present evaluation methodology and results, some meta data about the dictionary candidates.
 
-{:.table.table-striped}
 |Dict | Num. tokens |
 | --- | ---: |
 | Baseline | 0 |
@@ -182,13 +181,12 @@ exp1 = [e3_1,e3_2,e3_3,...,e3_100]
 
 Okay, so let's make a box-plot of them and see what they look like: Remember more edges covered, the better is the fuzzing outcome.
 
-![Fig. 1: Box plots showing the number of PCs covered across 100 independent runs each for baseline, and Dict A/B/C](/assets/img/Coverage_box_plots.png){:class="img-responsive"}
+![Fig. 1: Box plots showing the number of PCs covered across 100 independent runs each for baseline, and Dict A/B/C](/assets/img/Coverage_box_plots.png)
 
 Y-axis is the number of CFG edges covered; X-axis is the fuzzing configuration whose coverage distribution is presented as a box plot.
 Okay, it (visually) appears that "Dict A" is best of all in terms of median value (the orange line that strikes through the boxes is the median of that sample set) and quartile distribution.
 Some more basic statistics for the test coverage populations follow.
 
-{:.table.table-striped}
 |Name | Mean | Variance | Min | Max |
 | --- | --- | --- | --- | ---: |
 | Baseline | 1488.3 | 1918.5 | 1427 | 1591 |
@@ -204,14 +202,13 @@ This is precisely where significance tests enter the picture.
 We can check the "soundness" of the hypothesis "Dict A is different" by performing a Mann-Whitney U test on our data set.
 Here's a gist of my evaluation python script: Nothing fancy, reading coverage numbers from a log file and using `mannwhitneyu` function from the `scipy.stats` python module on the sets of acquired coverage numbers.
 
-{% gist df0f07dc0d3f5cac48e9dc9affe20d0f %}
+[View the evaluation script on GitHub Gist](https://gist.github.com/df0f07dc0d3f5cac48e9dc9affe20d0f)
 
 The p-values between different sets of evaluations are shown in the table below.
 The table is to be read as (p-value between row label vs. column label); 1e-2 is to be read as 1x10^-2 or 0.01.
 Since Mann Whitney p-values for the tuples (A,B) and (B,A) (where A,B are two non-identical sets of numbers) is the same, and p-value of (A,A) does not make any sense, these fields in the table have been denoted as `N.A.`, short for not applicable.
 A p-value of under `0.05` (i.e., `< 5e-2`) means that there is a significant difference between the means of the two sets of numbers.
 
-{:.table.table-striped}
 |Name vs. | Baseline | Dict A | Dict B | Dict C |
 | --- | --- | --- | --- | ---: |
 | Baseline | N.A. | N.A. | N.A. | N.A. |
@@ -221,7 +218,6 @@ A p-value of under `0.05` (i.e., `< 5e-2`) means that there is a significant dif
 
 From these numbers, we can create the following "significance" table (to be read as do (row,column) populations differ significantly):
 
-{:.table.table-striped}
 |Name vs. | Baseline | Dict A | Dict B | Dict C |
 | --- | --- | --- | --- | ---: |
 | Dict A | **Yes** | N.A. | **Yes** | **Yes** |

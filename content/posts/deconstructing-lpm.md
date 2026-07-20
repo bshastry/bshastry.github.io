@@ -34,7 +34,7 @@ Faster, hopefully because fuzzing only what needs to be fuzzed with only those m
 
 Here's a simple LPM spec taken from [here][2].
 
-{% gist 7c78e89af167700387a2ac93798a1c29 %}
+[View the LPM specification on GitHub Gist](https://gist.github.com/7c78e89af167700387a2ac93798a1c29)
 
 Here's a break-down of the most important fields:
 
@@ -200,7 +200,7 @@ The fuzzer harness, among other things, is accepting an LPM formatted input, con
 
 Here's a gist of the test harness (written by KCC; I'm embedding it via a gist because I've not yet found a nifty way to directly embed GH files in GH pages) for us to break down
 
-{% gist 79fb0771418c1929b6c0d6b22bf3550a %}
+[View the test harness on GitHub Gist](https://gist.github.com/79fb0771418c1929b6c0d6b22bf3550a)
 
 Let's look at the includes first:
   - some standard stuff happening with `<string>` etc.
