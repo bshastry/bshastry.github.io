@@ -32,12 +32,15 @@ export default function Talks() {
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {talk.venues.map((venue) => (
-                  <Fragment key={`${talk.title}-${venue.venue}`}>
+                  <Fragment key={`${talk.title}-${venue.venue}-${venue.year}`}>
                     <a
                       href={venue.slides}
                       target="_blank"
                       rel="noopener noreferrer"
                       title={venue.location ? `${venue.venue}, ${venue.location}` : venue.venue}
+                      aria-label={`${venue.venue} ${venue.year} slides${
+                        venue.location ? `, ${venue.location}` : ''
+                      }`}
                       className="chip gap-1.5 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
                       <FileText size={13} />

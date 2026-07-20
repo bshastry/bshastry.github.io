@@ -11,7 +11,11 @@ const typeIcons: Record<string, React.ReactNode> = {
 const fallbackTypeIcon = <FileText size={12} />
 
 export default function Findings() {
-  const { findings } = portfolioData
+  // Featured entries must lead the grid for their full-width rows to lay out
+  // cleanly; the stable sort keeps the data file's curation order otherwise.
+  const findings = [...portfolioData.findings].sort(
+    (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+  )
 
   return (
     <section id="findings" className="py-24 md:py-28">

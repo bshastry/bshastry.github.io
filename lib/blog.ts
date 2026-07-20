@@ -38,6 +38,8 @@ export interface BlogPostMeta {
   excerpt: string
   tags: string[]
   readTime: string
+  /** Pins the post to the top of the blog index with a "Start here" badge. */
+  pinned?: boolean
   series?: SeriesInfo
 }
 
@@ -56,6 +58,7 @@ interface PostFrontmatter {
   date: string | Date
   excerpt: string
   tags: string[]
+  pinned?: boolean
   seriesId?: string
   series?: string
   seriesPart?: number
@@ -126,6 +129,7 @@ export function getAllPostsMeta(): BlogPostMeta[] {
         excerpt: frontmatter.excerpt,
         tags: frontmatter.tags ?? [],
         readTime: computeReadTime(body),
+        pinned: frontmatter.pinned === true || undefined,
         series: parseSeries(frontmatter, slug),
       }
     })

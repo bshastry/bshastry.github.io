@@ -1,19 +1,21 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { pageAlternates } from '@/lib/seo'
+import portfolioData from '@/data/portfolio.json'
 import './globals.css'
 
 // The CSS variable keeps Tailwind's font-sans token pointing at the self-hosted
 // next/font family; nothing else loads a face literally named "Inter".
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+// 400 covers eyebrows/chips/body mono; 600 gives the hero stat digits a real
+// semibold face instead of browser-synthesized bold.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '600'],
   variable: '--font-jetbrains-mono',
 })
 
-const siteDescription =
-  'Security engineer at the Ethereum Foundation. Differential testing of Ethereum clients, post-quantum cryptography, and compilers — plus the AI-assisted triage pipelines that scale it.'
+const siteDescription = portfolioData.personal.description
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bshastry.github.io'),

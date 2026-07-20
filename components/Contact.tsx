@@ -51,7 +51,7 @@ Possible conflicts (does this touch Ethereum Foundation responsibilities?):
 `
 
 export default function Contact() {
-  const { email, social } = portfolioData.personal
+  const { email, social, cv } = portfolioData.personal
   const inquiryHref = `mailto:${email}?subject=${encodeURIComponent(
     inquirySubject,
   )}&body=${encodeURIComponent(inquiryBody)}`
@@ -83,7 +83,7 @@ export default function Contact() {
               LinkedIn
             </a>
             <a
-              href="/media/Bhargava_Shastry_CV.pdf"
+              href={cv}
               target="_blank"
               rel="noopener noreferrer"
               className="link-accent inline-flex items-center gap-2"

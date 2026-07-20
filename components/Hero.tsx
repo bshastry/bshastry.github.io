@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowDown, FileText } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
+import portfolioData from '@/data/portfolio.json'
 
 type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
 
@@ -99,18 +100,28 @@ function MethodTrace() {
   )
 }
 
+// Derived from the findings ledger so the hero can't drift from the evidence
+// it links to: the advisory count/URL and the year range track portfolio.json.
+const advisories = portfolioData.findings.filter((f) => f.type === 'Security advisory')
+const advisoryUrl = advisories[0]?.url ?? '#findings'
+const findingYears = portfolioData.findings.map((f) => Number(f.date.slice(-4)))
+const oldestYear = Math.min(...findingYears)
+const newestYear = Math.max(...findingYears)
+const findingsRange =
+  oldestYear === newestYear ? String(oldestYear) : `${oldestYear}–${String(newestYear).slice(-2)}`
+
 export default function Hero({ latestPost, findingsCount, publicationsCount }: HeroProps) {
   const stats = [
     {
       value: String(findingsCount),
-      label: 'public findings · 2025–26',
+      label: `public findings · ${findingsRange}`,
       href: '#findings',
     },
     {
-      value: '1',
-      label: 'security advisory',
-      href: 'https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/',
-      external: true,
+      value: String(advisories.length),
+      label: advisories.length === 1 ? 'security advisory' : 'security advisories',
+      href: advisoryUrl,
+      external: advisories.length > 0,
     },
     // geth, Besu, Nethermind, Erigon, and revm — see caseStudies[0].approach.
     { value: '5', label: 'EVM implementations cross-checked', href: '#case-studies' },
@@ -145,7 +156,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
               Recently: a confirmed-exploitable timing channel in Mbed TLS (
               <a
-                href="https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2026-07-ecc-optimized-modp-side-channel/"
+                href={advisoryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-accent"
@@ -225,7 +236,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
             See case studies
           </a>
           <a
-            href="/media/Bhargava_Shastry_CV.pdf"
+            href={portfolioData.personal.cv}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost px-6 py-3"

@@ -13,8 +13,6 @@ interface BlogIndexClientProps {
   posts: BlogPostMeta[]
 }
 
-const START_HERE_SLUG = 'trust-no-single-witness'
-
 const chipClass = (active: boolean) =>
   `chip transition-colors focus-visible:ring-2 focus-visible:ring-accent ${
     active ? 'border-accent text-accent' : ''
@@ -26,9 +24,10 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
 
   // Granular tags stay in post metadata; readers navigate six collections.
   const { annotatedPosts, visibleCollections } = useMemo(() => {
+    // Stable sort: pinned posts float to the top, everything else keeps date order.
     const annotated = posts
       .map((p) => ({ ...p, collection: collectionFor(p.tags) }))
-      .sort((a, b) => Number(b.slug === START_HERE_SLUG) - Number(a.slug === START_HERE_SLUG))
+      .sort((a, b) => Number(b.pinned ?? false) - Number(a.pinned ?? false))
     return {
       annotatedPosts: annotated,
       visibleCollections: COLLECTIONS.filter((c) => annotated.some((p) => p.collection === c)),
@@ -135,7 +134,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps) {
             {filteredPosts.map((post) => (
               <article key={post.slug} className="py-10">
                 <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
-                  {post.slug === START_HERE_SLUG && (
+                  {post.pinned && (
                     <span className="chip border-accent text-accent">Start here</span>
                   )}
                   <span className="flex items-center">

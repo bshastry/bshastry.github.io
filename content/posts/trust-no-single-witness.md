@@ -2,7 +2,8 @@
 title: "Trust No Single Witness"
 date: 2026-07-20
 excerpt: "In a system with more than one implementation there is no ground truth available to the test harness — only witnesses that can disagree. That changes how I test Ethereum clients, cryptographic libraries, compilers, and AI-assisted security pipelines."
-tags: ["differential-testing", "fuzzing", "ethereum", "cryptography", "verification", "oracle-problem"]
+tags: ["differential-testing", "fuzzing", "oracle-problem", "verification"]
+pinned: true
 ---
 
 **In a system with more than one implementation there is no ground truth — only

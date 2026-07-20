@@ -88,7 +88,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="/media/Bhargava_Shastry_CV.pdf"
+                  href={personal.cv}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted transition-colors hover:text-fg"

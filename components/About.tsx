@@ -129,7 +129,7 @@ export default function About() {
           </div>
 
           <a
-            href="/media/Bhargava_Shastry_CV.pdf"
+            href={portfolioData.personal.cv}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost mt-8 inline-flex items-center gap-2 px-5 py-2.5"
