@@ -31,7 +31,6 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
   }
 
   body {
@@ -39,8 +38,11 @@
     min-width: 320px;
   }
 
+  /* Single anchor-offset mechanism: 4rem fixed header + breathing room.
+     Deliberately not scroll-padding on html — that would also offset heading
+     anchors on blog/research pages, which have no fixed header. */
   section[id] {
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 5rem;
   }
 
   ::selection {
@@ -55,6 +57,12 @@
 
   .container-max {
     @apply mx-auto max-w-6xl;
+  }
+
+  /* Shared keyboard-focus treatment; keep JSX call sites on this class so the
+     ring can be retuned in one place. */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
   }
 
   /* Minimal editorial primitives */
@@ -91,10 +99,6 @@
     @apply rounded-lg border border-line bg-surface;
   }
 
-  .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center rounded-md border border-line px-4 py-2 font-medium text-fg transition-colors duration-200 hover:border-line-strong hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
-  }
-
   .text-gradient {
     @apply text-accent;
   }
@@ -125,10 +129,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {

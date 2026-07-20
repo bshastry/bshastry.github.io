@@ -161,7 +161,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
             {latestPost && (
               <Link
                 href={`/blog/${latestPost.slug}`}
-                className="group mt-8 inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-surface/60 px-4 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="focus-ring group mt-8 inline-flex max-w-full items-center gap-2 rounded-full border border-line bg-surface/60 px-4 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-fg"
               >
                 <Sparkles size={14} className="flex-shrink-0 text-accent" />
                 <span className="eyebrow flex-shrink-0">Latest</span>
@@ -175,11 +175,13 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
               </Link>
             )}
 
-            <p
-              aria-label="Method: input to independent witnesses to divergence to evidence"
-              className="mt-8 border-l-2 border-accent pl-3 font-mono text-xs leading-relaxed text-muted lg:hidden"
-            >
-              input → independent witnesses → divergence → evidence
+            {/* aria-label is prohibited on paragraphs, so screen readers get a
+                spelled-out copy and the arrow glyphs stay visual-only. */}
+            <p className="mt-8 border-l-2 border-accent pl-3 font-mono text-xs leading-relaxed text-muted lg:hidden">
+              <span aria-hidden="true">input → independent witnesses → divergence → evidence</span>
+              <span className="sr-only">
+                Method: input, to independent witnesses, to divergence, to evidence
+              </span>
             </p>
           </div>
 
@@ -197,7 +199,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
               className={`flex min-h-28 flex-col items-center justify-center gap-2 px-4 py-6 transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent ${
                 index % 2 === 1 ? 'border-l border-line' : ''
               } ${index < 2 ? 'border-b border-line md:border-b-0' : ''} ${
-                index > 0 ? 'md:border-l md:border-line' : 'md:border-l-0'
+                index > 0 ? 'md:border-l md:border-line' : ''
               }`}
             >
               <span className="font-mono text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
@@ -210,7 +212,7 @@ export default function Hero({ latestPost, findingsCount, publicationsCount }: H
 
         <a
           href="#about"
-          className="mx-auto mt-8 flex w-fit items-center gap-2 rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-faint transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+          className="focus-ring mx-auto mt-8 flex w-fit items-center gap-2 rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-faint transition-colors hover:text-fg"
         >
           Explore the method
           <ArrowDown size={15} aria-hidden="true" />
