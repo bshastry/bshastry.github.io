@@ -3,7 +3,9 @@ import { Inter } from 'next/font/google'
 import { pageAlternates } from '@/lib/seo'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+// The CSS variable keeps Tailwind's font-sans token pointing at the self-hosted
+// next/font family; nothing else loads a face literally named "Inter".
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bshastry.github.io'),
@@ -58,7 +60,7 @@ const themeScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className={`dark scroll-smooth ${inter.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

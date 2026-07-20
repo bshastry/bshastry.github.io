@@ -5,7 +5,7 @@ export default function CaseStudies() {
   const { caseStudies } = portfolioData
 
   return (
-    <section id="case-studies" className="border-t border-line py-24 md:py-28">
+    <section id="case-studies" className="border-t border-line bg-surface/30 py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
           <p className="eyebrow mb-4">02 — Case Studies</p>
@@ -17,14 +17,23 @@ export default function CaseStudies() {
           </p>
         </div>
 
-        <div className="space-y-12">
-          {caseStudies.map((cs) => (
-            <article key={cs.id} className="border-t border-line pt-8">
-              <p className="eyebrow mb-3 text-accent">{cs.eyebrow}</p>
+        <div className="space-y-6">
+          {caseStudies.map((cs, index) => (
+            <article
+              key={cs.id}
+              className="relative overflow-hidden rounded-xl border border-line bg-bg/80 p-6 md:p-8"
+            >
+              <span aria-hidden="true" className="absolute bottom-8 left-0 top-8 w-px bg-accent" />
+              <div className="mb-3 flex items-center gap-3">
+                <span className="font-mono text-xs text-faint">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className="eyebrow text-accent">{cs.eyebrow}</p>
+              </div>
               <h3 className="mb-6 max-w-3xl text-balance text-2xl font-semibold text-fg">
                 {cs.title}
               </h3>
-              <dl className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-3">
+              <dl className="grid grid-cols-1 gap-x-10 gap-y-5 border-t border-line pt-6 md:grid-cols-3">
                 <div>
                   <dt className="eyebrow mb-2">Stakes</dt>
                   <dd className="text-sm leading-relaxed text-muted">{cs.stakes}</dd>
@@ -38,7 +47,7 @@ export default function CaseStudies() {
                   <dd className="text-sm leading-relaxed text-muted">{cs.result}</dd>
                 </div>
               </dl>
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-5">
                 <span className="font-mono text-xs text-faint">{cs.demonstrates}</span>
                 <span className="flex flex-wrap items-center gap-4">
                   {cs.evidence.map((link) => (
