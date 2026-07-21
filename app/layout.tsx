@@ -20,7 +20,7 @@ const siteDescription = portfolioData.personal.description
 export const metadata: Metadata = {
   metadataBase: new URL('https://bshastry.github.io'),
   title: {
-    default: 'Bhargava Shastry — Security Engineer & Researcher',
+    default: 'Bhargava Shastry — Differential Testing & Protocol Security',
     template: '%s — Bhargava Shastry',
   },
   description: siteDescription,
@@ -29,6 +29,8 @@ export const metadata: Metadata = {
     'differential fuzzing',
     'ethereum',
     'protocol security',
+    'implementation security',
+    'compiler security',
     'post-quantum cryptography',
     'AI-assisted vulnerability research',
     'bug bounty',
@@ -42,12 +44,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://bshastry.github.io',
     siteName: 'Bhargava Shastry',
-    title: 'Bhargava Shastry — Security Engineer & Researcher',
+    title: 'Bhargava Shastry — Differential Testing & Protocol Security',
     description: siteDescription,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bhargava Shastry — Security Engineer & Researcher',
+    title: 'Bhargava Shastry — Differential Testing & Protocol Security',
     description: siteDescription,
     creator: '@ibags',
   },

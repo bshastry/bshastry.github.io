@@ -73,8 +73,8 @@ export default function Home() {
       <Header />
       <main id="main-content" className="min-h-screen">
         <Hero latestPost={latestPost} publicationsCount={publicationsCount} />
-        <About />
         <CaseStudies />
+        <About />
         <Projects />
         <Findings />
         <Talks />

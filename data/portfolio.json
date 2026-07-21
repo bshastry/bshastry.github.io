@@ -2,7 +2,7 @@
   "personal": {
     "name": "Bhargava Shastry",
     "title": "Security Engineer & Researcher",
-    "description": "Security engineer at the Ethereum Foundation. Differential testing of Ethereum clients, post-quantum cryptography, and compilers — plus the AI-assisted triage pipelines that scale it.",
+    "description": "Differential testing for critical systems: turning disagreements between Ethereum clients, cryptographic libraries, and compilers into reproducible findings.",
     "location": "Remote",
     "email": "bshastry@posteo.de",
     "cv": "/media/Bhargava_Shastry_CV.pdf",

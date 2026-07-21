@@ -1,5 +1,6 @@
 import portfolioData from '@/data/portfolio.json'
 import { ThemeLink } from '@/components/ResearchGrid'
+import { ArrowRight } from 'lucide-react'
 
 export default function CaseStudies() {
   const { caseStudies } = portfolioData
@@ -8,7 +9,7 @@ export default function CaseStudies() {
     <section id="case-studies" className="border-t border-line bg-surface/30 py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
-          <p className="eyebrow mb-4">02 — Case Studies</p>
+          <p className="eyebrow mb-4">01 — Case Studies</p>
           <h2 className="section-title">Case Studies</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             Three examples of what differential validation looks like in practice — what was at
@@ -60,13 +61,22 @@ export default function CaseStudies() {
           ))}
         </div>
 
-        <p className="mt-12 max-w-3xl text-sm leading-relaxed text-faint">
-          Working on a system where independent implementations must agree?{' '}
-          <a href="#contact" className="link-accent">
-            Discuss a scoped review
+        <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-line pt-8 sm:flex-row sm:items-center">
+          <div>
+            <p className="eyebrow mb-2 text-accent">Where this fits</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted">
+              Working on a critical system where independent implementations must agree — or
+              building the team that is?
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="btn-primary inline-flex flex-shrink-0 items-center gap-2 px-5 py-2.5"
+          >
+            <span>Start a conversation</span>
+            <ArrowRight size={15} aria-hidden="true" />
           </a>
-          .
-        </p>
+        </div>
       </div>
     </section>
   )

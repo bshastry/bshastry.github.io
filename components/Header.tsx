@@ -13,14 +13,14 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: 'About', href: '#about', id: 'about' },
   { name: 'Case Studies', href: '#case-studies', id: 'case-studies' },
+  { name: 'About', href: '#about', id: 'about' },
   { name: 'Research', href: '#research', id: 'research' },
   { name: 'Findings', href: '#findings', id: 'findings' },
   { name: 'Talks', href: '#talks', id: 'talks' },
   { name: 'Papers', href: '#publications', id: 'publications' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Work', href: '#contact', id: 'contact' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 // Hardcoded rather than imported from portfolio.json so this client component
@@ -39,8 +39,8 @@ const iconLinkClass = (size: string) =>
 // highlighted while the user scrolls through them.
 const sectionIds = [
   'home',
-  'about',
   'case-studies',
+  'about',
   'research',
   'findings',
   'talks',

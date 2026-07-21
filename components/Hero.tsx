@@ -2,7 +2,11 @@ import Link from 'next/link'
 import { ArrowDown, FileText } from 'lucide-react'
 import type { BlogPostMeta } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
-import { disclosureSummary, disclosureYearRange, soliditySecuritySummary } from '@/lib/disclosures'
+import {
+  disclosureSummary,
+  disclosureYearRange,
+  solSmithPatchedMiscompilations,
+} from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
 
 type LatestPost = Pick<BlogPostMeta, 'slug' | 'title' | 'date'>
@@ -101,8 +105,8 @@ function MethodTrace() {
 }
 
 // Derived from the findings ledgers so the hero can't drift from the evidence
-// it links to: the advisory URL tracks portfolio.json and the historical totals
-// track lib/disclosures.ts.
+// it links to: the advisory URL tracks portfolio.json and the totals track
+// lib/disclosures.ts.
 const advisories = portfolioData.findings.filter((f) => f.type === 'Security advisory')
 const advisoryUrl = advisories[0]?.url ?? '#findings'
 
@@ -114,9 +118,9 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
       href: '/findings/#cve-disclosures',
     },
     {
-      value: String(soliditySecuritySummary.total),
-      label: 'Solidity security-relevant bug records',
-      href: '/findings/#solidity-security-bugs',
+      value: String(solSmithPatchedMiscompilations),
+      label: 'patched compiler miscompilations',
+      href: '#findings',
     },
     // geth, Besu, Nethermind, Erigon, and revm — see caseStudies[0].approach.
     { value: '5', label: 'EVM implementations cross-checked', href: '#case-studies' },
@@ -225,9 +229,12 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
           <a href="#case-studies" className="btn-primary px-6 py-3">
             See case studies
+          </a>
+          <a href="#contact" className="btn-ghost px-6 py-3">
+            Start a conversation
           </a>
           <a
             href={portfolioData.personal.cv}
@@ -240,10 +247,10 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
         </div>
 
         <a
-          href="#about"
+          href="#case-studies"
           className="focus-ring mx-auto mt-8 flex w-fit items-center gap-2 rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-faint transition-colors hover:text-fg"
         >
-          Explore the method
+          Explore the evidence
           <ArrowDown size={15} aria-hidden="true" />
         </a>
       </div>
