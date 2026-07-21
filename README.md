@@ -24,16 +24,17 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 
 ## Scripts
 
-| Command                | Purpose                         |
-| ---------------------- | ------------------------------- |
-| `npm run dev`          | Local dev server with HMR       |
-| `npm run build`        | Static export to `out/`         |
-| `npm run typecheck`    | `tsc --noEmit`                  |
-| `npm run lint`         | ESLint (`next/core-web-vitals`) |
-| `npm run lint:fix`     | ESLint with `--fix`             |
-| `npm run format`       | Prettier write                  |
-| `npm run format:check` | Prettier check (used in CI)     |
-| `npm run check`        | typecheck + lint + format:check |
+| Command                | Purpose                                                         |
+| ---------------------- | --------------------------------------------------------------- |
+| `npm run dev`          | Local dev server with HMR                                       |
+| `npm run build`        | Static export to `out/`                                         |
+| `npm run typecheck`    | `tsc --noEmit`                                                  |
+| `npm run lint`         | ESLint (`next/core-web-vitals`)                                 |
+| `npm run lint:fix`     | ESLint with `--fix`                                             |
+| `npm run format`       | Prettier write                                                  |
+| `npm run format:check` | Prettier check (used in CI)                                     |
+| `npm run check`        | typecheck + lint + format:check                                 |
+| `npm run check:links`  | Internal-link audit over `out/` (run after `build`; used in CI) |
 
 ## Writing a blog post
 
@@ -57,6 +58,7 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 app/
   layout.tsx              Root layout + metadata + fonts
   page.tsx                Server-rendered homepage (composes components)
+  not-found.tsx           Branded 404 with routes back into the evidence pages
   blog/
     page.tsx              Blog index (server component)
     BlogIndexClient.tsx   Client-side search/filter
@@ -90,14 +92,18 @@ data/
 
 public/
   llms.txt                Curated agent-readable site index
+  .well-known/security.txt  RFC 9116 vulnerability-report contact (has an Expires date — renew yearly)
   <year>/.../*.html       Legacy Jekyll article redirects
+
+scripts/
+  check-links.mjs         CI gate: fails the build on broken internal links in out/
 ```
 
 ## Deployment
 
 Hosted at [bshastry.github.io](https://bshastry.github.io). Deployment is automated via GitHub Actions:
 
-- **`.github/workflows/ci.yml`** runs on every push and PR to any branch. It runs `npm run check` and `npm run build` to catch regressions before merge.
+- **`.github/workflows/ci.yml`** runs on every push and PR to any branch. It runs `npm run check`, `npm run build`, and `npm run check:links` to catch regressions before merge.
 - **`.github/workflows/deploy.yml`** runs only on push to `master`. It builds the static site and publishes `out/` to GitHub Pages.
 
 ### Repo-level settings (one-time)

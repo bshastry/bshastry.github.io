@@ -1,6 +1,7 @@
 import {
   FileDown,
   FlaskConical,
+  Github,
   GraduationCap,
   Key,
   Linkedin,
@@ -73,6 +74,15 @@ export default function Contact() {
             <a href={`mailto:${email}`} className="link-accent inline-flex items-center gap-2">
               <Mail size={15} />
               {email}
+            </a>
+            <a
+              href={`https://github.com/${social.github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-accent inline-flex items-center gap-2"
+            >
+              <Github size={15} />
+              GitHub
             </a>
             <a
               href={`https://linkedin.com/in/${social.linkedin}`}
