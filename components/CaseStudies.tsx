@@ -5,8 +5,10 @@ import { ArrowRight } from 'lucide-react'
 export default function CaseStudies() {
   const { caseStudies } = portfolioData
 
+  // No border-t on this section: the hero above already closes with border-b,
+  // and doubling them produced a 2px seam once this moved directly below it.
   return (
-    <section id="case-studies" className="border-t border-line bg-surface/30 py-24 md:py-28">
+    <section id="case-studies" className="bg-surface/30 py-24 md:py-28">
       <div className="container-max section-padding">
         <div className="mb-16">
           <p className="eyebrow mb-4">01 — Case Studies</p>
