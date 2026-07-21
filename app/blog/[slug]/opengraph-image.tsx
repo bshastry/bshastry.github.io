@@ -24,6 +24,8 @@ export default async function OGImage({ params }: { params: Promise<{ slug: stri
   // Long titles get a smaller type size so they stay inside the canvas.
   const titleSize = title.length > 70 ? 52 : title.length > 45 ? 62 : 72
 
+  // Visual language matches the homepage OG card (app/opengraph-image.tsx):
+  // near-black canvas, accent radial glow, accent eyebrow, footer rule.
   return new ImageResponse(
     <div
       style={{
@@ -33,18 +35,60 @@ export default async function OGImage({ params }: { params: Promise<{ slug: stri
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '80px',
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #312e81 100%)',
-        color: 'white',
+        backgroundColor: '#0a0a0a',
+        backgroundImage:
+          'radial-gradient(circle at 82% 18%, rgba(59, 130, 246, 0.22), transparent 30%)',
+        color: '#ededed',
         fontFamily: 'sans-serif',
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: 28, opacity: 0.7, marginBottom: 40 }}>bshastry.github.io/blog</div>
-        <div style={{ fontSize: titleSize, fontWeight: 800, lineHeight: 1.1 }}>{title}</div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            color: '#6ea8fe',
+            fontSize: 22,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            marginBottom: 40,
+          }}
+        >
+          <span
+            style={{
+              width: 9,
+              height: 9,
+              borderRadius: 999,
+              background: '#6ea8fe',
+            }}
+          />
+          Blog
+        </div>
+        <div
+          style={{
+            fontSize: titleSize,
+            fontWeight: 700,
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          {title}
+        </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontSize: 32, opacity: 0.92 }}>Bhargava Shastry</div>
-        <div style={{ fontSize: 28, opacity: 0.7 }}>{post ? formatDate(post.date) : ''}</div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderTop: '1px solid #242424',
+          paddingTop: 24,
+          color: '#777',
+          fontSize: 22,
+        }}
+      >
+        <span style={{ color: '#b8b8b8', fontSize: 26 }}>Bhargava Shastry</span>
+        <span>{post ? formatDate(post.date) : 'bshastry.github.io/blog'}</span>
       </div>
     </div>,
     { ...size },

@@ -312,6 +312,12 @@ export const soliditySecurityBugs: SoliditySecurityBug[] = [
   },
 ]
 
+// Total patched miscompilation bugs reported in the SolSmith paper
+// (solSmithPaperUrl). The seven bugs in soliditySecurityBugs are the subset
+// also catalogued in Solidity's security-relevant known-bug ledger; every
+// surface that cites the paper total must read it from here.
+export const solSmithPatchedMiscompilations = 25
+
 export const soliditySecuritySummary = {
   total: soliditySecurityBugs.length,
   incorrectOptimization: soliditySecurityBugs.filter(

@@ -8,6 +8,7 @@ import {
   soliditySecurityBugs,
   soliditySecuritySummary,
   solSmithPaperUrl,
+  solSmithPatchedMiscompilations,
 } from '@/lib/disclosures'
 
 const categoryDescriptions = [
@@ -132,8 +133,9 @@ export default function DisclosureLedger() {
             {soliditySecuritySummary.total} Solidity security-relevant bugs found by SolSmith
           </h2>
           <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted">
-            The SolSmith paper documents 25 patched miscompilation bugs found through semantic
-            differential fuzzing. Cross-referencing its linked reports with Solidity’s official{' '}
+            The SolSmith paper documents {solSmithPatchedMiscompilations} patched miscompilation
+            bugs found through semantic differential fuzzing. Cross-referencing its linked reports
+            with Solidity’s official{' '}
             <code className="font-mono text-xs text-fg">docs/bugs.json</code> ledger yields these{' '}
             {soliditySecuritySummary.total} exact matches. They are security-relevant compiler bug
             records, not CVEs; the severity and affected version ranges below come from the official
@@ -228,7 +230,7 @@ export default function DisclosureLedger() {
             rel="noopener noreferrer"
             className="link-accent inline-flex items-center gap-1.5 text-sm"
           >
-            SolSmith paper and all 25 findings
+            SolSmith paper and all {solSmithPatchedMiscompilations} findings
             <ExternalLink size={13} aria-hidden="true" />
           </a>
         </div>

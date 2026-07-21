@@ -16,8 +16,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h3 className="mb-4 text-2xl font-semibold tracking-tight text-fg">{personal.name}</h3>
             <p className="mb-6 max-w-md text-muted">
-              Security engineer at the Ethereum Foundation. I test systems where independent
-              implementations must agree.
+              Differential testing for critical systems — turning disagreement between independent
+              implementations into reproducible evidence.
             </p>
             <div className="flex space-x-5">
               <a
@@ -62,13 +62,13 @@ export default function Footer() {
             <h4 className="eyebrow mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-muted transition-colors hover:text-fg">
-                  About
+                <a href="#case-studies" className="text-muted transition-colors hover:text-fg">
+                  Case Studies
                 </a>
               </li>
               <li>
-                <a href="#case-studies" className="text-muted transition-colors hover:text-fg">
-                  Case Studies
+                <a href="#about" className="text-muted transition-colors hover:text-fg">
+                  About
                 </a>
               </li>
               <li>

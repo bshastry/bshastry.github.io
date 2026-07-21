@@ -1,6 +1,7 @@
 import {
   FileDown,
   FlaskConical,
+  Github,
   GraduationCap,
   Key,
   Linkedin,
@@ -61,7 +62,7 @@ export default function Contact() {
     <section id="contact" className="border-t border-line py-24 md:py-28">
       <div className="container-max section-padding">
         <div>
-          <p className="eyebrow mb-4">08 — Work</p>
+          <p className="eyebrow mb-4">08 — Contact</p>
           <h2 className="section-title">Work with me</h2>
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted">
             I&apos;m a security engineer at the Ethereum Foundation. Beyond that, I&apos;m glad to
@@ -73,6 +74,15 @@ export default function Contact() {
             <a href={`mailto:${email}`} className="link-accent inline-flex items-center gap-2">
               <Mail size={15} />
               {email}
+            </a>
+            <a
+              href={`https://github.com/${social.github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-accent inline-flex items-center gap-2"
+            >
+              <Github size={15} />
+              GitHub
             </a>
             <a
               href={`https://linkedin.com/in/${social.linkedin}`}

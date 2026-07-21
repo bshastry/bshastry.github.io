@@ -1,0 +1,8 @@
+# Scope: this website and my personal open-source projects
+# (github.com/bshastry). For Ethereum protocol or client
+# vulnerabilities, use https://bounty.ethereum.org instead.
+Contact: mailto:bshastry@posteo.de
+Encryption: https://keybase.io/bshastry/pgp_keys.asc
+Preferred-Languages: en
+Canonical: https://bshastry.github.io/.well-known/security.txt
+Expires: 2027-07-01T00:00:00.000Z

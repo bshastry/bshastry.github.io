@@ -27,16 +27,31 @@ const personJsonLd = {
     '@type': 'CollegeOrUniversity',
     name: 'Technische Universität Berlin',
   },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'degree',
+    educationalLevel: 'Ph.D.',
+    about: {
+      '@type': 'Thing',
+      name: 'Static analysis and fuzzing techniques for open source bug detection',
+    },
+    recognizedBy: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Technische Universität Berlin',
+    },
+  },
   sameAs: [
     'https://github.com/bshastry',
     'https://twitter.com/ibags',
     'https://linkedin.com/in/bshastry',
     'https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ',
+    'https://keybase.io/bshastry',
   ],
   knowsAbout: [
     'Differential testing',
     'Fuzzing',
     'Ethereum protocol security',
+    'Compiler security',
     'AI-assisted vulnerability research',
     'Post-quantum cryptography',
     'Side-channel analysis',
@@ -61,8 +76,8 @@ export default function Home() {
       <Header />
       <main id="main-content" className="min-h-screen">
         <Hero latestPost={latestPost} publicationsCount={publicationsCount} />
-        <About />
         <CaseStudies />
+        <About />
         <Projects />
         <Findings />
         <Talks />

@@ -1,6 +1,10 @@
 import Link from 'next/link'
 import { ArrowRight, ExternalLink, FileText, GitMerge, ShieldAlert } from 'lucide-react'
-import { disclosureSummary, soliditySecuritySummary } from '@/lib/disclosures'
+import {
+  disclosureSummary,
+  soliditySecuritySummary,
+  solSmithPatchedMiscompilations,
+} from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
 
 const typeIcons: Record<string, React.ReactNode> = {
@@ -43,9 +47,9 @@ export default function Findings() {
                 Open vSwitch, GNU oSIP2, Snort++, and tcpdump: {disclosureSummary.memoryCorruption}{' '}
                 memory-corruption findings, {disclosureSummary.outOfBoundsReads} out-of-bounds
                 reads, and {disclosureSummary.logicOrDos} logic/denial-of-service findings. The
-                compiler ledger separately maps {soliditySecuritySummary.total} of SolSmith’s 25
-                findings to Solidity’s official security-relevant bug records:{' '}
-                {soliditySecuritySummary.incorrectOptimization} optimizer bugs,{' '}
+                compiler ledger separately maps {soliditySecuritySummary.total} of SolSmith’s{' '}
+                {solSmithPatchedMiscompilations} findings to Solidity’s official security-relevant
+                bug records: {soliditySecuritySummary.incorrectOptimization} optimizer bugs,{' '}
                 {soliditySecuritySummary.codeGeneration} code-generation bug, and{' '}
                 {soliditySecuritySummary.frontEnd} front-end validation bug.
               </p>
