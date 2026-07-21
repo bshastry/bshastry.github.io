@@ -77,7 +77,10 @@ temp/
 # Claude Code memory
 memory-bank/
 legacy-archive/
-scripts/
+# Ignore scratch scripts but keep the CI link-audit gate tracked
+# (a bare `scripts/` would make the file impossible to re-include).
+scripts/*
+!scripts/check-links.mjs
 
 # Local research / drafts not intended for publication
 private/
