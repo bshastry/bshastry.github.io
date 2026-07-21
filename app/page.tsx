@@ -31,7 +31,10 @@ const personJsonLd = {
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: 'degree',
     educationalLevel: 'Ph.D.',
-    about: 'Static analysis and fuzzing techniques for open source bug detection',
+    about: {
+      '@type': 'Thing',
+      name: 'Static analysis and fuzzing techniques for open source bug detection',
+    },
     recognizedBy: {
       '@type': 'CollegeOrUniversity',
       name: 'Technische Universität Berlin',

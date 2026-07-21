@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/format'
 import {
   disclosureSummary,
   disclosureYearRange,
+  solSmithPaperUrl,
   solSmithPatchedMiscompilations,
 } from '@/lib/disclosures'
 import portfolioData from '@/data/portfolio.json'
@@ -166,9 +167,10 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
               <a href="#findings" className="link-accent">
                 findings
               </a>
-              ), and 25 miscompilation bugs found in the Solidity compiler (
+              ), and {solSmithPatchedMiscompilations} miscompilation bugs found in the Solidity
+              compiler (
               <a
-                href="https://arxiv.org/abs/2607.07217"
+                href={solSmithPaperUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-accent"

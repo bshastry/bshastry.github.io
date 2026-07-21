@@ -1,7 +1,7 @@
 {
   "personal": {
     "name": "Bhargava Shastry",
-    "title": "Security Engineer & Researcher",
+    "title": "Differential Testing & Protocol Security",
     "description": "Differential testing for critical systems: turning disagreements between Ethereum clients, cryptographic libraries, and compilers into reproducible findings.",
     "location": "Remote",
     "email": "bshastry@posteo.de",

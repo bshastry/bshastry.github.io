@@ -10,7 +10,7 @@
 // GitHub Pages serves trailing-slash URLs.
 
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs'
-import { join, dirname, normalize } from 'node:path'
+import { join, dirname, normalize, resolve, sep } from 'node:path'
 
 const OUT_DIR = 'out'
 
@@ -50,13 +50,28 @@ const pages = htmlFiles(OUT_DIR)
 const broken = []
 let checked = 0
 
+// Known limitations: `#fragment` targets are not validated against `id=`
+// attributes, and only double-quoted href/src attributes are matched (all
+// Next.js output uses double quotes; srcset is not emitted by this site).
+const outRoot = resolve(OUT_DIR)
+
 for (const page of pages) {
   const content = readFileSync(page, 'utf8')
   for (const match of content.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = decodeEntities(match[1])
-    if (/^(https?:|mailto:|tel:|data:|#)/.test(url)) continue
+    // `//host/path` is protocol-relative, i.e. external — not a file in out/.
+    if (/^(https?:|mailto:|tel:|data:|#|\/\/)/.test(url)) continue
 
-    const path = decodeURIComponent(url.split('#')[0].split('?')[0])
+    let path
+    try {
+      path = decodeURIComponent(url.split('#')[0].split('?')[0])
+    } catch {
+      // Malformed percent-encoding would 404 (or worse) in a real browser;
+      // report it instead of crashing the audit.
+      broken.push({ page, url: `${url} (malformed percent-encoding)` })
+      checked += 1
+      continue
+    }
     if (path === '') continue
 
     const fsPath = path.startsWith('/')
@@ -64,6 +79,12 @@ for (const page of pages) {
       : normalize(join(dirname(page), path))
 
     checked += 1
+    // A `..`-laden URL can resolve outside out/ and accidentally match a repo
+    // file that will never be deployed — treat any escape as broken.
+    if (!resolve(fsPath).startsWith(outRoot + sep) && resolve(fsPath) !== outRoot) {
+      broken.push({ page, url: `${url} (resolves outside ${OUT_DIR}/)` })
+      continue
+    }
     if (!targetExists(fsPath)) {
       broken.push({ page, url })
     }
