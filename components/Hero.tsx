@@ -248,8 +248,10 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
           </a>
         </div>
 
+        {/* Distinct destination from the "See case studies" CTA above: this
+            cue goes to the findings evidence index, matching its label. */}
         <a
-          href="#case-studies"
+          href="#findings"
           className="focus-ring mx-auto mt-8 flex w-fit items-center gap-2 rounded-sm px-3 py-2 font-mono text-xs uppercase tracking-[0.16em] text-faint transition-colors hover:text-fg"
         >
           Explore the evidence
