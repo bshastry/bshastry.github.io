@@ -13,14 +13,14 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: 'Case Studies', href: '#case-studies', id: 'case-studies' },
-  { name: 'About', href: '#about', id: 'about' },
-  { name: 'Research', href: '#research', id: 'research' },
-  { name: 'Findings', href: '#findings', id: 'findings' },
-  { name: 'Talks', href: '#talks', id: 'talks' },
-  { name: 'Papers', href: '#publications', id: 'publications' },
+  { name: 'Case Studies', href: '/#case-studies', id: 'case-studies' },
+  { name: 'About', href: '/#about', id: 'about' },
+  { name: 'Research', href: '/#research', id: 'research' },
+  { name: 'Findings', href: '/#findings', id: 'findings' },
+  { name: 'Talks', href: '/#talks', id: 'talks' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
+  { name: 'Recruiters', href: '/recruiter-brief' },
+  { name: 'Engagements', href: '/engagements' },
 ]
 
 // Hardcoded rather than imported from portfolio.json so this client component
@@ -173,12 +173,12 @@ export default function Header() {
       <nav aria-label="Primary navigation" className="container-max section-padding">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
-            <a
-              href="#home"
+            <Link
+              href="/#home"
               className="focus-ring inline-flex min-h-11 items-center rounded-sm text-lg font-semibold tracking-tight text-fg transition-opacity hover:opacity-80 xl:text-xl"
             >
               Bhargava Shastry
-            </a>
+            </Link>
           </div>
 
           <div className="hidden lg:block">

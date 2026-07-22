@@ -67,6 +67,8 @@ app/
       BlogPostClient.tsx  Share button + layout
   research/               Full research-area archive (homepage features 5)
   findings/               CVE + Solidity security-relevant bug ledgers
+  engagements/            Engagement index + evidence-backed service detail routes
+  recruiter-brief/        Concise hiring-team route through fit and evidence
   bugs/                   No-index legacy alias for /findings
   privacy/, terms/        Static legal pages
   feed.xml/               RSS feed generator
@@ -82,9 +84,13 @@ components/
 
 content/posts/            Blog markdown files
 
+docs/
+  distribution-playbook.md  Channel selection, profile copy, and measurement cadence
+
 lib/
   blog.ts                 Markdown parsing pipeline
   disclosures.ts          CVE and Solidity known-bug ledgers + aggregates
+  engagements.ts          Shared offers, detailed scopes, evidence links, enquiry builder
   seo.ts                  Site constants, canonical/RSS alternates, JSON-LD serializer
 
 data/
@@ -117,6 +123,8 @@ No custom domain is configured; the site serves from the default `bshastry.githu
 - **Dependencies:** Update periodically with `npm outdated` + `npm update`. For major bumps (Next.js, Tailwind), test thoroughly in a branch first.
 - **Legacy continuity:** Keep the static redirect files under `public/` and the `/bugs/` alias when changing routes; external links to the Jekyll-era site still depend on them.
 - **Content updates:** Blog posts live in `content/posts/`; portfolio data (projects, CV) lives in `data/portfolio.json`.
+- **Distribution:** Use [`docs/distribution-playbook.md`](docs/distribution-playbook.md) for
+  channel selection, profile alignment, community rules, and the six-week review cadence.
 
 ## License
 

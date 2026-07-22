@@ -1,5 +1,6 @@
 import portfolioData from '@/data/portfolio.json'
 import { ThemeLink } from '@/components/ResearchGrid'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 export default function CaseStudies() {
@@ -24,7 +25,8 @@ export default function CaseStudies() {
           {caseStudies.map((cs, index) => (
             <article
               key={cs.id}
-              className="relative overflow-hidden rounded-xl border border-line bg-bg/80 p-6 md:p-8"
+              id={cs.id}
+              className="relative scroll-mt-24 overflow-hidden rounded-xl border border-line bg-bg/80 p-6 md:p-8"
             >
               <span aria-hidden="true" className="absolute bottom-8 left-0 top-8 w-px bg-accent" />
               <div className="mb-3 flex items-center gap-3">
@@ -71,13 +73,18 @@ export default function CaseStudies() {
               building the team that is?
             </p>
           </div>
-          <a
-            href="#contact"
-            className="btn-primary inline-flex flex-shrink-0 items-center gap-2 px-5 py-2.5"
-          >
-            <span>Start a conversation</span>
-            <ArrowRight size={15} aria-hidden="true" />
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/engagements"
+              className="btn-primary inline-flex flex-shrink-0 items-center gap-2 px-5 py-2.5"
+            >
+              <span>Explore engagements</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+            <Link href="/recruiter-brief" className="btn-ghost px-5 py-2.5">
+              Recruiter brief
+            </Link>
+          </div>
         </div>
       </div>
     </section>
