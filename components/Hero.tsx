@@ -148,9 +148,13 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
             </h1>
 
             <p className="mt-7 max-w-2xl text-xl leading-relaxed text-fg sm:text-2xl">
+              I find consensus and implementation bugs before they become incidents.
+            </p>
+
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               I run independent implementations against each other — Ethereum clients, post-quantum
-              cryptography libraries, compilers — and turn every disagreement into a reproducible
-              bug report.
+              cryptography libraries, and compilers — and turn every disagreement into reproducible
+              evidence and an upstream fix.
             </p>
 
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
@@ -235,17 +239,12 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
           <a href="#case-studies" className="btn-primary px-6 py-3">
             See case studies
           </a>
-          <a href="#contact" className="btn-ghost px-6 py-3">
-            Start a conversation
-          </a>
-          <a
-            href={portfolioData.personal.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost px-6 py-3"
-          >
-            Download CV (PDF)
-          </a>
+          <Link href="/recruiter-brief" className="btn-ghost px-6 py-3">
+            For hiring teams
+          </Link>
+          <Link href="/engagements" className="btn-ghost px-6 py-3">
+            Engagement options
+          </Link>
         </div>
 
         {/* Distinct destination from the "See case studies" CTA above: this

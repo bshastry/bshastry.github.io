@@ -1,9 +1,22 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
-import { Calendar, Clock, ArrowLeft, Tag, Share2 } from 'lucide-react'
+import {
+  ArrowLeft,
+  Calendar,
+  Check,
+  Clock,
+  Copy,
+  ExternalLink,
+  Linkedin,
+  Share2,
+  Tag,
+  Twitter,
+} from 'lucide-react'
 import type { BlogPost, BlogPostMeta, SeriesPart } from '@/lib/blog'
 import { formatDate } from '@/lib/format'
+import { SITE_URL } from '@/lib/seo'
 import ThemeToggle from '@/components/ThemeToggle'
 import { SeriesNav, SeriesPager } from '@/components/SeriesNav'
 import { PostTitle } from '@/components/PostTitle'
@@ -21,21 +34,50 @@ export default function BlogPostClient({
   seriesTitle,
   seriesParts,
 }: BlogPostClientProps) {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied'>('idle')
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(canonicalUrl)
+    setCopyStatus('copied')
+    window.setTimeout(() => setCopyStatus('idle'), 2000)
+  }
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
           title: post.title,
           text: post.excerpt,
-          url: window.location.href,
+          url: canonicalUrl,
         })
       } catch {
         // user cancelled
       }
     } else {
-      await navigator.clipboard.writeText(window.location.href)
+      await handleCopy()
     }
   }
+
+  const encodedUrl = encodeURIComponent(canonicalUrl)
+  const encodedTitle = encodeURIComponent(post.title)
+  const shareLinks = [
+    {
+      label: 'Post to X',
+      href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+      Icon: Twitter,
+    },
+    {
+      label: 'Share on LinkedIn',
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      Icon: Linkedin,
+    },
+    {
+      label: 'Submit to Hacker News',
+      href: `https://news.ycombinator.com/submitlink?u=${encodedUrl}&t=${encodedTitle}`,
+      Icon: ExternalLink,
+    },
+  ]
 
   const related = allPosts
     .filter((p) => p.slug !== post.slug && p.tags.some((t) => post.tags.includes(t)))
@@ -120,6 +162,46 @@ export default function BlogPostClient({
             />
           </article>
 
+          <aside
+            aria-labelledby="share-this-post"
+            className="mt-12 rounded-xl border border-line bg-surface/40 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6"
+          >
+            <div>
+              <h2 id="share-this-post" className="text-sm font-semibold text-fg">
+                Share the original article
+              </h2>
+              <p className="mt-1 text-xs leading-relaxed text-faint">
+                Use the canonical source and original title; no tracking parameters are added.
+              </p>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-0 sm:justify-end">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="btn-ghost inline-flex items-center gap-2 px-3 py-2 text-xs"
+              >
+                {copyStatus === 'copied' ? (
+                  <Check size={14} aria-hidden="true" />
+                ) : (
+                  <Copy size={14} aria-hidden="true" />
+                )}
+                {copyStatus === 'copied' ? 'Copied' : 'Copy link'}
+              </button>
+              {shareLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost inline-flex items-center gap-2 px-3 py-2 text-xs"
+                >
+                  <Icon size={14} aria-hidden="true" />
+                  {label}
+                </a>
+              ))}
+            </div>
+          </aside>
+
           <SeriesPager parts={seriesParts} />
 
           {related.length > 0 && (
@@ -155,11 +237,15 @@ export default function BlogPostClient({
             <p className="max-w-2xl text-sm leading-relaxed text-muted">
               If you work on a system where independent implementations must agree — an Ethereum
               client, a cryptographic library, a compiler — I take on a small number of scoped
-              differential-testing engagements and workshops.
+              differential-testing engagements and workshops. Hiring teams can use the recruiter
+              brief for a concise view of role fit and evidence.
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-              <Link href="/#contact" className="link-accent font-medium">
-                Discuss a scoped review
+              <Link href="/engagements" className="link-accent font-medium">
+                Explore engagements
+              </Link>
+              <Link href="/recruiter-brief" className="link-accent font-medium">
+                Recruiter brief
               </Link>
               <Link href="/#case-studies" className="link-accent font-medium">
                 See case studies

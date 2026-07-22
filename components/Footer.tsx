@@ -62,24 +62,24 @@ export default function Footer() {
             <h4 className="eyebrow mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#case-studies" className="text-muted transition-colors hover:text-fg">
+                <Link href="/#case-studies" className="text-muted transition-colors hover:text-fg">
                   Case Studies
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#about" className="text-muted transition-colors hover:text-fg">
+                <Link href="/#about" className="text-muted transition-colors hover:text-fg">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#research" className="text-muted transition-colors hover:text-fg">
+                <Link href="/#research" className="text-muted transition-colors hover:text-fg">
                   Research
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#findings" className="text-muted transition-colors hover:text-fg">
+                <Link href="/#findings" className="text-muted transition-colors hover:text-fg">
                   Selected Findings
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/blog" className="text-muted transition-colors hover:text-fg">
@@ -87,19 +87,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href={personal.cv}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/recruiter-brief"
                   className="text-muted transition-colors hover:text-fg"
                 >
-                  CV (PDF)
-                </a>
+                  Recruiter brief
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-muted transition-colors hover:text-fg">
-                  Work with me
-                </a>
+                <Link href="/engagements" className="text-muted transition-colors hover:text-fg">
+                  Engagements
+                </Link>
               </li>
             </ul>
           </div>
