@@ -112,10 +112,10 @@ export default function DisclosureLedger() {
                 A CVE is the public vulnerability record. A vendor or distributor may separately
                 publish an advisory, and a public finding may instead be documented in a patch,
                 issue, or paper without receiving a CVE. This ledger uses “CVE-backed disclosure”
-                for the {disclosureSummary.cves} assigned records and keeps the non-CVE pinctrl fix
-                separate. Solidity’s own term is “known security-relevant compiler bugs”; those SOL
-                records are shown in a separate ledger below. Severity is never inferred from an
-                identifier.
+                for the {disclosureSummary.cves} assigned records and keeps the{' '}
+                {disclosureSummary.additionalPublicFindings} non-CVE hardening findings separate.
+                Solidity’s own term is “known security-relevant compiler bugs”; those SOL records
+                are shown in a separate ledger below. Severity is never inferred from an identifier.
               </p>
             </div>
           </div>
@@ -307,33 +307,51 @@ export default function DisclosureLedger() {
         <div className="mb-6 border-b border-line pb-5">
           <p className="eyebrow mb-2">Public, without a CVE</p>
           <h2 id="additional-findings-heading" className="text-2xl font-semibold text-fg">
-            Additional finding
+            Additional findings
           </h2>
         </div>
 
-        {additionalPublicFindings.map((finding) => (
-          <article
-            key={finding.url}
-            className="grid gap-3 border-y border-line py-5 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-6"
-          >
-            <div>
-              <p className="font-mono text-sm text-faint">{finding.date}</p>
-              <p className="mt-1 text-sm font-medium text-accent">{finding.project}</p>
-            </div>
-            <div>
-              <a
-                href={finding.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-semibold text-fg transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                {finding.title}
-                <ExternalLink size={14} aria-hidden="true" />
-              </a>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{finding.description}</p>
-            </div>
-          </article>
-        ))}
+        <div className="divide-y divide-line border-y border-line">
+          {additionalPublicFindings.map((finding) => (
+            <article
+              key={finding.url}
+              className="grid gap-3 py-5 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-6"
+            >
+              <div>
+                <p className="font-mono text-sm text-faint">{finding.date}</p>
+                <p className="mt-1 text-sm font-medium text-accent">{finding.project}</p>
+              </div>
+              <div>
+                <a
+                  href={finding.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-semibold text-fg transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  {finding.title}
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{finding.description}</p>
+                {finding.links && finding.links.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                    {finding.links.map((link) => (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-accent inline-flex items-center gap-1.5 text-sm"
+                      >
+                        {link.label}
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   )

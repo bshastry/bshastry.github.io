@@ -373,6 +373,14 @@
       "featured": true
     },
     {
+      "title": "Two safe-Rust memory-safety issues hardened in blst's Rust bindings",
+      "description": "Reported a DST use-after-free in Pairing and out-of-bounds scalar reads via unchecked nbits in blst 0.3.16, both reachable from safe Rust; hardened upstream with a DST lifetime bound and a scalar-length check. Not a security issue — the parameters are fixed at application design time.",
+      "project": "supranational/blst",
+      "type": "Fixed upstream",
+      "date": "Jul 2026",
+      "url": "https://github.com/supranational/blst/commit/1172c188cfcc059121b024a2010884700402baf9"
+    },
+    {
       "title": "Variable-time division on Mbed TLS RSA prime-generation path",
       "description": "Reported a variable-time DIV in mbedtls_mpi_mod_int reachable from RSA prime generation with secret data; fixed in Mbed TLS 3.6.7 and TF-PSA-Crypto.",
       "project": "Mbed-TLS/TF-PSA-Crypto",
