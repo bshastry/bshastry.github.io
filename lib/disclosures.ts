@@ -182,7 +182,34 @@ export const disclosureGroups: DisclosureGroup[] = [
   },
 ]
 
-export const additionalPublicFindings = [
+export interface PublicFinding {
+  project: string
+  date: string
+  title: string
+  description: string
+  url: string
+  links?: { label: string; url: string }[]
+}
+
+export const additionalPublicFindings: PublicFinding[] = [
+  {
+    project: 'Supranational blst',
+    date: 'Jul 2026',
+    title: 'Two safe-Rust memory-safety issues in the blst Rust bindings',
+    description:
+      'Privately reported two issues in the blst 0.3.16 Rust bindings, both reachable from safe Rust and reproduced under AddressSanitizer: Pairing stored a raw pointer to a borrowed DST slice and could read freed memory after the slice was dropped, and Pairing::mul_n_aggregate (and the high-level verify_multiple_aggregate_signatures) accepted an nbits value unchecked against the scalar slice length, allowing out-of-bounds reads. The maintainer fixed both — a DST lifetime bound on Pairing and a scalar-length check that panics on mismatch. Reporter and maintainer agreed these are hardening fixes rather than a security issue: the affected parameters are fixed at application design time and not attacker-controlled, and downstream use in Lighthouse v8.2.0 was checked and not affected.',
+    url: 'https://github.com/supranational/blst/commit/1172c188cfcc059121b024a2010884700402baf9',
+    links: [
+      {
+        label: 'Fix: bind DST lifetime to Pairing',
+        url: 'https://github.com/supranational/blst/commit/1172c188cfcc059121b024a2010884700402baf9',
+      },
+      {
+        label: 'Fix: harden Pairing.mul_n_aggregate interface',
+        url: 'https://github.com/supranational/blst/commit/96a46e6ca7360713d9bb1fb78469c28b3c043099',
+      },
+    ],
+  },
   {
     project: 'Open vSwitch / OVN',
     date: 'May 2017',
