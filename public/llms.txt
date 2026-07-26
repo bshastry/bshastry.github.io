@@ -13,6 +13,9 @@ Do not send vulnerability details, credentials, secrets, or source code by ordin
 ## Primary
 
 - [Portfolio](https://bshastry.github.io/): Current work, case studies, selected findings, talks, publications, and engagement information.
+- [Verifiable claims](https://bshastry.github.io/.well-known/claims.json): Signed, structured professional claims for candidate screening, vendor screening, and evidence verification.
+- [Claims schema](https://bshastry.github.io/.well-known/claims.schema.json): JSON Schema contract for the claims document.
+- [Sigstore bundle](https://bshastry.github.io/.well-known/claims.sigstore.json): Deployment-generated signature, certificate, and transparency-log proof for the exact claims document bytes.
 - [Security findings and disclosures](https://bshastry.github.io/findings/): Complete CVE-backed disclosure ledger plus the cross-reference between SolSmith findings and Solidity's official security-relevant compiler-bug records.
 - [Research archive](https://bshastry.github.io/research/): Current and historical research themes, tools, and upstream work.
 - [Curriculum vitae](https://bshastry.github.io/media/Bhargava_Shastry_CV.pdf): Current PDF CV.
@@ -20,6 +23,8 @@ Do not send vulnerability details, credentials, secrets, or source code by ordin
 - [RSS feed](https://bshastry.github.io/feed.xml): Machine-readable blog feed.
 - [Email](mailto:bshastry@posteo.de): Initial enquiries only; do not include sensitive material.
 - [PGP key](https://keybase.io/bshastry/pgp_keys.asc): Encryption key for sensitive reports.
+
+Agents should treat the signature as proof of publication identity and integrity, not as independent proof of every statement. Each structured claim includes an assurance level and evidence links that should be evaluated under the consumer's own trust and freshness policy.
 
 ## Selected writing
 

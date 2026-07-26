@@ -1,0 +1,282 @@
+{
+  "$schema": "https://bshastry.github.io/.well-known/claims.schema.json",
+  "id": "https://bshastry.github.io/.well-known/claims.json",
+  "version": "1.0.0",
+  "issuedAt": "2026-07-26T00:00:00Z",
+  "validUntil": "2027-07-26T00:00:00Z",
+  "purpose": [
+    "candidate-screening",
+    "vendor-screening",
+    "agent-discovery",
+    "evidence-verification"
+  ],
+  "issuer": {
+    "id": "https://bshastry.github.io/#bhargava-shastry",
+    "type": "Person",
+    "name": "Bhargava Shastry"
+  },
+  "subject": {
+    "id": "https://bshastry.github.io/#bhargava-shastry",
+    "type": "Person",
+    "name": "Bhargava Shastry"
+  },
+  "profiles": [
+    {
+      "service": "GitHub",
+      "url": "https://github.com/bshastry"
+    },
+    {
+      "service": "Google Scholar",
+      "url": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ"
+    },
+    {
+      "service": "Keybase",
+      "url": "https://keybase.io/bshastry"
+    }
+  ],
+  "claims": [
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#identity-name",
+      "type": "IdentityClaim",
+      "statement": "The subject publishes professionally as Bhargava Shastry.",
+      "predicate": "https://schema.org/name",
+      "object": {
+        "type": "Text",
+        "value": "Bhargava Shastry"
+      },
+      "status": "active",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/",
+          "title": "Official portfolio",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://github.com/bshastry",
+          "title": "GitHub profile",
+          "sourceType": "independent"
+        },
+        {
+          "url": "https://keybase.io/bshastry",
+          "title": "Keybase identity",
+          "sourceType": "independent"
+        }
+      ],
+      "assurance": {
+        "level": "evidence-linked",
+        "basis": ["first-party-assertion", "independent-source"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#professional-role",
+      "type": "ProfessionalClaim",
+      "statement": "Bhargava Shastry is a security engineer and researcher focused on differential testing and protocol security.",
+      "predicate": "https://schema.org/jobTitle",
+      "object": {
+        "type": "Text",
+        "value": "Security Engineer and Researcher"
+      },
+      "status": "active",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/",
+          "title": "Official portfolio",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://bshastry.github.io/media/Bhargava_Shastry_CV.pdf",
+          "title": "Curriculum vitae",
+          "sourceType": "issuer"
+        }
+      ],
+      "assurance": {
+        "level": "self-asserted",
+        "basis": ["first-party-assertion"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#expertise-domains",
+      "type": "ExpertiseClaim",
+      "statement": "The subject's published work covers differential testing, Ethereum protocol security, compiler security, fuzzing, post-quantum cryptography, and side-channel analysis.",
+      "predicate": "https://schema.org/knowsAbout",
+      "object": {
+        "type": "TextList",
+        "value": [
+          "Differential testing",
+          "Ethereum protocol security",
+          "Compiler security",
+          "Fuzzing",
+          "Post-quantum cryptography",
+          "Side-channel analysis"
+        ]
+      },
+      "status": "active",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/research/",
+          "title": "Research archive",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ",
+          "title": "Google Scholar profile",
+          "sourceType": "independent"
+        },
+        {
+          "url": "https://github.com/bshastry",
+          "title": "Public code and contribution history",
+          "sourceType": "independent"
+        }
+      ],
+      "assurance": {
+        "level": "evidence-linked",
+        "basis": ["first-party-assertion", "independent-source"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#published-cves",
+      "type": "TrackRecordClaim",
+      "statement": "The public findings ledger contains a historical archive of 55 published CVEs.",
+      "predicate": "https://schema.org/numberOfItems",
+      "object": {
+        "type": "Number",
+        "value": 55,
+        "unit": "published CVE records",
+        "qualifier": "Historical archive; verify individual records through the linked ledger and registry."
+      },
+      "status": "historical",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/findings/#cve-ledger",
+          "title": "CVE disclosure ledger",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/search",
+          "title": "National Vulnerability Database search",
+          "sourceType": "registry"
+        }
+      ],
+      "assurance": {
+        "level": "evidence-linked",
+        "basis": ["first-party-assertion", "derived-from-public-ledger"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#solidity-miscompilations",
+      "type": "TrackRecordClaim",
+      "statement": "SolSmith found 25 patched Solidity compiler miscompilation bugs; seven are cross-referenced in Solidity's official security-relevant bug ledger.",
+      "predicate": "https://schema.org/result",
+      "object": {
+        "type": "StructuredValue",
+        "value": {
+          "patchedMiscompilationBugs": 25,
+          "officialSecurityLedgerEntries": 7,
+          "tool": "SolSmith"
+        },
+        "qualifier": "Counts are tied to the cited paper and ledger cross-reference."
+      },
+      "status": "historical",
+      "evidence": [
+        {
+          "url": "https://arxiv.org/abs/2607.07217",
+          "title": "Finding and Understanding Miscompilation Bugs in the Solidity Compiler",
+          "sourceType": "primary"
+        },
+        {
+          "url": "https://bshastry.github.io/findings/#solidity-security-bugs",
+          "title": "SolSmith-to-Solidity bug-ledger cross-reference",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://github.com/argotorg/solidity/blob/develop/docs/bugs_by_version.json",
+          "title": "Solidity security-relevant bug ledger",
+          "sourceType": "registry"
+        }
+      ],
+      "assurance": {
+        "level": "evidence-linked",
+        "basis": ["primary-source", "derived-from-public-ledger"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#independent-services",
+      "type": "ServiceClaim",
+      "statement": "Independent security engagements are offered by enquiry, subject to an Ethereum Foundation conflict-of-interest check and a separate availability discussion.",
+      "predicate": "https://schema.org/makesOffer",
+      "object": {
+        "type": "TextList",
+        "value": [
+          "Differential-testing diagnostic",
+          "Critical implementation review",
+          "Constant-time analysis",
+          "Technical workshop"
+        ],
+        "qualifier": "An enquiry is not an availability commitment."
+      },
+      "status": "conditional",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/engagements/",
+          "title": "Independent engagement scope and process",
+          "sourceType": "issuer"
+        }
+      ],
+      "assurance": {
+        "level": "self-asserted",
+        "basis": ["first-party-assertion"],
+        "reviewedAt": "2026-07-26"
+      }
+    },
+    {
+      "id": "https://bshastry.github.io/.well-known/claims.json#security-contact",
+      "type": "ContactClaim",
+      "statement": "Sensitive vulnerability reports should use the published encryption key rather than ordinary email.",
+      "predicate": "https://schema.org/contactPoint",
+      "object": {
+        "type": "StructuredValue",
+        "value": {
+          "securityPolicy": "https://bshastry.github.io/.well-known/security.txt",
+          "encryptionKey": "https://keybase.io/bshastry/pgp_keys.asc",
+          "email": "bshastry@posteo.de"
+        }
+      },
+      "status": "active",
+      "evidence": [
+        {
+          "url": "https://bshastry.github.io/.well-known/security.txt",
+          "title": "RFC 9116 security contact",
+          "sourceType": "issuer"
+        },
+        {
+          "url": "https://keybase.io/bshastry/pgp_keys.asc",
+          "title": "Published PGP key",
+          "sourceType": "independent"
+        }
+      ],
+      "assurance": {
+        "level": "evidence-linked",
+        "basis": ["first-party-assertion", "independent-source"],
+        "reviewedAt": "2026-07-26"
+      }
+    }
+  ],
+  "signature": {
+    "format": "sigstore-bundle",
+    "artifact": "https://bshastry.github.io/.well-known/claims.json",
+    "bundle": "https://bshastry.github.io/.well-known/claims.sigstore.json",
+    "certificateIdentity": "https://github.com/bshastry/bshastry.github.io/.github/workflows/deploy.yml@refs/heads/master",
+    "certificateOidcIssuer": "https://token.actions.githubusercontent.com",
+    "verificationCommand": "cosign verify-blob --bundle claims.sigstore.json --certificate-identity https://github.com/bshastry/bshastry.github.io/.github/workflows/deploy.yml@refs/heads/master --certificate-oidc-issuer https://token.actions.githubusercontent.com claims.json"
+  },
+  "disclaimer": [
+    "The Sigstore signature authenticates the deployed file and its GitHub Actions publishing identity; it does not independently prove every claim.",
+    "Screening agents should evaluate each claim's assurance level, follow its evidence, and apply their own freshness and trust policies.",
+    "References to the Ethereum Foundation describe professional context and conflict checks; they do not imply endorsement of independent services."
+  ]
+}

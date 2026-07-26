@@ -11,6 +11,7 @@ Personal portfolio and security-research blog for Bhargava Shastry, security eng
 - **Markdown pipeline:** `js-yaml` front matter + `remark` + `remark-gfm` + `remark-rehype` + `rehype-slug` + `rehype-autolink-headings` + `rehype-pretty-code` (Shiki) + `rehype-stringify`
 - **Icons:** `lucide-react`
 - **Hosting:** GitHub Pages via GitHub Actions
+- **Machine-readable trust:** Evidence-linked JSON claims with a deployment-generated Sigstore bundle
 - **Quality gates:** Prettier, ESLint (`next/core-web-vitals`), `tsc --noEmit`, all enforced in CI
 
 ## Local development
@@ -33,7 +34,8 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 | `npm run lint:fix`     | ESLint with `--fix`                                             |
 | `npm run format`       | Prettier write                                                  |
 | `npm run format:check` | Prettier check (used in CI)                                     |
-| `npm run check`        | typecheck + lint + format:check                                 |
+| `npm run check`        | typecheck + lint + format:check + claims validation             |
+| `npm run check:claims` | Validate the claims contract, evidence shape, and freshness     |
 | `npm run check:links`  | Internal-link audit over `out/` (run after `build`; used in CI) |
 
 ## Writing a blog post
@@ -86,6 +88,7 @@ content/posts/            Blog markdown files
 
 docs/
   distribution-playbook.md  Channel selection, profile copy, and measurement cadence
+  verifiable-claims.md      Claims trust model, verification, and maintenance
 
 lib/
   blog.ts                 Markdown parsing pipeline
@@ -98,10 +101,13 @@ data/
 
 public/
   llms.txt                Curated agent-readable site index
+  .well-known/claims.json  Evidence-linked professional claims
+  .well-known/claims.schema.json  JSON Schema for the claims document
   .well-known/security.txt  RFC 9116 vulnerability-report contact (has an Expires date — renew yearly)
   <year>/.../*.html       Legacy Jekyll article redirects
 
 scripts/
+  check-claims.mjs        CI gate: validates claims structure, evidence, and expiry
   check-links.mjs         CI gate: fails the build on broken internal links in out/
 ```
 
@@ -109,8 +115,13 @@ scripts/
 
 Hosted at [bshastry.github.io](https://bshastry.github.io). Deployment is automated via GitHub Actions:
 
-- **`.github/workflows/ci.yml`** runs on every push and PR to any branch. It runs `npm run check`, `npm run build`, and `npm run check:links` to catch regressions before merge.
-- **`.github/workflows/deploy.yml`** runs only on push to `master`. It builds the static site and publishes `out/` to GitHub Pages.
+- **`.github/workflows/ci.yml`** runs on every push and PR to any branch. It
+  checks types, lint, formatting, claims, the production build, and internal
+  links to catch regressions before merge.
+- **`.github/workflows/deploy.yml`** runs only on push to `master`. It signs
+  `claims.json` with the workflow's keyless GitHub Actions identity, verifies
+  the Sigstore bundle, builds the static site, and publishes `out/` to GitHub
+  Pages.
 
 ### Repo-level settings (one-time)
 
@@ -123,6 +134,9 @@ No custom domain is configured; the site serves from the default `bshastry.githu
 - **Dependencies:** Update periodically with `npm outdated` + `npm update`. For major bumps (Next.js, Tailwind), test thoroughly in a branch first.
 - **Legacy continuity:** Keep the static redirect files under `public/` and the `/bugs/` alias when changing routes; external links to the Jekyll-era site still depend on them.
 - **Content updates:** Blog posts live in `content/posts/`; portfolio data (projects, CV) lives in `data/portfolio.json`.
+- **Claims:** Review `public/.well-known/claims.json` at least yearly, update its
+  dates and evidence with any substantive change, and follow
+  [`docs/verifiable-claims.md`](docs/verifiable-claims.md).
 - **Distribution:** Use [`docs/distribution-playbook.md`](docs/distribution-playbook.md) for
   channel selection, profile alignment, community rules, and the six-week review cadence.
 

@@ -81,6 +81,7 @@ legacy-archive/
 # (a bare `scripts/` would make the file impossible to re-include).
 scripts/*
 !scripts/check-links.mjs
+!scripts/check-claims.mjs
 
 # Local research / drafts not intended for publication
 private/
