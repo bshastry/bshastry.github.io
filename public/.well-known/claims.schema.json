@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bshastry.github.io/.well-known/claims.schema.json",
+  "title": "Bhargava Shastry verifiable claims",
+  "description": "A versioned, evidence-linked set of first-party professional claims with Sigstore verification metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "id",
+    "version",
+    "issuedAt",
+    "validUntil",
+    "purpose",
+    "issuer",
+    "subject",
+    "profiles",
+    "claims",
+    "signature",
+    "disclaimer"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://bshastry.github.io/.well-known/claims.schema.json"
+    },
+    "id": {
+      "const": "https://bshastry.github.io/.well-known/claims.json"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+\\.[0-9]+$"
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "purpose": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "candidate-screening",
+          "vendor-screening",
+          "agent-discovery",
+          "evidence-verification"
+        ]
+      }
+    },
+    "issuer": {
+      "$ref": "#/$defs/entity"
+    },
+    "subject": {
+      "$ref": "#/$defs/entity"
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/profile"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "signature": {
+      "$ref": "#/$defs/signature"
+    },
+    "disclaimer": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "httpsUri": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "name"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/httpsUri"
+        },
+        "type": {
+          "const": "Person"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["service", "url"],
+      "properties": {
+        "service": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/httpsUri"
+        }
+      }
+    },
+    "claimObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "value"],
+      "properties": {
+        "type": {
+          "enum": ["Text", "Number", "Boolean", "TextList", "StructuredValue"]
+        },
+        "value": {},
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualifier": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "const": "Text"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "Number"
+            },
+            "value": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "Boolean"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "TextList"
+            },
+            "value": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "StructuredValue"
+            },
+            "value": {
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "title", "sourceType"],
+      "properties": {
+        "url": {
+          "$ref": "#/$defs/httpsUri"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceType": {
+          "enum": ["issuer", "primary", "independent", "registry"]
+        }
+      }
+    },
+    "assurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "basis", "reviewedAt"],
+      "properties": {
+        "level": {
+          "enum": ["self-asserted", "evidence-linked"]
+        },
+        "basis": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "first-party-assertion",
+              "primary-source",
+              "independent-source",
+              "derived-from-public-ledger"
+            ]
+          }
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "statement",
+        "predicate",
+        "object",
+        "status",
+        "evidence",
+        "assurance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/httpsUri"
+        },
+        "type": {
+          "enum": [
+            "IdentityClaim",
+            "ProfessionalClaim",
+            "ExpertiseClaim",
+            "TrackRecordClaim",
+            "ServiceClaim",
+            "ContactClaim"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "predicate": {
+          "$ref": "#/$defs/httpsUri"
+        },
+        "object": {
+          "$ref": "#/$defs/claimObject"
+        },
+        "status": {
+          "enum": ["active", "historical", "conditional"]
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "assurance": {
+          "$ref": "#/$defs/assurance"
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "artifact",
+        "bundle",
+        "certificateIdentity",
+        "certificateOidcIssuer",
+        "verificationCommand"
+      ],
+      "properties": {
+        "format": {
+          "const": "sigstore-bundle"
+        },
+        "artifact": {
+          "const": "https://bshastry.github.io/.well-known/claims.json"
+        },
+        "bundle": {
+          "const": "https://bshastry.github.io/.well-known/claims.sigstore.json"
+        },
+        "certificateIdentity": {
+          "const": "https://github.com/bshastry/bshastry.github.io/.github/workflows/deploy.yml@refs/heads/master"
+        },
+        "certificateOidcIssuer": {
+          "const": "https://token.actions.githubusercontent.com"
+        },
+        "verificationCommand": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

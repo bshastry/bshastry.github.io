@@ -23,6 +23,22 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
+      - run: npm run check:claims
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
+      - name: Sign machine-readable claims
+        run: |
+          cosign sign-blob \
+            --yes \
+            --bundle public/.well-known/claims.sigstore.json \
+            public/.well-known/claims.json
+      - name: Verify machine-readable claims
+        run: |
+          cosign verify-blob \
+            --bundle public/.well-known/claims.sigstore.json \
+            --certificate-identity https://github.com/bshastry/bshastry.github.io/.github/workflows/deploy.yml@refs/heads/master \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+            public/.well-known/claims.json
       - run: npm run build
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3

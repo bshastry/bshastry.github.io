@@ -75,6 +75,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        <link
+          rel="alternate"
+          type="application/json"
+          href="/.well-known/claims.json"
+          title="Verifiable professional claims"
+        />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site index" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={inter.className}>
