@@ -1,10 +1,17 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, stat } from 'node:fs/promises'
 import { URL, fileURLToPath } from 'node:url'
 import path from 'node:path'
+import Ajv2020 from 'ajv/dist/2020.js'
+import addFormats from 'ajv-formats'
+import ts from 'typescript'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const claimsPath = path.join(root, 'public', '.well-known', 'claims.json')
 const schemaPath = path.join(root, 'public', '.well-known', 'claims.schema.json')
+const llmsPath = path.join(root, 'public', 'llms.txt')
+const disclosuresPath = path.join(root, 'lib', 'disclosures.ts')
+const outPath = path.join(root, 'out')
+const checkBuiltLinks = process.argv.includes('--check-links')
 
 function assert(condition, message) {
   if (!condition) throw new Error(message)
@@ -30,12 +37,175 @@ function assertDate(value, label, dateOnly = false) {
   assert(!Number.isNaN(Date.parse(value)), `${label} is not a valid date`)
 }
 
-const [claimsRaw, schemaRaw] = await Promise.all([
+function statementIncludesCount(statement, count) {
+  const smallNumberWords = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+    'eleven',
+    'twelve',
+    'thirteen',
+    'fourteen',
+    'fifteen',
+    'sixteen',
+    'seventeen',
+    'eighteen',
+    'nineteen',
+    'twenty',
+  ]
+  const tokens = [String(count)]
+  if (smallNumberWords[count]) tokens.push(smallNumberWords[count])
+  const normalized = statement.toLowerCase()
+  return tokens.some((token) => new RegExp(`\\b${token}\\b`).test(normalized))
+}
+
+async function loadDisclosureFacts() {
+  const source = await readFile(disclosuresPath, 'utf8')
+  const transpiled = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2020,
+    },
+    fileName: disclosuresPath,
+  }).outputText
+  const dataUrl = `data:text/javascript;base64,${Buffer.from(transpiled).toString('base64')}`
+  return import(dataUrl)
+}
+
+async function existingOutputPath(url) {
+  let pathname
+  try {
+    pathname = decodeURIComponent(url.pathname)
+  } catch {
+    throw new Error(`Malformed percent-encoding in ${url.href}`)
+  }
+
+  const relativePath = pathname.replace(/^\/+/, '')
+  const directPath = path.resolve(outPath, relativePath)
+  assert(
+    directPath === outPath || directPath.startsWith(`${outPath}${path.sep}`),
+    `${url.href} resolves outside out/`,
+  )
+  const candidates = pathname.endsWith('/')
+    ? [path.join(directPath, 'index.html')]
+    : [directPath, `${directPath}.html`, path.join(directPath, 'index.html')]
+
+  for (const candidate of candidates) {
+    try {
+      const metadata = await stat(candidate)
+      if (metadata.isFile()) return candidate
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error
+    }
+  }
+  return null
+}
+
+function collectHttpsUrls(value, label, collected) {
+  if (typeof value === 'string') {
+    if (!value.startsWith('https://')) return
+    collected.push({ label, url: new URL(value) })
+    return
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectHttpsUrls(item, `${label}[${index}]`, collected))
+    return
+  }
+  if (value && typeof value === 'object') {
+    for (const [key, item] of Object.entries(value)) {
+      collectHttpsUrls(item, `${label}.${key}`, collected)
+    }
+  }
+}
+
+async function checkSameOriginLinks(claims, llmsRaw) {
+  const siteOrigin = new URL(claims.id).origin
+  const collected = []
+  collectHttpsUrls(claims, 'claims', collected)
+
+  for (const [index, match] of [
+    ...llmsRaw.matchAll(/\[[^\]]+\]\((https:\/\/[^)\s]+)\)/g),
+  ].entries()) {
+    collected.push({ label: `llms.txt link ${index + 1}`, url: new URL(match[1]) })
+  }
+
+  const unique = new Map()
+  for (const reference of collected) {
+    if (reference.url.origin !== siteOrigin) continue
+    unique.set(reference.url.href, reference)
+  }
+
+  const failures = []
+  let checked = 0
+  let deployGenerated = 0
+
+  for (const { label, url } of unique.values()) {
+    const outputFile = await existingOutputPath(url)
+    if (!outputFile && url.href === claims.signature.bundle) {
+      deployGenerated += 1
+      continue
+    }
+    checked += 1
+    if (!outputFile) {
+      failures.push(`${label}: ${url.href} does not resolve in out/`)
+      continue
+    }
+
+    if (!url.hash || !outputFile.endsWith('.html')) continue
+    let fragment
+    try {
+      fragment = decodeURIComponent(url.hash.slice(1))
+    } catch {
+      failures.push(`${label}: ${url.href} has malformed fragment encoding`)
+      continue
+    }
+    const html = await readFile(outputFile, 'utf8')
+    const ids = new Set(
+      [...html.matchAll(/\sid=(?:"([^"]+)"|'([^']+)')/g)].map((match) => match[1] ?? match[2]),
+    )
+    if (!ids.has(fragment)) {
+      failures.push(
+        `${label}: ${url.href} has no matching id in ${path.relative(root, outputFile)}`,
+      )
+    }
+  }
+
+  assert(
+    failures.length === 0,
+    `same-origin claim link validation failed:\n${failures.map((failure) => `  - ${failure}`).join('\n')}`,
+  )
+  console.log(
+    `Validated ${checked} same-origin claim/llms links and anchors` +
+      (deployGenerated > 0 ? `; deferred ${deployGenerated} deploy-generated bundle.` : '.'),
+  )
+}
+
+const [claimsRaw, schemaRaw, llmsRaw, disclosureFacts] = await Promise.all([
   readFile(claimsPath, 'utf8'),
   readFile(schemaPath, 'utf8'),
+  readFile(llmsPath, 'utf8'),
+  loadDisclosureFacts(),
 ])
 const claims = JSON.parse(claimsRaw)
 const schema = JSON.parse(schemaRaw)
+
+const ajv = new Ajv2020({ allErrors: true, strict: true })
+addFormats(ajv)
+const validateSchema = ajv.compile(schema)
+assert(
+  validateSchema(claims),
+  `claims.json does not satisfy claims.schema.json:\n${ajv.errorsText(validateSchema.errors, {
+    separator: '\n',
+  })}`,
+)
 
 assert(claimsRaw.endsWith('\n'), 'claims.json must end with a newline')
 assert(schemaRaw.endsWith('\n'), 'claims.schema.json must end with a newline')
@@ -232,4 +402,46 @@ assert(
   'at least one trust-boundary disclaimer is required',
 )
 
-console.log(`Validated ${claims.claims.length} claims and ${claims.profiles.length} profiles.`)
+const claimByFragment = new Map(
+  claims.claims.map((claim) => [new URL(claim.id).hash.slice(1), claim]),
+)
+const cveClaim = claimByFragment.get('published-cves')
+assert(cveClaim, 'published-cves claim is required')
+assert(
+  cveClaim.object.value === disclosureFacts.disclosureSummary.cves,
+  `published-cves value must match lib/disclosures.ts (${disclosureFacts.disclosureSummary.cves})`,
+)
+assert(
+  statementIncludesCount(cveClaim.statement, disclosureFacts.disclosureSummary.cves),
+  'published-cves statement must include the derived CVE count',
+)
+
+const solSmithClaim = claimByFragment.get('solidity-miscompilations')
+assert(solSmithClaim, 'solidity-miscompilations claim is required')
+assert(
+  solSmithClaim.object.value.patchedMiscompilationBugs ===
+    disclosureFacts.solSmithPatchedMiscompilations,
+  'SolSmith patched-miscompilation count must match lib/disclosures.ts',
+)
+assert(
+  solSmithClaim.object.value.officialSecurityLedgerEntries ===
+    disclosureFacts.soliditySecuritySummary.total,
+  'Solidity security-ledger count must match lib/disclosures.ts',
+)
+for (const count of [
+  disclosureFacts.solSmithPatchedMiscompilations,
+  disclosureFacts.soliditySecuritySummary.total,
+]) {
+  assert(
+    statementIncludesCount(solSmithClaim.statement, count),
+    `solidity-miscompilations statement must include the derived count ${count}`,
+  )
+}
+
+console.log(
+  `Validated ${claims.claims.length} claims and ${claims.profiles.length} profiles against schema and source facts.`,
+)
+
+if (checkBuiltLinks) {
+  await checkSameOriginLinks(claims, llmsRaw)
+}

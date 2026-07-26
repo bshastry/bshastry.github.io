@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run check:claims",
     "check:claims": "node scripts/check-claims.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:claims:links": "node scripts/check-claims.mjs --check-links",
+    "check:links": "node scripts/check-links.mjs && npm run check:claims:links"
   },
   "dependencies": {
     "js-yaml": "^4.2.0",
@@ -37,6 +38,8 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "autoprefixer": "^10.0.0",
     "eslint": "^8.0.0",
     "eslint-config-next": "^15.5.19",
