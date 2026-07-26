@@ -17,7 +17,7 @@
     "check:links": "node scripts/check-links.mjs && npm run check:claims:links"
   },
   "dependencies": {
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^5.2.2",
     "lucide-react": "^0.294.0",
     "next": "^15.5.19",
     "react": "^18.0.0",
@@ -41,7 +41,7 @@
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "autoprefixer": "^10.0.0",
-    "eslint": "^8.0.0",
+    "eslint": "^10.8.0",
     "eslint-config-next": "^15.5.19",
     "postcss": "^8.5.15",
     "prettier": "^3.8.1",
