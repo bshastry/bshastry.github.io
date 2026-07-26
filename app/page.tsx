@@ -75,6 +75,7 @@ export default function Home() {
       />
       <Header />
       <main id="main-content" className="min-h-screen">
+        <span id="bhargava-shastry" aria-hidden="true" />
         <Hero latestPost={latestPost} publicationsCount={publicationsCount} />
         <CaseStudies />
         <About />

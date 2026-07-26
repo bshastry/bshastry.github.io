@@ -40,6 +40,7 @@ jobs:
             --certificate-oidc-issuer https://token.actions.githubusercontent.com \
             public/.well-known/claims.json
       - run: npm run build
+      - run: npm run check:links
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:

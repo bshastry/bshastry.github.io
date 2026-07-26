@@ -25,18 +25,19 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 
 ## Scripts
 
-| Command                | Purpose                                                         |
-| ---------------------- | --------------------------------------------------------------- |
-| `npm run dev`          | Local dev server with HMR                                       |
-| `npm run build`        | Static export to `out/`                                         |
-| `npm run typecheck`    | `tsc --noEmit`                                                  |
-| `npm run lint`         | ESLint (`next/core-web-vitals`)                                 |
-| `npm run lint:fix`     | ESLint with `--fix`                                             |
-| `npm run format`       | Prettier write                                                  |
-| `npm run format:check` | Prettier check (used in CI)                                     |
-| `npm run check`        | typecheck + lint + format:check + claims validation             |
-| `npm run check:claims` | Validate the claims contract, evidence shape, and freshness     |
-| `npm run check:links`  | Internal-link audit over `out/` (run after `build`; used in CI) |
+| Command                      | Purpose                                                         |
+| ---------------------------- | --------------------------------------------------------------- |
+| `npm run dev`                | Local dev server with HMR                                       |
+| `npm run build`              | Static export to `out/`                                         |
+| `npm run typecheck`          | `tsc --noEmit`                                                  |
+| `npm run lint`               | ESLint (`next/core-web-vitals`)                                 |
+| `npm run lint:fix`           | ESLint with `--fix`                                             |
+| `npm run format`             | Prettier write                                                  |
+| `npm run format:check`       | Prettier check (used in CI)                                     |
+| `npm run check`              | typecheck + lint + format:check + claims validation             |
+| `npm run check:claims`       | Validate the claims contract, evidence shape, and freshness     |
+| `npm run check:claims:links` | Audit built same-origin claims/llms links and anchors           |
+| `npm run check:links`        | Internal-link audit over `out/` (run after `build`; used in CI) |
 
 ## Writing a blog post
 
@@ -107,7 +108,7 @@ public/
   <year>/.../*.html       Legacy Jekyll article redirects
 
 scripts/
-  check-claims.mjs        CI gate: validates claims structure, evidence, and expiry
+  check-claims.mjs        CI gate: validates schema, source facts, links, and expiry
   check-links.mjs         CI gate: fails the build on broken internal links in out/
 ```
 

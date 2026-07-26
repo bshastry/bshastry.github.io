@@ -54,6 +54,19 @@ When changing a claim:
 5. If the structure changes, version the schema and update the document's
    `$schema` reference.
 
+The claims check validates the document with the published JSON Schema and
+cross-checks the CVE and SolSmith counts against `lib/disclosures.ts`. After a
+static build, `npm run check:links` also resolves same-origin URLs from both the
+claims document and `llms.txt`, including HTML fragments, against `out/`. The
+Sigstore bundle is the one exception in ordinary CI because it is generated
+during deployment; the deploy workflow runs the same link check after creating
+the bundle.
+
+External evidence URLs are not fetched in blocking CI. Availability checks
+against third-party services are prone to rate limits, bot protection, and
+transient outages, so consumers must still evaluate those links under their own
+retrieval and freshness policy.
+
 Production deploys validate the document, use keyless GitHub Actions OIDC to
 sign it, verify the resulting bundle against the expected workflow identity,
 and only then build the static site.
