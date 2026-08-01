@@ -12,7 +12,7 @@ const offerIcons = {
 } as const
 
 export default function Engagements() {
-  const { social } = portfolioData.personal
+  const { pgp } = portfolioData.personal
 
   return (
     <div>
@@ -104,9 +104,8 @@ export default function Engagements() {
           <ArrowRight size={15} aria-hidden="true" />
         </Link>
         <a
-          href={`https://keybase.io/${social.keybase}/pgp_keys.asc`}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={pgp.publicKeyPath}
+          download="bhargava-shastry-pgp.asc"
           className="btn-ghost inline-flex items-center gap-2 px-6 py-3"
         >
           <Key size={16} aria-hidden="true" />
@@ -117,6 +116,9 @@ export default function Engagements() {
       <p className="mt-10 max-w-3xl border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted">
         Do not include vulnerability details, secrets, credentials, or source code in an enquiry.
         Use the PGP key for sensitive reports.
+        <span className="mt-2 block break-words font-mono text-xs text-faint">
+          OpenPGP fingerprint: {pgp.fingerprint}
+        </span>
       </p>
 
       <p className="mt-8 max-w-3xl text-xs leading-relaxed text-faint">

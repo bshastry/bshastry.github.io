@@ -11,9 +11,10 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run check:claims",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run check:claims && npm run check:pgp",
     "check:claims": "node scripts/check-claims.mjs",
     "check:claims:links": "node scripts/check-claims.mjs --check-links",
+    "check:pgp": "node scripts/check-pgp.mjs",
     "check:links": "node scripts/check-links.mjs && npm run check:claims:links"
   },
   "dependencies": {

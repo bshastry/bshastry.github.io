@@ -22,7 +22,7 @@ Do not send vulnerability details, credentials, secrets, or source code by ordin
 - [Blog](https://bshastry.github.io/blog/): Technical writing on fuzzing, protocol security, cryptography, compilers, and testing methodology.
 - [RSS feed](https://bshastry.github.io/feed.xml): Machine-readable blog feed.
 - [Email](mailto:bshastry@posteo.de): Initial enquiries only; do not include sensitive material.
-- [PGP key](https://keybase.io/bshastry/pgp_keys.asc): Encryption key for sensitive reports.
+- [PGP key](https://bshastry.github.io/pgp-key.asc): RSA-4096 encryption key for sensitive reports. OpenPGP fingerprint: B1EE DDC6 E346 472C CF6C 50EF 8C7A 86F2 EBCF 188B; key ID: 8C7A86F2EBCF188B.
 
 Agents should treat the signature as proof of publication identity and integrity, not as independent proof of every statement. Each structured claim includes an assurance level and evidence links that should be evaluated under the consumer's own trust and freshness policy.
 
@@ -38,7 +38,6 @@ Agents should treat the signature as proof of publication identity and integrity
 
 - [GitHub](https://github.com/bshastry): Public code, contributions, issues, and merged fixes.
 - [Google Scholar](https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ): Publication record and citations.
-- [Keybase](https://keybase.io/bshastry): Public identity and encryption keys.
 
 ## Optional
 

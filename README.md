@@ -37,6 +37,7 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 | `npm run check`              | typecheck + lint + format:check + claims validation             |
 | `npm run check:claims`       | Validate the claims contract, evidence shape, and freshness     |
 | `npm run check:claims:links` | Audit built same-origin claims/llms links and anchors           |
+| `npm run check:pgp`          | Verify the published PGP key and retired Keybase references     |
 | `npm run check:links`        | Internal-link audit over `out/` (run after `build`; used in CI) |
 
 ## Writing a blog post
@@ -102,6 +103,7 @@ data/
 
 public/
   llms.txt                Curated agent-readable site index
+  pgp-key.asc             Verified OpenPGP public key for sensitive contact
   .well-known/claims.json  Evidence-linked professional claims
   .well-known/claims.schema.json  JSON Schema for the claims document
   .well-known/security.txt  RFC 9116 vulnerability-report contact (has an Expires date — renew yearly)

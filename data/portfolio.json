@@ -10,8 +10,15 @@
       "github": "bshastry",
       "twitter": "ibags",
       "linkedin": "bshastry",
-      "scholar": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ",
-      "keybase": "bshastry"
+      "scholar": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ"
+    },
+    "pgp": {
+      "publicKeyPath": "/pgp-key.asc",
+      "fingerprint": "B1EE DDC6 E346 472C CF6C 50EF 8C7A 86F2 EBCF 188B",
+      "keyId": "8C7A86F2EBCF188B",
+      "algorithm": "RSA",
+      "length": 4096,
+      "created": "2026-07-31"
     }
   },
   "experience": [

@@ -45,7 +45,6 @@ const personJsonLd = {
     'https://twitter.com/ibags',
     'https://linkedin.com/in/bshastry',
     'https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ',
-    'https://keybase.io/bshastry',
   ],
   knowsAbout: [
     'Differential testing',
