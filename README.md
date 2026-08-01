@@ -34,7 +34,7 @@ Open [http://localhost:3000](http://localhost:3000). The dev server hot-reloads 
 | `npm run lint:fix`           | ESLint with `--fix`                                             |
 | `npm run format`             | Prettier write                                                  |
 | `npm run format:check`       | Prettier check (used in CI)                                     |
-| `npm run check`              | typecheck + lint + format:check + claims validation             |
+| `npm run check`              | typecheck + lint + formatting + claims + PGP validation         |
 | `npm run check:claims`       | Validate the claims contract, evidence shape, and freshness     |
 | `npm run check:claims:links` | Audit built same-origin claims/llms links and anchors           |
 | `npm run check:pgp`          | Verify the published PGP key and retired Keybase references     |

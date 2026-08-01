@@ -50,10 +50,12 @@ function decodePublicKeyArmor(armor) {
 
   const checksumIndex = lines.findIndex((line) => line.startsWith('='))
   assert(checksumIndex > 1, 'public key armor checksum is missing')
+  assert(checksumIndex === lines.length - 2, 'public key armor has trailing content')
   const payload = lines.slice(1, checksumIndex).filter(Boolean).join('')
   assert(/^[A-Za-z0-9+/]+={0,2}$/.test(payload), 'public key armor payload is malformed')
 
   const bytes = Buffer.from(payload, 'base64')
+  assert(/^=[A-Za-z0-9+/]{4}$/.test(lines[checksumIndex]), 'public key armor checksum is malformed')
   const checksum = Buffer.from(lines[checksumIndex].slice(1), 'base64')
   assert(checksum.length === 3, 'public key armor checksum is malformed')
   assert(crc24(bytes) === checksum.readUIntBE(0, 3), 'public key armor checksum does not match')
@@ -118,6 +120,10 @@ const fingerprint = normalizeFingerprint(pgp.fingerprint)
 const keyPath = path.resolve(publicRoot, pgp.publicKeyPath.replace(/^\/+/, ''))
 
 assert(
+  pgp.publicKeyPath.startsWith('/') && !pgp.publicKeyPath.startsWith('//'),
+  'personal.pgp.publicKeyPath must be a same-origin absolute path',
+)
+assert(
   keyPath.startsWith(`${publicRoot}${path.sep}`),
   'personal.pgp.publicKeyPath must resolve inside public/',
 )
@@ -125,9 +131,25 @@ assert(/^[A-F0-9]{40}$/.test(fingerprint), 'personal.pgp.fingerprint must contai
 assert(pgp.keyId === fingerprint.slice(-16), 'personal.pgp.keyId must match the fingerprint')
 assert(pgp.algorithm === 'RSA', 'personal.pgp.algorithm must identify the published RSA key')
 assert(pgp.length === 4096, 'personal.pgp.length must identify the published 4096-bit key')
+assert(/^[a-f0-9]{64}$/.test(pgp.sha256), 'personal.pgp.sha256 must contain 64 hex digits')
 
 const armor = await readFile(keyPath, 'utf8')
-const packets = parsePackets(decodePublicKeyArmor(armor))
+const keyBytes = decodePublicKeyArmor(armor)
+// Pin the complete packet stream whose self-signatures and encryption capability were
+// independently verified before publication. The v4 fingerprint covers only the primary key.
+assert(
+  createHash('sha256').update(keyBytes).digest('hex') === pgp.sha256,
+  'published key packets do not match the verified key artifact',
+)
+const packets = parsePackets(keyBytes)
+assert(
+  packets.filter(({ tag }) => tag === 6).length === 1,
+  'published artifact must contain exactly one primary public key',
+)
+assert(
+  packets.filter(({ tag }) => tag === 14).length === 1,
+  'published artifact must contain exactly one public subkey',
+)
 const primaryKey = packets[0]
 assert(primaryKey.tag === 6, 'the first OpenPGP packet must be a public-key packet')
 assert(primaryKey.body[0] === 4, 'the published key must use the OpenPGP v4 fingerprint format')
@@ -176,6 +198,10 @@ assert(
 )
 
 const absoluteKeyUrl = new URL(pgp.publicKeyPath, 'https://bshastry.github.io').href
+assert(
+  new URL(absoluteKeyUrl).origin === 'https://bshastry.github.io',
+  'personal.pgp.publicKeyPath must stay on the portfolio origin',
+)
 const securityTxt = await readFile(path.join(publicRoot, '.well-known', 'security.txt'), 'utf8')
 const llmsTxt = await readFile(path.join(publicRoot, 'llms.txt'), 'utf8')
 const claims = JSON.parse(
@@ -188,6 +214,10 @@ assert(
   'security.txt does not reference the published key',
 )
 assert(
+  securityTxt.includes(`Contact: mailto:${email}`),
+  'security.txt does not reference the portfolio email',
+)
+assert(
   normalizeFingerprint(securityTxt).includes(fingerprint),
   'security.txt does not publish the fingerprint',
 )
@@ -196,6 +226,7 @@ assert(
   normalizeFingerprint(llmsTxt).includes(fingerprint),
   'llms.txt does not publish the fingerprint',
 )
+assert(llmsTxt.includes(pgp.keyId), 'llms.txt does not publish the key ID')
 assert(securityContact, 'claims.json is missing its security-contact claim')
 assert(
   securityContact.object.value.encryptionKey === absoluteKeyUrl,
@@ -208,6 +239,18 @@ assert(
 assert(
   securityContact.object.value.openPgpKeyId === pgp.keyId,
   'claims.json does not publish the key ID',
+)
+assert(
+  securityContact.object.value.keyAlgorithm === `${pgp.algorithm}-${pgp.length}`,
+  'claims.json does not publish the key algorithm and length',
+)
+assert(
+  securityContact.object.value.keyCreatedAt === pgp.created,
+  'claims.json does not publish the key creation date',
+)
+assert(
+  securityContact.object.value.email === email,
+  'claims.json does not reference the portfolio email',
 )
 
 const retiredReferences = []

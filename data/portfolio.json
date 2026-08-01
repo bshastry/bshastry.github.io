@@ -18,7 +18,8 @@
       "keyId": "8C7A86F2EBCF188B",
       "algorithm": "RSA",
       "length": 4096,
-      "created": "2026-07-31"
+      "created": "2026-07-31",
+      "sha256": "8acd04dae5888bd97537547db1196ced84d8a0a08879f5b90b70beca185eb47b"
     }
   },
   "experience": [

@@ -24,6 +24,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run check:claims
+      - run: npm run check:pgp
       - name: Install Cosign
         uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
       - name: Sign machine-readable claims

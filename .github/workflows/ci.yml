@@ -18,5 +18,6 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm run check:claims
+      - run: npm run check:pgp
       - run: npm run build
       - run: npm run check:links
