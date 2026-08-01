@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, Linkedin, Twitter, Mail, ExternalLink } from 'lucide-react'
+import { ExternalLink, Github, Key, Linkedin, Mail, Twitter } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 export default function Footer() {
@@ -119,25 +119,16 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={`https://keybase.io/${personal.social.keybase}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={personal.pgp.publicKeyPath}
+                  download="bhargava-shastry-pgp.asc"
                   className="inline-flex items-center space-x-1 text-muted transition-colors hover:text-fg"
                 >
-                  <span>Keybase</span>
-                  <ExternalLink size={14} className="text-faint" />
+                  <span>PGP key</span>
+                  <Key size={14} className="text-faint" aria-hidden="true" />
                 </a>
-              </li>
-              <li>
-                <a
-                  href={`https://keybase.io/${personal.social.keybase}/pgp_keys.asc`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1 text-muted transition-colors hover:text-fg"
-                >
-                  <span>PGP Key</span>
-                  <ExternalLink size={14} className="text-faint" />
-                </a>
+                <p className="mt-1 max-w-xs break-words font-mono text-[10px] leading-relaxed text-faint">
+                  Fingerprint {personal.pgp.fingerprint}
+                </p>
               </li>
               <li>
                 <a

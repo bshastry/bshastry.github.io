@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Briefcase, Mail, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Briefcase, Key, Mail, ShieldCheck } from 'lucide-react'
 import portfolioData from '@/data/portfolio.json'
 
 const paths = [
@@ -24,7 +24,7 @@ const paths = [
 ] as const
 
 export default function Contact() {
-  const { email } = portfolioData.personal
+  const { email, pgp } = portfolioData.personal
 
   return (
     <section id="contact" className="border-t border-line py-24 md:py-28">
@@ -63,10 +63,21 @@ export default function Contact() {
             <Mail size={15} aria-hidden="true" />
             {email}
           </a>
+          <a
+            href={pgp.publicKeyPath}
+            download="bhargava-shastry-pgp.asc"
+            className="link-accent inline-flex items-center gap-2"
+          >
+            <Key size={15} aria-hidden="true" />
+            PGP key for sensitive mail
+          </a>
           <span className="text-faint">
             No formality needed for a first, non-confidential note.
           </span>
         </div>
+        <p className="mt-3 max-w-3xl break-words font-mono text-xs leading-relaxed text-faint">
+          OpenPGP fingerprint: <span className="text-muted">{pgp.fingerprint}</span>
+        </p>
       </div>
     </section>
   )

@@ -63,6 +63,7 @@ export default async function EngagementGuidePage({ params }: EngagementGuidePag
 
   const canonicalUrl = `${SITE_URL}/engagements/${guide.slug}/`
   const inquiryHref = getEngagementInquiryHref(guide.label)
+  const { pgp } = portfolioData.personal
   const serviceJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -208,15 +209,18 @@ export default async function EngagementGuidePage({ params }: EngagementGuidePag
                 Start a structured enquiry
               </a>
               <a
-                href={`https://keybase.io/${portfolioData.personal.social.keybase}/pgp_keys.asc`}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={pgp.publicKeyPath}
+                download="bhargava-shastry-pgp.asc"
                 className="btn-ghost inline-flex items-center gap-2 px-6 py-3"
               >
                 <Key size={16} aria-hidden="true" />
                 PGP key
               </a>
             </div>
+            <p className="mt-5 max-w-3xl text-xs leading-relaxed text-faint">
+              For sensitive reports, use the PGP key and verify its OpenPGP fingerprint:
+              <span className="mt-1 block break-words font-mono text-muted">{pgp.fingerprint}</span>
+            </p>
             <p className="mt-7 max-w-3xl text-xs leading-relaxed text-faint">
               Independent engagements are limited, subject to conflict review, and represent my own
               views and work. They are not offered, endorsed, or reviewed by the Ethereum

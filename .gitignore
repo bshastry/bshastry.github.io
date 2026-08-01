@@ -82,6 +82,7 @@ legacy-archive/
 scripts/*
 !scripts/check-links.mjs
 !scripts/check-claims.mjs
+!scripts/check-pgp.mjs
 
 # Local research / drafts not intended for publication
 private/

@@ -1,9 +1,9 @@
 {
   "$schema": "https://bshastry.github.io/.well-known/claims.schema.json",
   "id": "https://bshastry.github.io/.well-known/claims.json",
-  "version": "1.0.0",
-  "issuedAt": "2026-07-26T00:00:00Z",
-  "validUntil": "2027-07-26T00:00:00Z",
+  "version": "1.1.0",
+  "issuedAt": "2026-07-31T00:00:00Z",
+  "validUntil": "2027-07-31T00:00:00Z",
   "purpose": [
     "candidate-screening",
     "vendor-screening",
@@ -28,10 +28,6 @@
     {
       "service": "Google Scholar",
       "url": "https://scholar.google.com/citations?hl=en&user=lsdZxf8AAAAJ"
-    },
-    {
-      "service": "Keybase",
-      "url": "https://keybase.io/bshastry"
     }
   ],
   "claims": [
@@ -55,17 +51,12 @@
           "url": "https://github.com/bshastry",
           "title": "GitHub profile",
           "sourceType": "independent"
-        },
-        {
-          "url": "https://keybase.io/bshastry",
-          "title": "Keybase identity",
-          "sourceType": "independent"
         }
       ],
       "assurance": {
         "level": "evidence-linked",
         "basis": ["first-party-assertion", "independent-source"],
-        "reviewedAt": "2026-07-26"
+        "reviewedAt": "2026-07-31"
       }
     },
     {
@@ -242,7 +233,11 @@
         "type": "StructuredValue",
         "value": {
           "securityPolicy": "https://bshastry.github.io/.well-known/security.txt",
-          "encryptionKey": "https://keybase.io/bshastry/pgp_keys.asc",
+          "encryptionKey": "https://bshastry.github.io/pgp-key.asc",
+          "openPgpFingerprint": "B1EEDDC6E346472CCF6C50EF8C7A86F2EBCF188B",
+          "openPgpKeyId": "8C7A86F2EBCF188B",
+          "keyAlgorithm": "RSA-4096",
+          "keyCreatedAt": "2026-07-31",
           "email": "bshastry@posteo.de"
         }
       },
@@ -254,15 +249,15 @@
           "sourceType": "issuer"
         },
         {
-          "url": "https://keybase.io/bshastry/pgp_keys.asc",
-          "title": "Published PGP key",
-          "sourceType": "independent"
+          "url": "https://bshastry.github.io/pgp-key.asc",
+          "title": "Published OpenPGP public key",
+          "sourceType": "primary"
         }
       ],
       "assurance": {
         "level": "evidence-linked",
-        "basis": ["first-party-assertion", "independent-source"],
-        "reviewedAt": "2026-07-26"
+        "basis": ["first-party-assertion", "primary-source"],
+        "reviewedAt": "2026-07-31"
       }
     }
   ],
