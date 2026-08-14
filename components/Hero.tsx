@@ -105,11 +105,11 @@ function MethodTrace() {
   )
 }
 
-// Derived from the findings ledgers so the hero can't drift from the evidence
-// it links to: the advisory URL tracks portfolio.json and the totals track
-// lib/disclosures.ts.
-const advisories = portfolioData.findings.filter((f) => f.type === 'Security advisory')
-const advisoryUrl = advisories[0]?.url ?? '#findings'
+// Findings are curated newest-first. Render every visible advisory field from
+// the same records so a future prepend updates the hero copy and links together.
+const recentAdvisories = portfolioData.findings
+  .filter((finding) => finding.type === 'Security advisory')
+  .slice(0, 2)
 
 export default function Hero({ latestPost, publicationsCount }: HeroProps) {
   const stats = [
@@ -158,21 +158,24 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
             </p>
 
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-              Recently: a confirmed-exploitable timing channel in Mbed TLS (
-              <a
-                href={advisoryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-accent"
-              >
-                security advisory, Jul 2026
-              </a>
-              ), upstream fixes merged in Erigon, Nethermind, and revm (
-              <a href="#findings" className="link-accent">
-                findings
-              </a>
-              ), and {solSmithPatchedMiscompilations} miscompilation bugs found in the Solidity
-              compiler (
+              Recently:{' '}
+              {recentAdvisories.map((advisory, index) => (
+                <span key={advisory.url}>
+                  {index > 0 ? '; ' : ''}
+                  {advisory.title} (
+                  <a
+                    href={advisory.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-accent"
+                  >
+                    {advisory.type.toLowerCase()}, {advisory.date}
+                  </a>
+                  )
+                </span>
+              ))}
+              {recentAdvisories.length > 0 ? '; and ' : ''}
+              {solSmithPatchedMiscompilations} miscompilation bugs found in the Solidity compiler (
               <a
                 href={solSmithPaperUrl}
                 target="_blank"
