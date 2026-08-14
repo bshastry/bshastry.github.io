@@ -106,10 +106,12 @@ function MethodTrace() {
 }
 
 // Derived from the findings ledgers so the hero can't drift from the evidence
-// it links to: the advisory URL tracks portfolio.json and the totals track
+// it links to: the advisory URLs track portfolio.json and the totals track
 // lib/disclosures.ts.
 const advisories = portfolioData.findings.filter((f) => f.type === 'Security advisory')
-const advisoryUrl = advisories[0]?.url ?? '#findings'
+const latestAdvisoryUrl = advisories[0]?.url ?? '#findings'
+const mbedTlsAdvisoryUrl =
+  advisories.find((f) => f.project === 'Mbed-TLS/mbedtls')?.url ?? '#findings'
 
 export default function Hero({ latestPost, publicationsCount }: HeroProps) {
   const stats = [
@@ -158,18 +160,24 @@ export default function Hero({ latestPost, publicationsCount }: HeroProps) {
             </p>
 
             <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-              Recently: a confirmed-exploitable timing channel in Mbed TLS (
+              Recently: incorrect BLS12-381 precompile results in Colibri’s wallet-facing EVM
+              simulation (
               <a
-                href={advisoryUrl}
+                href={latestAdvisoryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-accent"
+              >
+                security advisory, Aug 2026
+              </a>
+              ), a confirmed-exploitable timing channel in Mbed TLS (
+              <a
+                href={mbedTlsAdvisoryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-accent"
               >
                 security advisory, Jul 2026
-              </a>
-              ), upstream fixes merged in Erigon, Nethermind, and revm (
-              <a href="#findings" className="link-accent">
-                findings
               </a>
               ), and {solSmithPatchedMiscompilations} miscompilation bugs found in the Solidity
               compiler (

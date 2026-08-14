@@ -363,6 +363,14 @@
   ],
   "findings": [
     {
+      "title": "Incorrect EIP-2537 BLS12-381 additions in Colibri's verified EVM",
+      "description": "Reported the G1ADD/G2ADD precompiles returning infinity for P + P and rejecting valid on-curve points via an over-strict subgroup check — mainnet divergence reachable from wallet-facing, pre-signing transaction simulation; fixed in v2.0.2 under a moderate advisory.",
+      "project": "corpus-core/colibri-stateless",
+      "type": "Security advisory",
+      "date": "Aug 2026",
+      "url": "https://github.com/corpus-core/colibri-stateless/security/advisories/GHSA-659m-9wj9-x4vx"
+    },
+    {
       "title": "Exploitable timing side channel in Mbed TLS ECC modular reduction",
       "description": "Flagged a secret-dependent iteration count in the optimized modular reduction (ecp_modp); later confirmed exploitable and fixed under a coordinated security advisory.",
       "project": "Mbed-TLS/mbedtls",
