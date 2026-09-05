@@ -131,6 +131,11 @@
           "label": "Trust No Single Witness (slides)",
           "url": "/media/Trust_No_Single_Witness.pdf",
           "type": "external"
+        },
+        {
+          "label": "Trust No Single Witness (video)",
+          "url": "https://www.youtube.com/watch?v=nCAFOJ8NNlA",
+          "type": "external"
         }
       ]
     },
@@ -469,7 +474,8 @@
           "venue": "Berlin Ethereum Day",
           "location": "Berlin",
           "year": 2026,
-          "slides": "/media/Trust_No_Single_Witness.pdf"
+          "slides": "/media/Trust_No_Single_Witness.pdf",
+          "video": "https://www.youtube.com/watch?v=nCAFOJ8NNlA"
         }
       ],
       "essay": "/blog/trust-no-single-witness",
